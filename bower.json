@@ -13,6 +13,7 @@
     "mocha": "~1.17.0",
     "chai": "~1.9.1",
     "ember-mocha-adapter": "0.2.1",
-    "ember-mocha": "~0.1.0"
+    "ember-mocha": "~0.1.0",
+    "ember-pouch": "~1.1.0"
   }
 }
