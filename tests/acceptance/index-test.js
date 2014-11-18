@@ -13,14 +13,15 @@ describe('Acceptance: Index', function() {
     Ember.run(App, 'destroy');
   });
 
-  it('can visit /', function() {
+  it('lists issues', function() {
     visit('/');
 
     andThen(function() {
       expect(currentPath()).to.equal('index');
 
       Ember.run(function() {
-        expect(find('h2:contains("Welcome")')).to.have.length(1);
+        expect(find('li:contains("Apples")')).to.have.length(1);
+        expect(find('li:contains("Bananas")')).to.have.length(1);
       });
     });
   });
