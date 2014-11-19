@@ -1,4 +1,6 @@
 /* jshint expr:true */
+/* global PouchDB */
+/* global global */
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
 
@@ -17,8 +19,8 @@ describe('Acceptance: Index', function() {
 
       Ember.run(function() {
         Ember.RSVP.Promise.all([
-          store.createRecord('issue', {title: 'Apples'}).save(),
-          store.createRecord('issue', {title: 'Bananas'}).save()
+          global.store.createRecord('issue', {title: 'Apples'}).save(),
+          global.store.createRecord('issue', {title: 'Bananas'}).save()
         ]).then(function() {
           done();
         });

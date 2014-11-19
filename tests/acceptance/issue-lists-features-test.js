@@ -1,4 +1,6 @@
 /* jshint expr:true */
+/* global PouchDB */
+/* global global */
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
 
@@ -16,8 +18,8 @@ describe('Acceptance: Issue lists features', function() {
       global.store = PouchTestHelper.setup(App, currentTest.title);
 
       Ember.run(function() {
-        store.createRecord('issue', {title: 'All about apples'}).save().then(function(issue) {
-          var feature = store.createRecord('feature', {title: 'Apples are tasty'});
+        global.store.createRecord('issue', {title: 'All about apples'}).save().then(function(issue) {
+          var feature = global.store.createRecord('feature', {title: 'Apples are tasty'});
           issue.get('features').addObject(feature);
 
           feature.save().then(function() {
