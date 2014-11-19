@@ -6,7 +6,7 @@ import PouchTestHelper from '../helpers/pouch-test-helper';
 
 var App;
 
-describe('Acceptance: Index', function() {
+describe('Acceptance: Issue lists features', function() {
   beforeEach(function(done) {
     App = startApp();
 
@@ -16,11 +16,13 @@ describe('Acceptance: Index', function() {
       global.store = PouchTestHelper.setup(App, currentTest.title);
 
       Ember.run(function() {
-        Ember.RSVP.Promise.all([
-          store.createRecord('issue', {title: 'Apples'}).save(),
-          store.createRecord('issue', {title: 'Bananas'}).save()
-        ]).then(function() {
-          done();
+        store.createRecord('issue', {title: 'All about apples'}).save().then(function(issue) {
+          var feature = store.createRecord('feature', {title: 'Apples are tasty'});
+          issue.get('features').addObject(feature);
+
+          feature.save().then(function() {
+            done();
+          });
         });
       });
     });
@@ -31,18 +33,13 @@ describe('Acceptance: Index', function() {
     PouchTestHelper.teardown(done);
   });
 
-  it('lists issues', function(done) {
+  it('lists the features in an issue', function() {
     visit('/');
 
+    click('a:contains("Apples")');
+
     andThen(function() {
-      expect(currentPath()).to.equal('index');
-
-      expect(find('li:contains("Apples")')).to.have.length(1);
-      expect(find('li:contains("Bananas")')).to.have.length(1);
-
-      expect(find('li')).to.have.length(2);
-
-      done();
+      expect(find('li:contains("Apples are tasty")')).to.have.length(1);
     });
   });
 });

@@ -2,7 +2,7 @@
 
 Issues:
 <ul>
-  {{#each content}}
-    <li>{{title}}</li>
+  {{#each issue in content}}
+  <li>{{#link-to 'issue.index' issue}}{{issue.title}}{{/link-to}}</li>
   {{/each}}
 </ul>
