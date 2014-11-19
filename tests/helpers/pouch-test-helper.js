@@ -17,5 +17,11 @@ export default {
     var db = new PouchDB(name);
     app.__container__.lookup("adapter:application").db = db;
     return db;
+  },
+
+  logDB: function() {
+    db.allDocs({include_docs: true}, function(err, docs) {
+      console.log(docs);
+    });
   }
 };
