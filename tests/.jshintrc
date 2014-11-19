@@ -53,7 +53,8 @@
     "andThen",
     "currentURL",
     "currentPath",
-    "currentRouteName"
+    "currentRouteName",
+    "PouchDB"
   ],
   "node": false,
   "browser": false,
