@@ -1,5 +1,4 @@
 /* jshint expr:true */
-/* global PouchDB */
 /* global global */
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
