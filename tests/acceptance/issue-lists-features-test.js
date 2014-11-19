@@ -35,13 +35,15 @@ describe('Acceptance: Issue lists features', function() {
     PouchTestHelper.teardown(done);
   });
 
-  it('lists the features in an issue', function() {
+  it('lists the features in an issue', function(done) {
     visit('/');
 
-    click('a:contains("Apples")');
+    click('a:contains("All about apples")');
 
     andThen(function() {
       expect(find('li:contains("Apples are tasty")')).to.have.length(1);
+
+      done();
     });
   });
 });
