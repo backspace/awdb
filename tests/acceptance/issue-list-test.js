@@ -7,7 +7,7 @@ import PouchTestHelper from '../helpers/pouch-test-helper';
 
 var App;
 
-describe('Acceptance: Index', function() {
+describe('Acceptance: Issue list', function() {
   beforeEach(function(done) {
     App = startApp();
 
@@ -36,8 +36,6 @@ describe('Acceptance: Index', function() {
     visit('/');
 
     andThen(function() {
-      expect(currentPath()).to.equal('index');
-
       expect(find('li:contains("Apples")')).to.have.length(1);
       expect(find('li:contains("Bananas")')).to.have.length(1);
 

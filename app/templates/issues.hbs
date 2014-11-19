@@ -1,0 +1,8 @@
+Issues:
+<ul>
+  {{#each issue in content}}
+  <li>{{#link-to 'issue' issue.id}}{{issue.title}}{{/link-to}}</li>
+  {{/each}}
+</ul>
+
+{{outlet}}
