@@ -1,11 +1,17 @@
-<div class="icon-bar vertical two-up">
-  {{#link-to 'people' classNames='item'}}
-    {{fa-icon 'users'}}
-    <label>People</label>
-  {{/link-to}}
-  {{#link-to 'issues' classNames='item'}}
-    {{fa-icon 'book'}}
-    <label>Issues</label>
-  {{/link-to}}
+<div class="everything">
+  <aside>
+    <nav>
+      {{#link-to 'people' classNames='item'}}
+        {{fa-icon 'users'}}
+        <label>People</label>
+      {{/link-to}}
+      {{#link-to 'issues' classNames='item'}}
+        {{fa-icon 'book'}}
+        <label>Issues</label>
+      {{/link-to}}
+    </nav>
+  </aside>
+  <main>
+    {{outlet}}
+  </main>
 </div>
-{{outlet}}
