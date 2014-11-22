@@ -1,0 +1,8 @@
+h2 Issues:
+
+ul
+  each issue in model
+    li: link-to 'issue' issue.id: issue.title
+button click='createIssue' New issues
+
+outlet

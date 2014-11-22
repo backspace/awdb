@@ -1,0 +1,5 @@
+h2 People:
+
+ul
+  each person in model
+    li=person.name
