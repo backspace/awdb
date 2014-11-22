@@ -16,7 +16,8 @@ describe('Acceptance: Index lists models', function() {
     visit('/');
 
     andThen(function() {
-      expect(find('li:contains("Issues")')).to.have.length(1);
+      expect(find('a:contains("Issues")')).to.have.length(1);
+      expect(find('a:contains("People")')).to.have.length(1);
       done();
     });
   });
