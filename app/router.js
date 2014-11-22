@@ -10,6 +10,9 @@ Router.map(function() {
     this.resource('issue', { path: ':issue_id' }, function() {
     });
   });
+
+  this.resource('people', function() {
+  });
 });
 
 export default Router;
