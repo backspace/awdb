@@ -10,4 +10,6 @@ Features:
 {{#if isEditing}}
   <p>{{input type='text' name='title' value=title}}</p>
   <button {{action 'doneEditing'}}>Done</button>
+{{else}}
+  <button {{action 'edit'}}>Edit</button>
 {{/if}}
