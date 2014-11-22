@@ -6,3 +6,8 @@ Features:
     <li>{{title}}</li>
   {{/each}}
 </ul>
+
+{{#if isEditing}}
+  <p>{{input type='text' name='title' value=title}}</p>
+  <button {{action 'doneEditing'}}>Done</button>
+{{/if}}
