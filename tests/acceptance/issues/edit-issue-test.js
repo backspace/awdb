@@ -1,8 +1,8 @@
 /* global global */
 import Ember from 'ember';
-import startApp from '../helpers/start-app';
+import startApp from '../../helpers/start-app';
 
-import PouchTestHelper from '../helpers/pouch-test-helper';
+import PouchTestHelper from '../../helpers/pouch-test-helper';
 
 var App;
 
@@ -39,7 +39,7 @@ describe('Acceptance: Edit an issue', function () {
     visit('/');
 
     andThen(function() {
-      expect(find('li:contains("Cranberries are charming")'));
+      expect(find('li:contains("Cranberries are charming")')).to.have.length(1);
       done();
     });
   });

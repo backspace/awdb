@@ -1,7 +1,7 @@
 import Ember from 'ember';
-import startApp from '../helpers/start-app';
+import startApp from '../../helpers/start-app';
 
-import PouchTestHelper from '../helpers/pouch-test-helper';
+import PouchTestHelper from '../../helpers/pouch-test-helper';
 
 var App;
 
