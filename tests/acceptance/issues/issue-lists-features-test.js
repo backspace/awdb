@@ -36,6 +36,7 @@ describe('Acceptance: Issue lists features', function() {
 
   it('lists the features in an issue', function(done) {
     visit('/');
+    click('a:contains("Issues")');
 
     click('a:contains("All about apples")');
 

@@ -24,12 +24,14 @@ describe('Acceptance: Create issue', function() {
 
   it('lets the user create a new issue', function(done) {
     visit('/');
+    click('a:contains("Issues")');
 
     click('button:contains("New issue")');
     fillIn('input[name="title"]', 'Bananas are better');
     click('button:contains("Done")');
 
     visit('/');
+    click('a:contains("Issues")');
 
     andThen(function() {
       expect(find('li:contains("Bananas are better")')).to.have.length(1);

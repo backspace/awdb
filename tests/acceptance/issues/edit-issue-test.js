@@ -30,6 +30,7 @@ describe('Acceptance: Edit an issue', function () {
 
   it('saves an edited issue', function(done) {
     visit('/');
+    click('a:contains("Issues")');
 
     click('a:contains("Cranberries are contemptible")');
     click('button:contains("Edit")');
@@ -37,6 +38,7 @@ describe('Acceptance: Edit an issue', function () {
     click('button:contains("Done")');
 
     visit('/');
+    click('a:contains("Issues")');
 
     andThen(function() {
       expect(find('li:contains("Cranberries are charming")')).to.have.length(1);

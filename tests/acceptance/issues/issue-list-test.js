@@ -34,6 +34,7 @@ describe('Acceptance: Issue list', function() {
 
   it('lists issues', function(done) {
     visit('/');
+    click('a:contains("Issues")');
 
     andThen(function() {
       expect(find('li:contains("Apples")')).to.have.length(1);
