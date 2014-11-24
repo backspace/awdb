@@ -18,8 +18,12 @@ describe('Acceptance: Issue list', function() {
 
       Ember.run(function() {
         Ember.RSVP.Promise.all([
-          global.store.createRecord('issue', {title: 'Apples'}).save(),
-          global.store.createRecord('issue', {title: 'Bananas'}).save()
+          global.store.createRecord('issue', {title: 'Figs', number: 6}).save(),
+          global.store.createRecord('issue', {title: 'Eggplants', number: 5}).save(),
+          global.store.createRecord('issue', {title: 'Durians', number: 4}).save(),
+          global.store.createRecord('issue', {title: 'Coconuts', number: 3}).save(),
+          global.store.createRecord('issue', {title: 'Bananas', number: 2}).save(),
+          global.store.createRecord('issue', {title: 'Apples', number: 1}).save()
         ]).then(function() {
           done();
         });
@@ -39,8 +43,14 @@ describe('Acceptance: Issue list', function() {
     andThen(function() {
       expect(find('li:contains("Apples")')).to.have.length(1);
       expect(find('li:contains("Bananas")')).to.have.length(1);
+      expect(find('li:contains("Coconuts")')).to.have.length(1);
+      expect(find('li:contains("Durians")')).to.have.length(1);
+      expect(find('li:contains("Eggplants")')).to.have.length(1);
+      expect(find('li:contains("Figs")')).to.have.length(1);
 
-      expect(find('li')).to.have.length(2);
+      expect(find('li:contains("Apples") + li:contains("Bananas") + li:contains("Coconuts") + li:contains("Durians") + li:contains("Eggplants") + li:contains("Figs")')).to.have.length(1);
+
+      expect(find('li')).to.have.length(6);
 
       done();
     });
