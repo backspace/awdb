@@ -1,3 +1,11 @@
-h3=name
+if isNew
+  p
+    label Name
+    =input type='text' name='name' value=name
+    label Address
+    =textarea name='address' value=address
+    button click='doneEditing' Done
+else
+  h3=name
 
-p=address
+  p=address

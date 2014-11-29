@@ -57,4 +57,21 @@ describe('Acceptance: Manage people', function() {
       done();
     });
   });
+
+  it("lets the user create a person", function(done) {
+    visit('/');
+    click('a:contains("People")');
+
+    click('button:contains("New")');
+    fillIn('input[name="name"]', 'Corrie');
+    click('button:contains("Done")');
+
+    visit('/');
+    click('a:contains("People")');
+
+    andThen(function() {
+      expect(find('li:contains("Corrie")')).to.have.length(1);
+      done();
+    });
+  });
 });
