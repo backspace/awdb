@@ -2,4 +2,4 @@ h2 People:
 
 ul
   each person in model
-    li=person.name
+    li: link-to 'person' person: person.name

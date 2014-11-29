@@ -11,8 +11,8 @@ Router.map(function() {
     });
   });
 
-  this.resource('people', function() {
-  });
+  this.resource('people');
+  this.resource('person', { path: 'people/:person_id' });
 });
 
 export default Router;

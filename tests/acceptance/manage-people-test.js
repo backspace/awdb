@@ -17,7 +17,7 @@ describe('Acceptance: Manage people', function() {
 
       Ember.run(function() {
         Ember.RSVP.Promise.all([
-          global.store.createRecord('person', {name: "Alice"}).save(),
+          global.store.createRecord('person', {name: "Alice", address: '123 Main St.'}).save(),
           global.store.createRecord('person', {name: "Bob"}).save()
         ]).then(function() {
           done();
@@ -40,6 +40,19 @@ describe('Acceptance: Manage people', function() {
       expect(find('li:contains("Bob")')).to.have.length(1);
 
       expect(find('li')).to.have.length(2);
+
+      done();
+    });
+  });
+
+  it("shows a person's details", function(done) {
+    visit('/');
+    click('a:contains("People")');
+    click('a:contains("Alice")');
+
+    andThen(function() {
+      expect(find('h3:contains("Alice")')).to.have.length(1);
+      expect(find('p:contains("123 Main St.")')).to.have.length(1);
 
       done();
     });
