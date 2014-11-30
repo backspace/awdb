@@ -1,4 +1,4 @@
-if isNew
+if editing
   p
     label Name
     =input type='text' name='name' value=name
@@ -9,3 +9,5 @@ else
   h3=name
 
   p=address
+
+  button click='edit' Edit

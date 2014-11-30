@@ -74,4 +74,22 @@ describe('Acceptance: Manage people', function() {
       done();
     });
   });
+
+  it("lets the user edit a person", function(done) {
+    visit('/');
+    click('a:contains("People")');
+    click('a:contains("Bob")');
+    click('button:contains("Edit")');
+
+    fillIn('input[name="name"]', 'Bib');
+    click('button:contains("Done")');
+
+    visit('/');
+    click('a:contains("People")');
+
+    andThen(function() {
+      expect(find('li:contains("Bib")')).to.have.length(1);
+      done();
+    });
+  });
 });
