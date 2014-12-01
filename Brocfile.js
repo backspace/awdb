@@ -24,4 +24,6 @@ app.import('bower_components/pouchdb/dist/pouchdb.js');
 app.import('bower_components/relational-pouch/dist/pouchdb.relational-pouch.js');
 app.import('bower_components/ember-pouch/dist/globals/main.js');
 
+app.import('vendor/jspdf.min.js');
+
 module.exports = app.toTree();

@@ -4,3 +4,7 @@ ul
   each person in model
     li: link-to 'person' person: person.name
 button click='createPerson' New person
+
+br
+
+button click='labels' Labels
