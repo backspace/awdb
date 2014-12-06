@@ -5,8 +5,13 @@ PeopleController = Ember.ArrayController.extend
     labels: ->
       doc = new jsPDF()
 
+      labelHeight = 30
+
       @get('model').forEach (person, index) ->
-        doc.text 20, (index + 1)*20 + 1, person.get('name')
+        address = person.get('address')
+        address = "No address" if Ember.isNone(address)
+
+        doc.text 20, (index + 1)*labelHeight + 1, "#{person.get('name')}\n#{address}"
 
       $("body").append("<iframe>")
       $('iframe').attr('src', doc.output('datauristring')).height(352).width(396)
