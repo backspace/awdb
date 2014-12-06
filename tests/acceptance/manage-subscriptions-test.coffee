@@ -94,3 +94,38 @@ describe "Acceptance: Manage subscriptions", ->
       expect(find('p:contains("Issues remaining: 3")')).to.have.length 1
 
       done()
+
+  it 'creates fulfillments for a new issue', (done) ->
+    visit '/'
+    click 'a:contains("Issues")'
+    click 'button:contains("New issue")'
+    fillIn 'input[name="title"]', 'Bananas are better'
+    click 'button:contains("Done")'
+
+    click 'button:contains("Distribute to 2 subscribers")'
+
+    andThen ->
+      expect(find('h3:contains("Bananas")')).to.have.length 1
+
+      visit '/'
+      click 'a:contains("People")'
+      click 'a:contains("Alice")'
+
+      andThen ->
+        expect(find('p:contains("Not subscribed!")')).to.have.length 1
+        expect(find('li:contains("Bananas are better")')).to.have.length 1
+
+        click 'a:contains("People")'
+        click 'a:contains("Bob")'
+
+        andThen ->
+          expect(find('p:contains("Issues remaining: 2")')).to.have.length 1
+          expect(find('li:contains("Bananas are better")')).to.have.length 1
+
+          click 'a:contains("People")'
+          click 'a:contains("Cara")'
+
+          andThen ->
+            expect(find('li:contains("Bananas are better")')).to.have.length 0
+
+            done()

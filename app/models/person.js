@@ -7,9 +7,9 @@ export default DS.Model.extend({
 
   subscriptions: DS.hasMany('subscription', {inverse: 'person'}),
 
-  isSubscribed: function() {
-    return this.get('subscriptions').filterBy('isExhausted', false).get('length') > 0;
-  }.property('subscriptions.@each.isExhausted'),
+  activeSubscriptions: Ember.computed.filterBy('subscriptions', 'isExhausted', false),
+  isSubscribed: Ember.computed.notEmpty('activeSubscriptions'),
+  activeSubscription: Ember.computed.alias('activeSubscriptions.firstObject'),
 
   subscriptionFulfillmentsRemaining: Ember.computed.mapBy('subscriptions', 'remaining'),
   fulfillmentsRemaining: Ember.computed.sum('subscriptionFulfillmentsRemaining'),
