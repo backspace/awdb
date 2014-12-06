@@ -21,7 +21,7 @@ export default {
 
   logDB: function() {
     db.allDocs({include_docs: true}, function(err, docs) {
-      console.log(docs);
+      console.log(JSON.stringify(docs, null, 4));
     });
   }
 };
