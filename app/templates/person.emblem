@@ -10,4 +10,17 @@ else
 
   p=address
 
+  if isSubscribed
+    p Issues remaining: #{fulfillmentsRemaining}
+
+    p Issues received:
+    ul
+      each subscription in subscriptions
+        each fulfillment in subscription.fulfillments
+          li: link-to 'issue' fulfillment.issue.id: fulfillment.issue.title
+        else
+          p None
+  else
+    p Not subscribed!
+
   button click='edit' Edit
