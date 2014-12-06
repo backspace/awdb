@@ -17,12 +17,17 @@ describe('Acceptance: Issue lists features', function() {
       global.store = PouchTestHelper.setup(App, currentTest.title);
 
       Ember.run(function() {
-        global.store.createRecord('issue', {title: 'All about apples'}).save().then(function(issue) {
-          var feature = global.store.createRecord('feature', {title: 'Apples are tasty'});
-          issue.get('features').addObject(feature);
+        var issue = global.store.createRecord('issue', {title: 'All about apples'});
+
+        issue.save().then(function() {
+          var feature = global.store.createRecord('feature', {title: 'Apples are tasty', issue: issue});
 
           feature.save().then(function() {
-            done();
+            issue.get('features').addObject(feature);
+
+            issue.save().then(function() {
+              done();
+            });
           });
         });
       });
