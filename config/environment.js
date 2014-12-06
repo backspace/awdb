@@ -26,6 +26,8 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     ENV.APP.LOG_VIEW_LOOKUPS = true;
+
+    ENV.APP.databaseName = 'http://127.0.0.1:5984/awdb-development';
   }
 
   if (environment === 'test') {
