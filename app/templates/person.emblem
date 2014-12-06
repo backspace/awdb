@@ -24,3 +24,5 @@ else
     p Not subscribed!
 
   button click='edit' Edit
+  br
+  button click='addSubscription' Add 3-issue subscription

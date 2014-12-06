@@ -79,3 +79,18 @@ describe "Acceptance: Manage subscriptions", ->
           expect(find('p:contains("Not subscribed!")')).to.have.length 1
 
           done()
+
+  it 'allows the user to create subscriptions', (done) ->
+    visit '/'
+    click 'a:contains("People")'
+    click 'a:contains("Cara")'
+    click 'button:contains("Add 3-issue subscription")'
+
+    # TODO fix hack to delay so the action has time to complete
+    click 'a:contains("People")'
+    click 'a:contains("Cara")'
+
+    andThen ->
+      expect(find('p:contains("Issues remaining: 3")')).to.have.length 1
+
+      done()
