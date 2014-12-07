@@ -1,10 +1,10 @@
-/* global global */
 import Ember from 'ember';
 import startApp from '../helpers/start-app';
 
 import PouchTestHelper from '../helpers/pouch-test-helper';
 
 var App;
+var store;
 
 describe('Acceptance: Manage people', function() {
   beforeEach(function(done) {
@@ -13,12 +13,12 @@ describe('Acceptance: Manage people', function() {
     var currentTest = this.currentTest;
 
     andThen(function() {
-      global.store = PouchTestHelper.setup(App, currentTest.title);
+      store = PouchTestHelper.setup(App, currentTest.title);
 
       Ember.run(function() {
         Ember.RSVP.Promise.all([
-          global.store.createRecord('person', {name: "Alice", address: '123 Main St.'}).save(),
-          global.store.createRecord('person', {name: "Bob"}).save()
+          store.createRecord('person', {name: "Alice", address: '123 Main St.'}).save(),
+          store.createRecord('person', {name: "Bob"}).save()
         ]).then(function() {
           done();
         });

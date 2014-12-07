@@ -33,7 +33,7 @@
     "ember-cli-foundation-sass": "^0.4.1",
     "ember-cli-ic-ajax": "0.1.1",
     "ember-cli-inject-live-reload": "^1.3.0",
-    "ember-cli-mocha": "switchfly/ember-cli-mocha",
+    "ember-cli-mocha": "^0.2.0",
     "ember-cli-sass": "^3.0.3",
     "ember-data": "1.0.0-beta.12",
     "ember-export-application-global": "^1.0.0",

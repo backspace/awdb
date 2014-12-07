@@ -1,11 +1,11 @@
 /* jshint expr:true */
-/* global global */
 import Ember from 'ember';
 import startApp from '../../helpers/start-app';
 
 import PouchTestHelper from '../../helpers/pouch-test-helper';
 
 var App;
+var store;
 
 describe('Acceptance: Issue lists features', function() {
   beforeEach(function(done) {
@@ -14,13 +14,13 @@ describe('Acceptance: Issue lists features', function() {
     var currentTest = this.currentTest;
 
     andThen(function() {
-      global.store = PouchTestHelper.setup(App, currentTest.title);
+      store = PouchTestHelper.setup(App, currentTest.title);
 
       Ember.run(function() {
-        var issue = global.store.createRecord('issue', {title: 'All about apples'});
+        var issue = store.createRecord('issue', {title: 'All about apples'});
 
         issue.save().then(function() {
-          var feature = global.store.createRecord('feature', {title: 'Apples are tasty', issue: issue});
+          var feature = store.createRecord('feature', {title: 'Apples are tasty', issue: issue});
 
           feature.save().then(function() {
             issue.get('features').addObject(feature);

@@ -1,11 +1,11 @@
 /* jshint expr:true */
-/* global global */
 import Ember from 'ember';
 import startApp from '../../helpers/start-app';
 
 import PouchTestHelper from '../../helpers/pouch-test-helper';
 
 var App;
+var store;
 
 describe('Acceptance: Issue list', function() {
   beforeEach(function(done) {
@@ -14,16 +14,16 @@ describe('Acceptance: Issue list', function() {
     var currentTest = this.currentTest;
 
     andThen(function() {
-      global.store = PouchTestHelper.setup(App, currentTest.title);
+      store = PouchTestHelper.setup(App, currentTest.title);
 
       Ember.run(function() {
         Ember.RSVP.Promise.all([
-          global.store.createRecord('issue', {title: 'Figs', number: 6}).save(),
-          global.store.createRecord('issue', {title: 'Eggplants', number: 5}).save(),
-          global.store.createRecord('issue', {title: 'Durians', number: 4}).save(),
-          global.store.createRecord('issue', {title: 'Coconuts', number: 3}).save(),
-          global.store.createRecord('issue', {title: 'Bananas', number: 2}).save(),
-          global.store.createRecord('issue', {title: 'Apples', number: 1}).save()
+          store.createRecord('issue', {title: 'Figs', number: 6}).save(),
+          store.createRecord('issue', {title: 'Eggplants', number: 5}).save(),
+          store.createRecord('issue', {title: 'Durians', number: 4}).save(),
+          store.createRecord('issue', {title: 'Coconuts', number: 3}).save(),
+          store.createRecord('issue', {title: 'Bananas', number: 2}).save(),
+          store.createRecord('issue', {title: 'Apples', number: 1}).save()
         ]).then(function() {
           done();
         });

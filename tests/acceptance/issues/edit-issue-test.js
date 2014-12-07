@@ -1,10 +1,10 @@
-/* global global */
 import Ember from 'ember';
 import startApp from '../../helpers/start-app';
 
 import PouchTestHelper from '../../helpers/pouch-test-helper';
 
 var App;
+var store;
 
 describe('Acceptance: Edit an issue', function () {
   beforeEach(function(done) {
@@ -13,10 +13,10 @@ describe('Acceptance: Edit an issue', function () {
     var currentTest = this.currentTest;
 
     andThen(function() {
-      global.store = PouchTestHelper.setup(App, currentTest.title);
+      store = PouchTestHelper.setup(App, currentTest.title);
 
       Ember.run(function() {
-        global.store.createRecord('issue', {title: 'Cranberries are contemptible'}).save().then(function(issue) {
+        store.createRecord('issue', {title: 'Cranberries are contemptible'}).save().then(function(issue) {
           done();
         });
       });
