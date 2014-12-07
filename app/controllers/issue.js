@@ -4,8 +4,14 @@ export default Ember.ObjectController.extend({
   isEditing: false,
   isDistributing: false,
 
-  newFeature: Ember.computed('', function() {
-    return this.store.createRecord('feature');
+  newFeature: Ember.computed('', function(key, value) {
+    var newFeature = this.store.createRecord('feature');
+
+    if (arguments.length > 1) {
+      newFeature = value;
+    }
+
+    return newFeature;
   }),
 
   actions: {
@@ -33,8 +39,12 @@ export default Ember.ObjectController.extend({
       var issue = this.get('model');
       var feature = this.get('newFeature');
 
+      var self = this;
+
       feature.set('issue', issue);
       feature.save().then(function() {
+        self.set('newFeature', self.store.createRecord('feature'));
+
         issue.get('features').pushObject(feature);
         issue.save();
       });
