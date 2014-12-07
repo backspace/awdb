@@ -4,6 +4,10 @@ export default Ember.ObjectController.extend({
   isEditing: false,
   isDistributing: false,
 
+  newFeature: Ember.computed('', function() {
+    return this.store.createRecord('feature');
+  }),
+
   actions: {
     distribute: function() {
       var store = this.store;
@@ -22,6 +26,17 @@ export default Ember.ObjectController.extend({
         });
       }).then(function() {
         controller.set('isDistributing', false);
+      });
+    },
+
+    saveNewFeature: function() {
+      var issue = this.get('model');
+      var feature = this.get('newFeature');
+
+      feature.set('issue', issue);
+      feature.save().then(function() {
+        issue.get('features').pushObject(feature);
+        issue.save();
       });
     }
   }

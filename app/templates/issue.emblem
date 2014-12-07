@@ -7,6 +7,13 @@ else
   ul
     each features
       li=title
+    li
+      .row.collapse
+        .small-10.columns
+          =input type='text' name='title' value=newFeature.title placeholder="Feature Title"
+        .small-2.columns
+          button.postfix click=saveNewFeature
+            fa-icon 'check'
 
   if isEditing
     p
