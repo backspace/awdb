@@ -17,16 +17,22 @@ describe('Acceptance: Issue lists features', function() {
       store = PouchTestHelper.setup(App, currentTest.title);
 
       Ember.run(function() {
-        var issue = store.createRecord('issue', {title: 'All about apples'});
+        Ember.RSVP.hash({
+          alice: store.createRecord('person', {name: 'Alice'}).save(),
+          bob: store.createRecord('person', {name: 'Bob'}).save()
+        }).then(function(people) {
+          var issue = store.createRecord('issue', {title: 'All about apples'});
 
-        issue.save().then(function() {
-          var feature = store.createRecord('feature', {title: 'Apples are tasty', issue: issue});
+          issue.save().then(function() {
+            var feature = store.createRecord('feature', {title: 'Apples are tasty', issue: issue});
+            feature.get('contributors').pushObjects([people.alice, people.bob]);
 
-          feature.save().then(function() {
-            issue.get('features').addObject(feature);
+            feature.save().then(function() {
+              issue.get('features').addObject(feature);
 
-            issue.save().then(function() {
-              done();
+              issue.save().then(function() {
+                done();
+              });
             });
           });
         });
@@ -46,7 +52,7 @@ describe('Acceptance: Issue lists features', function() {
     click('a:contains("All about apples")');
 
     andThen(function() {
-      expect(find('li:contains("Apples are tasty")')).to.have.length(1);
+      expect(find('li:contains("Apples are tasty: Alice, Bob")')).to.have.length(1);
 
       done();
     });

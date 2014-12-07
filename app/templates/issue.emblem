@@ -15,7 +15,11 @@ else
   h4 Features:
   ul
     each features
-      li=title
+      li
+        if contributors
+          | #{title}: #{contributorNames}
+        else
+          =title
     li
       .row.collapse
         .small-10.columns
