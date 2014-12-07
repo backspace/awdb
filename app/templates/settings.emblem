@@ -1,3 +1,6 @@
-h2 Back up database
-=input type='text' value=url
-button click='replicate' Replicate
+if isReplicating
+  fa-icon 'circle-o-notch' spin=true size="lg"
+else
+  h2 Back up database
+  =input type='text' value=url
+  button click='replicate' Replicate
