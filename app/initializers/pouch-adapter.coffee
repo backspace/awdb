@@ -10,6 +10,7 @@ initializer =
     adapter = EmberPouch.Adapter.extend
       db: pouch
 
+    app.register 'pouch:main', pouch, {instantiate: false}
     app.register 'adapter:application', adapter
 
 `export default initializer`

@@ -13,6 +13,8 @@ Router.map(function() {
 
   this.resource('people');
   this.resource('person', { path: 'people/:person_id' });
+
+  this.route('settings');
 });
 
 export default Router;
