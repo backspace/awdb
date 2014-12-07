@@ -3,6 +3,15 @@ if isDistributing
 else
   h3=title
 
+  if isEditing
+    p
+      =input type='text' name='title' value=title
+      button click='doneEditing' Done
+  else
+    button click='edit' Edit
+    br
+    button click='distribute' Distribute to #{subscribers.length} subscribers
+
   h4 Features:
   ul
     each features
@@ -14,12 +23,3 @@ else
         .small-2.columns
           button.postfix click=saveNewFeature
             fa-icon 'check'
-
-  if isEditing
-    p
-      =input type='text' name='title' value=title
-      button click='doneEditing' Done
-  else
-    button click='edit' Edit
-    br
-    button click='distribute' Distribute to #{subscribers.length} subscribers
