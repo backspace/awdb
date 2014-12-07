@@ -1,8 +1,17 @@
 `import Ember from 'ember'`
 
 SettingsController = Ember.ObjectController.extend
-  url: ''
   isReplicating: false
+
+  url: Ember.computed('', (key, value, previousValue) ->
+    cookie = @get 'cookie'
+
+    # setter
+    if arguments.length > 1
+      cookie.setCookie 'replication-url', value
+
+    cookie.getCookie 'replication-url'
+  )
 
   actions:
     replicate: ->
