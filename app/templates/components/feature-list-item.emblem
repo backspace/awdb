@@ -2,8 +2,13 @@ if isEditing
   .row.collapse
     .small-10.columns
       =input type='text' name='title' value=feature.title placeholder="Feature Title"
-    .small-2.columns
+    .small-1.column
       button.postfix click=save
         fa-icon 'check'
+    unless isNew
+      .small-1.column
+        button.postfix.alert click=cancel
+          fa-icon 'undo'
 else
-  =titleAndContributors
+  span.js-target click=edit
+    =titleAndContributors
