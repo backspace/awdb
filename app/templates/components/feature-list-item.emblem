@@ -1,6 +1,12 @@
-.row.collapse
-  .small-10.columns
-    =input type='text' name='title' value=feature.title placeholder="Feature Title"
-  .small-2.columns
-    button.postfix click=save
-      fa-icon 'check'
+if isEditing
+  .row.collapse
+    .small-10.columns
+      =input type='text' name='title' value=feature.title placeholder="Feature Title"
+    .small-2.columns
+      button.postfix click=save
+        fa-icon 'check'
+else
+  if feature.contributors
+    | #{feature.title}: #{feature.contributorNames}
+  else
+    =feature.title

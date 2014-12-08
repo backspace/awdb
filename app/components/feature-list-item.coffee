@@ -3,6 +3,8 @@
 FeatureListItem = Ember.Component.extend
   tagName: 'li'
 
+  isEditing: Ember.computed.alias('feature.isNew')
+
   actions:
     save: ->
       @sendAction 'save'

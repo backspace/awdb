@@ -14,10 +14,6 @@ else
 
   h4 Features:
   ul
-    each features
-      li
-        if contributors
-          | #{title}: #{contributorNames}
-        else
-          =title
+    each feature in features
+      =feature-list-item feature=feature
     =feature-list-item feature=newFeature save="saveNewFeature"
