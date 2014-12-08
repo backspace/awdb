@@ -1,4 +1,3 @@
-import Ember from 'ember';
 import DS from 'ember-data';
 
 var Feature = DS.Model.extend({
@@ -7,11 +6,7 @@ var Feature = DS.Model.extend({
 
   contributors: DS.hasMany('person'),
 
-  rev: DS.attr('string'),
-
-  contributorNames: Ember.computed('contributors.@each.name', function() {
-    return this.get('contributors').mapBy('name').join(", ");
-  })
+  rev: DS.attr('string')
 });
 
 export default Feature;

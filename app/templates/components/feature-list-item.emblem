@@ -6,7 +6,4 @@ if isEditing
       button.postfix click=save
         fa-icon 'check'
 else
-  if feature.contributors
-    | #{feature.title}: #{feature.contributorNames}
-  else
-    =feature.title
+  =titleAndContributors
