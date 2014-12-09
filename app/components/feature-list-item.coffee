@@ -29,7 +29,7 @@ FeatureListItem = Ember.Component.extend
 
   appendNewContributor: Ember.observer 'newContributor.id', ->
     if @get('newContributor.id')
-      @get('feature').appendNewContributor(@get('newContributor.id')) 
+      @get('feature').appendNewContributor(@get('newContributor.id'))
       @setNewContributor()
 
   actions:
