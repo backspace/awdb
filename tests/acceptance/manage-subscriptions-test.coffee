@@ -43,6 +43,10 @@ describe "Acceptance: Manage subscriptions", ->
           records = fulfillments.subscriptions.records
           subscriptions = fulfillments.subscriptions
 
+          # FIXME hack to prevent stored person IDs from being cleared
+          subscriptions.alice.set 'person', records.alice
+          subscriptions.bob.set 'person', records.bob
+
           Ember.RSVP.all([
             records.alice.save(),
             records.bob.save()
