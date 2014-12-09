@@ -7,6 +7,7 @@ App = null
 store = null
 
 feature = null
+alice = null
 
 describe "Acceptance: Edit issue feature", ->
   beforeEach (done) ->
@@ -24,7 +25,9 @@ describe "Acceptance: Edit issue feature", ->
           feature.save().then ->
             issue.get('features').pushObject(feature)
             issue.save().then ->
-              done()
+              alice = store.createRecord('person', {name: 'Alice'})
+              alice.save().then ->
+                done()
 
   afterEach (done) ->
     Ember.run(App, 'destroy')
@@ -37,11 +40,12 @@ describe "Acceptance: Edit issue feature", ->
 
     click 'li:contains("Oops") .js-target'
     fillIn 'li.js-persisted input[name="title"]', 'Corrected'
+    fillIn 'li.js-persisted select', alice.id
     click 'li.js-persisted i.fa-check'
 
     # TODO figure out how to refresh rather than this hack to ensure the change is persisted
     andThen ->
-      click 'li:contains("Corrected") .js-target'
+      click 'li:contains("Corrected: Alice") .js-target'
       fillIn 'li.js-persisted input[name="title"]', 'Recorrected'
       click 'li.js-persisted i.fa-undo'
 
@@ -50,6 +54,6 @@ describe "Acceptance: Edit issue feature", ->
       click 'a:contains("Featureful")'
 
       andThen ->
-        expect(find('li:contains("Corrected")')).to.have.length 1
+        expect(find('li:contains("Corrected: Alice")')).to.have.length 1
 
         done()

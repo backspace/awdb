@@ -9,6 +9,8 @@ if isEditing
       .small-1.column
         button.postfix.alert click=cancel
           fa-icon 'undo'
+  each contributor in contributors
+    view "select" name='contributor' content=people optionValuePath='content.id' optionLabelPath='content.name' prompt="Contributor name" value=contributor.id
 else
   span.js-target click=edit
     =titleAndContributors

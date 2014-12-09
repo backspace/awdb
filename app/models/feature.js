@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import DS from 'ember-data';
 
 var Feature = DS.Model.extend({
@@ -5,6 +6,14 @@ var Feature = DS.Model.extend({
   issue: DS.belongsTo('issue'),
 
   contributors: DS.hasMany('person'),
+
+  appendNewContributor: function(id) {
+    if (Ember.isPresent(id)) {
+      this.store.find('person', id).then(function(result) {
+        this.get('contributors').pushObject(result);
+      }.bind(this));
+    }
+  },
 
   rev: DS.attr('string')
 });

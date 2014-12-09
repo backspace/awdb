@@ -14,6 +14,7 @@ export default Ember.Route.extend({
 
   setupController: function(controller, model) {
     this._super(controller, model);
+    controller.set('people', this.get('people'));
     controller.set('subscribers', this.get('people').filterBy('isSubscribed'));
   }
 });

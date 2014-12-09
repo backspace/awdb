@@ -5,6 +5,7 @@
 
 App = null
 store = null
+records = null
 
 describe "Acceptance: Create issue feature", ->
   beforeEach (done) ->
@@ -16,7 +17,12 @@ describe "Acceptance: Create issue feature", ->
       store = PouchTestHelper.setup(App, currentTest.title)
 
       Ember.run ->
-        store.createRecord('issue', {title: 'Full of features'}).save().then ->
+        Ember.RSVP.hash(
+          issue: store.createRecord('issue', {title: 'Full of features'}).save(),
+          alice: store.createRecord('person', {name: 'Alice'}).save(),
+          bob: store.createRecord('person', {name: 'Bob'}).save()
+        ).then (result) ->
+          records = result
           done()
 
   afterEach (done) ->
@@ -29,6 +35,8 @@ describe "Acceptance: Create issue feature", ->
     click 'a:contains("Full of features")'
 
     fillIn 'input[name="title"]', 'Like this one'
+    fillIn 'select[name="contributor"]:last', records.alice.id
+    fillIn 'select[name="contributor"]:last', records.bob.id
     click 'i.fa-check'
 
     visit '/'
@@ -36,6 +44,6 @@ describe "Acceptance: Create issue feature", ->
     click 'a:contains("Full of features")'
 
     andThen ->
-      expect(find('li:contains("Like this one")')).to.have.length 1
+      expect(find('li:contains("Like this one: Alice, Bob")')).to.have.length 1
 
       done()
