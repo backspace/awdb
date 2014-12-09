@@ -39,15 +39,13 @@ export default Ember.ObjectController.extend({
       var issue = this.get('model');
       var feature = this.get('newFeature');
 
-      var self = this;
-
       feature.set('issue', issue);
       feature.save().then(function() {
-        self.set('newFeature', self.store.createRecord('feature'));
+        this.set('newFeature', this.store.createRecord('feature'));
 
         issue.get('features').pushObject(feature);
         issue.save();
-      });
+      }.bind(this));
     }
   }
 });

@@ -6,10 +6,9 @@ export default Ember.Route.extend({
   },
 
   afterModel: function() {
-    var self = this;
     return this.store.find('person').then(function(result) {
-      self.set('people', result);
-    });
+      this.set('people', result);
+    }.bind(this));
   },
 
   setupController: function(controller, model) {
