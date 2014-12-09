@@ -41,16 +41,16 @@ describe('Acceptance: Issue list', function() {
     click('a:contains("Issues")');
 
     andThen(function() {
-      expect(find('li:contains("Apples")')).to.have.length(1);
-      expect(find('li:contains("Bananas")')).to.have.length(1);
-      expect(find('li:contains("Coconuts")')).to.have.length(1);
-      expect(find('li:contains("Durians")')).to.have.length(1);
-      expect(find('li:contains("Eggplants")')).to.have.length(1);
-      expect(find('li:contains("Figs")')).to.have.length(1);
+      expectElement('li', {contains: 'Apples'});
+      expectElement('li', {contains: 'Bananas'});
+      expectElement('li', {contains: 'Coconuts'});
+      expectElement('li', {contains: 'Durians'});
+      expectElement('li', {contains: 'Eggplants'});
+      expectElement('li', {contains: 'Figs'});
 
-      expect(find('li:contains("Apples") + li:contains("Bananas") + li:contains("Coconuts") + li:contains("Durians") + li:contains("Eggplants") + li:contains("Figs")')).to.have.length(1);
+      expectElement('li:contains("Apples") + li:contains("Bananas") + li:contains("Coconuts") + li:contains("Durians") + li:contains("Eggplants") + li:contains("Figs")');
 
-      expect(find('li')).to.have.length(6);
+      expectElement('li', 6);
 
       done();
     });

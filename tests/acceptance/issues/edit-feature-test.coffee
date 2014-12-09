@@ -54,6 +54,6 @@ describe "Acceptance: Edit issue feature", ->
       click 'a:contains("Featureful")'
 
       andThen ->
-        expect(find('li:contains("Corrected: Alice")')).to.have.length 1
+        expectElement 'li', {contains: 'Corrected: Alice'}
 
         done()

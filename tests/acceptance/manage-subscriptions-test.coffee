@@ -62,21 +62,21 @@ describe "Acceptance: Manage subscriptions", ->
     click 'a:contains("Alice")'
 
     andThen ->
-      expect(find('p:contains("Issues remaining: 1")')).to.have.length 1
-      expect(find('li:contains("Apples are amazing")')).to.have.length 1
+      expectElement 'p', {contains: 'Issues remaining: 1'}
+      expectElement 'li', {contains: 'Apples are amazing'}
 
       click 'a:contains("People")'
       click 'a:contains("Bob")'
 
       andThen ->
-        expect(find('p:contains("Issues remaining: 3")')).to.have.length 1
-        expect(find('li:contains("Apples are amazing")')).to.have.length 0
+        expectElement 'p', {contains: 'Issues remaining: 3'}
+        expectNoElement 'li', {contains: 'Apples are amazing'}
 
         click 'a:contains("People")'
         click 'a:contains("Cara")'
 
         andThen ->
-          expect(find('p:contains("Not subscribed!")')).to.have.length 1
+          expectElement 'p', {contains: 'Not subscribed!'}
 
           done()
 
@@ -91,7 +91,7 @@ describe "Acceptance: Manage subscriptions", ->
     click 'a:contains("Cara")'
 
     andThen ->
-      expect(find('p:contains("Issues remaining: 3")')).to.have.length 1
+      expectElement 'p', {contains: 'Issues remaining: 3'}
 
       done()
 
@@ -105,27 +105,27 @@ describe "Acceptance: Manage subscriptions", ->
     click 'button:contains("Distribute to 2 subscribers")'
 
     andThen ->
-      expect(find('h3:contains("Bananas")')).to.have.length 1
+      expectElement 'h3', {contains: 'Bananas'}
 
       visit '/'
       click 'a:contains("People")'
       click 'a:contains("Alice")'
 
       andThen ->
-        expect(find('p:contains("Not subscribed!")')).to.have.length 1
-        expect(find('li:contains("Bananas are better")')).to.have.length 1
+        expectElement 'p', {contains: 'Not subscribed!'}
+        expectElement 'li', {contains: 'Bananas are better'}
 
         click 'a:contains("People")'
         click 'a:contains("Bob")'
 
         andThen ->
-          expect(find('p:contains("Issues remaining: 2")')).to.have.length 1
-          expect(find('li:contains("Bananas are better")')).to.have.length 1
+          expectElement 'p', {contains: 'Issues remaining: 2'}
+          expectElement 'li', {contains: 'Bananas are better'}
 
           click 'a:contains("People")'
           click 'a:contains("Cara")'
 
           andThen ->
-            expect(find('li:contains("Bananas are better")')).to.have.length 0
+            expectNoElement 'li', {contains: 'Bananas are better'}
 
             done()

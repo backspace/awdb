@@ -44,6 +44,6 @@ describe "Acceptance: Create issue feature", ->
     click 'a:contains("Full of features")'
 
     andThen ->
-      expect(find('li:contains("Like this one: Alice, Bob")')).to.have.length 1
+      expectElement 'li', {contains: 'Like this one: Alice, Bob'}
 
       done()

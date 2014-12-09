@@ -52,7 +52,7 @@ describe('Acceptance: Issue lists features', function() {
     click('a:contains("All about apples")');
 
     andThen(function() {
-      expect(find('li:contains("Apples are tasty: Alice, Bob")')).to.have.length(1);
+      expectElement('li', {contains: 'Apples are tasty: Alice, Bob'});
 
       done();
     });

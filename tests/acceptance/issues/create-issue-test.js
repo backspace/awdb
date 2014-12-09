@@ -34,7 +34,7 @@ describe('Acceptance: Create issue', function() {
     click('a:contains("Issues")');
 
     andThen(function() {
-      expect(find('li:contains("Bananas are better")')).to.have.length(1);
+      expectElement('li', {contains: 'Bananas are better'});
       done();
     });
   });

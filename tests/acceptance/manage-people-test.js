@@ -36,10 +36,10 @@ describe('Acceptance: Manage people', function() {
     click('a:contains("People")');
 
     andThen(function() {
-      expect(find('li:contains("Alice")')).to.have.length(1);
-      expect(find('li:contains("Bob")')).to.have.length(1);
+      expectElement('li', {contains: 'Alice'});
+      expectElement('li', {contains: 'Bob'});
 
-      expect(find('li')).to.have.length(2);
+      expectElement('li', 2);
 
       done();
     });
@@ -51,8 +51,8 @@ describe('Acceptance: Manage people', function() {
     click('a:contains("Alice")');
 
     andThen(function() {
-      expect(find('h3:contains("Alice")')).to.have.length(1);
-      expect(find('p:contains("123 Main St.")')).to.have.length(1);
+      expectElement('h3', {contains: 'Alice'});
+      expectElement('p', {contains: '123 Main St.'});
 
       done();
     });
@@ -70,7 +70,7 @@ describe('Acceptance: Manage people', function() {
     click('a:contains("People")');
 
     andThen(function() {
-      expect(find('li:contains("Corrie")')).to.have.length(1);
+      expectElement('li', {contains: 'Corrie'});
       done();
     });
   });
@@ -88,7 +88,7 @@ describe('Acceptance: Manage people', function() {
     click('a:contains("People")');
 
     andThen(function() {
-      expect(find('li:contains("Bib")')).to.have.length(1);
+      expectElement('li', {contains: 'Bib'});
       done();
     });
   });
