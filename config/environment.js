@@ -46,5 +46,9 @@ module.exports = function(environment) {
 
   }
 
+  ENV.coffeeOptions = {
+    blueprints: false
+  }
+
   return ENV;
 };
