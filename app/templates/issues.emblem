@@ -2,7 +2,7 @@ h2 Issues:
 
 ul
   each issue in controller
-    li: link-to 'issue' issue.id: issue.title
+    li: link-to 'issue' issue: issue.title
 button click='createIssue' New issue
 
 outlet
