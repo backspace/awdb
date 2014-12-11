@@ -5,17 +5,12 @@ import startApp from '../../helpers/start-app';
 import PouchTestHelper from '../../helpers/pouch-test-helper';
 
 var App;
-var store;
 
 describe('Acceptance: Issue lists features', function() {
   beforeEach(function(done) {
     App = startApp();
 
-    var currentTest = this.currentTest;
-
-    andThen(function() {
-      store = PouchTestHelper.setup(App, currentTest.title);
-
+    PouchTestHelper.buildStore(App, this.currentTest.title).then(function(store) {
       Ember.run(function() {
         Ember.RSVP.hash({
           alice: store.createRecord('person', {name: 'Alice'}).save(),
@@ -42,7 +37,7 @@ describe('Acceptance: Issue lists features', function() {
 
   afterEach(function(done) {
     Ember.run(App, 'destroy');
-    PouchTestHelper.teardown(done);
+    Ember.run(done);
   });
 
   it('lists the features in an issue', function(done) {

@@ -1,22 +1,14 @@
 var db;
 
 export default {
-  setup: function(app, name) {
-    db = this.setDB(app, name);
-    return app.__container__.lookup('store:main');
-  },
-
-  teardown: function(callback) {
-    db.destroy(function(err) {
-      if (err) return callback(err);
-      callback();
+  buildStore: function(app, name) {
+    return PouchDB.destroy(name).then(function(a, b) {
+      return (new PouchDB(name)).then(function(newDB, b) {
+        app.__container__.lookup("adapter:application").db = newDB;
+        db = newDB;
+        return app.__container__.lookup('store:main');
+      });
     });
-  },
-
-  setDB: function(app, name) {
-    var db = new PouchDB(name);
-    app.__container__.lookup("adapter:application").db = db;
-    return db;
   },
 
   logDB: function() {

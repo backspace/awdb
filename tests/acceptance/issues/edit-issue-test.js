@@ -4,17 +4,12 @@ import startApp from '../../helpers/start-app';
 import PouchTestHelper from '../../helpers/pouch-test-helper';
 
 var App;
-var store;
 
 describe('Acceptance: Edit an issue', function () {
   beforeEach(function(done) {
     App = startApp();
 
-    var currentTest = this.currentTest;
-
-    andThen(function() {
-      store = PouchTestHelper.setup(App, currentTest.title);
-
+    PouchTestHelper.buildStore(App, this.currentTest.title).then(function(store) {
       Ember.run(function() {
         store.createRecord('issue', {title: 'Cranberries are contemptible'}).save().then(function(issue) {
           done();
@@ -25,7 +20,7 @@ describe('Acceptance: Edit an issue', function () {
 
   afterEach(function(done) {
     Ember.run(App, 'destroy');
-    PouchTestHelper.teardown(done);
+    Ember.run(done);
   });
 
   it('saves an edited issue', function(done) {

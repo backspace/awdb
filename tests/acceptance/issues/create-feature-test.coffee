@@ -4,18 +4,13 @@
 `import PouchTestHelper from '../../helpers/pouch-test-helper'`
 
 App = null
-store = null
 records = null
 
 describe "Acceptance: Create issue feature", ->
   beforeEach (done) ->
     App = startApp()
 
-    currentTest = @currentTest
-
-    andThen ->
-      store = PouchTestHelper.setup(App, currentTest.title)
-
+    PouchTestHelper.buildStore(App, @currentTest.title).then (store) ->
       Ember.run ->
         Ember.RSVP.hash(
           issue: store.createRecord('issue', {title: 'Full of features'}).save(),
@@ -27,7 +22,7 @@ describe "Acceptance: Create issue feature", ->
 
   afterEach (done) ->
     Ember.run(App, 'destroy')
-    PouchTestHelper.teardown(done)
+    Ember.run(done)
 
   it 'shows the new feature', (done) ->
     visit '/'

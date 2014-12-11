@@ -5,17 +5,12 @@ import startApp from '../../helpers/start-app';
 import PouchTestHelper from '../../helpers/pouch-test-helper';
 
 var App;
-var store;
 
 describe('Acceptance: Issue list', function() {
   beforeEach(function(done) {
     App = startApp();
 
-    var currentTest = this.currentTest;
-
-    andThen(function() {
-      store = PouchTestHelper.setup(App, currentTest.title);
-
+    PouchTestHelper.buildStore(App, this.currentTest.title).then(function(store) {
       Ember.run(function() {
         Ember.RSVP.Promise.all([
           store.createRecord('issue', {title: 'Figs', number: 6}).save(),
@@ -33,7 +28,7 @@ describe('Acceptance: Issue list', function() {
 
   afterEach(function(done) {
     Ember.run(App, 'destroy');
-    PouchTestHelper.teardown(done);
+    Ember.run(done);
   });
 
   it('lists issues', function(done) {

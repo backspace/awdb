@@ -4,17 +4,12 @@
 `import PouchTestHelper from '../helpers/pouch-test-helper'`
 
 App = null
-store = null
 
 describe "Acceptance: Manage subscriptions", ->
   beforeEach (done) ->
     App = startApp()
 
-    currentTest = @currentTest
-
-    andThen ->
-      store = PouchTestHelper.setup(App, currentTest.title)
-
+    PouchTestHelper.buildStore(App, @currentTest.title).then (store) ->
       Ember.run ->
         asyncRecords = Ember.RSVP.hash
           alice: store.createRecord('person', {name: 'Alice'}).save()
@@ -58,7 +53,7 @@ describe "Acceptance: Manage subscriptions", ->
 
   afterEach (done) ->
     Ember.run(App, 'destroy')
-    PouchTestHelper.teardown(done)
+    Ember.run(done)
 
   it 'shows issues remaining', (done) ->
     visit '/'

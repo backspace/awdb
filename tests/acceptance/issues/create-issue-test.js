@@ -9,17 +9,14 @@ describe('Acceptance: Create issue', function() {
   beforeEach(function(done) {
     App = startApp();
 
-    var currentTest = this.currentTest;
-
-    andThen(function() {
-      PouchTestHelper.setup(App, currentTest.title);
+    PouchTestHelper.buildStore(App, this.currentTest.title).then(function() {
       done();
     });
   });
 
   afterEach(function(done) {
     Ember.run(App, 'destroy');
-    PouchTestHelper.teardown(done);
+    Ember.run(done);
   });
 
   it('lets the user create a new issue', function(done) {

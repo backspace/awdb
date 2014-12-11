@@ -4,7 +4,6 @@
 `import PouchTestHelper from '../../helpers/pouch-test-helper'`
 
 App = null
-store = null
 
 feature = null
 alice = null
@@ -14,24 +13,23 @@ describe "Acceptance: Edit issue feature", ->
     App = startApp()
 
     andThen =>
-      store = PouchTestHelper.setup(App, @currentTest.title)
+      PouchTestHelper.buildStore(App, @currentTest.title).then (store) ->
+        Ember.run ->
+          issue = store.createRecord('issue', {title: 'Featureful'})
 
-      Ember.run ->
-        issue = store.createRecord('issue', {title: 'Featureful'})
+          issue.save().then ->
+            feature = store.createRecord('feature', {title: 'Oops', issue: issue})
 
-        issue.save().then ->
-          feature = store.createRecord('feature', {title: 'Oops', issue: issue})
-
-          feature.save().then ->
-            issue.get('features').pushObject(feature)
-            issue.save().then ->
-              alice = store.createRecord('person', {name: 'Alice'})
-              alice.save().then ->
-                done()
+            feature.save().then ->
+              issue.get('features').pushObject(feature)
+              issue.save().then ->
+                alice = store.createRecord('person', {name: 'Alice'})
+                alice.save().then ->
+                  done()
 
   afterEach (done) ->
     Ember.run(App, 'destroy')
-    PouchTestHelper.teardown(done)
+    Ember.run(done)
 
   it 'updates the feature', (done) ->
     visit '/'

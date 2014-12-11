@@ -4,17 +4,12 @@ import startApp from '../helpers/start-app';
 import PouchTestHelper from '../helpers/pouch-test-helper';
 
 var App;
-var store;
 
 describe('Acceptance: Manage people', function() {
   beforeEach(function(done) {
     App = startApp();
 
-    var currentTest = this.currentTest;
-
-    andThen(function() {
-      store = PouchTestHelper.setup(App, currentTest.title);
-
+    PouchTestHelper.buildStore(App, this.currentTest.title).then(function(store) {
       Ember.run(function() {
         Ember.RSVP.Promise.all([
           store.createRecord('person', {name: "Alice", address: '123 Main St.'}).save(),
@@ -28,7 +23,7 @@ describe('Acceptance: Manage people', function() {
 
   afterEach(function(done) {
     Ember.run(App, 'destroy');
-    PouchTestHelper.teardown(done);
+    Ember.run(done);
   });
 
   it('lists the people', function(done) {
