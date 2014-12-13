@@ -85,9 +85,7 @@ describe "Acceptance: Manage subscriptions", ->
     click 'a:contains("Cara")'
     click 'button:contains("Add 3-issue subscription")'
 
-    # TODO fix hack to delay so the action has time to complete
-    click 'a:contains("People")'
-    click 'a:contains("Cara")'
+    waitForControllerWithPromise('person')
 
     andThen ->
       expectElement 'p', {contains: 'Issues remaining: 3'}
@@ -102,6 +100,8 @@ describe "Acceptance: Manage subscriptions", ->
     click 'button:contains("Done")'
 
     click 'button:contains("Distribute to 2 subscribers")'
+
+    waitForControllerWithPromise('issue')
 
     andThen ->
       expectElement 'h3', {contains: 'Bananas'}
