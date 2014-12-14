@@ -42,6 +42,8 @@ export default Ember.ObjectController.extend({
       var promise = context.promise;
       var feature = context.feature;
 
+      this.set('promise', promise.promise);
+
       if (feature.get('isNew')) {
         var issue = this.get('model');
 
@@ -60,6 +62,8 @@ export default Ember.ObjectController.extend({
           promise.resolve();
         });
       }
+
+      return promise;
     }
   }
 });

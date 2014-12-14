@@ -41,6 +41,8 @@ describe "Acceptance: Edit issue feature", ->
     fillIn 'li.js-persisted select', alice.id
     click 'li.js-persisted i.fa-check'
 
+    waitForControllerWithPromise('issue')
+
     # TODO figure out how to refresh rather than this hack to ensure the change is persisted
     andThen ->
       click 'li:contains("Corrected: Alice") .js-target'
