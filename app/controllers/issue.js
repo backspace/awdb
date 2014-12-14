@@ -38,17 +38,28 @@ export default Ember.ObjectController.extend({
       return promise;
     },
 
-    saveNewFeature: function() {
-      var issue = this.get('model');
-      var feature = this.get('newFeature');
+    saveFeature: function(context) {
+      var promise = context.promise;
+      var feature = context.feature;
 
-      feature.set('issue', issue);
-      feature.save().then(function() {
-        this.set('newFeature', this.store.createRecord('feature'));
+      if (feature.get('isNew')) {
+        var issue = this.get('model');
 
-        issue.get('features').pushObject(feature);
-        issue.save();
-      }.bind(this));
+        feature.set('issue', issue);
+        feature.save().then(function() {
+          this.set('newFeature', this.store.createRecord('feature'));
+
+          issue.get('features').pushObject(feature);
+          issue.save().then(function() {
+            promise.resolve();
+          });
+        }.bind(this));
+      }
+      else {
+        feature.save().then(function() {
+          promise.resolve();
+        });
+      }
     }
   }
 });

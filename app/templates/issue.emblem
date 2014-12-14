@@ -15,5 +15,5 @@ else
   h4 Features:
   ul
     each feature in features
-      =feature-list-item feature=feature people=people
-    =feature-list-item feature=newFeature save="saveNewFeature" people=people
+      =feature-list-item feature=feature people=people save="saveFeature"
+    =feature-list-item feature=newFeature save="saveFeature" people=people

@@ -34,11 +34,19 @@ FeatureListItem = Ember.Component.extend
 
   actions:
     save: ->
-      if @get('isNew')
-        @sendAction 'save'
-      else
-        @get('feature').save().then =>
-          @set 'isEditing', false
+      # Pattern from http://stackoverflow.com/a/20810854/760389
+      defer = Ember.RSVP.defer()
+      defer.promise.then(=>
+        # TODO the isDestroyed/isDestroying checks are only for testing, seems weird
+        @set 'isEditing', false unless @get('isDestroyed') || @get('isDestroying') || @get('isNew')
+      , =>
+        alert "An error saving the feature!"
+      )
+
+      @sendAction 'save',
+        promise: defer
+        feature: @get('feature')
+
     cancel: ->
       @get('feature').rollback()
       @set 'isEditing', false
