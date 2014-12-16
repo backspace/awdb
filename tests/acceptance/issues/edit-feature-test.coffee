@@ -49,11 +49,11 @@ describe "Acceptance: Edit issue feature", ->
       fillIn 'li.js-persisted input[name="title"]', 'Recorrected'
       click 'li.js-persisted i.fa-undo'
 
-      visit '/'
-      click 'a:contains("Issues")'
-      click 'a:contains("Featureful")'
+    visit '/'
+    click 'a:contains("Issues")'
+    click 'a:contains("Featureful")'
 
-      andThen ->
-        expectElement 'li', {contains: 'Corrected: Alice'}
+    andThen ->
+      expectElement 'li', {contains: 'Corrected: Alice'}
 
-        done()
+      done()
