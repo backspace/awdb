@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 import registerAcceptanceTestHelpers from './201-created/register-acceptance-test-helpers';
-import registerWaitForControllerWithPromise from './register-wait-for-controller-with-promise';
+import registerWaitForModels from './register-wait-for-models';
 
 import Application from '../../app';
 import Router from '../../router';
@@ -21,7 +21,7 @@ export default function startApp(attrs) {
     App = Application.create(attributes);
     App.setupForTesting();
     registerAcceptanceTestHelpers();
-    registerWaitForControllerWithPromise();
+    registerWaitForModels();
 
     App.injectTestHelpers();
   });

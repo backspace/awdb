@@ -23,7 +23,7 @@ export default Ember.ObjectController.extend({
       this.set('isDistributing', true);
       var controller = this;
 
-      var promise = Ember.RSVP.all(this.get('subscribers').mapBy('activeSubscription').map(function(subscription) {
+      return Ember.RSVP.all(this.get('subscribers').mapBy('activeSubscription').map(function(subscription) {
         var fulfillment = store.createRecord('fulfillment', {issue: issue, subscription: subscription});
         return fulfillment.save();
       })).then(function(fulfillments) {
@@ -33,16 +33,11 @@ export default Ember.ObjectController.extend({
       }).then(function() {
         controller.set('isDistributing', false);
       });
-
-      this.set('promise', promise);
-      return promise;
     },
 
     saveFeature: function(context) {
       var promise = context.promise;
       var feature = context.feature;
-
-      this.set('promise', promise.promise);
 
       if (feature.get('isNew')) {
         var issue = this.get('model');

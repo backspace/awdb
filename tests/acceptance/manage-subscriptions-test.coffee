@@ -85,7 +85,7 @@ describe "Acceptance: Manage subscriptions", ->
     click 'a:contains("Cara")'
     click 'button:contains("Add 3-issue subscription")'
 
-    waitForControllerWithPromise('person')
+    waitForModels ['subscription', 'person']
 
     andThen ->
       expectElement 'p', {contains: 'Issues remaining: 3'}
@@ -101,7 +101,7 @@ describe "Acceptance: Manage subscriptions", ->
 
     click 'button:contains("Distribute to 2 subscribers")'
 
-    waitForControllerWithPromise('issue')
+    waitForModels ['issue', 'subscription', 'fulfillment']
 
     andThen ->
       expectElement 'h3', {contains: 'Bananas'}
