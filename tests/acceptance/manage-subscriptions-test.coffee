@@ -64,20 +64,20 @@ describe "Acceptance: Manage subscriptions", ->
       expectElement 'p', {contains: 'Issues remaining: 1'}
       expectElement 'li', {contains: 'Apples are amazing'}
 
-      click 'a:contains("People")'
-      click 'a:contains("Bob")'
+    click 'a:contains("People")'
+    click 'a:contains("Bob")'
 
     andThen ->
       expectElement 'p', {contains: 'Issues remaining: 3'}
       expectNoElement 'li', {contains: 'Apples are amazing'}
 
-      click 'a:contains("People")'
-      click 'a:contains("Cara")'
+    click 'a:contains("People")'
+    click 'a:contains("Cara")'
 
-      andThen ->
-        expectElement 'p', {contains: 'Not subscribed!'}
+    andThen ->
+      expectElement 'p', {contains: 'Not subscribed!'}
 
-        done()
+      done()
 
   it 'allows the user to create subscriptions', (done) ->
     visit '/'
@@ -106,9 +106,9 @@ describe "Acceptance: Manage subscriptions", ->
     andThen ->
       expectElement 'h3', {contains: 'Bananas'}
 
-      visit '/'
-      click 'a:contains("People")'
-      click 'a:contains("Alice")'
+    visit '/'
+    click 'a:contains("People")'
+    click 'a:contains("Alice")'
 
     andThen ->
       expectElement 'p', {contains: 'Not subscribed!'}
