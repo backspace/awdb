@@ -1,19 +1,18 @@
-if isDistributing
-  p Distributing!
+h3=title
+
+outlet
+
+if isEditing
+  p
+    =input type='text' name='title' value=title
+    button click='doneEditing' Done
 else
-  h3=title
+  button click='edit' Edit
+  br
+  =link-to 'issue.distribute' | Distribute
 
-  if isEditing
-    p
-      =input type='text' name='title' value=title
-      button click='doneEditing' Done
-  else
-    button click='edit' Edit
-    br
-    button click='distribute' Distribute to #{subscribers.length} subscribers
-
-  h4 Features:
-  ul
-    each feature in features
-      =feature-list-item feature=feature people=people save="saveFeature"
-    =feature-list-item feature=newFeature save="saveFeature" people=people
+h4 Features:
+ul
+  each feature in features
+    =feature-list-item feature=feature people=people save="saveFeature"
+  =feature-list-item feature=newFeature save="saveFeature" people=people

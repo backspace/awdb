@@ -63,6 +63,12 @@ describe "Acceptance: Distribute issues", ->
     fillIn 'input[name="title"]', 'Bananas are better'
     click 'button:contains("Done")'
 
+    click 'a:contains("Distribute")'
+
+    andThen ->
+      expectElement '.subscribers li', {contains: 'Alice'}
+      expectElement '.subscribers li', {contains: 'Bob'}
+
     click 'button:contains("Distribute to 2 subscribers")'
 
     waitForModels ['issue', 'subscription', 'fulfillment']
