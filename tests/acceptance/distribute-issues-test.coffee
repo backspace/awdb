@@ -5,7 +5,8 @@
 
 App = null
 
-describe "Acceptance: Manage subscriptions", ->
+describe "Acceptance: Distribute issues", ->
+  # Copied from manage-subscriptions-test; DRY up somehow?
   beforeEach (done) ->
     App = startApp()
 
@@ -55,39 +56,39 @@ describe "Acceptance: Manage subscriptions", ->
     Ember.run(App, 'destroy')
     Ember.run(done)
 
-  it 'shows issues remaining', (done) ->
+  it 'creates fulfillments for a new issue', (done) ->
+    visit '/'
+    click 'a:contains("Issues")'
+    click 'button:contains("New issue")'
+    fillIn 'input[name="title"]', 'Bananas are better'
+    click 'button:contains("Done")'
+
+    click 'button:contains("Distribute to 2 subscribers")'
+
+    waitForModels ['issue', 'subscription', 'fulfillment']
+
+    andThen ->
+      expectElement 'h3', {contains: 'Bananas'}
+
     visit '/'
     click 'a:contains("People")'
     click 'a:contains("Alice")'
 
     andThen ->
-      expectElement 'p', {contains: 'Issues remaining: 1'}
-      expectElement 'li', {contains: 'Apples are amazing'}
+      expectElement 'p', {contains: 'Not subscribed!'}
+      expectElement 'li', {contains: 'Bananas are better'}
 
     click 'a:contains("People")'
     click 'a:contains("Bob")'
 
     andThen ->
-      expectElement 'p', {contains: 'Issues remaining: 3'}
-      expectNoElement 'li', {contains: 'Apples are amazing'}
+      expectElement 'p', {contains: 'Issues remaining: 2'}
+      expectElement 'li', {contains: 'Bananas are better'}
 
     click 'a:contains("People")'
     click 'a:contains("Cara")'
 
     andThen ->
-      expectElement 'p', {contains: 'Not subscribed!'}
-
-      done()
-
-  it 'allows the user to create subscriptions', (done) ->
-    visit '/'
-    click 'a:contains("People")'
-    click 'a:contains("Cara")'
-    click 'button:contains("Add 3-issue subscription")'
-
-    waitForModels ['subscription', 'person']
-
-    andThen ->
-      expectElement 'p', {contains: 'Issues remaining: 3'}
+      expectNoElement 'li', {contains: 'Bananas are better'}
 
       done()
