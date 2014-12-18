@@ -69,7 +69,7 @@ describe "Acceptance: Distribute issues", ->
       expectElement '.subscribers li', {contains: 'Alice'}
       expectElement '.subscribers li', {contains: 'Bob'}
 
-    click 'button:contains("Distribute to 2 subscribers")'
+    click 'button:contains("Distribute")'
 
     waitForModels ['issue', 'subscription', 'fulfillment']
 
@@ -96,5 +96,18 @@ describe "Acceptance: Distribute issues", ->
 
     andThen ->
       expectNoElement 'li', {contains: 'Bananas are better'}
+
+      done()
+
+  it 'does not automatically distribute to subscribers who have already received an issue', (done) ->
+    visit '/'
+    click 'a:contains("Issues")'
+    click 'a:contains("Apples")'
+
+    click 'a:contains("Distribute")'
+
+    andThen ->
+      expectElement '.subscribers li', 0, {contains: 'Alice'}
+      expectElement '.subscribers li', {contains: 'Bob'}
 
       done()

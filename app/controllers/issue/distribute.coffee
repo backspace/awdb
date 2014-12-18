@@ -7,6 +7,12 @@ IssueDistributeController = Ember.ObjectController.extend
 
   subscribers: Ember.computed.filterBy('controllers.issue.people', 'isSubscribed')
 
+  suggestedSubscriptions: Ember.computed 'subscribers', ->
+    issue = @get 'model'
+
+    @get('subscribers').filter (subscriber) =>
+      !subscriber.get('issuesReceived').contains(issue)
+
   actions:
     distribute: ->
       issue = @get 'model'

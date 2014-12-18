@@ -14,5 +14,10 @@ export default DS.Model.extend({
   subscriptionFulfillmentsRemaining: Ember.computed.mapBy('subscriptions', 'remaining'),
   fulfillmentsRemaining: Ember.computed.sum('subscriptionFulfillmentsRemaining'),
 
+  issuesReceived: Ember.computed('subscriptions', function() {
+    var subscriptions = this.get('subscriptions');
+    return subscriptions.mapBy('fulfillments').reduce(function(flattened, fulfillments) { return flattened.concat(fulfillments); }).mapBy('issue');
+  }),
+
   rev: DS.attr('string')
 });

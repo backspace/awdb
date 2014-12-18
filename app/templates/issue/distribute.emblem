@@ -1,5 +1,5 @@
-button click='distribute' Distribute to #{subscribers.length} subscribers
+button click='distribute' Distribute to #{suggestedSubscribers.length} subscribers
 
 ul.subscribers
-  each subscriber in subscribers
+  each subscriber in suggestedSubscriptions
     li: link-to 'person' subscriber: subscriber.name
