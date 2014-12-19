@@ -22,7 +22,9 @@ IssueDistributeController = Ember.ObjectController.extend
 
       distribution.save().then =>
         Ember.RSVP.all(@get('subscribers').mapBy('activeSubscription').map (subscription) =>
-          fulfillment = @store.createRecord 'fulfillment', {issue: issue, subscription: subscription, distribution: distribution}
+          person = subscription.get('person')
+
+          fulfillment = @store.createRecord 'fulfillment', {address: person.get('address'), issue: issue, subscription: subscription, distribution: distribution}
           fulfillment.save()
         ).then((fulfillments) ->
           fulfillments.map((fulfillment) ->

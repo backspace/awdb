@@ -106,7 +106,16 @@ describe "Acceptance: Distribute issues", ->
 
         done()
 
-    it 'retains the addresses in the distribution', (done) ->
+    it 'retains the addresses in the distribution even if they have since changed', (done) ->
+      visit '/'
+      click 'a:contains("People")'
+      click 'a:contains("Alice")'
+      click 'button:contains("Edit")'
+      fillIn('textarea[name="address"]', 'New address for Alice')
+      click('button:contains("Done")')
+
+      waitForModels ['person']
+
       visit '/'
       click 'a:contains("Issues")'
       click 'a:contains("Bananas")'

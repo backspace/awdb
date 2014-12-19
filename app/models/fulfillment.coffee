@@ -5,6 +5,8 @@ Fulfillment = DS.Model.extend
   subscription: DS.belongsTo 'subscription'
   distribution: DS.belongsTo 'distribution'
 
+  address: DS.attr 'string'
+
   rev: DS.attr 'string'
 
 `export default Fulfillment`

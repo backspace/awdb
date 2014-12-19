@@ -4,4 +4,4 @@ ul
     li
       with fulfillment.subscription.person as person
         link-to 'person' person: person.name
-        p=person.address
+        p=fulfillment.address
