@@ -1,0 +1,7 @@
+h2 Distribution of issue {{issue.title}}
+ul
+  each fulfillment in fulfillments
+    li
+      with fulfillment.subscription.person as person
+        link-to 'person' person: person.name
+        p=person.address

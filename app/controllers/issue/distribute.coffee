@@ -16,17 +16,25 @@ IssueDistributeController = Ember.ObjectController.extend
   actions:
     distribute: ->
       issue = @get 'model'
+      distribution = @store.createRecord 'distribution', {issue: issue}
 
       @set 'isDistributing', true
 
-      Ember.RSVP.all(@get('subscribers').mapBy('activeSubscription').map (subscription) =>
-        fulfillment = @store.createRecord 'fulfillment', {issue: issue, subscription: subscription}
-        fulfillment.save()
-      ).then((fulfillments) ->
-        fulfillments.map((fulfillment) ->
-          fulfillment.get('subscription').save()
-        )
-      ).then =>
-        @set 'isDistributing', false
+      distribution.save().then =>
+        Ember.RSVP.all(@get('subscribers').mapBy('activeSubscription').map (subscription) =>
+          fulfillment = @store.createRecord 'fulfillment', {issue: issue, subscription: subscription, distribution: distribution}
+          fulfillment.save()
+        ).then((fulfillments) ->
+          fulfillments.map((fulfillment) ->
+            distribution.get('fulfillments').pushObject fulfillment
+            fulfillment.get('subscription').save()
+          )
+        ).then( ->
+          issue.get('distributions').pushObject distribution
+          issue.save()
+        ).then( ->
+          distribution.save()
+        ).then =>
+          @set 'isDistributing', false
 
 `export default IssueDistributeController`

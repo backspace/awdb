@@ -12,3 +12,8 @@ ul
   each feature in features
     =feature-list-item feature=feature people=people save="saveFeature"
   =feature-list-item feature=newFeature save="saveFeature" people=people
+
+h4 Distributions:
+ul.distributions
+  each distribution in distributions
+    li: link-to 'distribution' distribution: distribution.createdAt

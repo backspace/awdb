@@ -13,8 +13,8 @@ describe "Acceptance: Distribute issues", ->
     PouchTestHelper.buildStore(App, @currentTest.title).then (store) ->
       Ember.run ->
         asyncRecords = Ember.RSVP.hash
-          alice: store.createRecord('person', {name: 'Alice'}).save()
-          bob: store.createRecord('person', {name: 'Bob'}).save()
+          alice: store.createRecord('person', {name: 'Alice', address: 'Alice address'}).save()
+          bob: store.createRecord('person', {name: 'Bob', address: 'Bob address'}).save()
           cara: store.createRecord('person', {name: 'Cara'}).save()
 
           apples: store.createRecord('issue', {title: 'Apples are amazing'}).save()
@@ -56,48 +56,67 @@ describe "Acceptance: Distribute issues", ->
     Ember.run(App, 'destroy')
     Ember.run(done)
 
-  it 'creates fulfillments for a new issue', (done) ->
-    visit '/'
-    click 'a:contains("Issues")'
-    click 'button:contains("New issue")'
-    fillIn 'input[name="title"]', 'Bananas are better'
-    click 'button:contains("Done")'
+  describe 'when distributing a new issue', (done) ->
+    beforeEach (done) ->
+      visit '/'
+      click 'a:contains("Issues")'
+      click 'button:contains("New issue")'
+      fillIn 'input[name="title"]', 'Bananas are better'
+      click 'button:contains("Done")'
 
-    click 'a:contains("Distribute")'
+      waitForModels ['issue']
 
-    andThen ->
-      expectElement '.subscribers li', {contains: 'Alice'}
-      expectElement '.subscribers li', {contains: 'Bob'}
+      click 'a:contains("Distribute")'
 
-    click 'button:contains("Distribute")'
+      andThen ->
+        expectElement '.subscribers li', {contains: 'Alice'}
+        expectElement '.subscribers li', {contains: 'Bob'}
 
-    waitForModels ['issue', 'subscription', 'fulfillment']
+      click 'button:contains("Distribute")'
 
-    andThen ->
-      expectElement 'h3', {contains: 'Bananas'}
+      waitForModels ['issue', 'subscription', 'fulfillment', 'distribution']
 
-    visit '/'
-    click 'a:contains("People")'
-    click 'a:contains("Alice")'
+      andThen ->
+        done()
 
-    andThen ->
-      expectElement 'p', {contains: 'Not subscribed!'}
-      expectElement 'li', {contains: 'Bananas are better'}
+    it 'shows that subscribers received the issue', (done) ->
+      andThen ->
+        expectElement 'h3', {contains: 'Bananas'}
 
-    click 'a:contains("People")'
-    click 'a:contains("Bob")'
+      visit '/'
+      click 'a:contains("People")'
+      click 'a:contains("Alice")'
 
-    andThen ->
-      expectElement 'p', {contains: 'Issues remaining: 2'}
-      expectElement 'li', {contains: 'Bananas are better'}
+      andThen ->
+        expectElement 'p', {contains: 'Not subscribed!'}
+        expectElement 'li', {contains: 'Bananas are better'}
 
-    click 'a:contains("People")'
-    click 'a:contains("Cara")'
+      click 'a:contains("People")'
+      click 'a:contains("Bob")'
 
-    andThen ->
-      expectNoElement 'li', {contains: 'Bananas are better'}
+      andThen ->
+        expectElement 'p', {contains: 'Issues remaining: 2'}
+        expectElement 'li', {contains: 'Bananas are better'}
 
-      done()
+      click 'a:contains("People")'
+      click 'a:contains("Cara")'
+
+      andThen ->
+        expectNoElement 'li', {contains: 'Bananas are better'}
+
+        done()
+
+    it 'retains the addresses in the distribution', (done) ->
+      visit '/'
+      click 'a:contains("Issues")'
+      click 'a:contains("Bananas")'
+      click '.distributions li a'
+
+      andThen ->
+        expectElement 'p', {contains: 'Alice address'}
+        expectElement 'p', {contains: 'Bob address'}
+
+        done()
 
   it 'does not automatically distribute to subscribers who have already received an issue', (done) ->
     visit '/'
