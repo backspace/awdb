@@ -105,8 +105,8 @@ describe "Acceptance: Manage subscriptions", ->
     andThen ->
       expectElement '.js-subscribers li', {contains: 'Alice'}
       expectElement '.js-subscribers li', {contains: 'Bob'}
-      expectElement '.js-subscribers li', 0, {contains: 'Cara'}
-      expectElement '.js-subscribers li', 0, {contains: 'Donna'}
+      expectNoElement '.js-subscribers li', {contains: 'Cara'}
+      expectNoElement '.js-subscribers li', {contains: 'Donna'}
 
       done()
 
@@ -115,9 +115,9 @@ describe "Acceptance: Manage subscriptions", ->
     click 'a:contains("People")'
 
     andThen ->
-      expectElement '.js-former-subscribers li', 0, {contains: 'Alice'}
-      expectElement '.js-former-subscribers li', 0, {contains: 'Bob'}
-      expectElement '.js-former-subscribers li', 0, {contains: 'Cara'}
+      expectNoElement '.js-former-subscribers li', {contains: 'Alice'}
+      expectNoElement '.js-former-subscribers li', {contains: 'Bob'}
+      expectNoElement '.js-former-subscribers li', {contains: 'Cara'}
       expectElement '.js-former-subscribers li', {contains: 'Donna'}
 
       done()

@@ -135,7 +135,7 @@ describe "Acceptance: Distribute issues", ->
     click 'a:contains("Distribute")'
 
     andThen ->
-      expectElement '.subscribers li', 0, {contains: 'Alice'}
+      expectNoElement '.subscribers li', {contains: 'Alice'}
       expectElement '.subscribers li', {contains: 'Bob'}
 
       done()
