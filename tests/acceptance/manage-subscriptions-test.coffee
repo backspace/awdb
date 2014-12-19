@@ -15,6 +15,7 @@ describe "Acceptance: Manage subscriptions", ->
           alice: store.createRecord('person', {name: 'Alice'}).save()
           bob: store.createRecord('person', {name: 'Bob'}).save()
           cara: store.createRecord('person', {name: 'Cara'}).save()
+          donna: store.createRecord('person', {name: 'Donna'}).save()
 
           apples: store.createRecord('issue', {title: 'Apples are amazing'}).save()
 
@@ -23,6 +24,7 @@ describe "Acceptance: Manage subscriptions", ->
           subscriptions = Ember.RSVP.hash
             alice: store.createRecord('subscription', {person: records.alice, count: 2}).save()
             bob: store.createRecord('subscription', {person: records.bob, count: 3}).save()
+            donna: store.createRecord('subscription', {person: records.donna, count: 1}).save()
             records: records
 
           subscriptions
@@ -31,6 +33,7 @@ describe "Acceptance: Manage subscriptions", ->
 
           fulfillments = Ember.RSVP.hash
             fulfillment: store.createRecord('fulfillment', {issue: records.apples, subscription: subscriptions.alice}).save()
+            final_fulfillment: store.createRecord('fulfillment', {issue: records.apples, subscription: subscriptions.donna}).save()
             subscriptions: subscriptions
 
           fulfillments
@@ -41,12 +44,15 @@ describe "Acceptance: Manage subscriptions", ->
           # FIXME hack to prevent stored person IDs from being cleared
           subscriptions.alice.set 'person', records.alice
           subscriptions.bob.set 'person', records.bob
+          subscriptions.donna.set 'person', records.donna
 
           Ember.RSVP.all([
             records.alice.save(),
             records.bob.save()
+            records.donna.save()
             subscriptions.alice.save(),
             subscriptions.bob.save()
+            subscriptions.donna.save()
           ]).then ->
             done()
         )
@@ -89,5 +95,29 @@ describe "Acceptance: Manage subscriptions", ->
 
     andThen ->
       expectElement 'p', {contains: 'Issues remaining: 3'}
+
+      done()
+
+  it 'lists current subscribers', (done) ->
+    visit '/'
+    click 'a:contains("People")'
+
+    andThen ->
+      expectElement '.js-subscribers li', {contains: 'Alice'}
+      expectElement '.js-subscribers li', {contains: 'Bob'}
+      expectElement '.js-subscribers li', 0, {contains: 'Cara'}
+      expectElement '.js-subscribers li', 0, {contains: 'Donna'}
+
+      done()
+
+  it 'lists former subscribers', (done) ->
+    visit '/'
+    click 'a:contains("People")'
+
+    andThen ->
+      expectElement '.js-former-subscribers li', 0, {contains: 'Alice'}
+      expectElement '.js-former-subscribers li', 0, {contains: 'Bob'}
+      expectElement '.js-former-subscribers li', 0, {contains: 'Cara'}
+      expectElement '.js-former-subscribers li', {contains: 'Donna'}
 
       done()

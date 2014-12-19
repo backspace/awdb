@@ -11,6 +11,10 @@ export default DS.Model.extend({
   isSubscribed: Ember.computed.notEmpty('activeSubscriptions'),
   activeSubscription: Ember.computed.alias('activeSubscriptions.firstObject'),
 
+  hasSubscribed: Ember.computed.notEmpty('subscriptions'),
+  isNotSubscribed: Ember.computed.empty('activeSubscriptions'),
+  isFormerSubscriber: Ember.computed.and('hasSubscribed', 'isNotSubscribed'),
+
   subscriptionFulfillmentsRemaining: Ember.computed.mapBy('subscriptions', 'remaining'),
   fulfillmentsRemaining: Ember.computed.sum('subscriptionFulfillmentsRemaining'),
 

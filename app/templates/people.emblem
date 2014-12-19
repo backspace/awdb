@@ -8,3 +8,14 @@ button click='createPerson' New person
 br
 
 button click='labels' Labels
+
+h3 Current subscribers:
+ul.js-subscribers
+  each person in subscribers
+    li: link-to 'person' person: person.name
+
+h3 Former subscribers:
+
+ul.js-former-subscribers
+  each person in formerSubscribers
+    li: link-to 'person' person: person.name
