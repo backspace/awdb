@@ -48,6 +48,7 @@ IssueDistributeController = Ember.ObjectController.extend
           distribution.save()
         ).then =>
           @set 'isDistributing', false
+          @send 'showDistribution', distribution
 
     deleteFulfillment: (fulfillment) ->
       @get('model.proposedFulfillments').removeObject(fulfillment)

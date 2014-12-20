@@ -79,10 +79,14 @@ describe "Acceptance: Distribute issues", ->
       andThen ->
         done()
 
-    it 'shows that subscribers received the issue', (done) ->
+    it 'shows the completed distribution', (done) ->
       andThen ->
-        expectElement 'h3', {contains: 'Bananas'}
+        expectElement 'h2', {contains: "Distribution of issue Bananas are better"}
+        expectElement 'a', {contains: 'Alice'}
 
+        done()
+
+    it 'shows that subscribers received the issue', (done) ->
       visit '/'
       click 'a:contains("People")'
       click 'a:contains("Alice")'

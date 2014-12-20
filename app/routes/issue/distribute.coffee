@@ -8,4 +8,8 @@ DistributeRoute = Ember.Route.extend
     controller.addSuggestedFulfillmentsToDistribution(model)
     controller.set 'model', model
 
+  actions:
+    showDistribution: (distribution) ->
+      @transitionTo 'distribution', distribution
+
 `export default DistributeRoute`
