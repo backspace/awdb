@@ -1,6 +1,6 @@
 {
   "max_line_length": {
-    "level": "warn"
+    "level": "ignore"
   },
 
   "no_backticks": {
