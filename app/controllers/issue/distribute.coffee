@@ -15,7 +15,7 @@ IssueDistributeController = Ember.ObjectController.extend
     # FIXME hideous hack to store fulfillments elsewhere because of broken parent-saving with unsaved children
     distribution.set 'proposedFulfillments', []
 
-    suggestedSubscribers = @get('subscribers').filter (subscriber) =>
+    suggestedSubscribers = @get('subscribers').filter (subscriber) ->
       !subscriber.get('issuesReceived').contains(issue)
 
     suggestedSubscribers.mapBy('activeSubscription').forEach (subscription) =>

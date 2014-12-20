@@ -39,7 +39,7 @@ FeatureListItem = Ember.Component.extend
       defer.promise.then(=>
         # TODO the isDestroyed/isDestroying checks are only for testing, seems weird
         @set 'isEditing', false unless @get('isDestroyed') || @get('isDestroying') || @get('isNew')
-      , =>
+      , ->
         alert "An error saving the feature!"
       )
 
