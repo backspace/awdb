@@ -1,5 +1,6 @@
-button click='distribute' Distribute to #{suggestedSubscribers.length} subscribers
+button click='distribute' Distribute to #{proposedFulfillments.length} subscribers
 
 ul.subscribers
-  each subscriber in suggestedSubscriptions
-    li: link-to 'person' subscriber: subscriber.name
+  each fulfillment in proposedFulfillments
+    with fulfillment.subscription.person as person
+      li: link-to 'person' person: person.name

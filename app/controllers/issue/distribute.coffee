@@ -7,26 +7,36 @@ IssueDistributeController = Ember.ObjectController.extend
 
   subscribers: Ember.computed.filterBy('controllers.issue.people', 'isSubscribed')
 
-  suggestedSubscriptions: Ember.computed 'subscribers', ->
-    issue = @get 'model'
+  addSuggestedFulfillmentsToDistribution: (distribution) ->
+    return unless distribution?
 
-    @get('subscribers').filter (subscriber) =>
+    issue = distribution.get 'issue'
+
+    # FIXME hideous hack to store fulfillments elsewhere because of broken parent-saving with unsaved children
+    distribution.set 'proposedFulfillments', []
+
+    suggestedSubscribers = @get('subscribers').filter (subscriber) =>
       !subscriber.get('issuesReceived').contains(issue)
+
+    suggestedSubscribers.mapBy('activeSubscription').forEach (subscription) =>
+      person = subscription.get 'person'
+
+      fulfillment = @store.createRecord 'fulfillment', {address: person.get('address'), issue: issue, subscription: subscription}
+
+      distribution.get('proposedFulfillments').pushObject fulfillment
 
   actions:
     distribute: ->
-      issue = @get 'model'
-      distribution = @store.createRecord 'distribution', {issue: issue}
+      distribution = @get 'model'
+      issue = distribution.get('issue')
 
       @set 'isDistributing', true
 
       distribution.save().then =>
-        Ember.RSVP.all(@get('subscribers').mapBy('activeSubscription').map (subscription) =>
-          person = subscription.get('person')
-
-          fulfillment = @store.createRecord 'fulfillment', {address: person.get('address'), issue: issue, subscription: subscription, distribution: distribution}
+        Ember.RSVP.all(distribution.get('proposedFulfillments').map((fulfillment) ->
+          fulfillment.set 'distribution', distribution
           fulfillment.save()
-        ).then((fulfillments) ->
+        )).then((fulfillments) ->
           fulfillments.map((fulfillment) ->
             distribution.get('fulfillments').pushObject fulfillment
             fulfillment.get('subscription').save()

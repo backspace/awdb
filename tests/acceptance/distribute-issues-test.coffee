@@ -72,7 +72,7 @@ describe "Acceptance: Distribute issues", ->
         expectElement '.subscribers li', {contains: 'Alice'}
         expectElement '.subscribers li', {contains: 'Bob'}
 
-      click 'button:contains("Distribute")'
+      click 'button:contains("Distribute to 2 subscribers")'
 
       waitForModels ['issue', 'subscription', 'fulfillment', 'distribution']
 
