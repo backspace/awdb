@@ -49,4 +49,7 @@ IssueDistributeController = Ember.ObjectController.extend
         ).then =>
           @set 'isDistributing', false
 
+    deleteFulfillment: (fulfillment) ->
+      @get('model.proposedFulfillments').removeObject(fulfillment)
+
 `export default IssueDistributeController`

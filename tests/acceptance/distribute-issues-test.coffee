@@ -139,3 +139,42 @@ describe "Acceptance: Distribute issues", ->
       expectElement '.subscribers li', {contains: 'Bob'}
 
       done()
+
+  describe 'when there is another subscriber', (done) ->
+    beforeEach (done) ->
+      visit '/'
+      click 'a:contains("People")'
+      click 'a:contains("Cara")'
+      click 'button:contains("Add")'
+
+      waitForModels ['subscription', 'person']
+
+      andThen ->
+        done()
+
+    describe 'and the new subscriber is deleted from the distribution', (done) ->
+      beforeEach (done) ->
+        visit '/'
+        click 'a:contains("Issues")'
+        click 'a:contains("Apples")'
+        click 'a:contains("Distribute")'
+
+        click 'li:contains("Cara") .fa-trash'
+
+        click 'button:contains("Distribute")'
+
+        waitForModels ['distribution', 'fulfillment', 'issue', 'subscription']
+
+        andThen ->
+          done()
+
+      it 'does not distribute to the new subscriber', (done) ->
+        click 'a:contains("Issues")'
+        click 'a:contains("Apples")'
+        click '.distributions li a'
+
+        andThen ->
+          expectElement 'a', {contains: 'Bob'}
+          expectNoElement 'a', {contains: 'Cara'}
+
+          done()
