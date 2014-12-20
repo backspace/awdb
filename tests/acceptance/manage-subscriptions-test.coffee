@@ -93,6 +93,11 @@ describe "Acceptance: Manage subscriptions", ->
 
     waitForModels ['subscription', 'person']
 
+    # Navigate away to ensure relationship is stored on both ends
+    visit '/'
+    click 'a:contains("People")'
+    click 'a:contains("Cara")'
+
     andThen ->
       expectElement 'p', {contains: 'Issues remaining: 3'}
 

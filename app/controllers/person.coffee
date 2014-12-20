@@ -18,7 +18,9 @@ PersonController = Ember.ObjectController.extend
       @set 'isEditing', true
 
     addSubscription: ->
-      @store.createRecord('subscription', {person: @get('model'), count: 3}).save().then =>
-        @get('model').save
+      @store.createRecord('subscription', {person: @get('model'), count: 3}).save().then (subscription) =>
+        person = @get('model')
+        person.get('subscriptions').addObject(subscription)
+        person.save()
 
 `export default PersonController`
