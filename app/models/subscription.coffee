@@ -15,4 +15,8 @@ Subscription = DS.Model.extend
 
   rev: DS.attr 'string'
 
+  createTransaction: Ember.on 'didCreate', ->
+    transaction = @store.createRecord 'transaction', {amount: 30, person: @get('person')}
+    transaction.save()
+
 `export default Subscription`

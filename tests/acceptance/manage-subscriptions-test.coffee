@@ -85,23 +85,36 @@ describe "Acceptance: Manage subscriptions", ->
 
       done()
 
-  it 'allows the user to create subscriptions', (done) ->
-    visit '/'
-    click 'a:contains("People")'
-    click 'a:contains("Cara")'
-    click 'button:contains("Add 3-issue subscription")'
+  describe 'creating a new subscription', ->
+    beforeEach (done) ->
+      visit '/'
+      click 'a:contains("People")'
+      click 'a:contains("Cara")'
+      click 'button:contains("Add 3-issue subscription")'
 
-    waitForModels ['subscription', 'person']
+      waitForModels ['subscription', 'person']
 
-    # Navigate away to ensure relationship is stored on both ends
-    visit '/'
-    click 'a:contains("People")'
-    click 'a:contains("Cara")'
+      andThen ->
+        done()
 
-    andThen ->
-      expectElement 'p', {contains: 'Issues remaining: 3'}
+    it 'shows the new subscription', (done) ->
+      # Navigate away to ensure relationship is stored on both ends
+      visit '/'
+      click 'a:contains("People")'
+      click 'a:contains("Cara")'
 
-      done()
+      andThen ->
+        expectElement 'p', {contains: 'Issues remaining: 3'}
+
+        done()
+
+    it 'results in a subscription transaction', (done) ->
+      click 'a:contains("Transactions")'
+
+      andThen ->
+        expectElement 'tr:contains("Cara") td', {contains: '$30'}
+
+        done()
 
   it 'lists current subscribers', (done) ->
     visit '/'
