@@ -5,6 +5,7 @@ import startApp from '../../helpers/start-app';
 import PouchTestHelper from '../../helpers/pouch-test-helper';
 
 var App;
+var people;
 
 describe('Acceptance: Issue lists features', function() {
   beforeEach(function(done) {
@@ -15,18 +16,26 @@ describe('Acceptance: Issue lists features', function() {
         Ember.RSVP.hash({
           alice: store.createRecord('person', {name: 'Alice'}).save(),
           bob: store.createRecord('person', {name: 'Bob'}).save()
-        }).then(function(people) {
+        }).then(function(result) {
+          people = result;
           var issue = store.createRecord('issue', {title: 'All about apples'});
 
           issue.save().then(function() {
             var feature = store.createRecord('feature', {title: 'Apples are tasty', issue: issue});
-            feature.get('contributors').pushObjects([people.alice, people.bob]);
 
             feature.save().then(function() {
               issue.get('features').addObject(feature);
 
               issue.save().then(function() {
-                done();
+                Ember.RSVP.all([
+                  store.createRecord('contribution', {feature: feature, person: people.alice}).save(),
+                  store.createRecord('contribution', {feature: feature, person: people.bob}).save()
+                ]).then(function(contributions) {
+                  feature.get('contributions').pushObjects(contributions);
+                  feature.save().then(function() {
+                    done();
+                  });
+                });
               });
             });
           });

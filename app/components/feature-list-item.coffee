@@ -17,20 +17,20 @@ FeatureListItem = Ember.Component.extend
     @setIsEditing()
   ).observes 'feature.id'
 
-  contributors: Ember.computed 'feature.contributors', ->
-    contributorsWithNew = Ember.copy(@get('feature.contributors').mapBy('.'))
-    contributorsWithNew.pushObject(@get('newContributor'))
+  contributions: Ember.computed 'feature.contributions', ->
+    contributionsWithNew = Ember.copy(@get('feature.contributions').mapBy('.'))
+    contributionsWithNew.pushObject(@get('newContribution'))
 
-    contributorsWithNew
+    contributionsWithNew
 
-  newContributor: null,
-  setNewContributor: Ember.on 'init', ->
-    @set 'newContributor', Ember.Object.create()
+  newContribution: null,
+  setNewContribution: Ember.on 'init', ->
+    @set 'newContribution', Ember.Object.create({person: Ember.Object.create({id: null})})
 
-  appendNewContributor: Ember.observer 'newContributor.id', ->
-    if @get('newContributor.id')
-      @get('feature').appendNewContributor(@get('newContributor.id'))
-      @setNewContributor()
+  appendNewContribution: Ember.observer 'newContribution.person.id', ->
+    if @get('newContribution.person.id')
+      @get('feature').appendNewContributor(@get('newContribution.person.id'))
+      @setNewContribution()
 
   actions:
     save: ->
