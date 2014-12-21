@@ -5,25 +5,31 @@ else
   =input type='text' value=url
   button click='replicate' Replicate
 
-h2 Subscription costs
+.row
+  .small-12.medium-8.columns
+    h2 Subscription costs
 
-table
-  thead
-    tr
-      th
-      th 3 issues
-  tbody
-    tr
-      th Canada
-      td=input type='number' value=subscriptionCanada3 name='subscriptionCanada3'
-    tr
-      th USA
-      td=input type='number' value=subscriptionUsa3 name='subscriptionUsa3'
-    tr
-      th International
-      td=input type='number' value=subscriptionInternational3 name='subscriptionInternational3'
-    tr
-      th Institution
-      td=input type='number' value=subscriptionInstitution3 name='subscriptionInstitution3'
-
-button click='save' Save
+    table
+      thead
+        tr
+          th
+          th 3 issues
+      tbody
+        tr
+          th Canada
+          td=input type='number' value=subscriptionCanada3 name='subscriptionCanada3'
+        tr
+          th USA
+          td=input type='number' value=subscriptionUsa3 name='subscriptionUsa3'
+        tr
+          th International
+          td=input type='number' value=subscriptionInternational3 name='subscriptionInternational3'
+        tr
+          th Institution
+          td=input type='number' value=subscriptionInstitution3 name='subscriptionInstitution3'
+  .small-12.medium-4.columns
+    h2 Feature compensation
+    =input type='number' value=featureCompensation name='featureCompensation'
+.row
+  .small-centered.small-3.columns
+    button click='save' Save

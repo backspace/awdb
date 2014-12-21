@@ -271,3 +271,37 @@ describe "Acceptance: Distribute issues", ->
           expectNoElement 'a', {contains: 'Cara'}
 
           done()
+
+  describe 'when the default feature compensation is changed', (done) ->
+    beforeEach (done) ->
+      visit '/'
+      click 'a:contains("Settings")'
+      fillIn 'input[name=featureCompensation]', '50'
+      click 'button:contains("Save")'
+
+      waitForModels ['settings']
+
+      andThen ->
+        done()
+
+    it 'uses the new feature compensation in a distribution', (done) ->
+      click 'a:contains("Issues")'
+      click 'button:contains("New issue")'
+      fillIn 'input[name="title"]', 'Cantaloupe is capricious'
+      click 'button:contains("Done")'
+
+      waitForModels ['issue']
+
+      fillIn 'input[name="title"]', 'Sometimes so good'
+      fillIn 'select[name="contributor"]:last', people.artist.id
+      click 'i.fa-check'
+
+      waitForModels ['feature', 'issue']
+      click 'a:contains("Issues")'
+      click 'a:contains("Cantaloupe")'
+      click 'a:contains("Distribute")'
+
+      andThen ->
+        expect(find('input[type="number"]').val()).to.equal('50')
+
+        done()
