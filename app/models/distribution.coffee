@@ -12,4 +12,11 @@ Distribution = DS.Model.extend
   proposedContributionFulfillments: Ember.computed.filterBy 'proposedFulfillments', 'isForContribution'
   proposedExtraFulfillments: Ember.computed.filterBy 'proposedFulfillments', 'isExtra'
 
+  createContributionTransactions: Ember.on 'didCreate', ->
+    @get('issue.features').forEach (feature) =>
+      feature.get('contributions').forEach (contribution) =>
+        transaction = @store.createRecord 'transaction', {amount: contribution.get('compensation'), person: contribution.get('person')}
+
+        transaction.save()
+
 `export default Distribution`

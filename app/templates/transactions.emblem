@@ -1,0 +1,12 @@
+table
+  thead
+    tr
+      th Date
+      th Person
+      th Amount
+  tbody
+    each transaction in model
+      tr
+        td=transaction.createdAt
+        td=transaction.person.name
+        td $#{transaction.amount}

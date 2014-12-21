@@ -17,6 +17,8 @@ Router.map(function() {
 
   this.route('distribution', { path: 'distributions/:distribution_id' });
 
+  this.resource('transactions');
+
   this.route('settings');
 });
 

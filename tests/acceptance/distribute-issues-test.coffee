@@ -132,9 +132,11 @@ describe "Acceptance: Distribute issues", ->
 
     describe 'that has been distributed', ->
       beforeEach (done) ->
+        fillIn 'input[type="number"]', '100'
+
         click 'button:contains("Distribute to 3 recipients")'
 
-        waitForModels ['issue', 'subscription', 'fulfillment', 'distribution']
+        waitForModels ['issue', 'subscription', 'fulfillment', 'distribution', 'transaction']
 
         andThen ->
           done()
@@ -200,6 +202,15 @@ describe "Acceptance: Distribute issues", ->
         andThen ->
           expectElement 'p', {contains: 'Alice address'}
           expectElement 'p', {contains: 'Bob address'}
+
+          done()
+
+      it 'created a transaction for contributor compensation', (done) ->
+        click 'a:contains("Transactions")'
+
+        andThen ->
+          expectElement 'td', {contains: '$100'}
+          expectElement 'td', {contains: 'Artist'}
 
           done()
 

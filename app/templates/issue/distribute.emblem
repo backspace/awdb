@@ -21,3 +21,11 @@ ul.results
   else
     if search
       | No results!
+
+h3 Contributor compensation
+ul.compensations
+  each feature in issue.features
+    each contribution in feature.contributions
+      li
+        | #{feature.title}: #{contribution.person.name}
+        =input type='number' value=contribution.compensation
