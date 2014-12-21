@@ -9,4 +9,4 @@ table
       tr
         td=transaction.createdAt
         td=transaction.person.name
-        td $#{transaction.amount}
+        td #{transaction.formattedAmount}

@@ -15,7 +15,7 @@ Distribution = DS.Model.extend
   createContributionTransactions: Ember.on 'didCreate', ->
     @get('issue.features').forEach (feature) =>
       feature.get('contributions').forEach (contribution) =>
-        transaction = @store.createRecord 'transaction', {amount: contribution.get('compensation'), person: contribution.get('person')}
+        transaction = @store.createRecord 'transaction', {amount: -contribution.get('compensation'), person: contribution.get('person')}
 
         transaction.save()
 

@@ -9,4 +9,13 @@ Transaction = DS.Model.extend
 
   rev: DS.attr 'string'
 
+  # FIXME presenter logic
+  formattedAmount: Ember.computed 'amount', ->
+    amount = @get 'amount'
+
+    if amount < 0
+      "-$#{Math.abs amount}"
+    else
+      "$#{amount}"
+
 `export default Transaction`

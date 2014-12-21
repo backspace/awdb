@@ -215,7 +215,7 @@ describe "Acceptance: Distribute issues", ->
         click 'a:contains("Transactions")'
 
         andThen ->
-          expectElement 'td', {contains: '$200'}
+          expectElement 'td', {contains: '-$200'}
           expectElement 'td', {contains: 'Artist'}
 
           done()
