@@ -94,17 +94,18 @@ describe "Acceptance: Manage subscriptions", ->
       andThen ->
         done()
 
-    countryRates =
+    rates =
       Canada: 30
       USA: 35
       International: 40
+      Institution: 45
 
-    for own country, rate of countryRates
-      do (country, rate) ->
-        describe "creating a new subscription to #{country}", ->
+    for own classification, rate of rates
+      do (classification, rate) ->
+        describe "creating a new subscription for #{classification}", ->
           beforeEach (done) ->
             click 'button:contains("Edit")'
-            click "label:contains('#{country}')"
+            click "label:contains('#{classification}')"
             click 'button:contains("Done")'
 
             waitForModels ['person']

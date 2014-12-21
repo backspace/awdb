@@ -5,14 +5,17 @@ if editing
     label Address
     =textarea name='address' value=address
     label
-      =radio-button value='canada' checked=country
+      =radio-button value='canada' checked=classification
       | Canada
     label
-      =radio-button value='usa' checked=country
+      =radio-button value='usa' checked=classification
       | USA
     label
-      =radio-button value='international' checked=country
+      =radio-button value='international' checked=classification
       | International
+    label
+      =radio-button value='institution' check=classification
+      | Institution
     button click='doneEditing' Done
 else
   h3=name

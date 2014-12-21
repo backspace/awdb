@@ -16,10 +16,11 @@ Subscription = DS.Model.extend
   rev: DS.attr 'string'
 
   createTransaction: Ember.on 'didCreate', ->
-    country = @get('person.country')
-    cost = 30 if country == 'canada'
-    cost = 35 if country == 'usa'
-    cost = 40 if country == 'international'
+    classification = @get('person.classification')
+    cost = 30 if classification == 'canada'
+    cost = 35 if classification == 'usa'
+    cost = 40 if classification == 'international'
+    cost = 45 unless classification?
 
     transaction = @store.createRecord 'transaction', {amount: cost, person: @get('person')}
     transaction.save()

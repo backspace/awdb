@@ -4,7 +4,7 @@ import DS from 'ember-data';
 export default DS.Model.extend({
   name: DS.attr('string'),
   address: DS.attr('string'),
-  country: DS.attr('string'),
+  classification: DS.attr('string'),
 
   subscriptions: DS.hasMany('subscription', {inverse: 'person'}),
 
