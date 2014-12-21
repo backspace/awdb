@@ -32,8 +32,8 @@ describe "Acceptance: Manage subscriptions", ->
           records = subscriptions.records
 
           fulfillments = Ember.RSVP.hash
-            fulfillment: store.createRecord('fulfillment', {issue: records.apples, subscription: subscriptions.alice}).save()
-            final_fulfillment: store.createRecord('fulfillment', {issue: records.apples, subscription: subscriptions.donna}).save()
+            fulfillment: store.createRecord('fulfillment', {issue: records.apples, person: records.alice, subscription: subscriptions.alice}).save()
+            final_fulfillment: store.createRecord('fulfillment', {issue: records.apples, person: records.donna, subscription: subscriptions.donna}).save()
             subscriptions: subscriptions
 
           fulfillments

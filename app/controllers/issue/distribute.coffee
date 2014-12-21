@@ -21,9 +21,17 @@ IssueDistributeController = Ember.ObjectController.extend
     suggestedSubscribers.mapBy('activeSubscription').forEach (subscription) =>
       person = subscription.get 'person'
 
-      fulfillment = @store.createRecord 'fulfillment', {address: person.get('address'), issue: issue, subscription: subscription}
+      fulfillment = @store.createRecord 'fulfillment', {person: person, address: person.get('address'), issue: issue, subscription: subscription}
 
       distribution.get('proposedFulfillments').pushObject fulfillment
+
+    issue.get('features').forEach (feature) =>
+      # FIXME a contributor will receive one issue for each feature
+      feature.get('contributors').forEach (contributor) =>
+        # TODO almost duplication of above fulfillment creation, just without subscription
+        fulfillment = @store.createRecord 'fulfillment', {person: contributor, address: contributor.get('address'), issue: issue}
+
+        distribution.get('proposedFulfillments').pushObject fulfillment
 
   actions:
     distribute: ->
@@ -39,7 +47,10 @@ IssueDistributeController = Ember.ObjectController.extend
         )).then((fulfillments) ->
           fulfillments.map((fulfillment) ->
             distribution.get('fulfillments').pushObject fulfillment
-            fulfillment.get('subscription').save()
+            subscription = fulfillment.get('subscription')
+            subscription.save() if subscription?
+
+            fulfillment.get('person').save()
           )
         ).then( ->
           issue.get('distributions').pushObject distribution

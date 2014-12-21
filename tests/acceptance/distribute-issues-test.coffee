@@ -4,6 +4,7 @@
 `import PouchTestHelper from '../helpers/pouch-test-helper'`
 
 App = null
+people = null
 
 describe "Acceptance: Distribute issues", ->
   # Copied from manage-subscriptions-test; DRY up somehow?
@@ -16,10 +17,13 @@ describe "Acceptance: Distribute issues", ->
           alice: store.createRecord('person', {name: 'Alice', address: 'Alice address'}).save()
           bob: store.createRecord('person', {name: 'Bob', address: 'Bob address'}).save()
           cara: store.createRecord('person', {name: 'Cara'}).save()
+          artist: store.createRecord('person', {name: 'Artist'}).save()
 
           apples: store.createRecord('issue', {title: 'Apples are amazing'}).save()
 
         asyncRecords.then((records) ->
+          people = records
+
           # TODO is there a better way to add to an RSVP.hash? HIDEOUS
           subscriptions = Ember.RSVP.hash
             alice: store.createRecord('subscription', {person: records.alice, count: 2}).save()
@@ -56,7 +60,7 @@ describe "Acceptance: Distribute issues", ->
     Ember.run(App, 'destroy')
     Ember.run(done)
 
-  describe 'when distributing a new issue', (done) ->
+  describe 'with a new issue', (done) ->
     beforeEach (done) ->
       visit '/'
       click 'a:contains("Issues")'
@@ -66,21 +70,29 @@ describe "Acceptance: Distribute issues", ->
 
       waitForModels ['issue']
 
+      fillIn 'input[name="title"]', 'Not so much potassium though'
+      fillIn 'select[name="contributor"]:last', people.artist.id
+      click 'i.fa-check'
+
+      waitForModels ['feature', 'issue']
+
       click 'a:contains("Distribute")'
 
       andThen ->
         done()
 
-    it 'suggests active subscribers as recipients', (done) ->
+    it 'the proposed distribution lists active subscribers and contributors as recipients', (done) ->
       andThen ->
-        expectElement '.subscribers li', {contains: 'Alice'}
-        expectElement '.subscribers li', {contains: 'Bob'}
+        expectElement '.recipients li', {contains: 'Alice'}
+        expectElement '.recipients li', {contains: 'Bob'}
+
+        expectElement '.recipients li', {contains: 'Artist'}
 
         done()
 
     describe 'that has been distributed', ->
       beforeEach (done) ->
-        click 'button:contains("Distribute to 2 subscribers")'
+        click 'button:contains("Distribute to 3 recipients")'
 
         waitForModels ['issue', 'subscription', 'fulfillment', 'distribution']
 
@@ -110,6 +122,18 @@ describe "Acceptance: Distribute issues", ->
           expectElement 'p', {contains: 'Issues remaining: 2'}
           expectElement 'li', {contains: 'Bananas are better'}
 
+          done()
+
+      it 'shows that the contributor received the issue', (done) ->
+        click 'a:contains("People")'
+        click 'a:contains("Artist")'
+
+        andThen ->
+          expectElement 'li', {contains: 'Bananas are better'}
+
+          done()
+
+      it 'shows that the non-subscriber did not receive the issue', (done) ->
         click 'a:contains("People")'
         click 'a:contains("Cara")'
 
@@ -147,8 +171,8 @@ describe "Acceptance: Distribute issues", ->
     click 'a:contains("Distribute")'
 
     andThen ->
-      expectNoElement '.subscribers li', {contains: 'Alice'}
-      expectElement '.subscribers li', {contains: 'Bob'}
+      expectNoElement '.recipients li', {contains: 'Alice'}
+      expectElement '.recipients li', {contains: 'Bob'}
 
       done()
 

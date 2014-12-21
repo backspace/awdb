@@ -1,8 +1,8 @@
-button click='distribute' Distribute to #{proposedFulfillments.length} subscribers
+button click='distribute' Distribute to #{proposedFulfillments.length} recipients
 
-ul.subscribers
+ul.recipients
   each fulfillment in proposedFulfillments
-    with fulfillment.subscription.person as person
+    with fulfillment.person as person
       li
         link-to 'person' person: person.name
         button.alert.tiny.round click="deleteFulfillment fulfillment"

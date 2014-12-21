@@ -19,11 +19,10 @@ else
 
   p Issues received:
   ul
-    each subscription in subscriptions
-      each fulfillment in subscription.fulfillments
-        li: link-to 'issue' fulfillment.issue: fulfillment.issue.title
-      else
-        p None
+    each fulfillment in fulfillments
+      li: link-to 'issue' fulfillment.issue: fulfillment.issue.title
+    else
+      p None
 
   button click='edit' Edit
   br
