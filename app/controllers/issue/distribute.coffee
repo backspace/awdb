@@ -5,7 +5,9 @@ IssueDistributeController = Ember.ObjectController.extend
 
   isDistributing: false
 
-  subscribers: Ember.computed.filterBy('controllers.issue.people', 'isSubscribed')
+  # FIXME this is empty when the distribute page is directly accessed
+  people: Ember.computed.alias 'controllers.issue.people'
+  subscribers: Ember.computed.filterBy('people', 'isSubscribed')
 
   addSuggestedFulfillmentsToDistribution: (distribution) ->
     return unless distribution?
@@ -32,6 +34,15 @@ IssueDistributeController = Ember.ObjectController.extend
         fulfillment = @store.createRecord 'fulfillment', {person: contributor, issue: issue}
 
         distribution.get('proposedFulfillments').pushObject fulfillment
+
+  searchResults: Ember.computed 'search', 'peole', ->
+    search = @get 'search'
+
+    if search
+      @get('people').filter (person) ->
+        person.get('name').indexOf(search) > -1
+    else
+      return []
 
   actions:
     distribute: ->
@@ -63,5 +74,8 @@ IssueDistributeController = Ember.ObjectController.extend
 
     deleteFulfillment: (fulfillment) ->
       @get('model.proposedFulfillments').removeObject(fulfillment)
+
+    addPerson: (person) ->
+      @get('model.proposedFulfillments').addObject(@store.createRecord('fulfillment', {person: person, issue: @get('model.issue')}))
 
 `export default IssueDistributeController`

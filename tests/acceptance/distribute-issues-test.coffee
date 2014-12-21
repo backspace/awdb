@@ -17,7 +17,9 @@ describe "Acceptance: Distribute issues", ->
           alice: store.createRecord('person', {name: 'Alice', address: 'Alice address'}).save()
           bob: store.createRecord('person', {name: 'Bob', address: 'Bob address'}).save()
           cara: store.createRecord('person', {name: 'Cara'}).save()
+
           artist: store.createRecord('person', {name: 'Artist'}).save()
+          extra: store.createRecord('person', {name: 'Extra'}).save()
 
           apples: store.createRecord('issue', {title: 'Apples are amazing'}).save()
 
@@ -89,6 +91,44 @@ describe "Acceptance: Distribute issues", ->
         expectElement '.recipients li', {contains: 'Artist'}
 
         done()
+
+    describe 'having an additional recipient', ->
+      beforeEach (done) ->
+        fillIn 'input[type="search"]', 'xtr'
+        click 'li:contains("Extra") .fa-plus'
+
+        andThen ->
+          done()
+
+      it 'the new recipient is listed', (done) ->
+        andThen ->
+          expectElement '.recipients li', {contains: 'Extra'}
+
+          done()
+
+      describe ', when it is distributed', ->
+        beforeEach (done) ->
+          click 'button:contains("Distribute")'
+
+          waitForModels ['issue', 'subscription', 'fulfillment', 'distribution']
+
+          andThen ->
+            done()
+
+        it 'shows the new recipient in the completed distribution', (done) ->
+          andThen ->
+            expectElement 'a', {contains: 'Extra'}
+
+            done()
+
+        it 'shows that the new recipient received the issue', (done) ->
+          click 'a:contains("People")'
+          click 'a:contains("Extra")'
+
+          andThen ->
+            expectElement 'li', {contains: 'Bananas are better'}
+
+            done()
 
     describe 'that has been distributed', ->
       beforeEach (done) ->

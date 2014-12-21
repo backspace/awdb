@@ -7,3 +7,14 @@ ul.recipients
         link-to 'person' person: person.name
         button.alert.tiny.round click="deleteFulfillment fulfillment"
           fa-icon 'trash'
+
+=input type='search' value=search
+ul.results
+  each person in searchResults
+    li
+      =person.name
+      button.tiny.round click="addPerson person"
+        fa-icon 'plus'
+  else
+    if search
+      | No results!
