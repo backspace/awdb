@@ -102,7 +102,7 @@ describe "Acceptance: Distribute issues", ->
 
       it 'the new recipient is listed', (done) ->
         andThen ->
-          expectElement '.contributions li', {contains: 'Extra'}
+          expectElement '.extras li', {contains: 'Extra'}
 
           done()
 

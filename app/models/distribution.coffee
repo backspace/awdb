@@ -10,5 +10,6 @@ Distribution = DS.Model.extend
 
   proposedSubscriptionFulfillments: Ember.computed.filterBy 'proposedFulfillments', 'isForSubscription'
   proposedContributionFulfillments: Ember.computed.filterBy 'proposedFulfillments', 'isForContribution'
+  proposedExtraFulfillments: Ember.computed.filterBy 'proposedFulfillments', 'isExtra'
 
 `export default Distribution`

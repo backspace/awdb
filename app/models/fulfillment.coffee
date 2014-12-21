@@ -4,6 +4,8 @@ Fulfillment = DS.Model.extend
   issue: DS.belongsTo 'issue'
 
   subscription: DS.belongsTo 'subscription'
+  contribution: DS.belongsTo 'contribution'
+
   person: DS.belongsTo 'person'
 
   distribution: DS.belongsTo 'distribution'
@@ -22,6 +24,8 @@ Fulfillment = DS.Model.extend
   rev: DS.attr 'string'
 
   isForSubscription: Ember.computed.notEmpty 'subscription'
-  isForContribution: Ember.computed.empty 'subscription'
+  isForContribution: Ember.computed.notEmpty 'contribution'
+  isExtra: Ember.computed 'isForSubscription', 'isForContribution', ->
+    !(@get('isForSubscription') || @get('isForContribution'))
 
 `export default Fulfillment`

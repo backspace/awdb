@@ -29,9 +29,8 @@ IssueDistributeController = Ember.ObjectController.extend
 
     issue.get('features').forEach (feature) =>
       # FIXME a contributor will receive one issue for each feature
-      feature.get('contributors').forEach (contributor) =>
-        # TODO almost duplication of above fulfillment creation, just without subscription
-        fulfillment = @store.createRecord 'fulfillment', {person: contributor, issue: issue}
+      feature.get('contributions').forEach (contribution) =>
+        fulfillment = @store.createRecord 'fulfillment', {person: contribution.get('person'), contribution: contribution, issue: issue}
 
         distribution.get('proposedFulfillments').pushObject fulfillment
 
