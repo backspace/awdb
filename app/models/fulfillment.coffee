@@ -8,8 +8,16 @@ Fulfillment = DS.Model.extend
 
   distribution: DS.belongsTo 'distribution'
 
-  # TODO can be derived from person
   address: DS.attr 'string'
+
+  addressPopulator: Ember.observer 'person.id', ->
+    newPersonID = @get 'person.id'
+
+    if @oldPersonID != newPersonID
+      person = @get 'person'
+      @set 'address', person.get('address') if person?
+
+      @oldPersonID = newPersonID
 
   rev: DS.attr 'string'
 
