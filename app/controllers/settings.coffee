@@ -26,4 +26,7 @@ SettingsController = Ember.ObjectController.extend
         @set 'isReplicating', false
       )
 
+    save: ->
+      @get('model').save()
+
 `export default SettingsController`

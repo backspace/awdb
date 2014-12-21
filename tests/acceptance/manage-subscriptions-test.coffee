@@ -117,6 +117,48 @@ describe "Acceptance: Manage subscriptions", ->
             andThen ->
               done()
 
+          it "results in a subscription transaction for $#{rate}", (done) ->
+            click 'a:contains("Transactions")'
+
+            andThen ->
+              expectElement 'tr:contains("Cara") td', {contains: "$#{rate}"}
+
+              done()
+
+    describe 'when the subscriber is an institution', ->
+      beforeEach (done) ->
+        click 'button:contains("Edit")'
+        click 'label:contains("Institution")'
+        click 'button:contains("Done")'
+
+        waitForModels ['person']
+
+        andThen ->
+          done()
+
+      describe 'and the rate for institutions has been changed', ->
+        beforeEach (done) ->
+          click 'a:contains("Settings")'
+          fillIn 'input[name=subscriptionInstitution3]', 100
+          click 'button:contains("Save")'
+
+          waitForModels ['settings']
+
+          andThen ->
+            done()
+
+        describe 'when the subscription is created', ->
+          beforeEach (done) ->
+            click 'a:contains("People")'
+            click 'a:contains("Cara")'
+
+            click 'button:contains("Add 3-issue subscription")'
+
+            waitForModels ['subscription', 'person']
+
+            andThen ->
+              done()
+
           it 'shows the new subscription', (done) ->
             # Navigate away to ensure relationship is stored on both ends
             visit '/'
@@ -128,11 +170,11 @@ describe "Acceptance: Manage subscriptions", ->
 
               done()
 
-          it "results in a subscription transaction for $#{rate}", (done) ->
+          it "results in a subscription transaction for the new rate", (done) ->
             click 'a:contains("Transactions")'
 
             andThen ->
-              expectElement 'tr:contains("Cara") td', {contains: "$#{rate}"}
+              expectElement 'tr:contains("Cara") td', {contains: "$100"}
 
               done()
 

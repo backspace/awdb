@@ -4,3 +4,26 @@ else
   h2 Back up database
   =input type='text' value=url
   button click='replicate' Replicate
+
+h2 Subscription costs
+
+table
+  thead
+    tr
+      th
+      th 3 issues
+  tbody
+    tr
+      th Canada
+      td=input type='number' value=subscriptionCanada3 name='subscriptionCanada3'
+    tr
+      th USA
+      td=input type='number' value=subscriptionUsa3 name='subscriptionUsa3'
+    tr
+      th International
+      td=input type='number' value=subscriptionInternational3 name='subscriptionInternational3'
+    tr
+      th Institution
+      td=input type='number' value=subscriptionInstitution3 name='subscriptionInstitution3'
+
+button click='save' Save
