@@ -21,4 +21,7 @@ Fulfillment = DS.Model.extend
 
   rev: DS.attr 'string'
 
+  isForSubscription: Ember.computed.notEmpty 'subscription'
+  isForContribution: Ember.computed.empty 'subscription'
+
 `export default Fulfillment`

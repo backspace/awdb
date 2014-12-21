@@ -106,7 +106,7 @@ describe "Acceptance: Distribute issues", ->
 
           done()
 
-      describe ', when it is distributed', ->
+      describe 'when it is distributed', ->
         beforeEach (done) ->
           click 'button:contains("Distribute")'
 
@@ -203,7 +203,7 @@ describe "Acceptance: Distribute issues", ->
 
           done()
 
-  it 'does not automatically distribute to subscribers who have already received an issue', (done) ->
+  it 'does not suggest subscribers who have already received an issue', (done) ->
     visit '/'
     click 'a:contains("Issues")'
     click 'a:contains("Apples")'

@@ -1,12 +1,24 @@
 button click='distribute' Distribute to #{proposedFulfillments.length} recipients
 
 ul.recipients
-  each fulfillment in proposedFulfillments
-    with fulfillment.person as person
-      li
-        link-to 'person' person: person.name
-        button.alert.tiny.round click="deleteFulfillment fulfillment"
-          fa-icon 'trash'
+  li
+    | Subscribers
+    ul
+      each fulfillment in proposedSubscriptionFulfillments
+        with fulfillment.person as person
+          li
+            link-to 'person' person: person.name
+            button.alert.tiny.round click="deleteFulfillment fulfillment"
+              fa-icon 'trash'
+  li
+    | Contributors
+    ul
+      each fulfillment in proposedContributionFulfillments
+        with fulfillment.person as person
+          li
+            link-to 'person' person: person.name
+            button.alert.tiny.round click="deleteFulfillment fulfillment"
+              fa-icon 'trash'
 
 =input type='search' value=search
 ul.results
