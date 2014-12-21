@@ -69,67 +69,75 @@ describe "Acceptance: Distribute issues", ->
       click 'a:contains("Distribute")'
 
       andThen ->
+        done()
+
+    it 'suggests active subscribers as recipients', (done) ->
+      andThen ->
         expectElement '.subscribers li', {contains: 'Alice'}
         expectElement '.subscribers li', {contains: 'Bob'}
 
-      click 'button:contains("Distribute to 2 subscribers")'
-
-      waitForModels ['issue', 'subscription', 'fulfillment', 'distribution']
-
-      andThen ->
         done()
 
-    it 'shows the completed distribution', (done) ->
-      andThen ->
-        expectElement 'h2', {contains: "Distribution of issue Bananas are better"}
-        expectElement 'a', {contains: 'Alice'}
+    describe 'that has been distributed', ->
+      beforeEach (done) ->
+        click 'button:contains("Distribute to 2 subscribers")'
 
-        done()
+        waitForModels ['issue', 'subscription', 'fulfillment', 'distribution']
 
-    it 'shows that subscribers received the issue', (done) ->
-      visit '/'
-      click 'a:contains("People")'
-      click 'a:contains("Alice")'
+        andThen ->
+          done()
 
-      andThen ->
-        expectElement 'p', {contains: 'Not subscribed!'}
-        expectElement 'li', {contains: 'Bananas are better'}
+      it 'shows the completed distribution', (done) ->
+        andThen ->
+          expectElement 'h2', {contains: "Distribution of issue Bananas are better"}
+          expectElement 'a', {contains: 'Alice'}
 
-      click 'a:contains("People")'
-      click 'a:contains("Bob")'
+          done()
 
-      andThen ->
-        expectElement 'p', {contains: 'Issues remaining: 2'}
-        expectElement 'li', {contains: 'Bananas are better'}
+      it 'shows that subscribers received the issue', (done) ->
+        visit '/'
+        click 'a:contains("People")'
+        click 'a:contains("Alice")'
 
-      click 'a:contains("People")'
-      click 'a:contains("Cara")'
+        andThen ->
+          expectElement 'p', {contains: 'Not subscribed!'}
+          expectElement 'li', {contains: 'Bananas are better'}
 
-      andThen ->
-        expectNoElement 'li', {contains: 'Bananas are better'}
+        click 'a:contains("People")'
+        click 'a:contains("Bob")'
 
-        done()
+        andThen ->
+          expectElement 'p', {contains: 'Issues remaining: 2'}
+          expectElement 'li', {contains: 'Bananas are better'}
 
-    it 'retains the addresses in the distribution even if they have since changed', (done) ->
-      visit '/'
-      click 'a:contains("People")'
-      click 'a:contains("Alice")'
-      click 'button:contains("Edit")'
-      fillIn('textarea[name="address"]', 'New address for Alice')
-      click('button:contains("Done")')
+        click 'a:contains("People")'
+        click 'a:contains("Cara")'
 
-      waitForModels ['person']
+        andThen ->
+          expectNoElement 'li', {contains: 'Bananas are better'}
 
-      visit '/'
-      click 'a:contains("Issues")'
-      click 'a:contains("Bananas")'
-      click '.distributions li a'
+          done()
 
-      andThen ->
-        expectElement 'p', {contains: 'Alice address'}
-        expectElement 'p', {contains: 'Bob address'}
+      it 'retains the addresses in the distribution even if they have since changed', (done) ->
+        visit '/'
+        click 'a:contains("People")'
+        click 'a:contains("Alice")'
+        click 'button:contains("Edit")'
+        fillIn('textarea[name="address"]', 'New address for Alice')
+        click('button:contains("Done")')
 
-        done()
+        waitForModels ['person']
+
+        visit '/'
+        click 'a:contains("Issues")'
+        click 'a:contains("Bananas")'
+        click '.distributions li a'
+
+        andThen ->
+          expectElement 'p', {contains: 'Alice address'}
+          expectElement 'p', {contains: 'Bob address'}
+
+          done()
 
   it 'does not automatically distribute to subscribers who have already received an issue', (done) ->
     visit '/'
