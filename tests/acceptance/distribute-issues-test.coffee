@@ -85,10 +85,10 @@ describe "Acceptance: Distribute issues", ->
 
     it 'the proposed distribution lists active subscribers and contributors as recipients', (done) ->
       andThen ->
-        expectElement '.recipients li', {contains: 'Alice'}
-        expectElement '.recipients li', {contains: 'Bob'}
+        expectElement '.subscriptions li', {contains: 'Alice'}
+        expectElement '.subscriptions li', {contains: 'Bob'}
 
-        expectElement '.recipients li', {contains: 'Artist'}
+        expectElement '.contributions li', {contains: 'Artist'}
 
         done()
 
@@ -102,7 +102,7 @@ describe "Acceptance: Distribute issues", ->
 
       it 'the new recipient is listed', (done) ->
         andThen ->
-          expectElement '.recipients li', {contains: 'Extra'}
+          expectElement '.contributions li', {contains: 'Extra'}
 
           done()
 
@@ -212,7 +212,7 @@ describe "Acceptance: Distribute issues", ->
 
     andThen ->
       expectNoElement '.recipients li', {contains: 'Alice'}
-      expectElement '.recipients li', {contains: 'Bob'}
+      expectElement '.subscriptions li', {contains: 'Bob'}
 
       done()
 
@@ -235,7 +235,7 @@ describe "Acceptance: Distribute issues", ->
         click 'a:contains("Apples")'
         click 'a:contains("Distribute")'
 
-        click 'li:contains("Cara") .fa-trash'
+        click 'li.subscriptions li:contains("Cara") .fa-trash'
 
         click 'button:contains("Distribute")'
 

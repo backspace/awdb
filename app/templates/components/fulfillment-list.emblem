@@ -1,0 +1,6 @@
+each fulfillment in fulfillments
+  with fulfillment.person as person
+    li
+      link-to 'person' person: person.name
+      button.alert.tiny.round click="deleteFulfillment fulfillment"
+        fa-icon 'trash'
