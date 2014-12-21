@@ -85,36 +85,55 @@ describe "Acceptance: Manage subscriptions", ->
 
       done()
 
-  describe 'creating a new subscription', ->
+  describe 'with someone who is not subscribed', ->
     beforeEach (done) ->
       visit '/'
       click 'a:contains("People")'
       click 'a:contains("Cara")'
-      click 'button:contains("Add 3-issue subscription")'
-
-      waitForModels ['subscription', 'person']
 
       andThen ->
         done()
 
-    it 'shows the new subscription', (done) ->
-      # Navigate away to ensure relationship is stored on both ends
-      visit '/'
-      click 'a:contains("People")'
-      click 'a:contains("Cara")'
+    countryRates =
+      Canada: 30
+      USA: 35
+      International: 40
 
-      andThen ->
-        expectElement 'p', {contains: 'Issues remaining: 3'}
+    for own country, rate of countryRates
+      do (country, rate) ->
+        describe "creating a new subscription to #{country}", ->
+          beforeEach (done) ->
+            click 'button:contains("Edit")'
+            click "label:contains('#{country}')"
+            click 'button:contains("Done")'
 
-        done()
+            waitForModels ['person']
 
-    it 'results in a subscription transaction', (done) ->
-      click 'a:contains("Transactions")'
+            click 'button:contains("Add 3-issue subscription")'
 
-      andThen ->
-        expectElement 'tr:contains("Cara") td', {contains: '$30'}
+            waitForModels ['subscription', 'person']
 
-        done()
+            andThen ->
+              done()
+
+          it 'shows the new subscription', (done) ->
+            # Navigate away to ensure relationship is stored on both ends
+            visit '/'
+            click 'a:contains("People")'
+            click 'a:contains("Cara")'
+
+            andThen ->
+              expectElement 'p', {contains: 'Issues remaining: 3'}
+
+              done()
+
+          it "results in a subscription transaction for $#{rate}", (done) ->
+            click 'a:contains("Transactions")'
+
+            andThen ->
+              expectElement 'tr:contains("Cara") td', {contains: "$#{rate}"}
+
+              done()
 
   it 'lists current subscribers', (done) ->
     visit '/'
