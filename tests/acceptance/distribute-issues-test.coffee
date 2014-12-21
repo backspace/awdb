@@ -92,6 +92,12 @@ describe "Acceptance: Distribute issues", ->
 
         done()
 
+    it 'uses the default $100 feature compensation', (done) ->
+      andThen ->
+        expect(find('input[type="number"]').val()).to.equal('100')
+
+        done()
+
     describe 'having an additional recipient', ->
       beforeEach (done) ->
         fillIn 'input[type="search"]', 'xtr'
@@ -132,7 +138,7 @@ describe "Acceptance: Distribute issues", ->
 
     describe 'that has been distributed', ->
       beforeEach (done) ->
-        fillIn 'input[type="number"]', '100'
+        fillIn 'input[type="number"]', '200'
 
         click 'button:contains("Distribute to 3 recipients")'
 
@@ -209,7 +215,7 @@ describe "Acceptance: Distribute issues", ->
         click 'a:contains("Transactions")'
 
         andThen ->
-          expectElement 'td', {contains: '$100'}
+          expectElement 'td', {contains: '$200'}
           expectElement 'td', {contains: 'Artist'}
 
           done()
