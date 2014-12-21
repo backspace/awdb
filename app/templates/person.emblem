@@ -4,6 +4,15 @@ if editing
     =input type='text' name='name' value=name
     label Address
     =textarea name='address' value=address
+    label
+      =radio-button value='canada' checked=country
+      | Canada
+    label
+      =radio-button value='usa' checked=country
+      | USA
+    label
+      =radio-button value='international' checked=country
+      | International
     button click='doneEditing' Done
 else
   h3=name
