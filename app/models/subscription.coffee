@@ -16,11 +16,14 @@ Subscription = DS.Model.extend
   rev: DS.attr 'string'
 
   createTransaction: Ember.on 'didCreate', ->
+    settings = @container.lookup 'settings:main'
+
     classification = @get('person.classification')
-    cost = 30 if classification == 'canada'
-    cost = 35 if classification == 'usa'
-    cost = 40 if classification == 'international'
-    cost = 45 unless classification?
+    # TODO prevent subscription without setting classification?
+    classification ?= 'institution'
+    titleClassification = classification[0].toUpperCase() + classification.slice(1)
+
+    cost = settings.get "subscription#{titleClassification}3"
 
     transaction = @store.createRecord 'transaction', {amount: cost, person: @get('person')}
     transaction.save()
