@@ -3,6 +3,8 @@ initializer =
   after: ['pouch']
 
   initialize: (container, application) ->
+    application.deferReadiness()
+
     store = container.lookup 'store:main'
 
     store.find('settings').then (allSettings) ->
@@ -13,7 +15,8 @@ initializer =
         settings.save()
 
       application.register 'settings:main', settings, {instantiate: false}
-      # FIXME this doesn't work
       application.inject 'model', 'settings', 'settings:main'
+
+      application.advanceReadiness()
 
 `export default initializer`

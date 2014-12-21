@@ -7,8 +7,7 @@ Contribution = DS.Model.extend
 
   # Wanted to use defaultValue but it didn't have access to this?
   setDefaultCompensation: Ember.on 'init', ->
-    # FIXME should be able to access injected settings
-    @set('compensation', @container.lookup('settings:main').get('featureCompensation')) unless @get('compensation')
+    @set('compensation', @settings.get('featureCompensation')) unless @get('compensation')
 
   rev: DS.attr 'string'
 
