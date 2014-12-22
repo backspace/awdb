@@ -11,6 +11,11 @@ Settings = DS.Model.extend
   subscriptionInternational3: DS.attr 'number', {defaultValue: 40}
   subscriptionInstitution3: DS.attr 'number', {defaultValue: 45}
 
+  subscriptionCanada6: DS.attr 'number', {defaultValue: 50}
+  subscriptionUsa6: DS.attr 'number', {defaultValue: 60}
+  subscriptionInternational6: DS.attr 'number', {defaultValue: 70}
+  subscriptionInstitution6: DS.attr 'number', {defaultValue: 80}
+
   rev: DS.attr 'string'
 
 `export default Settings`

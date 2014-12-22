@@ -14,19 +14,24 @@ else
         tr
           th
           th 3 issues
+          th 6 issues
       tbody
         tr
           th Canada
           td=input type='number' value=subscriptionCanada3 name='subscriptionCanada3'
+          td=input type='number' value=subscriptionCanada6 name='subscriptionCanada6'
         tr
           th USA
           td=input type='number' value=subscriptionUsa3 name='subscriptionUsa3'
+          td=input type='number' value=subscriptionUsa6 name='subscriptionUsa6'
         tr
           th International
           td=input type='number' value=subscriptionInternational3 name='subscriptionInternational3'
+          td=input type='number' value=subscriptionInternational6 name='subscriptionInternational6'
         tr
           th Institution
           td=input type='number' value=subscriptionInstitution3 name='subscriptionInstitution3'
+          td=input type='number' value=subscriptionInstitution6 name='subscriptionInstitution6'
   .small-12.medium-4.columns
     h2 Feature compensation
     =input type='number' value=featureCompensation name='featureCompensation'

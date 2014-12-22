@@ -140,6 +140,7 @@ describe "Acceptance: Manage subscriptions", ->
         beforeEach (done) ->
           click 'a:contains("Settings")'
           fillIn 'input[name=subscriptionInstitution3]', 100
+          fillIn 'input[name=subscriptionInstitution6]', 100
           click 'button:contains("Save")'
 
           waitForModels ['settings']
@@ -147,36 +148,38 @@ describe "Acceptance: Manage subscriptions", ->
           andThen ->
             done()
 
-        describe 'when the subscription is created', ->
-          beforeEach (done) ->
-            click 'a:contains("People")'
-            click 'a:contains("Cara")'
+        for issueCount in [3, 6]
+          do (issueCount) ->
+            describe "when a #{issueCount}-issue subscription is created", ->
+              beforeEach (done) ->
+                click 'a:contains("People")'
+                click 'a:contains("Cara")'
 
-            click 'button:contains("Add 3-issue subscription")'
+                click "button:contains('Add #{issueCount}-issue subscription')"
 
-            waitForModels ['subscription', 'person']
+                waitForModels ['subscription', 'person']
 
-            andThen ->
-              done()
+                andThen ->
+                  done()
 
-          it 'shows the new subscription', (done) ->
-            # Navigate away to ensure relationship is stored on both ends
-            visit '/'
-            click 'a:contains("People")'
-            click 'a:contains("Cara")'
+              it 'shows the new subscription', (done) ->
+                # Navigate away to ensure relationship is stored on both ends
+                visit '/'
+                click 'a:contains("People")'
+                click 'a:contains("Cara")'
 
-            andThen ->
-              expectElement 'p', {contains: 'Issues remaining: 3'}
+                andThen ->
+                  expectElement 'p', {contains: "Issues remaining: #{issueCount}"}
 
-              done()
+                  done()
 
-          it "results in a subscription transaction for the new rate", (done) ->
-            click 'a:contains("Transactions")'
+              it "results in a subscription transaction for the new rate", (done) ->
+                click 'a:contains("Transactions")'
 
-            andThen ->
-              expectElement 'tr:contains("Cara") td', {contains: "$100"}
+                andThen ->
+                  expectElement 'tr:contains("Cara") td', {contains: "$100"}
 
-              done()
+                  done()
 
   it 'lists current subscribers', (done) ->
     visit '/'
