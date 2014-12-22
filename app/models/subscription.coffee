@@ -22,9 +22,8 @@ Subscription = DS.Model.extend
     classification = @get('person.classification')
     # TODO prevent subscription without setting classification?
     classification ?= 'institution'
-    titleClassification = classification[0].toUpperCase() + classification.slice(1)
 
-    cost = settings.get "subscription#{titleClassification}3"
+    cost = settings.get "subscription#{classification.capitalize()}3"
 
     transaction = @store.createRecord 'transaction', {amount: cost, person: @get('person')}
     transaction.save()
