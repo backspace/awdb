@@ -37,4 +37,5 @@ else
     =input type='number' value=featureCompensation name='featureCompensation'
 .row
   .small-centered.small-3.columns
-    button click='save' Save
+    if isDirty
+      =async-button action="save" default="Save" pending="Saving…"
