@@ -238,7 +238,7 @@ describe "Acceptance: Distribute issues", ->
       visit '/'
       click 'a:contains("People")'
       click 'a:contains("Cara")'
-      click 'button:contains("Add")'
+      click 'button:contains("3-issue")'
 
       waitForModels ['subscription', 'person']
 
