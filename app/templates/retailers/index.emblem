@@ -1,0 +1,4 @@
+ul
+  each retailer in model
+    li: link-to 'retailer' retailer: retailer.name
+button click='createRetailer' New retailer

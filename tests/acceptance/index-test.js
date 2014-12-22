@@ -18,6 +18,7 @@ describe('Acceptance: Index lists models', function() {
     andThen(function() {
       expectElement('a', {contains: 'Issues'});
       expectElement('a', {contains: 'People'});
+      expectElement('a', {contains: 'Retailers'});
       expectElement('a', {contains: 'Transactions'});
       done();
     });

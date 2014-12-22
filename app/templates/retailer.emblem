@@ -1,0 +1,15 @@
+if isEditing
+  label
+    | Name
+    =input type='text' name='name' value=name
+  label
+    | Address
+    =textarea name='address' value=address
+
+  button click='doneEditing' Done
+else
+  h3=model.name
+
+  p=model.address
+
+  button click='edit' Edit

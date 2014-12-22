@@ -15,6 +15,10 @@ Router.map(function() {
   this.resource('people');
   this.resource('person', { path: 'people/:person_id' });
 
+  this.resource('retailers', function() {
+    this.resource('retailer', {path: ':retailer_id'});
+  });
+
   this.route('distribution', { path: 'distributions/:distribution_id' });
 
   this.resource('transactions');
