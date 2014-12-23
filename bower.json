@@ -14,7 +14,7 @@
     "chai": "~1.10.0",
     "ember-mocha-adapter": "0.2.1",
     "ember-mocha": "~0.2.0",
-    "ember-pouch": "1.1.4",
+    "ember-pouch": "^1.1.5",
     "es5-shim": "~4.0.3",
     "es6-shim": "~0.20.3",
     "foundation": "~5.4.7",
