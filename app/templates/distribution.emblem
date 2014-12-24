@@ -1,7 +1,6 @@
 h2 Distribution of issue {{issue.title}}
 ul
   each fulfillment in fulfillments
-    li
-      with fulfillment.entity as entity
-        link-to 'entity' entity: entity.name
+    with fulfillment.entity as entity
+      entity-list-item entity=entity
         p=fulfillment.address

@@ -1,7 +1,6 @@
 each fulfillment in fulfillments
   with fulfillment.entity as entity
-    li
-      link-to 'entity' entity: entity.name
+    entity-list-item entity=entity
       button.alert.tiny.round click="deleteFulfillment fulfillment"
         fa-icon 'trash'
 else
