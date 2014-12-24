@@ -62,6 +62,10 @@ FeatureListItem = Ember.Component.extend
     addContributor: (contributor) ->
       @set 'newContribution.entity.id', contributor.id
 
+    removeContribution: (contribution) ->
+      feature = @get('feature')
+      feature.removeContribution(contribution)
+
   titleAndContributors: Ember.computed 'feature.title', 'feature.contributors.@each.name', ->
     string = @get('feature.title')
 

@@ -17,6 +17,16 @@ var Feature = DS.Model.extend({
     }
   },
 
+  removeContribution: function(contribution) {
+    this.get('contributions').removeObject(contribution);
+
+    if (contribution.get('isNew')) {
+      contribution.destroyRecord().then(function() {
+        this.save();
+      }.bind(this));
+    }
+  },
+
   rev: DS.attr('string')
 });
 

@@ -9,6 +9,12 @@ if isEditing
       .small-1.column
         button.postfix.alert click=cancel
           fa-icon 'undo'
+  ul.fa-ul
+    each contribution in feature.contributions
+      entity-list-item entity=contribution.entity
+        button.alert.tiny.round click="removeContribution contribution"
+          fa-icon 'trash'
+
   entity-search entities=entities addEntity="addContributor" placeholder="Contributor name"
 else
   span.js-target click=edit

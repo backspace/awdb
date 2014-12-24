@@ -28,35 +28,79 @@ describe "Acceptance: Edit issue feature", ->
                   done()
 
   afterEach (done) ->
-    Ember.run(App, 'destroy')
-    Ember.run(done)
-
-  it 'updates the feature', (done) ->
-    visit '/'
-    click 'a:contains("Issues")'
-    click 'a:contains("Featureful")'
-
-    click 'li:contains("Oops") .js-target'
-    fillIn 'li.js-persisted input[name="title"]', 'Corrected'
-
-    fillIn 'input[type="search"]', 'alice'
-    click 'li:contains("Alice") .fa-plus'
-
-    click 'li.js-persisted i.fa-check'
-
-    waitForModels ['issue', 'feature']
-
-    # TODO figure out how to refresh rather than this hack to ensure the change is persisted
-    andThen ->
-      click 'li:contains("Corrected: Alice") .js-target'
-      fillIn 'li.js-persisted input[name="title"]', 'Recorrected'
-      click 'li.js-persisted i.fa-undo'
-
-    visit '/'
-    click 'a:contains("Issues")'
-    click 'a:contains("Featureful")'
+    waitForModels ['entity', 'feature']
 
     andThen ->
-      expectElement 'li', {contains: 'Corrected: Alice'}
+      Ember.run(App, 'destroy')
+      Ember.run(done)
 
-      done()
+  describe 'when the feature name is changed', ->
+    beforeEach (done) ->
+      visit '/'
+      click 'a:contains("Issues")'
+      click 'a:contains("Featureful")'
+
+      click 'li:contains("Oops") .js-target'
+      fillIn 'li.js-persisted input[name="title"]', 'Corrected'
+
+      click 'li.js-persisted i.fa-check'
+
+      waitForModels ['issue', 'feature']
+
+      andThen ->
+        done()
+
+    it 'shows the updated feature name', (done) ->
+      andThen ->
+        expectElement 'li', {contains: 'Corrected'}
+
+        done()
+
+  describe 'when a contributor is added', ->
+    beforeEach (done) ->
+      visit '/'
+      click 'a:contains("Issues")'
+      click 'a:contains("Featureful")'
+      click 'li:contains("Oops") .js-target'
+
+      fillIn 'input[type="search"]', 'alice'
+      click 'li:contains("Alice") .fa-plus'
+
+      click 'li.js-persisted i.fa-check'
+
+      waitForModels ['issue', 'feature']
+
+      andThen ->
+        done()
+
+    it 'shows the new contributor', (done) ->
+      visit '/'
+      click 'a:contains("Issues")'
+      click 'a:contains("Featureful")'
+
+      andThen ->
+        expectElement 'li', {contains: 'Oops: Alice'}
+
+        done()
+
+    describe 'and then removed', ->
+      beforeEach (done) ->
+        click 'li:contains("Oops") .js-target'
+        click 'li:contains("Alice") .fa-trash'
+
+        click 'li.js-persisted i.fa-check'
+
+        waitForModels ['issue', 'feature']
+
+        andThen ->
+          done()
+
+      it 'no longer shows the contributor', (done) ->
+        visit '/'
+        click 'a:contains("Issues")'
+        click 'a:contains("Featureful")'
+
+        andThen ->
+          expectNoElement 'li', {contains: 'Oops: Alice'}
+
+          done()
