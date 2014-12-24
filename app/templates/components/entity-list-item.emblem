@@ -1,6 +1,3 @@
-if entity.isInstitution
-  =fa-icon 'institution' listItem=true
-else
-  =fa-icon 'user' listItem=true
+=fa-icon icon listItem=true
 link-to 'entity' entity: entity.name
 yield
