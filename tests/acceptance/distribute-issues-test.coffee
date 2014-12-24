@@ -77,7 +77,10 @@ describe "Acceptance: Distribute issues", ->
       waitForModels ['issue']
 
       fillIn 'input[name="title"]', 'Not so much potassium though'
-      fillIn 'select[name="contributor"]:last', entities.artist.id
+
+      fillIn 'input[type="search"]', 'artist'
+      click 'li:contains("Artist") .fa-plus'
+
       click 'i.fa-check'
 
       waitForModels ['feature', 'issue']
@@ -297,7 +300,10 @@ describe "Acceptance: Distribute issues", ->
       waitForModels ['issue']
 
       fillIn 'input[name="title"]', 'Sometimes so good'
-      fillIn 'select[name="contributor"]:last', entities.artist.id
+
+      fillIn 'input[type="search"]', 'artist'
+      click 'li:contains("Artist") .fa-plus'
+
       click 'i.fa-check'
 
       waitForModels ['feature', 'issue']

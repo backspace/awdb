@@ -59,6 +59,9 @@ FeatureListItem = Ember.Component.extend
     edit: ->
       @set 'isEditing', true
 
+    addContributor: (contributor) ->
+      @set 'newContribution.entity.id', contributor.id
+
   titleAndContributors: Ember.computed 'feature.title', 'feature.contributors.@each.name', ->
     string = @get('feature.title')
 

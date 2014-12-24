@@ -38,7 +38,10 @@ describe "Acceptance: Edit issue feature", ->
 
     click 'li:contains("Oops") .js-target'
     fillIn 'li.js-persisted input[name="title"]', 'Corrected'
-    fillIn 'li.js-persisted select', alice.id
+
+    fillIn 'input[type="search"]', 'alice'
+    click 'li:contains("Alice") .fa-plus'
+
     click 'li.js-persisted i.fa-check'
 
     waitForModels ['issue', 'feature']

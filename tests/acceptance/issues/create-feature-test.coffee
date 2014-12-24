@@ -30,8 +30,13 @@ describe "Acceptance: Create issue feature", ->
     click 'a:contains("Full of features")'
 
     fillIn 'input[name="title"]', 'Like this one'
-    fillIn 'select[name="contributor"]:last', records.alice.id
-    fillIn 'select[name="contributor"]:last', records.bob.id
+
+    fillIn 'input[type="search"]', 'alice'
+    click 'li:contains("Alice") .fa-plus'
+
+    fillIn 'input[type="search"]', 'ob'
+    click 'li:contains("Bob") .fa-plus'
+
     click 'i.fa-check'
 
     visit '/'

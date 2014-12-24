@@ -9,9 +9,7 @@ if isEditing
       .small-1.column
         button.postfix.alert click=cancel
           fa-icon 'undo'
-  each contribution in contributions
-    with contribution.entity as contributor
-      view "select" name='contributor' content=entities optionValuePath='content.id' optionLabelPath='content.name' prompt="Contributor name" value=contributor.id
+  entity-search entities=entities addEntity="addContributor"
 else
   span.js-target click=edit
     =titleAndContributors
