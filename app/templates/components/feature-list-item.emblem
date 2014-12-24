@@ -9,7 +9,7 @@ if isEditing
       .small-1.column
         button.postfix.alert click=cancel
           fa-icon 'undo'
-  entity-search entities=entities addEntity="addContributor"
+  entity-search entities=entities addEntity="addContributor" placeholder="Contributor name"
 else
   span.js-target click=edit
     =titleAndContributors

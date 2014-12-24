@@ -11,7 +11,7 @@ ul.recipients
     | Extras
     =fulfillment-list fulfillments=proposedExtraFulfillments deleteFulfillment="deleteFulfillment"
 
-=entity-search entities=entities addEntity="addEntity"
+=entity-search entities=entities addEntity="addEntity" placeholder="Add an extra recipient"
 
 h3 Contributor compensation
 ul.compensations

@@ -1,4 +1,4 @@
-=input type='search' value=search
+=input type='search' value=search placeholder=placeholder!
 
 ul.results.fa-ul
   each entity in searchResults
