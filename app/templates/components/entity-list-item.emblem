@@ -1,2 +1,6 @@
+if entity.isInstitution
+  =fa-icon 'institution' listItem=true
+else
+  =fa-icon 'user' listItem=true
 link-to 'entity' entity: entity.name
 yield

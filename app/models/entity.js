@@ -7,6 +7,7 @@ export default DS.Model.extend({
   classification: DS.attr('string'),
 
   isRetailer: DS.attr('boolean', {defaultValue: false}),
+  isInstitution: Ember.computed.equal('classification', 'institution'),
 
   subscriptions: DS.hasMany('subscription', {inverse: 'entity'}),
 

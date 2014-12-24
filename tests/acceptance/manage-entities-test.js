@@ -13,7 +13,8 @@ describe('Acceptance: Manage entities', function() {
       Ember.run(function() {
         Ember.RSVP.Promise.all([
           store.createRecord('entity', {name: "Alice", address: '123 Main St.'}).save(),
-          store.createRecord('entity', {name: "Bob"}).save()
+          store.createRecord('entity', {name: "Bob"}).save(),
+          store.createRecord('entity', {name: "Zzzana's World of Pleasure", classification: 'institution'})
         ]).then(function() {
           done();
         });
@@ -33,8 +34,21 @@ describe('Acceptance: Manage entities', function() {
     andThen(function() {
       expectElement('li', {contains: 'Alice'});
       expectElement('li', {contains: 'Bob'});
+      expectElement('li', {contains: "Zzzana's World of Pleasure"});
 
-      expectElement('li', 2);
+      expectElement('li', 3);
+
+      done();
+    });
+  });
+
+  it('differentiates types of entities', function(done) {
+    visit('/');
+    click('a:contains("Entities")');
+
+    andThen(function() {
+      expectElement('li .fa-li.fa-user', 2);
+      expectElement('li .fa-li.fa-institution');
 
       done();
     });
