@@ -14,7 +14,7 @@ if editing
       =radio-button value='international' groupValue=classification
       | International
     label
-      =radio-button value='institution' check=classification
+      =radio-button value='institution' groupValue=classification
       | Institution
     button click='doneEditing' Done
 else
