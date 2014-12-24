@@ -4,7 +4,7 @@
 `import PouchTestHelper from '../helpers/pouch-test-helper'`
 
 App = null
-people = null
+entities = null
 
 describe "Acceptance: Distribute issues", ->
   # Copied from manage-subscriptions-test; DRY up somehow?
@@ -14,22 +14,22 @@ describe "Acceptance: Distribute issues", ->
     PouchTestHelper.buildStore(App, @currentTest.title).then (store) ->
       Ember.run ->
         asyncRecords = Ember.RSVP.hash
-          alice: store.createRecord('person', {name: 'Alice', address: 'Alice address'}).save()
-          bob: store.createRecord('person', {name: 'Bob', address: 'Bob address'}).save()
-          cara: store.createRecord('person', {name: 'Cara'}).save()
+          alice: store.createRecord('entity', {name: 'Alice', address: 'Alice address'}).save()
+          bob: store.createRecord('entity', {name: 'Bob', address: 'Bob address'}).save()
+          cara: store.createRecord('entity', {name: 'Cara'}).save()
 
-          artist: store.createRecord('person', {name: 'Artist'}).save()
-          extra: store.createRecord('person', {name: 'Extra'}).save()
+          artist: store.createRecord('entity', {name: 'Artist'}).save()
+          extra: store.createRecord('entity', {name: 'Extra'}).save()
 
           apples: store.createRecord('issue', {title: 'Apples are amazing'}).save()
 
         asyncRecords.then((records) ->
-          people = records
+          entities = records
 
           # TODO is there a better way to add to an RSVP.hash? HIDEOUS
           subscriptions = Ember.RSVP.hash
-            alice: store.createRecord('subscription', {person: records.alice, count: 2}).save()
-            bob: store.createRecord('subscription', {person: records.bob, count: 3}).save()
+            alice: store.createRecord('subscription', {entity: records.alice, count: 2}).save()
+            bob: store.createRecord('subscription', {entity: records.bob, count: 3}).save()
             records: records
 
           subscriptions
@@ -45,9 +45,9 @@ describe "Acceptance: Distribute issues", ->
           records = fulfillments.subscriptions.records
           subscriptions = fulfillments.subscriptions
 
-          # FIXME hack to prevent stored person IDs from being cleared
-          subscriptions.alice.set 'person', records.alice
-          subscriptions.bob.set 'person', records.bob
+          # FIXME hack to prevent stored entity IDs from being cleared
+          subscriptions.alice.set 'entity', records.alice
+          subscriptions.bob.set 'entity', records.bob
 
           Ember.RSVP.all([
             records.alice.save(),
@@ -73,7 +73,7 @@ describe "Acceptance: Distribute issues", ->
       waitForModels ['issue']
 
       fillIn 'input[name="title"]', 'Not so much potassium though'
-      fillIn 'select[name="contributor"]:last', people.artist.id
+      fillIn 'select[name="contributor"]:last', entities.artist.id
       click 'i.fa-check'
 
       waitForModels ['feature', 'issue']
@@ -128,7 +128,7 @@ describe "Acceptance: Distribute issues", ->
             done()
 
         it 'shows that the new recipient received the issue', (done) ->
-          click 'a:contains("People")'
+          click 'a:contains("Entities")'
           click 'a:contains("Extra")'
 
           andThen ->
@@ -156,14 +156,14 @@ describe "Acceptance: Distribute issues", ->
 
       it 'shows that subscribers received the issue', (done) ->
         visit '/'
-        click 'a:contains("People")'
+        click 'a:contains("Entities")'
         click 'a:contains("Alice")'
 
         andThen ->
           expectElement 'p', {contains: 'Not subscribed!'}
           expectElement 'li', {contains: 'Bananas are better'}
 
-        click 'a:contains("People")'
+        click 'a:contains("Entities")'
         click 'a:contains("Bob")'
 
         andThen ->
@@ -173,7 +173,7 @@ describe "Acceptance: Distribute issues", ->
           done()
 
       it 'shows that the contributor received the issue', (done) ->
-        click 'a:contains("People")'
+        click 'a:contains("Entities")'
         click 'a:contains("Artist")'
 
         andThen ->
@@ -182,7 +182,7 @@ describe "Acceptance: Distribute issues", ->
           done()
 
       it 'shows that the non-subscriber did not receive the issue', (done) ->
-        click 'a:contains("People")'
+        click 'a:contains("Entities")'
         click 'a:contains("Cara")'
 
         andThen ->
@@ -192,13 +192,13 @@ describe "Acceptance: Distribute issues", ->
 
       it 'retains the addresses in the distribution even if they have since changed', (done) ->
         visit '/'
-        click 'a:contains("People")'
+        click 'a:contains("Entities")'
         click 'a:contains("Alice")'
         click 'button:contains("Edit")'
         fillIn('textarea[name="address"]', 'New address for Alice')
         click('button:contains("Done")')
 
-        waitForModels ['person']
+        waitForModels ['entity']
 
         visit '/'
         click 'a:contains("Issues")'
@@ -236,11 +236,11 @@ describe "Acceptance: Distribute issues", ->
   describe 'when there is another subscriber', (done) ->
     beforeEach (done) ->
       visit '/'
-      click 'a:contains("People")'
+      click 'a:contains("Entities")'
       click 'a:contains("Cara")'
       click 'button:contains("3-issue")'
 
-      waitForModels ['subscription', 'person']
+      waitForModels ['subscription', 'entity']
 
       andThen ->
         done()
@@ -293,7 +293,7 @@ describe "Acceptance: Distribute issues", ->
       waitForModels ['issue']
 
       fillIn 'input[name="title"]', 'Sometimes so good'
-      fillIn 'select[name="contributor"]:last', people.artist.id
+      fillIn 'select[name="contributor"]:last', entities.artist.id
       click 'i.fa-check'
 
       waitForModels ['feature', 'issue']

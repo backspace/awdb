@@ -6,8 +6,8 @@ IssueDistributeController = Ember.ObjectController.extend
   isDistributing: false
 
   # FIXME this is empty when the distribute page is directly accessed
-  people: Ember.computed.alias 'controllers.issue.people'
-  subscribers: Ember.computed.filterBy('people', 'isSubscribed')
+  entities: Ember.computed.alias 'controllers.issue.entities'
+  subscribers: Ember.computed.filterBy('entities', 'isSubscribed')
 
   addSuggestedFulfillmentsToDistribution: (distribution) ->
     return unless distribution?
@@ -21,16 +21,16 @@ IssueDistributeController = Ember.ObjectController.extend
       !subscriber.get('issuesReceived').contains(issue)
 
     suggestedSubscribers.mapBy('activeSubscription').forEach (subscription) =>
-      person = subscription.get 'person'
+      entity = subscription.get 'entity'
 
-      fulfillment = @store.createRecord 'fulfillment', {person: person, issue: issue, subscription: subscription}
+      fulfillment = @store.createRecord 'fulfillment', {entity: entity, issue: issue, subscription: subscription}
 
       distribution.get('proposedFulfillments').pushObject fulfillment
 
     issue.get('features').forEach (feature) =>
       # FIXME a contributor will receive one issue for each feature
       feature.get('contributions').forEach (contribution) =>
-        fulfillment = @store.createRecord 'fulfillment', {person: contribution.get('person'), contribution: contribution, issue: issue}
+        fulfillment = @store.createRecord 'fulfillment', {entity: contribution.get('entity'), contribution: contribution, issue: issue}
 
         distribution.get('proposedFulfillments').pushObject fulfillment
 
@@ -38,8 +38,8 @@ IssueDistributeController = Ember.ObjectController.extend
     search = @get 'search'
 
     if search
-      @get('people').filter (person) ->
-        person.get('name').indexOf(search) > -1
+      @get('entities').filter (entity) ->
+        entity.get('name').indexOf(search) > -1
     else
       return []
 
@@ -60,7 +60,7 @@ IssueDistributeController = Ember.ObjectController.extend
             subscription = fulfillment.get('subscription')
             subscription.save() if subscription?
 
-            fulfillment.get('person').save()
+            fulfillment.get('entity').save()
           )
         ).then( ->
           issue.get('distributions').pushObject distribution
@@ -74,7 +74,7 @@ IssueDistributeController = Ember.ObjectController.extend
     deleteFulfillment: (fulfillment) ->
       @get('model.proposedFulfillments').removeObject(fulfillment)
 
-    addPerson: (person) ->
-      @get('model.proposedFulfillments').addObject(@store.createRecord('fulfillment', {person: person, issue: @get('model.issue')}))
+    addEntity: (entity) ->
+      @get('model.proposedFulfillments').addObject(@store.createRecord('fulfillment', {entity: entity, issue: @get('model.issue')}))
 
 `export default IssueDistributeController`

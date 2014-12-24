@@ -6,20 +6,20 @@ Fulfillment = DS.Model.extend
   subscription: DS.belongsTo 'subscription'
   contribution: DS.belongsTo 'contribution'
 
-  person: DS.belongsTo 'person'
+  entity: DS.belongsTo 'entity'
 
   distribution: DS.belongsTo 'distribution'
 
   address: DS.attr 'string'
 
-  addressPopulator: Ember.observer 'person.id', ->
-    newPersonID = @get 'person.id'
+  addressPopulator: Ember.observer 'entity.id', ->
+    newEntityID = @get 'entity.id'
 
-    if @oldPersonID != newPersonID
-      person = @get 'person'
-      @set 'address', person.get('address') if person?
+    if @oldEntityID != newEntityID
+      entity = @get 'entity'
+      @set 'address', entity.get('address') if entity?
 
-      @oldPersonID = newPersonID
+      @oldEntityID = newEntityID
 
   rev: DS.attr 'string'
 

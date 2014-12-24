@@ -5,8 +5,8 @@ IssueIndexRoute = Ember.Route.extend
     @modelFor 'issue'
 
   afterModel: ->
-    @store.find('person').then (result) =>
-      @set 'people', result
+    @store.find('entity').then (result) =>
+      @set 'entities', result
 
   setupController: (controller, model) ->
     @_super controller, model
@@ -15,7 +15,7 @@ IssueIndexRoute = Ember.Route.extend
       # FIXME cannot call 'send', duplicating edit action
       controller.set 'isEditing', true
 
-    controller.set 'people', @get('people')
+    controller.set 'entities', @get('entities')
 
   actions:
     edit: ->

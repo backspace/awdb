@@ -3,7 +3,7 @@
 
 Contribution = DS.Model.extend
   feature: DS.belongsTo 'feature'
-  person: DS.belongsTo 'person'
+  entity: DS.belongsTo 'entity'
 
   # Wanted to use defaultValue but it didn't have access to this?
   setDefaultCompensation: Ember.on 'init', ->

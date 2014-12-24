@@ -2,7 +2,7 @@
 `import DS from 'ember-data'`
 
 Subscription = DS.Model.extend
-  person: DS.belongsTo 'person', {inverse: 'subscriptions'}
+  entity: DS.belongsTo 'entity', {inverse: 'subscriptions'}
   count: DS.attr 'number'
 
   fulfillments: DS.hasMany 'fulfillment'
@@ -19,13 +19,13 @@ Subscription = DS.Model.extend
     # FIXME should be injected
     settings = @container.lookup 'settings:main'
 
-    classification = @get('person.classification')
+    classification = @get('entity.classification')
     # TODO prevent subscription without setting classification?
     classification ?= 'institution'
 
     cost = settings.get "subscription#{classification.capitalize()}3"
 
-    transaction = @store.createRecord 'transaction', {amount: cost, person: @get('person')}
+    transaction = @store.createRecord 'transaction', {amount: cost, entity: @get('entity')}
     transaction.save()
 
 `export default Subscription`

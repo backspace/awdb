@@ -5,15 +5,15 @@ import PouchTestHelper from '../helpers/pouch-test-helper';
 
 var App;
 
-describe('Acceptance: Manage people', function() {
+describe('Acceptance: Manage entities', function() {
   beforeEach(function(done) {
     App = startApp();
 
     PouchTestHelper.buildStore(App, this.currentTest.title).then(function(store) {
       Ember.run(function() {
         Ember.RSVP.Promise.all([
-          store.createRecord('person', {name: "Alice", address: '123 Main St.'}).save(),
-          store.createRecord('person', {name: "Bob"}).save()
+          store.createRecord('entity', {name: "Alice", address: '123 Main St.'}).save(),
+          store.createRecord('entity', {name: "Bob"}).save()
         ]).then(function() {
           done();
         });
@@ -26,9 +26,9 @@ describe('Acceptance: Manage people', function() {
     Ember.run(done);
   });
 
-  it('lists the people', function(done) {
+  it('lists the entities', function(done) {
     visit('/');
-    click('a:contains("People")');
+    click('a:contains("Entities")');
 
     andThen(function() {
       expectElement('li', {contains: 'Alice'});
@@ -40,9 +40,9 @@ describe('Acceptance: Manage people', function() {
     });
   });
 
-  it("shows a person's details", function(done) {
+  it("shows an entity's details", function(done) {
     visit('/');
-    click('a:contains("People")');
+    click('a:contains("Entities")');
     click('a:contains("Alice")');
 
     andThen(function() {
@@ -53,16 +53,16 @@ describe('Acceptance: Manage people', function() {
     });
   });
 
-  it("lets the user create a person", function(done) {
+  it("lets the user create an entity", function(done) {
     visit('/');
-    click('a:contains("People")');
+    click('a:contains("Entities")');
 
     click('button:contains("New")');
     fillIn('input[name="name"]', 'Corrie');
     click('button:contains("Done")');
 
     visit('/');
-    click('a:contains("People")');
+    click('a:contains("Entities")');
 
     andThen(function() {
       expectElement('li', {contains: 'Corrie'});
@@ -70,9 +70,9 @@ describe('Acceptance: Manage people', function() {
     });
   });
 
-  it("lets the user edit a person", function(done) {
+  it("lets the user edit an entity", function(done) {
     visit('/');
-    click('a:contains("People")');
+    click('a:contains("Entities")');
     click('a:contains("Bob")');
     click('button:contains("Edit")');
 
@@ -80,7 +80,7 @@ describe('Acceptance: Manage people', function() {
     click('button:contains("Done")');
 
     visit('/');
-    click('a:contains("People")');
+    click('a:contains("Entities")');
 
     andThen(function() {
       expectElement('li', {contains: 'Bib'});

@@ -31,11 +31,11 @@ FeatureListItem = Ember.Component.extend
 
   newContribution: null,
   setNewContribution: Ember.on 'init', ->
-    @set 'newContribution', Ember.Object.create({person: Ember.Object.create({id: null})})
+    @set 'newContribution', Ember.Object.create({entity: Ember.Object.create({id: null})})
 
-  appendNewContribution: Ember.observer 'newContribution.person.id', ->
-    if @get('newContribution.person.id')
-      @get('feature').appendNewContributor(@get('newContribution.person.id'))
+  appendNewContribution: Ember.observer 'newContribution.entity.id', ->
+    if @get('newContribution.entity.id')
+      @get('feature').appendNewContributor(@get('newContribution.entity.id'))
       @setNewContribution()
 
   actions:

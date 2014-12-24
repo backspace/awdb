@@ -1,0 +1,21 @@
+h2 Entities:
+
+ul
+  each entity in model
+    li: link-to 'entity' entity: entity.name
+button click='createEntity' New entity
+
+br
+
+button click='labels' Labels
+
+h3 Current subscribers:
+ul.js-subscribers
+  each entity in subscribers
+    li: link-to 'entity' entity: entity.name
+
+h3 Former subscribers:
+
+ul.js-former-subscribers
+  each entity in formerSubscribers
+    li: link-to 'entity' entity: entity.name

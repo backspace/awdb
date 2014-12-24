@@ -3,7 +3,7 @@
 
 Transaction = DS.Model.extend
   amount: DS.attr 'number'
-  person: DS.belongsTo 'person'
+  entity: DS.belongsTo 'entity'
 
   createdAt: DS.attr 'date', {defaultValue: -> new Date()}
 

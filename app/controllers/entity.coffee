@@ -1,6 +1,6 @@
 `import Ember from 'ember'`
 
-PersonController = Ember.ObjectController.extend
+EntityController = Ember.ObjectController.extend
   isEditing: false
 
   editing: (->
@@ -18,9 +18,9 @@ PersonController = Ember.ObjectController.extend
       @set 'isEditing', true
 
     addSubscription: (count) ->
-      @store.createRecord('subscription', {person: @get('model'), count: count}).save().then (subscription) =>
-        person = @get('model')
-        person.get('subscriptions').addObject(subscription)
-        person.save()
+      @store.createRecord('subscription', {entity: @get('model'), count: count}).save().then (subscription) =>
+        entity = @get('model')
+        entity.get('subscriptions').addObject(subscription)
+        entity.save()
 
-`export default PersonController`
+`export default EntityController`

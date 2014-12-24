@@ -23,7 +23,7 @@ describe "Acceptance: Edit issue feature", ->
             feature.save().then ->
               issue.get('features').pushObject(feature)
               issue.save().then ->
-                alice = store.createRecord('person', {name: 'Alice'})
+                alice = store.createRecord('entity', {name: 'Alice'})
                 alice.save().then ->
                   done()
 

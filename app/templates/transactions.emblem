@@ -2,11 +2,11 @@ table
   thead
     tr
       th Date
-      th Person
+      th Entity
       th Amount
   tbody
     each transaction in model
       tr
         td=transaction.createdAt
-        td=transaction.person.name
+        td=transaction.entity.name
         td #{transaction.formattedAmount}

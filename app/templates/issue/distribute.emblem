@@ -13,10 +13,10 @@ ul.recipients
 
 =input type='search' value=search
 ul.results
-  each person in searchResults
+  each entity in searchResults
     li
-      =person.name
-      button.tiny.round click="addPerson person"
+      =entity.name
+      button.tiny.round click="addEntity entity"
         fa-icon 'plus'
   else
     if search
@@ -27,5 +27,5 @@ ul.compensations
   each feature in issue.features
     each contribution in feature.contributions
       li
-        | #{feature.title}: #{contribution.person.name}
+        | #{feature.title}: #{contribution.entity.name}
         =input type='number' value=contribution.compensation

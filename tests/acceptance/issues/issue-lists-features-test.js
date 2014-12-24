@@ -5,7 +5,7 @@ import startApp from '../../helpers/start-app';
 import PouchTestHelper from '../../helpers/pouch-test-helper';
 
 var App;
-var people;
+var entities;
 
 describe('Acceptance: Issue lists features', function() {
   beforeEach(function(done) {
@@ -14,10 +14,10 @@ describe('Acceptance: Issue lists features', function() {
     PouchTestHelper.buildStore(App, this.currentTest.title).then(function(store) {
       Ember.run(function() {
         Ember.RSVP.hash({
-          alice: store.createRecord('person', {name: 'Alice'}).save(),
-          bob: store.createRecord('person', {name: 'Bob'}).save()
+          alice: store.createRecord('entity', {name: 'Alice'}).save(),
+          bob: store.createRecord('entity', {name: 'Bob'}).save()
         }).then(function(result) {
-          people = result;
+          entities = result;
           var issue = store.createRecord('issue', {title: 'All about apples'});
 
           issue.save().then(function() {
@@ -28,8 +28,8 @@ describe('Acceptance: Issue lists features', function() {
 
               issue.save().then(function() {
                 Ember.RSVP.all([
-                  store.createRecord('contribution', {feature: feature, person: people.alice}).save(),
-                  store.createRecord('contribution', {feature: feature, person: people.bob}).save()
+                  store.createRecord('contribution', {feature: feature, entity: entities.alice}).save(),
+                  store.createRecord('contribution', {feature: feature, entity: entities.bob}).save()
                 ]).then(function(contributions) {
                   feature.get('contributions').pushObjects(contributions);
                   feature.save().then(function() {

@@ -14,8 +14,8 @@ describe "Acceptance: Create issue feature", ->
       Ember.run ->
         Ember.RSVP.hash(
           issue: store.createRecord('issue', {title: 'Full of features'}).save(),
-          alice: store.createRecord('person', {name: 'Alice'}).save(),
-          bob: store.createRecord('person', {name: 'Bob'}).save()
+          alice: store.createRecord('entity', {name: 'Alice'}).save(),
+          bob: store.createRecord('entity', {name: 'Bob'}).save()
         ).then (result) ->
           records = result
           done()

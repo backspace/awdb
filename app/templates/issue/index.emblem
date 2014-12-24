@@ -10,8 +10,8 @@ else
 h4 Features:
 ul
   each feature in features
-    =feature-list-item feature=feature people=people save="saveFeature"
-  =feature-list-item feature=newFeature save="saveFeature" people=people
+    =feature-list-item feature=feature entities=entities save="saveFeature"
+  =feature-list-item feature=newFeature save="saveFeature" entities=entities
 
 h4 Distributions:
 ul.distributions

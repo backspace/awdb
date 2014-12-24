@@ -12,19 +12,19 @@ describe "Acceptance: Manage subscriptions", ->
     PouchTestHelper.buildStore(App, @currentTest.title).then (store) ->
       Ember.run ->
         asyncRecords = Ember.RSVP.hash
-          alice: store.createRecord('person', {name: 'Alice'}).save()
-          bob: store.createRecord('person', {name: 'Bob'}).save()
-          cara: store.createRecord('person', {name: 'Cara'}).save()
-          donna: store.createRecord('person', {name: 'Donna'}).save()
+          alice: store.createRecord('entity', {name: 'Alice'}).save()
+          bob: store.createRecord('entity', {name: 'Bob'}).save()
+          cara: store.createRecord('entity', {name: 'Cara'}).save()
+          donna: store.createRecord('entity', {name: 'Donna'}).save()
 
           apples: store.createRecord('issue', {title: 'Apples are amazing'}).save()
 
         asyncRecords.then((records) ->
           # TODO is there a better way to add to an RSVP.hash? HIDEOUS
           subscriptions = Ember.RSVP.hash
-            alice: store.createRecord('subscription', {person: records.alice, count: 2}).save()
-            bob: store.createRecord('subscription', {person: records.bob, count: 3}).save()
-            donna: store.createRecord('subscription', {person: records.donna, count: 1}).save()
+            alice: store.createRecord('subscription', {entity: records.alice, count: 2}).save()
+            bob: store.createRecord('subscription', {entity: records.bob, count: 3}).save()
+            donna: store.createRecord('subscription', {entity: records.donna, count: 1}).save()
             records: records
 
           subscriptions
@@ -32,8 +32,8 @@ describe "Acceptance: Manage subscriptions", ->
           records = subscriptions.records
 
           fulfillments = Ember.RSVP.hash
-            fulfillment: store.createRecord('fulfillment', {issue: records.apples, person: records.alice, subscription: subscriptions.alice}).save()
-            final_fulfillment: store.createRecord('fulfillment', {issue: records.apples, person: records.donna, subscription: subscriptions.donna}).save()
+            fulfillment: store.createRecord('fulfillment', {issue: records.apples, entity: records.alice, subscription: subscriptions.alice}).save()
+            final_fulfillment: store.createRecord('fulfillment', {issue: records.apples, entity: records.donna, subscription: subscriptions.donna}).save()
             subscriptions: subscriptions
 
           fulfillments
@@ -41,10 +41,10 @@ describe "Acceptance: Manage subscriptions", ->
           records = fulfillments.subscriptions.records
           subscriptions = fulfillments.subscriptions
 
-          # FIXME hack to prevent stored person IDs from being cleared
-          subscriptions.alice.set 'person', records.alice
-          subscriptions.bob.set 'person', records.bob
-          subscriptions.donna.set 'person', records.donna
+          # FIXME hack to prevent stored entity IDs from being cleared
+          subscriptions.alice.set 'entity', records.alice
+          subscriptions.bob.set 'entity', records.bob
+          subscriptions.donna.set 'entity', records.donna
 
           Ember.RSVP.all([
             records.alice.save(),
@@ -63,21 +63,21 @@ describe "Acceptance: Manage subscriptions", ->
 
   it 'shows issues remaining', (done) ->
     visit '/'
-    click 'a:contains("People")'
+    click 'a:contains("Entities")'
     click 'a:contains("Alice")'
 
     andThen ->
       expectElement 'p', {contains: 'Issues remaining: 1'}
       expectElement 'li', {contains: 'Apples are amazing'}
 
-    click 'a:contains("People")'
+    click 'a:contains("Entities")'
     click 'a:contains("Bob")'
 
     andThen ->
       expectElement 'p', {contains: 'Issues remaining: 3'}
       expectNoElement 'li', {contains: 'Apples are amazing'}
 
-    click 'a:contains("People")'
+    click 'a:contains("Entities")'
     click 'a:contains("Cara")'
 
     andThen ->
@@ -88,7 +88,7 @@ describe "Acceptance: Manage subscriptions", ->
   describe 'with someone who is not subscribed', ->
     beforeEach (done) ->
       visit '/'
-      click 'a:contains("People")'
+      click 'a:contains("Entities")'
       click 'a:contains("Cara")'
 
       andThen ->
@@ -108,11 +108,11 @@ describe "Acceptance: Manage subscriptions", ->
             click "label:contains('#{classification}')"
             click 'button:contains("Done")'
 
-            waitForModels ['person']
+            waitForModels ['entity']
 
             click 'button:contains("Add 3-issue subscription")'
 
-            waitForModels ['subscription', 'person']
+            waitForModels ['subscription', 'entity']
 
             andThen ->
               done()
@@ -131,7 +131,7 @@ describe "Acceptance: Manage subscriptions", ->
         click 'label:contains("Institution")'
         click 'button:contains("Done")'
 
-        waitForModels ['person']
+        waitForModels ['entity']
 
         andThen ->
           done()
@@ -152,12 +152,12 @@ describe "Acceptance: Manage subscriptions", ->
           do (issueCount) ->
             describe "when a #{issueCount}-issue subscription is created", ->
               beforeEach (done) ->
-                click 'a:contains("People")'
+                click 'a:contains("Entities")'
                 click 'a:contains("Cara")'
 
                 click "button:contains('Add #{issueCount}-issue subscription')"
 
-                waitForModels ['subscription', 'person']
+                waitForModels ['subscription', 'entity']
 
                 andThen ->
                   done()
@@ -165,7 +165,7 @@ describe "Acceptance: Manage subscriptions", ->
               it 'shows the new subscription', (done) ->
                 # Navigate away to ensure relationship is stored on both ends
                 visit '/'
-                click 'a:contains("People")'
+                click 'a:contains("Entities")'
                 click 'a:contains("Cara")'
 
                 andThen ->
@@ -183,7 +183,7 @@ describe "Acceptance: Manage subscriptions", ->
 
   it 'lists current subscribers', (done) ->
     visit '/'
-    click 'a:contains("People")'
+    click 'a:contains("Entities")'
 
     andThen ->
       expectElement '.js-subscribers li', {contains: 'Alice'}
@@ -195,7 +195,7 @@ describe "Acceptance: Manage subscriptions", ->
 
   it 'lists former subscribers', (done) ->
     visit '/'
-    click 'a:contains("People")'
+    click 'a:contains("Entities")'
 
     andThen ->
       expectNoElement '.js-former-subscribers li', {contains: 'Alice'}
