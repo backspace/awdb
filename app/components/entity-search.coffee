@@ -7,8 +7,9 @@ EntitySearch = Ember.Component.extend
     search = @get 'search'
 
     if search
+      search = search.toLowerCase()
       @get('entities').filter (entity) ->
-        entity.get('name').indexOf(search) > -1
+        entity.get('name').toLowerCase().indexOf(search) > -1
     else
       []
 

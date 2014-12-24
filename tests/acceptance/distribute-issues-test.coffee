@@ -104,7 +104,7 @@ describe "Acceptance: Distribute issues", ->
 
     describe 'having an additional recipient', ->
       beforeEach (done) ->
-        fillIn 'input[type="search"]', 'xtr'
+        fillIn 'input[type="search"]', 'ext'
         click 'li:contains("Extra") .fa-plus'
 
         andThen ->
