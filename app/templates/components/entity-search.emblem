@@ -1,0 +1,10 @@
+=input type='search' value=search
+
+ul.results.fa-ul
+  each entity in searchResults
+    =entity-list-item entity=entity
+      button.tiny.round click="addEntity entity"
+        fa-icon 'plus'
+  else
+    if search
+      | No results!

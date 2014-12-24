@@ -34,15 +34,6 @@ IssueDistributeController = Ember.ObjectController.extend
 
         distribution.get('proposedFulfillments').pushObject fulfillment
 
-  searchResults: Ember.computed 'search', 'peole', ->
-    search = @get 'search'
-
-    if search
-      @get('entities').filter (entity) ->
-        entity.get('name').indexOf(search) > -1
-    else
-      return []
-
   actions:
     distribute: ->
       distribution = @get 'model'

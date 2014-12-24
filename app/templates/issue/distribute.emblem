@@ -11,16 +11,7 @@ ul.recipients
     | Extras
     =fulfillment-list fulfillments=proposedExtraFulfillments deleteFulfillment="deleteFulfillment"
 
-=input type='search' value=search
-ul.results
-  each entity in searchResults
-    li
-      =entity.name
-      button.tiny.round click="addEntity entity"
-        fa-icon 'plus'
-  else
-    if search
-      | No results!
+=entity-search entities=entities addEntity="addEntity"
 
 h3 Contributor compensation
 ul.compensations
