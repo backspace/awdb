@@ -6,6 +6,8 @@ export default DS.Model.extend({
   address: DS.attr('string'),
   classification: DS.attr('string'),
 
+  isRetailer: DS.attr('boolean', {defaultValue: false}),
+
   subscriptions: DS.hasMany('subscription', {inverse: 'entity'}),
 
   fulfillments: DS.hasMany('fulfillment'),

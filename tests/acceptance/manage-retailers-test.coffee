@@ -12,8 +12,8 @@ describe "Acceptance: Manage retailers", ->
     PouchTestHelper.buildStore(application, @currentTest.title).then (store) ->
       Ember.run ->
         Ember.RSVP.Promise.all([
-          store.createRecord('retailer', {name: 'Awesomeness', address: '123 Awesome Avenue'}).save(),
-          store.createRecord('retailer', {name: 'Bodaciousness'}).save()
+          store.createRecord('entity', {name: 'Awesomeness', address: '123 Awesome Avenue', isRetailer: true}).save(),
+          store.createRecord('entity', {name: 'Bodaciousness', isRetailer: true}).save()
         ]).then ->
           done()
 

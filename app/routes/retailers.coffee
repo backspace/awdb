@@ -2,11 +2,11 @@
 
 RetailersRoute = Ember.Route.extend
   model: ->
-    @store.find 'retailer'
+    @store.find('entity')
 
   actions:
     createRetailer: ->
-      retailer = @store.createRecord 'retailer'
+      retailer = @store.createRecord 'entity', {isRetailer: true}
       @transitionTo 'retailer', retailer
 
 `export default RetailersRoute`

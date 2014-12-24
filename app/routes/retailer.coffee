@@ -2,6 +2,6 @@
 
 RetailerRoute = Ember.Route.extend
   model: (params) ->
-    @store.find 'retailer', params.retailer_id
+    @store.find 'entity', params.retailer_id
 
 `export default RetailerRoute`
