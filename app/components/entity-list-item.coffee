@@ -6,6 +6,8 @@ EntityListItem = Ember.Component.extend
   icon: Ember.computed 'entity.isRetailer', 'entity.isInstitution', ->
     entity = @get 'entity'
 
+    return 'question' unless entity?
+
     if entity.get('isRetailer')
       'shopping-cart'
     else if entity.get('isInstitution')
