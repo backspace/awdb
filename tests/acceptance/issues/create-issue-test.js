@@ -20,15 +20,13 @@ describe('Acceptance: Create issue', function() {
   });
 
   it('lets the user create a new issue', function(done) {
-    visit('/');
-    click('a:contains("Issues")');
+    viewIssues();
 
     click('button:contains("New issue")');
     fillIn('input[name="title"]', 'Bananas are better');
     click('button:contains("Done")');
 
-    visit('/');
-    click('a:contains("Issues")');
+    viewIssues();
 
     andThen(function() {
       expectElement('li', {contains: 'Bananas are better'});

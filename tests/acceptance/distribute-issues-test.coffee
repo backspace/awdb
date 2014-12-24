@@ -68,8 +68,7 @@ describe "Acceptance: Distribute issues", ->
 
   describe 'with a new issue', (done) ->
     beforeEach (done) ->
-      visit '/'
-      click 'a:contains("Issues")'
+      viewIssues()
       click 'button:contains("New issue")'
       fillIn 'input[name="title"]', 'Bananas are better'
       click 'button:contains("Done")'
@@ -135,8 +134,7 @@ describe "Acceptance: Distribute issues", ->
             done()
 
         it 'shows that the new recipient received the issue', (done) ->
-          click 'a:contains("Entities")'
-          click 'a:contains("Extra")'
+          viewEntity 'Extra'
 
           andThen ->
             expectElement 'li', {contains: 'Bananas are better'}
@@ -162,16 +160,13 @@ describe "Acceptance: Distribute issues", ->
           done()
 
       it 'shows that subscribers received the issue', (done) ->
-        visit '/'
-        click 'a:contains("Entities")'
-        click 'a:contains("Alice")'
+        viewEntity 'Alice'
 
         andThen ->
           expectElement 'p', {contains: 'Not subscribed!'}
           expectElement 'li', {contains: 'Bananas are better'}
 
-        click 'a:contains("Entities")'
-        click 'a:contains("Bob")'
+        viewEntity 'Bob'
 
         andThen ->
           expectElement 'p', {contains: 'Issues remaining: 2'}
@@ -180,8 +175,7 @@ describe "Acceptance: Distribute issues", ->
           done()
 
       it 'shows that the contributor received the issue', (done) ->
-        click 'a:contains("Entities")'
-        click 'a:contains("Artist")'
+        viewEntity 'Artist'
 
         andThen ->
           expectElement 'li', {contains: 'Bananas are better'}
@@ -189,8 +183,7 @@ describe "Acceptance: Distribute issues", ->
           done()
 
       it 'shows that the non-subscriber did not receive the issue', (done) ->
-        click 'a:contains("Entities")'
-        click 'a:contains("Cara")'
+        viewEntity 'Cara'
 
         andThen ->
           expectNoElement 'li', {contains: 'Bananas are better'}
@@ -198,18 +191,14 @@ describe "Acceptance: Distribute issues", ->
           done()
 
       it 'retains the addresses in the distribution even if they have since changed', (done) ->
-        visit '/'
-        click 'a:contains("Entities")'
-        click 'a:contains("Alice")'
+        viewEntity 'Alice'
         click 'button:contains("Edit")'
         fillIn('textarea[name="address"]', 'New address for Alice')
         click('button:contains("Done")')
 
         waitForModels ['entity']
 
-        visit '/'
-        click 'a:contains("Issues")'
-        click 'a:contains("Bananas")'
+        viewIssue 'Bananas'
         click '.distributions li a'
 
         andThen ->
@@ -228,9 +217,7 @@ describe "Acceptance: Distribute issues", ->
           done()
 
   it 'does not suggest subscribers who have already received an issue', (done) ->
-    visit '/'
-    click 'a:contains("Issues")'
-    click 'a:contains("Apples")'
+    viewIssue 'Apples'
 
     click 'a:contains("Distribute")'
 
@@ -242,9 +229,7 @@ describe "Acceptance: Distribute issues", ->
 
   describe 'when there is another subscriber', (done) ->
     beforeEach (done) ->
-      visit '/'
-      click 'a:contains("Entities")'
-      click 'a:contains("Cara")'
+      viewEntity 'Cara'
       click 'button:contains("3-issue")'
 
       waitForModels ['subscription', 'entity']
@@ -254,9 +239,7 @@ describe "Acceptance: Distribute issues", ->
 
     describe 'and the new subscriber is deleted from the distribution', (done) ->
       beforeEach (done) ->
-        visit '/'
-        click 'a:contains("Issues")'
-        click 'a:contains("Apples")'
+        viewIssue 'Apples'
         click 'a:contains("Distribute")'
 
         click 'li.subscriptions li:contains("Cara") .fa-trash'
@@ -269,8 +252,7 @@ describe "Acceptance: Distribute issues", ->
           done()
 
       it 'does not distribute to the new subscriber', (done) ->
-        click 'a:contains("Issues")'
-        click 'a:contains("Apples")'
+        viewIssue 'Apples'
         click '.distributions li a'
 
         andThen ->
@@ -292,7 +274,7 @@ describe "Acceptance: Distribute issues", ->
         done()
 
     it 'uses the new feature compensation in a distribution', (done) ->
-      click 'a:contains("Issues")'
+      viewIssues()
       click 'button:contains("New issue")'
       fillIn 'input[name="title"]', 'Cantaloupe is capricious'
       click 'button:contains("Done")'
@@ -307,8 +289,7 @@ describe "Acceptance: Distribute issues", ->
       click 'i.fa-check'
 
       waitForModels ['feature', 'issue']
-      click 'a:contains("Issues")'
-      click 'a:contains("Cantaloupe")'
+      viewIssue 'Cantaloupe'
       click 'a:contains("Distribute")'
 
       andThen ->

@@ -24,16 +24,14 @@ describe('Acceptance: Edit an issue', function () {
   });
 
   it('saves an edited issue', function(done) {
-    visit('/');
-    click('a:contains("Issues")');
+    viewIssues();
 
     click('a:contains("Cranberries are contemptible")');
     click('button:contains("Edit")');
     fillIn('input[name="title"]', 'Cranberries are charming');
     click('button:contains("Done")');
 
-    visit('/');
-    click('a:contains("Issues")');
+    viewIssues();
 
     andThen(function() {
       expectElement('li', {contains: 'Cranberries are charming'});

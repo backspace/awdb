@@ -36,9 +36,7 @@ describe "Acceptance: Edit issue feature", ->
 
   describe 'when the feature name is changed', ->
     beforeEach (done) ->
-      visit '/'
-      click 'a:contains("Issues")'
-      click 'a:contains("Featureful")'
+      viewIssue 'Featureful'
 
       click 'li:contains("Oops") .js-target'
       fillIn 'li.js-persisted input[name="title"]', 'Corrected'
@@ -58,9 +56,7 @@ describe "Acceptance: Edit issue feature", ->
 
   describe 'when a contributor is added', ->
     beforeEach (done) ->
-      visit '/'
-      click 'a:contains("Issues")'
-      click 'a:contains("Featureful")'
+      viewIssue 'Featureful'
       click 'li:contains("Oops") .js-target'
 
       fillIn 'input[type="search"]', 'alice'
@@ -74,9 +70,7 @@ describe "Acceptance: Edit issue feature", ->
         done()
 
     it 'shows the new contributor', (done) ->
-      visit '/'
-      click 'a:contains("Issues")'
-      click 'a:contains("Featureful")'
+      viewIssue 'Featureful'
 
       andThen ->
         expectElement 'li', {contains: 'Oops: Alice'}
@@ -96,9 +90,7 @@ describe "Acceptance: Edit issue feature", ->
           done()
 
       it 'no longer shows the contributor', (done) ->
-        visit '/'
-        click 'a:contains("Issues")'
-        click 'a:contains("Featureful")'
+        viewIssue 'Featureful'
 
         andThen ->
           expectNoElement 'li', {contains: 'Oops: Alice'}

@@ -22,8 +22,7 @@ describe "Acceptance: Manage retailers", ->
     Ember.run(done)
 
   it 'lists the retailers', (done) ->
-    visit '/'
-    click 'a:contains("Retailers")'
+    viewRetailers()
 
     andThen ->
       expectElement 'li', {contains: 'Awesomeness'}
@@ -33,9 +32,7 @@ describe "Acceptance: Manage retailers", ->
       done()
 
   it "shows a retailer's details", (done) ->
-    visit '/'
-    click 'a:contains("Retailers")'
-    click 'a:contains("Awesomeness")'
+    viewRetailer 'Awesomeness'
 
     andThen ->
       expectElement 'h3', {contains: 'Awesomeness'}
@@ -44,8 +41,7 @@ describe "Acceptance: Manage retailers", ->
       done()
 
   it 'supports creating a retailer', (done) ->
-    visit '/'
-    click 'a:contains("Retailers")'
+    viewRetailers()
 
     click 'button:contains("New")'
     fillIn 'input[name="name"]', 'Controversial'
@@ -59,9 +55,7 @@ describe "Acceptance: Manage retailers", ->
       done()
 
   it 'supports editing a retailer', (done) ->
-    visit '/'
-    click 'a:contains("Retailers")'
-    click 'a:contains("Bodaciousness")'
+    viewRetailer 'Bodaciousness'
 
     click 'button:contains("Edit")'
     fillIn 'input[name="name"]', 'Better'

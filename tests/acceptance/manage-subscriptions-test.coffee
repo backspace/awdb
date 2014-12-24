@@ -62,23 +62,19 @@ describe "Acceptance: Manage subscriptions", ->
     Ember.run(done)
 
   it 'shows issues remaining', (done) ->
-    visit '/'
-    click 'a:contains("Entities")'
-    click 'a:contains("Alice")'
+    viewEntity 'Alice'
 
     andThen ->
       expectElement 'p', {contains: 'Issues remaining: 1'}
       expectElement 'li', {contains: 'Apples are amazing'}
 
-    click 'a:contains("Entities")'
-    click 'a:contains("Bob")'
+    viewEntity 'Bob'
 
     andThen ->
       expectElement 'p', {contains: 'Issues remaining: 3'}
       expectNoElement 'li', {contains: 'Apples are amazing'}
 
-    click 'a:contains("Entities")'
-    click 'a:contains("Cara")'
+    viewEntity 'Cara'
 
     andThen ->
       expectElement 'p', {contains: 'Not subscribed!'}
@@ -87,9 +83,7 @@ describe "Acceptance: Manage subscriptions", ->
 
   describe 'with someone who is not subscribed', ->
     beforeEach (done) ->
-      visit '/'
-      click 'a:contains("Entities")'
-      click 'a:contains("Cara")'
+      viewEntity 'Cara'
 
       andThen ->
         done()
@@ -152,8 +146,7 @@ describe "Acceptance: Manage subscriptions", ->
           do (issueCount) ->
             describe "when a #{issueCount}-issue subscription is created", ->
               beforeEach (done) ->
-                click 'a:contains("Entities")'
-                click 'a:contains("Cara")'
+                viewEntity 'Cara'
 
                 click "button:contains('Add #{issueCount}-issue subscription')"
 
@@ -164,9 +157,7 @@ describe "Acceptance: Manage subscriptions", ->
 
               it 'shows the new subscription', (done) ->
                 # Navigate away to ensure relationship is stored on both ends
-                visit '/'
-                click 'a:contains("Entities")'
-                click 'a:contains("Cara")'
+                viewEntity 'Cara'
 
                 andThen ->
                   expectElement 'p', {contains: "Issues remaining: #{issueCount}"}
@@ -182,8 +173,7 @@ describe "Acceptance: Manage subscriptions", ->
                   done()
 
   it 'lists current subscribers', (done) ->
-    visit '/'
-    click 'a:contains("Entities")'
+    viewEntities()
 
     andThen ->
       expectElement '.js-subscribers li', {contains: 'Alice'}
@@ -194,8 +184,7 @@ describe "Acceptance: Manage subscriptions", ->
       done()
 
   it 'lists former subscribers', (done) ->
-    visit '/'
-    click 'a:contains("Entities")'
+    viewEntities()
 
     andThen ->
       expectNoElement '.js-former-subscribers li', {contains: 'Alice'}

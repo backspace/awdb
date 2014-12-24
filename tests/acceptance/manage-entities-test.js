@@ -28,8 +28,7 @@ describe('Acceptance: Manage entities', function() {
   });
 
   it('lists the entities', function(done) {
-    visit('/');
-    click('a:contains("Entities")');
+    viewEntities();
 
     andThen(function() {
       expectElement('li', {contains: 'Alice'});
@@ -43,8 +42,7 @@ describe('Acceptance: Manage entities', function() {
   });
 
   it('differentiates types of entities', function(done) {
-    visit('/');
-    click('a:contains("Entities")');
+    viewEntities();
 
     andThen(function() {
       expectElement('li .fa-li.fa-user', 2);
@@ -55,9 +53,7 @@ describe('Acceptance: Manage entities', function() {
   });
 
   it("shows an entity's details", function(done) {
-    visit('/');
-    click('a:contains("Entities")');
-    click('a:contains("Alice")');
+    viewEntity("Alice");
 
     andThen(function() {
       expectElement('h3', {contains: 'Alice'});
@@ -68,15 +64,13 @@ describe('Acceptance: Manage entities', function() {
   });
 
   it("lets the user create an entity", function(done) {
-    visit('/');
-    click('a:contains("Entities")');
+    viewEntities();
 
     click('button:contains("New")');
     fillIn('input[name="name"]', 'Corrie');
     click('button:contains("Done")');
 
-    visit('/');
-    click('a:contains("Entities")');
+    viewEntities();
 
     andThen(function() {
       expectElement('li', {contains: 'Corrie'});
@@ -85,16 +79,13 @@ describe('Acceptance: Manage entities', function() {
   });
 
   it("lets the user edit an entity", function(done) {
-    visit('/');
-    click('a:contains("Entities")');
-    click('a:contains("Bob")');
+    viewEntity("Bob");
     click('button:contains("Edit")');
 
     fillIn('input[name="name"]', 'Bib');
     click('button:contains("Done")');
 
-    visit('/');
-    click('a:contains("Entities")');
+    viewEntities();
 
     andThen(function() {
       expectElement('li', {contains: 'Bib'});

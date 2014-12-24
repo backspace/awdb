@@ -32,8 +32,7 @@ describe('Acceptance: Issue list', function() {
   });
 
   it('lists issues', function(done) {
-    visit('/');
-    click('a:contains("Issues")');
+    viewIssues();
 
     andThen(function() {
       expectElement('li', {contains: 'Apples'});

@@ -25,9 +25,7 @@ describe "Acceptance: Create issue feature", ->
     Ember.run(done)
 
   it 'shows the new feature', (done) ->
-    visit '/'
-    click 'a:contains("Issues")'
-    click 'a:contains("Full of features")'
+    viewIssue 'Full of features'
 
     fillIn 'input[name="title"]', 'Like this one'
 
@@ -39,9 +37,7 @@ describe "Acceptance: Create issue feature", ->
 
     click 'i.fa-check'
 
-    visit '/'
-    click 'a:contains("Issues")'
-    click 'a:contains("Full of features")'
+    viewIssue 'Full of features'
 
     andThen ->
       expectElement 'li', {contains: 'Like this one: Alice, Bob'}
