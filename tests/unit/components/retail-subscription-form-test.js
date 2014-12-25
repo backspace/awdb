@@ -31,7 +31,7 @@ describeComponent(
 
       it('relays the save action', function(done) {
         var component = this.subject();
-        var $component = this.append();
+        var $component = this.render();
 
         var target = {
           externalAction: function() {
