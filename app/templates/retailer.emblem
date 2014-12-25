@@ -13,3 +13,15 @@ else
   p=model.address
 
   button click='edit' Edit
+
+if isNotSubscribed
+  button click='subscribe' Create subscription
+else
+  button click='endSubscription' End subscription
+
+h3 Inactive subscriptions:
+ul.js-inactive-subscriptions
+  each subscription in model.inactiveSubscriptions
+    li From #{subscription.createdAt} to #{subscription.endedAt}
+  else
+    | None!

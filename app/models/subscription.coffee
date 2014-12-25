@@ -5,27 +5,40 @@ Subscription = DS.Model.extend
   entity: DS.belongsTo 'entity', {inverse: 'subscriptions'}
   count: DS.attr 'number'
 
+  createdAt: DS.attr 'date', {defaultValue: -> new Date()}
+  endedAt: DS.attr 'date'
+
+  isRetail: Ember.computed.alias 'entity.isRetailer'
+
   fulfillments: DS.hasMany 'fulfillment'
 
   remaining: Ember.computed 'fulfillments', ->
     @get('count') - @get('fulfillments.length')
 
-  isExhausted: Ember.computed 'remaining', ->
-    @get('remaining') == 0
+  isExhausted: Ember.computed 'remaining', 'isRetail', 'endedAt', ->
+    if @get 'isRetail'
+      Ember.isPresent(@get('endedAt'))
+    else
+      @get('remaining') == 0
 
   rev: DS.attr 'string'
 
   createTransaction: Ember.on 'didCreate', ->
-    # FIXME should be injected
-    settings = @container.lookup 'settings:main'
+    unless @get 'isRetail'
+      # FIXME should be injected
+      settings = @container.lookup 'settings:main'
 
-    classification = @get('entity.classification')
-    # TODO prevent subscription without setting classification?
-    classification ?= 'institution'
+      classification = @get('entity.classification')
+      # TODO prevent subscription without setting classification?
+      classification ?= 'institution'
 
-    cost = settings.get "subscription#{classification.capitalize()}3"
+      cost = settings.get "subscription#{classification.capitalize()}3"
 
-    transaction = @store.createRecord 'transaction', {amount: cost, entity: @get('entity')}
-    transaction.save()
+      transaction = @store.createRecord 'transaction', {amount: cost, entity: @get('entity')}
+      transaction.save()
+
+  end: ->
+    @set 'endedAt', new Date()
+    @save()
 
 `export default Subscription`

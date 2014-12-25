@@ -14,6 +14,8 @@ export default DS.Model.extend({
   fulfillments: DS.hasMany('fulfillment'),
 
   activeSubscriptions: Ember.computed.filterBy('subscriptions', 'isExhausted', false),
+  inactiveSubscriptions: Ember.computed.filterBy('subscriptions', 'isExhausted'),
+
   isSubscribed: Ember.computed.notEmpty('activeSubscriptions'),
   activeSubscription: Ember.computed.alias('activeSubscriptions.firstObject'),
 

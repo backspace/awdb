@@ -1,4 +1,14 @@
-ul
+ul.js-retailers
   each retailer in retailers
     li: link-to 'retailer' retailer: retailer.name
 button click='createRetailer' New retailer
+
+h3 Active retailers:
+ul.fa-ul.js-active-retailers
+  each retailer in activeRetailers
+    li: link-to 'retailer' retailer: retailer.name
+
+h3 Inactive retailers:
+ul.fa-ul.js-inactive-retailers
+  each retailer in inactiveRetailers
+    li: link-to 'retailer' retailer: retailer.name

@@ -25,4 +25,8 @@ register = ->
     viewRetailers()
     click "a:contains('#{name}')"
 
+  Ember.Test.registerAsyncHelper 'viewTransactions', ->
+    visit '/'
+    click 'a:contains("Transactions")'
+
 `export default register`
