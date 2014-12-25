@@ -4,6 +4,9 @@ ul.recipients
   li.subscriptions
     | Subscribers
     =fulfillment-list fulfillments=proposedSubscriptionFulfillments deleteFulfillment="deleteFulfillment"
+  li.retailSubscriptions
+    | Retailers
+    =fulfillment-list fulfillments=proposedRetailSubscriptionFulfillments deleteFulfillment="deleteFulfillment"
   li.contributions
     | Contributors
     =fulfillment-list fulfillments=proposedContributionFulfillments deleteFulfillment="deleteFulfillment"

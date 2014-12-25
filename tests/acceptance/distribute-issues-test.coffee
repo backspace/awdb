@@ -18,6 +18,9 @@ describe "Acceptance: Distribute issues", ->
           bob: store.createRecord('entity', {name: 'Bob', address: 'Bob address'}).save()
           cara: store.createRecord('entity', {name: 'Cara'}).save()
 
+          bookstore: store.createRecord('entity', {name: 'Bookstore', address: 'Bookstore address', isRetailer: true}).save()
+          dépanneur: store.createRecord('entity', {name: 'Dépanneur', address: 'Dépanneur address', isRetailer: true}).save()
+
           artist: store.createRecord('entity', {name: 'Artist'}).save()
           extra: store.createRecord('entity', {name: 'Extra'}).save()
 
@@ -30,6 +33,8 @@ describe "Acceptance: Distribute issues", ->
           subscriptions = Ember.RSVP.hash
             alice: store.createRecord('subscription', {entity: records.alice, count: 2}).save()
             bob: store.createRecord('subscription', {entity: records.bob, count: 3}).save()
+            bookstore: store.createRecord('subscription', {entity: records.bookstore}).save()
+
             records: records
 
           subscriptions
@@ -38,6 +43,8 @@ describe "Acceptance: Distribute issues", ->
 
           fulfillments = Ember.RSVP.hash
             fulfillment: store.createRecord('fulfillment', {issue: records.apples, subscription: subscriptions.alice}).save()
+            bookstoreFulfillment: store.createRecord('fulfillment', {issue: records.apples, subscription: subscriptions.bookstore}).save()
+
             subscriptions: subscriptions
 
           fulfillments
@@ -48,12 +55,15 @@ describe "Acceptance: Distribute issues", ->
           # FIXME hack to prevent stored entity IDs from being cleared
           subscriptions.alice.set 'entity', records.alice
           subscriptions.bob.set 'entity', records.bob
+          subscriptions.bookstore.set 'entity', records.bookstore
 
           Ember.RSVP.all([
             records.alice.save(),
-            records.bob.save()
+            records.bob.save(),
+            records.bookstore.save(),
             subscriptions.alice.save(),
-            subscriptions.bob.save()
+            subscriptions.bob.save(),
+            subscriptions.bookstore.save()
           ]).then ->
             done()
         )
@@ -93,6 +103,8 @@ describe "Acceptance: Distribute issues", ->
       andThen ->
         expectElement '.subscriptions li', {contains: 'Alice'}
         expectElement '.subscriptions li', {contains: 'Bob'}
+
+        expectElement '.retailSubscriptions li', {contains: 'Bookstore'}
 
         expectElement '.contributions li', {contains: 'Artist'}
 
@@ -145,7 +157,7 @@ describe "Acceptance: Distribute issues", ->
       beforeEach (done) ->
         fillIn 'input[type="number"]', '200'
 
-        click 'button:contains("Distribute to 3 recipients")'
+        click 'button:contains("Distribute to 4 recipients")'
 
         waitForModels ['issue', 'subscription', 'fulfillment', 'distribution', 'transaction']
 
@@ -156,6 +168,7 @@ describe "Acceptance: Distribute issues", ->
         andThen ->
           expectElement 'h2', {contains: "Distribution of issue Bananas are better"}
           expectElement 'a', {contains: 'Alice'}
+          expectElement 'a', {contains: 'Bookstore'}
 
           done()
 
@@ -174,6 +187,14 @@ describe "Acceptance: Distribute issues", ->
 
           done()
 
+      it 'shows that the retailer received the issue', (done) ->
+        viewRetailer 'Bookstore'
+
+        andThen ->
+          expectElement 'li', {contains: 'Bananas are better'}
+
+          done()
+
       it 'shows that the contributor received the issue', (done) ->
         viewEntity 'Artist'
 
@@ -182,8 +203,13 @@ describe "Acceptance: Distribute issues", ->
 
           done()
 
-      it 'shows that the non-subscriber did not receive the issue', (done) ->
+      it 'shows that the non-subscribers did not receive the issue', (done) ->
         viewEntity 'Cara'
+
+        andThen ->
+          expectNoElement 'li', {contains: 'Bananas are better'}
+
+        viewRetailer 'Dépanneur'
 
         andThen ->
           expectNoElement 'li', {contains: 'Bananas are better'}
@@ -223,6 +249,7 @@ describe "Acceptance: Distribute issues", ->
 
     andThen ->
       expectNoElement '.recipients li', {contains: 'Alice'}
+      expectNoElement '.recipients li', {contains: 'Bookstore'}
       expectElement '.subscriptions li', {contains: 'Bob'}
 
       done()

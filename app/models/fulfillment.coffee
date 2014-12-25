@@ -23,9 +23,18 @@ Fulfillment = DS.Model.extend
 
   rev: DS.attr 'string'
 
-  isForSubscription: Ember.computed.notEmpty 'subscription'
+  isRetail: Ember.computed.alias 'entity.isRetailer'
+  isNotRetail: Ember.computed.not 'isRetail'
+
+  # TODO rename non-retail subscriptions?
+  isForSomeSubscription: Ember.computed.notEmpty 'subscription'
+
+  isForSubscription: Ember.computed.and 'isForSomeSubscription', 'isNotRetail'
+  isForRetailSubscription: Ember.computed.and 'isForSomeSubscription', 'isRetail'
+
   isForContribution: Ember.computed.notEmpty 'contribution'
-  isExtra: Ember.computed 'isForSubscription', 'isForContribution', ->
-    !(@get('isForSubscription') || @get('isForContribution'))
+
+  isNotExtra: Ember.computed.or 'isForSomeSubscription', 'isForContribution'
+  isExtra: Ember.computed.not 'isNotExtra'
 
 `export default Fulfillment`

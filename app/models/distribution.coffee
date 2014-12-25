@@ -9,6 +9,7 @@ Distribution = DS.Model.extend
   rev: DS.attr 'string'
 
   proposedSubscriptionFulfillments: Ember.computed.filterBy 'proposedFulfillments', 'isForSubscription'
+  proposedRetailSubscriptionFulfillments: Ember.computed.filterBy 'proposedFulfillments', 'isForRetailSubscription'
   proposedContributionFulfillments: Ember.computed.filterBy 'proposedFulfillments', 'isForContribution'
   proposedExtraFulfillments: Ember.computed.filterBy 'proposedFulfillments', 'isExtra'
 

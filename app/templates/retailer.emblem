@@ -25,3 +25,10 @@ ul.js-inactive-subscriptions
     li From #{subscription.createdAt} to #{subscription.endedAt}
   else
     | None!
+
+p Issues received:
+ul
+  each fulfillment in fulfillments
+    li: link-to 'issue' fulfillment.issue: fulfillment.issue.title
+  else
+    p None
