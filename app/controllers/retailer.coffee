@@ -5,6 +5,9 @@ RetailerController = Ember.ObjectController.extend
 
   isEditing: Ember.computed.any 'model.isNew', 'requestedEditing'
 
+  newSubscription: Ember.computed 'model.isRetailer', 'model.isNew', ->
+    @store.createRecord 'subscription', {count: 999}
+
   actions:
     doneEditing: ->
       @get('model').save()
@@ -16,11 +19,10 @@ RetailerController = Ember.ObjectController.extend
       @set 'requestedEditing', true
 
     subscribe: ->
-      retailer = @get 'model'
-      subscription = @store.createRecord('subscription', {entity: retailer, count: 999})
-      subscription.save().then (subscription) ->
-        retailer.get('subscriptions').addObject subscription
-        retailer.save()
+      subscription = @get('newSubscription')
+      subscription.set 'entity', @get('model')
+      subscription.save().then =>
+        @get('model').save()
 
     endSubscription: ->
       retailer = @get 'model'
