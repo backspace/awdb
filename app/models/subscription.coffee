@@ -4,6 +4,7 @@
 Subscription = DS.Model.extend
   entity: DS.belongsTo 'entity', {inverse: 'subscriptions'}
   count: DS.attr 'number'
+  copies: DS.attr 'number'
 
   createdAt: DS.attr 'date', {defaultValue: -> new Date()}
   endedAt: DS.attr 'date'

@@ -12,6 +12,8 @@ Fulfillment = DS.Model.extend
 
   address: DS.attr 'string'
 
+  count: DS.attr 'number', {defaultValue: 1}
+
   addressPopulator: Ember.observer 'entity.id', ->
     newEntityID = @get 'entity.id'
 
@@ -22,6 +24,10 @@ Fulfillment = DS.Model.extend
       @oldEntityID = newEntityID
 
   rev: DS.attr 'string'
+
+  countPopulator: Ember.observer 'subscription.copies', ->
+    if @get 'isRetail'
+      @set('count', @get('subscription.copies'))
 
   isRetail: Ember.computed.alias 'entity.isRetailer'
   isNotRetail: Ember.computed.not 'isRetail'

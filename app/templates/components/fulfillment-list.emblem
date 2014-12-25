@@ -1,6 +1,8 @@
 each fulfillment in fulfillments
   with fulfillment.entity as entity
     entity-list-item entity=entity
+      if fulfillment.isRetail
+        | x #{fulfillment.count}
       button.alert.tiny.round click="deleteFulfillment fulfillment"
         fa-icon 'trash'
 else
