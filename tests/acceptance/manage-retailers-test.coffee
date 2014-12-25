@@ -13,7 +13,8 @@ describe "Acceptance: Manage retailers", ->
       Ember.run ->
         Ember.RSVP.Promise.all([
           store.createRecord('entity', {name: 'Awesomeness', address: '123 Awesome Avenue', isRetailer: true}).save(),
-          store.createRecord('entity', {name: 'Bodaciousness', isRetailer: true}).save()
+          store.createRecord('entity', {name: 'Bodaciousness', isRetailer: true}).save(),
+          store.createRecord('entity', {name: 'A human'}).save()
         ]).then ->
           done()
 
@@ -21,13 +22,13 @@ describe "Acceptance: Manage retailers", ->
     Ember.run(application, 'destroy')
     Ember.run(done)
 
-  it 'lists the retailers', (done) ->
+  it 'lists only the retailers', (done) ->
     viewRetailers()
 
     andThen ->
-      expectElement 'li', {contains: 'Awesomeness'}
-      expectElement 'li', {contains: 'Bodaciousness'}
-      expectElement 'li', 2
+      expectElement '.js-retailers li', {contains: 'Awesomeness'}
+      expectElement '.js-retailers li', {contains: 'Bodaciousness'}
+      expectElement '.js-retailers li', 2
 
       done()
 
@@ -50,7 +51,7 @@ describe "Acceptance: Manage retailers", ->
     click 'a:contains("Retailers")'
 
     andThen ->
-      expectElement 'li', {contains: 'Controversial'}
+      expectElement '.js-retailers li', {contains: 'Controversial'}
 
       done()
 
@@ -64,5 +65,5 @@ describe "Acceptance: Manage retailers", ->
     click 'a:contains("Retailers")'
 
     andThen ->
-      expectElement 'li', {contains: 'Better'}
+      expectElement '.js-retailers li', {contains: 'Better'}
       done()
