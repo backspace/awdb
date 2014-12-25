@@ -15,4 +15,10 @@ EntityListItem = Ember.Component.extend
     else
       'user'
 
+  route: Ember.computed 'entity.isRetailer', ->
+    if @get('entity.isRetailer')
+      'retailer'
+    else
+      'entity'
+
 `export default EntityListItem`
