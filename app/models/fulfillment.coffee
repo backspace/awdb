@@ -25,9 +25,10 @@ Fulfillment = DS.Model.extend
 
   rev: DS.attr 'string'
 
-  countPopulator: Ember.observer 'subscription.copies', ->
+  countAndCostPopulator: Ember.observer 'subscription.copies', 'subscription.cost', ->
     if @get 'isRetail'
       @set('count', @get('subscription.copies'))
+      @set('cost', @get('subscription.cost'))
 
   isRetail: Ember.computed.alias 'entity.isRetailer'
   isNotRetail: Ember.computed.not 'isRetail'
@@ -42,5 +43,10 @@ Fulfillment = DS.Model.extend
 
   isNotExtra: Ember.computed.or 'isForSomeSubscription', 'isForContribution'
   isExtra: Ember.computed.not 'isNotExtra'
+
+  createTransaction: Ember.on 'didCreate', ->
+    if @get 'isRetail'
+      transaction = @store.createRecord 'transaction', {amount: @get('cost')*@get('count'), entity: @get('entity')}
+      transaction.save()
 
 `export default Fulfillment`

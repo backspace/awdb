@@ -33,7 +33,7 @@ describe "Acceptance: Distribute issues", ->
           subscriptions = Ember.RSVP.hash
             alice: store.createRecord('subscription', {entity: records.alice, count: 2}).save()
             bob: store.createRecord('subscription', {entity: records.bob, count: 3}).save()
-            bookstore: store.createRecord('subscription', {entity: records.bookstore, copies: 30}).save()
+            bookstore: store.createRecord('subscription', {entity: records.bookstore, copies: 30, cost: 10}).save()
 
             records: records
 
@@ -105,7 +105,7 @@ describe "Acceptance: Distribute issues", ->
         expectElement '.subscriptions li', {contains: 'Bob'}
 
         expectElement '.retailSubscriptions li', {contains: 'Bookstore'}
-        expectElement 'li li:contains("Bookstore")', {contains: '30'}
+        expectElement 'li li:contains("Bookstore")', {contains: '30 @ $10/each'}
 
         expectElement '.contributions li', {contains: 'Artist'}
 
@@ -240,6 +240,16 @@ describe "Acceptance: Distribute issues", ->
         andThen ->
           expectElement 'td', {contains: '-$200'}
           expectElement 'td', {contains: 'Artist'}
+
+          done()
+
+      # FIXME this calculation is temporary, needs clarification
+      it 'creates a transaction for the retail subscription', (done) ->
+        viewTransactions()
+
+        andThen ->
+          expectElement 'td', {contains: 'Bookstore'}
+          expectElement 'td', {contains: '$300'}
 
           done()
 
