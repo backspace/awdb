@@ -32,7 +32,8 @@ Subscription = DS.Model.extend
       # TODO prevent subscription without setting classification?
       classification ?= 'institution'
 
-      cost = settings.get "subscription#{classification.capitalize()}3"
+      # FIXME assumes only 3 or 6 issues
+      cost = settings.get "subscription#{classification.capitalize()}#{@get 'count'}"
 
       transaction = @store.createRecord 'transaction', {amount: cost, entity: @get('entity')}
       transaction.save()

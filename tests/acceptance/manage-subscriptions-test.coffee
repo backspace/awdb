@@ -134,7 +134,7 @@ describe "Acceptance: Manage subscriptions", ->
         beforeEach (done) ->
           click 'a:contains("Settings")'
           fillIn 'input[name=subscriptionInstitution3]', 100
-          fillIn 'input[name=subscriptionInstitution6]', 100
+          fillIn 'input[name=subscriptionInstitution6]', 200
           click 'button:contains("Save")'
 
           waitForModels ['settings']
@@ -142,8 +142,12 @@ describe "Acceptance: Manage subscriptions", ->
           andThen ->
             done()
 
-        for issueCount in [3, 6]
-          do (issueCount) ->
+        costsByIssueCount =
+          3: 100
+          6: 200
+
+        for issueCount, cost of costsByIssueCount
+          do (issueCount, cost) ->
             describe "when a #{issueCount}-issue subscription is created", ->
               beforeEach (done) ->
                 viewEntity 'Cara'
@@ -168,7 +172,7 @@ describe "Acceptance: Manage subscriptions", ->
                 click 'a:contains("Transactions")'
 
                 andThen ->
-                  expectElement 'tr:contains("Cara") td', {contains: "$100"}
+                  expectElement 'tr:contains("Cara") td', {contains: "$#{cost}"}
 
                   done()
 
