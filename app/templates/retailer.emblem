@@ -14,21 +14,22 @@ else
 
   button click='edit' Edit
 
-if isNotSubscribed
-  button click='subscribe' Create subscription
-else
-  button click='endSubscription' End subscription
-
-h3 Inactive subscriptions:
-ul.js-inactive-subscriptions
-  each subscription in model.inactiveSubscriptions
-    li From #{subscription.createdAt} to #{subscription.endedAt}
+unless isNew
+  if isNotSubscribed
+    retail-subscription-form retailer=model subscription=newSubscription save="subscribe"
   else
-    | None!
+    button click='endSubscription' End subscription
 
-p Issues received:
-ul
-  each fulfillment in fulfillments
-    li: link-to 'issue' fulfillment.issue: fulfillment.issue.title
-  else
-    p None
+  h3 Inactive subscriptions:
+  ul.js-inactive-subscriptions
+    each subscription in model.inactiveSubscriptions
+      li From #{subscription.createdAt} to #{subscription.endedAt}
+    else
+      | None!
+
+  p Issues received:
+  ul
+    each fulfillment in fulfillments
+      li: link-to 'issue' fulfillment.issue: fulfillment.issue.title
+    else
+      p None
