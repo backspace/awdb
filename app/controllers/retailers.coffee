@@ -1,7 +1,8 @@
 `import Ember from 'ember'`
 
 RetailersController = Ember.ArrayController.extend
-  retailers: Ember.computed.filterBy('model', 'isRetailer')
+  allRetailers: Ember.computed.filterBy('model', 'isRetailer')
+  retailers: Ember.computed.filterBy('allRetailers', 'isNew', false)
 
   activeRetailers: Ember.computed.filterBy 'retailers', 'isSubscribed'
 
