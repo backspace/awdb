@@ -13,6 +13,11 @@ module.exports = function(environment) {
       }
     },
 
+    // FIXME overly generous for now?
+    contentSecurityPolicy: {
+      'connect-src': "*"
+    },
+
     APP: {
       databaseName: 'awdb-' + environment
       // Here you can pass flags/options to your application instance
