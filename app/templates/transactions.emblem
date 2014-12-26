@@ -6,7 +6,4 @@ table
       th Amount
   tbody
     each transaction in model
-      tr
-        td=transaction.createdAt
-        td=transaction.entity.name
-        td #{transaction.formattedAmount}
+      transaction-list-item transaction=transaction
