@@ -11,7 +11,7 @@ export default DS.Model.extend({
 
   subscriptions: DS.hasMany('subscription', {inverse: 'entity'}),
 
-  fulfillments: DS.hasMany('fulfillment'),
+  fulfillments: DS.hasMany('fulfillment', {async: true}),
 
   activeSubscriptions: Ember.computed.filterBy('subscriptions', 'isExhausted', false),
   inactiveSubscriptions: Ember.computed.filterBy('subscriptions', 'isExhausted'),

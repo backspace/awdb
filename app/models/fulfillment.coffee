@@ -6,7 +6,7 @@ Fulfillment = DS.Model.extend
   subscription: DS.belongsTo 'subscription'
   contribution: DS.belongsTo 'contribution'
 
-  entity: DS.belongsTo 'entity'
+  entity: DS.belongsTo 'entity', {async: true}
 
   distribution: DS.belongsTo 'distribution'
 

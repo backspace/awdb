@@ -51,7 +51,8 @@ IssueDistributeController = Ember.ObjectController.extend
             subscription = fulfillment.get('subscription')
             subscription.save() if subscription?
 
-            fulfillment.get('entity').save()
+            fulfillment.get('entity').then (entity) ->
+              entity.save()
           )
         ).then( ->
           issue.get('distributions').pushObject distribution
