@@ -1,6 +1,6 @@
 =fa-icon icon listItem=true
 if entity.id
-  link-to route entity: entity.name
+  link-to route entity boundActive=active: entity.name
 else
   =entity.name
 yield

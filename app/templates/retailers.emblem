@@ -1,9 +1,9 @@
 .list-and-details
   section.list
     h2 Retailers
-    ul.js-retailers
+    ul.js-retailers.side-nav
       each retailer in retailers
-        li: link-to 'retailer' retailer: retailer.name
+        entity-list-item entity=retailer
     button click='createRetailer' New retailer
 
     h3 Active retailers:

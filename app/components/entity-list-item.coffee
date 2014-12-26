@@ -3,6 +3,9 @@
 EntityListItem = Ember.Component.extend
   tagName: 'li'
 
+  classNameBindings: ['active']
+  active: false
+
   icon: Ember.computed 'entity.isRetailer', 'entity.isInstitution', ->
     entity = @get 'entity'
 
