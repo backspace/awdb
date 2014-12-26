@@ -10,10 +10,13 @@ RetailerController = Ember.ObjectController.extend
 
   actions:
     doneEditing: ->
-      @get('model').save()
-      @set 'requestedEditing', false
-
-      @get 'model'
+      model = @get('model')
+      if model.get('isNew')
+        model.save().then =>
+          @transitionToRoute 'retailer', model
+      else
+        model.save().then =>
+          @set 'requestedEditing', false
 
     edit: ->
       @set 'requestedEditing', true

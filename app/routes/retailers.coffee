@@ -6,7 +6,6 @@ RetailersRoute = Ember.Route.extend
 
   actions:
     createRetailer: ->
-      retailer = @store.createRecord 'entity', {isRetailer: true}
-      @transitionTo 'retailer', retailer
+      @transitionTo 'retailers.new'
 
 `export default RetailersRoute`

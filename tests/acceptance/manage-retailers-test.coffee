@@ -48,6 +48,8 @@ describe "Acceptance: Manage retailers", ->
     fillIn 'input[name="name"]', 'Controversial'
     click 'button:contains("Done")'
 
+    waitForModels ['entity']
+
     click 'a:contains("Retailers")'
 
     andThen ->
