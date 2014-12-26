@@ -3,6 +3,7 @@ table
     tr
       th Date
       th Entity
+      th Event
       th Amount
   tbody
     each transaction in model

@@ -11,4 +11,17 @@ TransactionListItem = Ember.Component.extend
     else
       "$#{amount}"
 
+  eventType: Ember.computed 'transaction.event', ->
+    event = @get 'transaction.event'
+
+    if event
+      constructor = event.constructor.toString()
+
+      if constructor.contains "fulfillment"
+        "Fulfillment"
+      else if constructor.contains "contribution"
+        "Contribution"
+      else if constructor.contains "subscription"
+        "Subscription"
+
 `export default TransactionListItem`

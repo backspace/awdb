@@ -46,7 +46,7 @@ Fulfillment = DS.Model.extend
 
   createTransaction: Ember.on 'didCreate', ->
     if @get 'isRetail'
-      transaction = @store.createRecord 'transaction', {amount: @get('cost')*@get('count'), entity: @get('entity')}
+      transaction = @store.createRecord 'transaction', {amount: @get('cost')*@get('count'), entity: @get('entity'), fulfillment: @}
       transaction.save()
 
 `export default Fulfillment`

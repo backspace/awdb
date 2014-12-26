@@ -115,7 +115,11 @@ describe "Acceptance: Manage subscriptions", ->
             viewTransactions()
 
             andThen ->
+              # withinElement 'tr:contains("Cara")', ->
+              #   expectElement 'td', {contains: "$#{rate}"}
+              #   expectElement 'td', {contains: 'Subscription'}
               expectElement 'tr:contains("Cara") td', {contains: "$#{rate}"}
+              expectElement 'tr:contains("Cara") td', {contains: 'Subscription'}
 
               done()
 

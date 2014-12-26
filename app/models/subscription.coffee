@@ -37,7 +37,7 @@ Subscription = DS.Model.extend
       # FIXME assumes only 3 or 6 issues
       cost = settings.get "subscription#{classification.capitalize()}#{@get 'count'}"
 
-      transaction = @store.createRecord 'transaction', {amount: cost, entity: @get('entity')}
+      transaction = @store.createRecord 'transaction', {amount: cost, entity: @get('entity'), subscription: @}
       transaction.save()
 
   end: ->

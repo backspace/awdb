@@ -5,6 +5,13 @@ Transaction = DS.Model.extend
   amount: DS.attr 'number'
   entity: DS.belongsTo 'entity'
 
+  # TODO make actually polymorphic
+  fulfillment: DS.belongsTo 'fulfillment'
+  contribution: DS.belongsTo 'contribution'
+  subscription: DS.belongsTo 'subscription'
+
+  event: Ember.computed.any 'fulfillment', 'contribution', 'subscription'
+
   createdAt: DS.attr 'date', {defaultValue: -> new Date()}
 
   rev: DS.attr 'string'

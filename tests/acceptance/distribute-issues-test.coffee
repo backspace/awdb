@@ -238,8 +238,12 @@ describe "Acceptance: Distribute issues", ->
         viewTransactions()
 
         andThen ->
-          expectElement 'td', {contains: '-$200'}
-          expectElement 'td', {contains: 'Artist'}
+          # TODO fix withinElement, doesn’t reset scope
+          # withinElement 'tr:contains("Artist")', ->
+          #   expectElement 'td', {contains: '-$200'}
+          #   expectElement 'td', {contains: 'Contribution'}
+          expectElement 'tr:contains("Artist") td', {contains: '-$200'}
+          expectElement 'tr:contains("Artist") td', {contains: 'Contribution'}
 
           done()
 
@@ -248,8 +252,11 @@ describe "Acceptance: Distribute issues", ->
         viewTransactions()
 
         andThen ->
-          expectElement 'td', {contains: 'Bookstore'}
-          expectElement 'td', {contains: '$300'}
+          # withinElement 'tr:contains("Bookstore")', ->
+          #   expectElement 'td', {contains: '$300'}
+          #   expectElement 'td', {contains: 'Fulfillment'}
+          expectElement 'tr:contains("Bookstore") td', {contains: '$300'}
+          expectElement 'tr:contains("Bookstore") td', {contains: 'Fulfillment'}
 
           done()
 
