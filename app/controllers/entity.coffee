@@ -9,10 +9,13 @@ EntityController = Ember.ObjectController.extend
 
   actions:
     doneEditing: ->
-      @get('model').save()
-      @set 'isEditing', false
-
-      return @get('model')
+      model = @get('model')
+      if model.get('isNew')
+        model.save().then =>
+          @transitionToRoute 'entity', model
+      else
+        model.save().then =>
+          @set 'isEditing', false
 
     edit: ->
       @set 'isEditing', true

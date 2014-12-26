@@ -6,7 +6,6 @@ EntitiesRoute = Ember.Route.extend
 
   actions:
     createEntity: ->
-      entity = @get('store').createRecord 'entity'
-      @transitionTo('entity', entity)
+      @transitionTo('entities.new')
 
 `export default EntitiesRoute`

@@ -13,7 +13,9 @@ Router.map(function() {
     });
   });
 
-  this.resource('entities');
+  this.resource('entities', function() {
+    this.route('new');
+  });
   this.resource('entity', { path: 'entities/:entity_id' });
 
   this.resource('retailers', function() {
