@@ -1,3 +1,7 @@
+// TODO better way to style container?
+body, body > .ember-view, .everything
+  height: 100%
+
 .everything
   @extend .row
 
@@ -5,11 +9,17 @@ aside
   @extend .small-1
   @extend .column
 
+  height: 100%
+
   padding: 0
 
 nav
   @extend .icon-bar
   @extend .vertical
+  width: 100%
+
+  label
+    display: none
 
 main
   @extend .small-11
