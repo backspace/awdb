@@ -15,8 +15,8 @@ Router.map(function() {
 
   this.resource('entities', function() {
     this.route('new');
+    this.resource('entity', { path: ':entity_id' });
   });
-  this.resource('entity', { path: 'entities/:entity_id' });
 
   this.resource('retailers', function() {
     this.route('new');

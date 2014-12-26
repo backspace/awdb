@@ -1,6 +1,6 @@
 `import Ember from 'ember'`
 
-EntitiesIndexController = Ember.ArrayController.extend
+EntitiesController = Ember.ArrayController.extend
   subscribers: Ember.computed.filterBy('model', 'isSubscribed')
   formerSubscribers: Ember.computed.filterBy('model', 'isFormerSubscriber')
 
@@ -19,4 +19,4 @@ EntitiesIndexController = Ember.ArrayController.extend
       $("body").append("<iframe>")
       $('iframe').attr('src', doc.output('datauristring')).height(352).width(396)
 
-`export default EntitiesIndexController`
+`export default EntitiesController`
