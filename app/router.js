@@ -20,8 +20,8 @@ Router.map(function() {
 
   this.resource('retailers', function() {
     this.route('new');
+    this.resource('retailer', {path: ':retailer_id'});
   });
-  this.resource('retailer', {path: 'retailers/:retailer_id'});
 
   this.route('distribution', { path: 'distributions/:distribution_id' });
 
