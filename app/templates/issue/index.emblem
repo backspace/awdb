@@ -11,13 +11,14 @@ else
   br
   =link-to 'issue.distribute' | Distribute
 
-h4 Features:
-ul
-  each feature in features
-    =feature-list-item feature=feature entities=entities save="saveFeature"
-  =feature-list-item feature=newFeature save="saveFeature" entities=entities
+unless isNew
+  h4 Features:
+  ul
+    each feature in features
+      =feature-list-item feature=feature entities=entities save="saveFeature"
+    =feature-list-item feature=newFeature save="saveFeature" entities=entities
 
-h4 Distributions:
-ul.distributions
-  each distribution in distributions
-    li: link-to 'distribution' distribution: distribution.createdAt
+  h4 Distributions:
+  ul.distributions
+    each distribution in distributions
+      li: link-to 'distribution' distribution: distribution.createdAt
