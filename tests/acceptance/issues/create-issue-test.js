@@ -23,6 +23,11 @@ describe('Acceptance: Create issue', function() {
     viewIssues();
 
     click('button:contains("New issue")');
+
+    andThen(function() {
+      expect(find('input[type="number"]').val()).to.equal('1')
+    });
+
     fillIn('input[name="title"]', 'Bananas are better');
     click('button:contains("Done")');
 
@@ -31,6 +36,31 @@ describe('Acceptance: Create issue', function() {
     andThen(function() {
       expectElement('li', {contains: 'Bananas are better'});
       done();
+    });
+  });
+
+  describe('when an issue already exists', function() {
+    var existingIssueNumber = 3;
+
+    beforeEach(function(done) {
+      viewIssues();
+      click('button:contains("New issue")');
+      fillIn('input[name=number]', existingIssueNumber);
+      click('button:contains("Done")');
+
+      andThen(function() {
+        done();
+      });
+    });
+
+    it('auto-fills the next issue number', function(done) {
+      viewIssues();
+      click('button:contains("New issue")');
+
+      andThen(function() {
+        expect(find('input[type=number]').val()).to.equal(existingIssueNumber + 1 + '');
+        done();
+      });
     });
   });
 });
