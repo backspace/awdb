@@ -25,7 +25,7 @@ describe('Acceptance: Create issue', function() {
     click('button:contains("New issue")');
 
     andThen(function() {
-      expect(find('input[type="number"]').val()).to.equal('1')
+      expect(find('input[type="number"]').val()).to.equal('1');
     });
 
     fillIn('input[name="title"]', 'Bananas are better');
