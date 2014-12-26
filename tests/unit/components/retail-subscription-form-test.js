@@ -4,6 +4,7 @@ import {
   it
 } from 'ember-mocha';
 
+import Ember from 'ember';
 import startApp from '../../helpers/start-app';
 
 describeComponent(
@@ -29,21 +30,32 @@ describeComponent(
         startApp();
       });
 
-      it('relays the save action', function(done) {
+      it('prevents saving when the subscription is incomplete', function() {
         var component = this.subject();
         var $component = this.render();
 
-        var target = {
-          externalAction: function() {
-            expect(true).to.be.ok;
-            done();
-          }
-        };
+        expectElement('button[disabled]');
+      });
 
-        component.set('save', 'externalAction');
-        component.set('targetObject', target);
+      describe('when the subscription is complete', function() {
+        var subscription = Ember.Object.create({copies: 3, cost: 3});
 
-        click('button');
+        it('relays the save action', function(done) {
+          var component = this.subject({subscription: subscription});
+          var $component = this.render();
+
+          var target = {
+            externalAction: function() {
+              expect(true).to.be.ok;
+              done();
+            }
+          };
+
+          component.set('save', 'externalAction');
+          component.set('targetObject', target);
+
+          click('button');
+        });
       });
     });
   }

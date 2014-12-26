@@ -36,9 +36,14 @@ describe 'Acceptance: Manage retail subscriptions', ->
       done()
 
   describe 'when a retailer subscribes', ->
+    cost = '50'
+    copies = '100'
+
     beforeEach (done) ->
       viewRetailer 'Chapters'
 
+      fillIn 'input[name=cost]', cost
+      fillIn 'input[name=copies]', copies
       click 'button:contains("Create subscription")'
 
       waitForModels ['entity', 'subscription', 'transaction']
@@ -52,6 +57,8 @@ describe 'Acceptance: Manage retail subscriptions', ->
       andThen ->
         expectElement '.js-active-retailers li'
         expectElement '.js-active-retailers li', {contains: 'Chapters'}
+        expectElement '.js-active-retailers li:contains("Chapters")', {contains: cost}
+        expectElement '.js-active-retailers li:contains("Chapters")', {contains: copies}
 
         done()
 

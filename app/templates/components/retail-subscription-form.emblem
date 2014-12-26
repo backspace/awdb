@@ -1,1 +1,7 @@
-button click='save' Create subscription
+label
+  | Cost per issue
+  =input type='number' name="cost" value=subscription.cost
+label
+  | Copies per delivery
+  =input type='number' name="copies" value=subscription.copies
+button click='save' disabled=isIncomplete Create subscription
