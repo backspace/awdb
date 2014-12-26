@@ -1,3 +1,5 @@
+$list-background: #eee
+
 // TODO better way to style container?
 body, body > .ember-view, .everything
   height: 100%
@@ -24,3 +26,19 @@ nav
 main
   @extend .small-11
   @extend .columns
+  height: 100%
+
+.list-and-details
+  @extend .row
+  height: 100%
+
+  .list
+    @extend .small-4
+    @extend .columns
+    height: 100%
+
+    background-color: $list-background
+
+  .details
+    @extend .small-8
+    @extend .columns
