@@ -235,7 +235,7 @@ describe "Acceptance: Distribute issues", ->
           done()
 
       it 'created a transaction for contributor compensation', (done) ->
-        click 'a:contains("Transactions")'
+        viewTransactions()
 
         andThen ->
           expectElement 'td', {contains: '-$200'}

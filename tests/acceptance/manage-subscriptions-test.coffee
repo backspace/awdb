@@ -112,7 +112,7 @@ describe "Acceptance: Manage subscriptions", ->
               done()
 
           it "results in a subscription transaction for $#{rate}", (done) ->
-            click 'a:contains("Transactions")'
+            viewTransactions()
 
             andThen ->
               expectElement 'tr:contains("Cara") td', {contains: "$#{rate}"}
@@ -169,7 +169,7 @@ describe "Acceptance: Manage subscriptions", ->
                   done()
 
               it "results in a subscription transaction for the new rate", (done) ->
-                click 'a:contains("Transactions")'
+                viewTransactions()
 
                 andThen ->
                   expectElement 'tr:contains("Cara") td', {contains: "$#{cost}"}
