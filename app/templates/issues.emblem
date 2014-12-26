@@ -1,6 +1,6 @@
 .list-and-details
   section.list
-    h2 Issues:
+    h2 Issues
 
     ul.side-nav
       each issue in controller
