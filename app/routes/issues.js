@@ -7,8 +7,7 @@ export default Ember.Route.extend({
 
   actions: {
     createIssue: function() {
-      var newIssue = this.get('store').createRecord('issue');
-      this.transitionTo('issue', newIssue.save());
+      this.transitionTo('issues.new');
     }
   }
 });

@@ -3,6 +3,13 @@
 IssueIndexController = Ember.ObjectController.extend
   isEditing: false
 
+  handleNewRecord: Ember.observer 'model.isNew', ->
+    if @get('model.isNew')
+      @set 'wasNew', true
+      @set 'isEditing', true
+    else if @get('wasNew')
+      @transitionToRoute 'issue.index', @get('model')
+
   newFeature: Ember.computed '', (key, value) ->
     newFeature = @store.createRecord 'feature'
 
@@ -12,6 +19,13 @@ IssueIndexController = Ember.ObjectController.extend
     newFeature
 
   actions:
+    edit: ->
+      @set 'isEditing', true
+
+    doneEditing: ->
+      @get('model').save().then =>
+        @set 'isEditing', false
+
     saveFeature: (context) ->
       promise = context.promise
       feature = context.feature

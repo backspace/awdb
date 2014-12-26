@@ -7,6 +7,7 @@ var Router = Ember.Router.extend({
 
 Router.map(function() {
   this.resource('issues', function() {
+    this.route('new');
     this.resource('issue', { path: ':issue_id' }, function() {
       this.route('distribute');
     });
