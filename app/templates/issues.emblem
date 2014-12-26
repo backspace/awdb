@@ -1,1 +1,10 @@
-outlet
+.list-and-details
+  section.list
+    h2 Issues:
+
+    ul.side-nav
+      each issue in controller
+        li: link-to 'issue' issue: issue.title
+    button click='createIssue' New issue
+  section.details
+    outlet
