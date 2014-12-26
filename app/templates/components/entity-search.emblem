@@ -7,4 +7,10 @@ ul.results.fa-ul
         fa-icon 'plus'
   else
     if search
-      | No results!
+      if supportCreation
+        =entity-list-item entity=newEntity
+          button.tiny.round click="createEntity newEntity"
+            fa-icon 'plus'
+            | Create and add as contributor
+      else
+        | No results!

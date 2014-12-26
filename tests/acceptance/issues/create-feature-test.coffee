@@ -43,3 +43,26 @@ describe "Acceptance: Create issue feature", ->
       expectElement 'li', {contains: 'Like this one: Alice, Bob'}
 
       done()
+
+  it 'supports creating a new entity via a contribution', (done) ->
+    viewIssue 'Full of features'
+
+    fillIn 'input[name=title]', 'Welcome'
+    fillIn 'input[type=search]', 'Francine'
+    click 'li:contains("Francine") .fa-plus'
+
+    click 'i.fa-check'
+
+    waitForModels ['feature', 'entity']
+
+    viewIssue 'Full of features'
+
+    andThen ->
+      expectElement 'li', {contains: 'Welcome: Francine'}
+
+    viewEntities()
+
+    andThen ->
+      expectElement 'li', {contains: 'Francine'}
+
+      done()

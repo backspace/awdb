@@ -62,6 +62,16 @@ FeatureListItem = Ember.Component.extend
     addContributor: (contributor) ->
       @set 'newContribution.entity.id', contributor.id
 
+    addNewContributor: (pseudoEntity) ->
+      defer = Ember.RSVP.defer()
+      defer.promise.then (entity) =>
+        this.send('addContributor',entity)
+
+      # TODO surely a better way to get Ember.Object attributes
+      @sendAction 'createEntity',
+        promise: defer
+        attributes: JSON.parse(JSON.stringify(pseudoEntity))
+
     removeContribution: (contribution) ->
       feature = @get('feature')
       feature.removeContribution(contribution)

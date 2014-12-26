@@ -57,4 +57,14 @@ IssueIndexController = Ember.ObjectController.extend
           feature.save().then ->
             promise.resolve()
 
+    createEntity: (promiseAndAttributes) ->
+      promise = promiseAndAttributes.promise
+      attributes = promiseAndAttributes.attributes
+
+      entity = @store.createRecord 'entity', attributes
+
+      entity.save().then ->
+        promise.resolve(entity)
+
+
 `export default IssueIndexController`

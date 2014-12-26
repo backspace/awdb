@@ -13,8 +13,14 @@ EntitySearch = Ember.Component.extend
     else
       []
 
+  newEntity: Ember.computed 'search', ->
+    Ember.Object.create
+      name: @get 'search'
+
   actions:
     addEntity: (entity) ->
       @sendAction 'addEntity', entity
+    createEntity: (promiseAndAttributes) ->
+      @sendAction 'createEntity', promiseAndAttributes
 
 `export default EntitySearch`
