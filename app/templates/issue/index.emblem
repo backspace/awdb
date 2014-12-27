@@ -5,11 +5,11 @@ if isEditing
   label
     | Number
     =input type='number' name='number' value=number
-  button click='doneEditing' Done
+  button.js-save click='doneEditing' Done
 else
   button click='edit' Edit
   br
-  =link-to 'issue.distribute' | Distribute
+  =link-to 'issue.distribute' class="js-build-distribution" | Distribute
 
 unless isNew
   h4 Features:

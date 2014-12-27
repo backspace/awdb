@@ -3,7 +3,7 @@ if isEditing
     .small-10.columns
       =input type='text' name='title' value=feature.title placeholder=placeholder
     .small-1.column
-      button.postfix click=save
+      button.js-save.postfix click=save
         fa-icon 'check'
     unless isNew
       .small-1.column
