@@ -26,9 +26,9 @@ describe "Acceptance: Manage retailers", ->
     viewRetailers()
 
     andThen ->
-      expectElement '.js-retailers li', {contains: 'Awesomeness'}
-      expectElement '.js-retailers li', {contains: 'Bodaciousness'}
-      expectElement '.js-retailers li', 2
+      expectElement 'li', {contains: 'Awesomeness'}
+      expectElement 'li', {contains: 'Bodaciousness'}
+      expectElement 'li:not(.heading)', 2
 
       done()
 
@@ -53,7 +53,7 @@ describe "Acceptance: Manage retailers", ->
     click 'a:contains("Retailers")'
 
     andThen ->
-      expectElement '.js-retailers li', {contains: 'Controversial'}
+      expectElement 'li', {contains: 'Controversial'}
 
       done()
 
@@ -67,5 +67,5 @@ describe "Acceptance: Manage retailers", ->
     click 'a:contains("Retailers")'
 
     andThen ->
-      expectElement '.js-retailers li', {contains: 'Better'}
+      expectElement 'li', {contains: 'Better'}
       done()

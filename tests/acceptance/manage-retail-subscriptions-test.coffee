@@ -28,7 +28,7 @@ describe 'Acceptance: Manage retail subscriptions', ->
     viewRetailers()
 
     andThen ->
-      expectNoElement '.js-active-retailers li'
+      expectNoElement '.js-active-retailers li:not(.heading)'
 
       expectElement '.js-inactive-retailers li', {contains: 'Mondragón'}
       expectElement '.js-inactive-retailers li', {contains: 'Chapters'}
@@ -55,7 +55,7 @@ describe 'Acceptance: Manage retail subscriptions', ->
       viewRetailers()
 
       andThen ->
-        expectElement '.js-active-retailers li'
+        expectElement '.js-active-retailers li:not(.heading)'
         expectElement '.js-active-retailers li', {contains: 'Chapters'}
         expectElement '.js-active-retailers li:contains("Chapters")', {contains: cost}
         expectElement '.js-active-retailers li:contains("Chapters")', {contains: copies}
