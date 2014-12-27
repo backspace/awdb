@@ -2,5 +2,5 @@ h2 Distribution of issue {{issue.title}}
 ul
   each fulfillment in fulfillments
     with fulfillment.entity as entity
-      entity-list-item entity=entity
+      entity-list-item entity=entity nameOverride=fulfillment.name
         p=fulfillment.address

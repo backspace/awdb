@@ -10,17 +10,20 @@ Fulfillment = DS.Model.extend
 
   distribution: DS.belongsTo 'distribution'
 
+  name: DS.attr 'string'
   address: DS.attr 'string'
 
   count: DS.attr 'number', {defaultValue: 1}
 
-  addressPopulator: Ember.observer 'entity.id', ->
+  # TODO must be a better way to copy name and address
+  nameAndAddressPopulator: Ember.observer 'entity.id', ->
     return unless @get('isNew')
 
     newEntityID = @get 'entity.id'
 
     if @oldEntityID != newEntityID
       entity = @get 'entity'
+      @set 'name', entity.get('name') if entity?
       @set 'address', entity.get('address') if entity?
 
       @oldEntityID = newEntityID

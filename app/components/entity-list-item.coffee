@@ -13,6 +13,11 @@ EntityListItem = Ember.Component.extend
     if @get 'warning'
       @get 'warningText'
 
+  name: Ember.computed 'entity.name', 'nameOverride', ->
+    override = @get('nameOverride')
+
+    if override? then override else @get('entity.name')
+
   icon: Ember.computed 'entity.isRetailer', 'entity.isInstitution', ->
     entity = @get 'entity'
 
