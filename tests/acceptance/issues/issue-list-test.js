@@ -27,8 +27,7 @@ describe('Acceptance: Issue list', function() {
   });
 
   afterEach(function(done) {
-    Ember.run(App, 'destroy');
-    Ember.run(done);
+    endAcceptanceTest(done);
   });
 
   it('lists issues', function(done) {

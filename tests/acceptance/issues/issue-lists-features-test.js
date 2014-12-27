@@ -45,8 +45,7 @@ describe('Acceptance: Issue lists features', function() {
   });
 
   afterEach(function(done) {
-    Ember.run(App, 'destroy');
-    Ember.run(done);
+    endAcceptanceTest(done);
   });
 
   it('lists the features in an issue', function(done) {

@@ -58,8 +58,7 @@ describe "Acceptance: Manage subscriptions", ->
         )
 
   afterEach (done) ->
-    Ember.run(App, 'destroy')
-    Ember.run(done)
+    endAcceptanceTest(done)
 
   it 'shows issues remaining', (done) ->
     viewEntity 'Alice'

@@ -28,11 +28,7 @@ describe "Acceptance: Edit issue feature", ->
                   done()
 
   afterEach (done) ->
-    waitForModels ['entity', 'feature']
-
-    andThen ->
-      Ember.run(App, 'destroy')
-      Ember.run(done)
+    endAcceptanceTest(done)
 
   describe 'when the feature name is changed', ->
     beforeEach (done) ->

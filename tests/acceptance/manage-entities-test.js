@@ -24,8 +24,7 @@ describe('Acceptance: Manage entities', function() {
   });
 
   afterEach(function(done) {
-    Ember.run(App, 'destroy');
-    Ember.run(done);
+    endAcceptanceTest(done);
   });
 
   it('lists the entities', function(done) {

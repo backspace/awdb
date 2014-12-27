@@ -1,4 +1,9 @@
+/* global require */
+/* global waitForModels */
+
 import Ember from 'ember';
+
+import config from '../../config/environment';
 
 // Thanks to rsutphin
 // https://gist.github.com/rsutphin/73fdad14a24884eee336
@@ -48,5 +53,18 @@ export default function() {
     Ember.Test.registerWaiter(context, waiter);
 
     return wait();
+  });
+
+  Ember.Test.registerAsyncHelper('waitForAllModels', function(app, typeNames) {
+    // Find all model names from https://stackoverflow.com/questions/25124980/ember-js-get-all-model-names
+    var modulePrefix = config.modulePrefix;
+    var models = Object.keys(require._eak_seen).filter(function(module) {
+      return module.indexOf(modulePrefix + '/models/') === 0;
+    }).map(function(fullName) {
+      var split = fullName.split('/');
+      return split[split.length - 1];
+    });
+
+    return waitForModels(models);
   });
 }

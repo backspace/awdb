@@ -19,8 +19,7 @@ describe('Acceptance: Edit an issue', function () {
   });
 
   afterEach(function(done) {
-    Ember.run(App, 'destroy');
-    Ember.run(done);
+    endAcceptanceTest(done);
   });
 
   it('saves an edited issue', function(done) {

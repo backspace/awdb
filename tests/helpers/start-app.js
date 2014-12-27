@@ -22,6 +22,15 @@ export default function startApp(attrs) {
     registerWaitForModels();
     registerHighLevelHelpers();
 
+    Ember.Test.registerAsyncHelper('endAcceptanceTest', function(app, done) {
+      waitForAllModels();
+
+      andThen(function() {
+        Ember.run(app, 'destroy');
+        Ember.run(done);
+      });
+    });
+
     application.injectTestHelpers();
   });
 

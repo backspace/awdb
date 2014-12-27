@@ -21,8 +21,7 @@ describe "Acceptance: Create issue feature", ->
           done()
 
   afterEach (done) ->
-    Ember.run(App, 'destroy')
-    Ember.run(done)
+    endAcceptanceTest(done)
 
   it 'shows the new feature', (done) ->
     viewIssue 'Full of features'

@@ -18,11 +18,7 @@ describe 'Acceptance: Manage retail subscriptions', ->
           done()
 
   afterEach (done) ->
-    waitForModels ['subscription', 'entity']
-
-    andThen ->
-      Ember.run(application, 'destroy')
-      Ember.run(done)
+    endAcceptanceTest(done)
 
   it 'shows no retail subscriptions', (done) ->
     viewRetailers()

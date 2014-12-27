@@ -19,8 +19,7 @@ describe "Acceptance: Manage retailers", ->
           done()
 
   afterEach (done) ->
-    Ember.run(application, 'destroy')
-    Ember.run(done)
+    endAcceptanceTest(done)
 
   it 'lists only the retailers', (done) ->
     viewRetailers()

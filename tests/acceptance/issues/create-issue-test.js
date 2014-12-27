@@ -15,8 +15,7 @@ describe('Acceptance: Create issue', function() {
   });
 
   afterEach(function(done) {
-    Ember.run(App, 'destroy');
-    Ember.run(done);
+    endAcceptanceTest(done);
   });
 
   it('lets the user create a new issue', function(done) {

@@ -69,12 +69,7 @@ describe "Acceptance: Distribute issues", ->
         )
 
   afterEach (done) ->
-    # TODO generalise for all acceptance test teardown?
-    waitForModels ['feature']
-
-    andThen ->
-      Ember.run(App, 'destroy')
-      Ember.run(done)
+    endAcceptanceTest(done)
 
   describe 'with a new issue', (done) ->
     beforeEach (done) ->
