@@ -73,10 +73,26 @@ describeComponent(
 
           expectElement('input[name=cost][disabled]');
           expectElement('input[name=copies][disabled]');
-          expectNoElement('button');
 
           expect(find('input[name=cost]').val()).to.equal('40');
           expect(find('input[name=copies]').val()).to.equal('5');
+        });
+
+        it('relays the end action', function(done) {
+          var component = this.subject({subscription: subscription});
+          var $component = this.render();
+
+          var target = {
+            externalAction: function() {
+              expect(true).to.be.ok;
+              done();
+            }
+          };
+
+          component.set('end', 'externalAction');
+          component.set('targetObject', target);
+
+          click('button');
         });
       });
     });

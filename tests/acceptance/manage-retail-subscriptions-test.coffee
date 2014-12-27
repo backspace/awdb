@@ -90,7 +90,7 @@ describe 'Acceptance: Manage retail subscriptions', ->
       beforeEach (done) ->
         viewRetailer 'Chapters'
 
-        click 'button:contains("End subscription")'
+        click 'button.js-unsubscribe'
 
         waitForModels ['entity', 'subscription']
 

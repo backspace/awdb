@@ -11,9 +11,12 @@ fieldset
     label.small-5.columns
       | Copies per delivery
       =input type='number' name="copies" value=subscription.copies disabled=isPersisted
-    unless isPersisted
-      label.small-2.columns
-        | &nbsp;
+    label.small-2.columns
+      | &nbsp;
+      if isPersisted
+        button.alert.postfix.js-unsubscribe click='end'
+          fa-icon 'ban'
+      else
         button.postfix.js-subscribe click='save' disabled=isIncomplete class=isIncomplete:secondary
           if isIncomplete
             fa-icon 'ellipsis-h'
