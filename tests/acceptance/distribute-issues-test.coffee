@@ -282,6 +282,17 @@ describe "Acceptance: Distribute issues", ->
 
       done()
 
+  it 'will not distribute when there are no recipients', (done) ->
+    viewIssue 'Apples'
+    click 'a:contains("Distribute")'
+
+    click '.js-delete'
+
+    andThen ->
+      expectElement '.js-distribute[disabled]'
+
+      done()
+
   describe 'when there is another subscriber', (done) ->
     beforeEach (done) ->
       viewEntity 'Cara'

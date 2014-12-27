@@ -9,6 +9,7 @@ IssueDistributeController = Ember.ObjectController.extend
   entities: Ember.computed.alias 'controllers.issue.entities'
   subscribers: Ember.computed.filterBy('entities', 'isSubscribed')
 
+  hasNoFulfillments: Ember.computed.empty 'model.proposedFulfillments'
   fulfillmentAddresses: Ember.computed.mapBy 'model.proposedFulfillments', 'entity.address'
   allFulfillmentsHaveAddresses: Ember.computed 'fulfillmentAddresses.@each', ->
     Ember.isEmpty(@get('fulfillmentAddresses').filter (address) ->
@@ -16,7 +17,7 @@ IssueDistributeController = Ember.ObjectController.extend
     )
   hasMissingAddresses: Ember.computed.not 'allFulfillmentsHaveAddresses'
 
-  isIncomplete: Ember.computed.any 'hasMissingAddresses'
+  isIncomplete: Ember.computed.any 'hasNoFulfillments', 'hasMissingAddresses'
 
   addSuggestedFulfillmentsToDistribution: (distribution) ->
     return unless distribution?
