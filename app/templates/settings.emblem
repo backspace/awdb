@@ -5,6 +5,13 @@ else
   =input type='text' value=url
   button click='replicate' Replicate
 
+if isReplacing
+  fa-icon 'circle-o-notch' spin=true size="lg"
+else
+  h2 Replace this database
+  =input type='text' value=replacementUrl
+  button click='replace' Replace
+
 .row
   .small-12.medium-8.columns
     h2 Subscription costs

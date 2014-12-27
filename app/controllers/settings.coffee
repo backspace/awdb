@@ -13,6 +13,16 @@ SettingsController = Ember.ObjectController.extend
     cookie.getCookie 'replication-url'
   )
 
+  replacementUrl: Ember.computed('', (key, value, previousValue) ->
+    cookie = @get 'cookie'
+
+    # setter
+    if arguments.length > 1
+      cookie.setCookie 'replacement-url', value
+
+    cookie.getCookie 'replacement-url'
+  )
+
   actions:
     replicate: ->
       pouch = @container.lookup 'pouch:main'
@@ -25,6 +35,27 @@ SettingsController = Ember.ObjectController.extend
         alert "There was an error! Obscure error message: #{JSON.stringify(info)}"
         @set 'isReplicating', false
       )
+
+    replace: ->
+      if confirm("Are you sure you want to erase the current database and replace it with the one at #{@get('replacementUrl')}?")
+        @set 'isReplacing', true
+
+        pouch = @container.lookup 'pouch:main'
+        databaseName = pouch._db_name
+
+        replacementName = @get('replacementUrl')
+
+        pouch.destroy().then =>
+          new PouchDB(databaseName).then (newPouch) =>
+            pouch = newPouch
+            pouch.replicate.from(replacementName).on('complete', =>
+              console.log "??"
+              @set 'isReplacing', false
+              document.location.reload()
+            ).on('error', (info) =>
+              alert "Error: #{JSON.stringify(info)}"
+            )
+      else
 
     save: (callback) ->
       promise = @get('model').save()
