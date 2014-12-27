@@ -1,4 +1,4 @@
-button click='distribute' Distribute to #{proposedFulfillments.length} recipients
+button.js-distribute click='distribute' disabled=isIncomplete class=isIncomplete:secondary Distribute to #{proposedFulfillments.length} recipients
 
 div.js-recipients
   div.js-subscriptions

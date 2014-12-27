@@ -21,8 +21,9 @@ describe "Acceptance: Distribute issues", ->
           bookstore: store.createRecord('entity', {name: 'Bookstore', address: 'Bookstore address', isRetailer: true}).save()
           dépanneur: store.createRecord('entity', {name: 'Dépanneur', address: 'Dépanneur address', isRetailer: true}).save()
 
-          artist: store.createRecord('entity', {name: 'Artist'}).save()
-          extra: store.createRecord('entity', {name: 'Extra'}).save()
+          artist: store.createRecord('entity', {name: 'Artist', address: 'Artist address'}).save()
+          extra: store.createRecord('entity', {name: 'Extra', address: 'Extra address'}).save()
+          addressless: store.createRecord('entity', {name: 'Addressless'}).save()
 
           apples: store.createRecord('issue', {title: 'Apples are amazing'}).save()
 
@@ -112,18 +113,32 @@ describe "Acceptance: Distribute issues", ->
 
         done()
 
-    describe 'having an additional recipient', ->
+    describe 'having an additional recipient with no address', ->
       beforeEach (done) ->
-        fillIn 'input[type="search"]', 'ext'
-        click 'li:contains("Extra") .fa-plus'
+        fillIn 'input[type="search"]', 'Addressless'
+        click 'li:contains("Addressless") .fa-plus'
 
         andThen ->
           done()
 
       it 'the new recipient is listed', (done) ->
         andThen ->
-          expectElement '.js-extras li', {contains: 'Extra'}
+          expectElement '.js-extras li', {contains: 'Addressless'}
 
+          done()
+
+      it 'will not distribute because the recipient has no address', (done) ->
+        andThen ->
+          expectElement 'button.js-distribute[disabled]'
+
+          done()
+
+    describe 'having an additional recipient who has an address', ->
+      beforeEach (done) ->
+        fillIn 'input[type="search"]', 'ext'
+        click 'li:contains("Extra") .fa-plus'
+
+        andThen ->
           done()
 
       describe 'when it is distributed', ->
