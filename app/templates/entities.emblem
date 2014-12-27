@@ -3,7 +3,7 @@
     h2 Entities
     // TODO componentise to avoid having to know about fa-ul?
     ul.fa-ul.side-nav
-      each entity in model
+      each entity in persistedEntities
         =entity-list-item entity=entity
     button click='createEntity' New entity
 
