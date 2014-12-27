@@ -2,12 +2,14 @@ fieldset
   legend
     | Create a subscription
   .row
-    label.small-2.columns
-      =radio-button name='3' value='3' groupValue=subscription.count
-      | 3 issues
-    label.small-2.columns
-      =radio-button name='6' value='6' groupValue=subscription.count
-      | 6 issues
+    div.small-4.columns
+      label Number of issues
+      label.inline-radio for='count3'
+        =radio-button name='3' value='3' id='count3' groupValue=subscription.count
+        | &nbsp; 3
+      label.inline-radio for='count6'
+        =radio-button name='6' value='6' id='count6' groupValue=subscription.count
+        | &nbsp; 6
     label.small-6.columns
       | Cost
       =input type="number" name="cost" value=subscription.cost
