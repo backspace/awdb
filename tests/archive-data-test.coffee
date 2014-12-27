@@ -73,6 +73,11 @@ describe.skip 'Archive test data', ->
       classification: 'Institution'
 
     createEntity
+      name: 'Caterpillar'
+      address: "A branch"
+      classification: 'International'
+
+    createEntity
       name: 'Giftee'
       address: '42 Emerson Ave.\nWinnipeg, MB  R2F 9P9\nCanada'
       classification: 'Canada'
@@ -104,6 +109,9 @@ describe.skip 'Archive test data', ->
       count: 6
       cost: 10000
 
+    createEntitySubscription
+      name: 'Caterpillar'
+      count: 6
 
 
     createIssue = (attributes) ->
@@ -170,6 +178,16 @@ describe.skip 'Archive test data', ->
 
     distributeIssue
       title: 'Bananas'
+
+    # Change a name and address
+
+    viewEntity 'Caterpillar'
+    click '.js-edit'
+    fillIn 'input[name=name]', 'Butterfly'
+    fillIn 'textarea[name=address]', 'I was in the air'
+    click '.js-save'
+
+    waitForModels ['entity']
 
     distributeIssue
       title: 'Coconuts'
