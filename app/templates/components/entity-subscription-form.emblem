@@ -9,6 +9,7 @@ fieldset
       =radio-button name='6' value='6' groupValue=subscription.count
       | 6 issues
     label.small-6.columns
+      | Cost
       =input type="number" name="cost" value=subscription.cost
     label.small-2.columns
       | &nbsp;
