@@ -5,6 +5,7 @@ EntitiesController = Ember.ArrayController.extend
   formerSubscribers: Ember.computed.filterBy('persistedEntities', 'isFormerSubscriber')
   neverSubscribers: Ember.computed.filterBy('persistedEntities', 'isNeverSubscriber')
 
-  persistedEntities: Ember.computed.filterBy 'model', 'isNew', false
+  nonRetailers: Ember.computed.filterBy 'model', 'isRetailer', false
+  persistedEntities: Ember.computed.filterBy 'nonRetailers', 'isNew', false
 
 `export default EntitiesController`
