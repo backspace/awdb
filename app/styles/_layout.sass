@@ -4,13 +4,17 @@ $list-background: #eee
 body, body > .ember-view, .everything
   height: 100%
 
+body > .ember-view
+  display: flex
+  flex-direction: column
+
 .everything
-  @extend .row
+  display: flex
+  flex: 1
 
 aside
-  @extend .small-1
-  @extend .column
-
+  display: flex
+  flex: 0 0 5rem
   height: 100%
 
   padding: 0
@@ -24,24 +28,21 @@ nav
     display: none
 
 main
-  @extend .small-11
-  @extend .columns
+  flex: 1
   height: 100%
 
 .list-and-details
-  @extend .row
+  display: flex
   height: 100%
 
   .list
-    @extend .small-4
-    @extend .columns
+    flex: 0 0 15rem
     height: 100%
     overflow-y: scroll
 
     background-color: $list-background
 
   .details
-    @extend .small-8
-    @extend .columns
+    flex: 1
     height: 100%
     overflow-y: scroll
