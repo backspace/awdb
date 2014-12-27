@@ -13,3 +13,38 @@ ul.side-nav
 label.inline-radio
   display: inline
   margin-right: 1rem
+
+.fulfillment-list
+  list-style-type: none
+  margin: 0.5rem 0 1rem 0.5rem
+
+  li
+    float: left
+    margin-right: 0.5rem
+    padding: 0.25rem 0.5rem
+
+    background: #eee
+
+    zoom: 0.75
+
+    .deleter
+      padding-left: 0.5rem
+      cursor: pointer
+
+      color: #ccc
+      transition: color 100ms ease-out
+
+    i
+      padding-right: 0.5rem
+
+    &:hover
+      .deleter
+        color: black
+
+  &:after
+    visibility: hidden
+    display: block
+    font-size: 0
+    content: ' '
+    clear: both
+    height: 0

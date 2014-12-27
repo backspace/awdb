@@ -24,4 +24,6 @@ EntityListItem = Ember.Component.extend
     else
       'entity'
 
+  listItemIcon: Ember.computed.none 'inlineIcon'
+
 `export default EntityListItem`

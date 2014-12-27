@@ -96,13 +96,13 @@ describe "Acceptance: Distribute issues", ->
 
     it 'the proposed distribution lists active subscribers and contributors as recipients', (done) ->
       andThen ->
-        expectElement '.subscriptions li', {contains: 'Alice'}
-        expectElement '.subscriptions li', {contains: 'Bob'}
+        expectElement '.js-subscriptions li', {contains: 'Alice'}
+        expectElement '.js-subscriptions li', {contains: 'Bob'}
 
-        expectElement '.retailSubscriptions li', {contains: 'Bookstore'}
-        expectElement 'li li:contains("Bookstore")', {contains: '30 @ $10/each'}
+        expectElement '.js-retail-subscriptions li', {contains: 'Bookstore'}
+        expectElement '.js-retail-subscriptions li:contains("Bookstore")', {contains: '30 @ $10/each'}
 
-        expectElement '.contributions li', {contains: 'Artist'}
+        expectElement '.js-contributions li', {contains: 'Artist'}
 
         done()
 
@@ -122,7 +122,7 @@ describe "Acceptance: Distribute issues", ->
 
       it 'the new recipient is listed', (done) ->
         andThen ->
-          expectElement '.extras li', {contains: 'Extra'}
+          expectElement '.js-extras li', {contains: 'Extra'}
 
           done()
 
@@ -261,9 +261,9 @@ describe "Acceptance: Distribute issues", ->
     click 'a:contains("Distribute")'
 
     andThen ->
-      expectNoElement '.recipients li', {contains: 'Alice'}
-      expectNoElement '.recipients li', {contains: 'Bookstore'}
-      expectElement '.subscriptions li', {contains: 'Bob'}
+      expectNoElement '.js-recipients li', {contains: 'Alice'}
+      expectNoElement '.js-recipients li', {contains: 'Bookstore'}
+      expectElement '.js-subscriptions li', {contains: 'Bob'}
 
       done()
 
@@ -284,7 +284,7 @@ describe "Acceptance: Distribute issues", ->
         viewIssue 'Apples'
         click 'a:contains("Distribute")'
 
-        click 'li.subscriptions li:contains("Cara") .fa-trash'
+        click '.js-subscriptions li:contains("Cara") .js-delete'
 
         click 'button:contains("Distribute")'
 

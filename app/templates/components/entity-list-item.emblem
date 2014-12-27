@@ -1,4 +1,4 @@
-=fa-icon icon listItem=true
+=fa-icon icon listItem=listItemIcon
 if entity.id
   link-to route entity boundActive=active: entity.name
 else

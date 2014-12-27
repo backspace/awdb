@@ -1,9 +1,8 @@
 each fulfillment in fulfillments
   with fulfillment.entity as entity
-    entity-list-item entity=entity
+    entity-list-item entity=entity inlineIcon=true
       if fulfillment.isRetail
         | × #{fulfillment.count} @ $#{fulfillment.cost}/each
-      button.alert.tiny.round click="deleteFulfillment fulfillment"
-        fa-icon 'trash'
+      span.deleter.js-delete click="deleteFulfillment fulfillment" ×
 else
-  li None
+  | None

@@ -2,7 +2,7 @@
 
 FulfillmentList = Ember.Component.extend
   tagName: 'ul'
-  classNames: ['fa-ul']
+  classNames: ['fa-ul', 'fulfillment-list']
 
   actions:
     deleteFulfillment: (fulfillment) ->

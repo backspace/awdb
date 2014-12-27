@@ -1,16 +1,16 @@
 button click='distribute' Distribute to #{proposedFulfillments.length} recipients
 
-ul.recipients
-  li.subscriptions
+div.js-recipients
+  div.js-subscriptions
     | Subscribers
     =fulfillment-list fulfillments=proposedSubscriptionFulfillments deleteFulfillment="deleteFulfillment"
-  li.retailSubscriptions
+  div.js-retail-subscriptions
     | Retailers
     =fulfillment-list fulfillments=proposedRetailSubscriptionFulfillments deleteFulfillment="deleteFulfillment"
-  li.contributions
+  div.js-contributions
     | Contributors
     =fulfillment-list fulfillments=proposedContributionFulfillments deleteFulfillment="deleteFulfillment"
-  li.extras
+  div.js-extras
     | Extras
     =fulfillment-list fulfillments=proposedExtraFulfillments deleteFulfillment="deleteFulfillment"
 
