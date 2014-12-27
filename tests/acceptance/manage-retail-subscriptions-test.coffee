@@ -58,6 +58,18 @@ describe 'Acceptance: Manage retail subscriptions', ->
 
         done()
 
+    it 'shows its subscription details', (done) ->
+      viewRetailer 'Chapters'
+
+      andThen ->
+        expectElement 'input[disabled][name=cost]'
+        expectElement 'input[disabled][name=copies]'
+
+        expect(find('input[name=cost]').val()).to.equal(cost)
+        expect(find('input[name=copies]').val()).to.equal(copies)
+
+        done()
+
     it 'cannot be subscribed again', (done) ->
       viewRetailer 'Chapters'
 

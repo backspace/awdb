@@ -18,6 +18,7 @@ unless isNew
   if isNotSubscribed
     retail-subscription-form retailer=model subscription=newSubscription save="subscribe"
   else
+    retail-subscription-form subscription=model.activeSubscription
     button click='endSubscription' End subscription
 
   h3 Inactive subscriptions:
