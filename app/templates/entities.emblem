@@ -9,8 +9,6 @@
 
     br
 
-    button click='labels' Labels
-
     h3 Current subscribers:
     ul.fa-ul.js-subscribers
       each entity in subscribers
