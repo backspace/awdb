@@ -295,9 +295,9 @@ describe "Acceptance: Distribute issues", ->
         andThen ->
           done()
 
-      it 'the new recipient is listed', (done) ->
+      it 'the new recipient is listed with a warning', (done) ->
         andThen ->
-          expectElement '.js-extras li', {contains: 'Addressless'}
+          expectElement '.js-extras li.warning[title*="no address"]', {contains: 'Addressless'}
 
           done()
 

@@ -3,8 +3,15 @@
 EntityListItem = Ember.Component.extend
   tagName: 'li'
 
-  classNameBindings: ['active']
+  classNameBindings: ['active', 'warning']
   active: false
+  warning: false
+
+  attributeBindings: ['warningTitle:title']
+
+  warningTitle: Ember.computed 'warning', ->
+    if @get 'warning'
+      @get 'warningText'
 
   icon: Ember.computed 'entity.isRetailer', 'entity.isInstitution', ->
     entity = @get 'entity'

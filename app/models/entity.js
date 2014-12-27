@@ -32,5 +32,7 @@ export default DS.Model.extend({
     return subscriptions.mapBy('fulfillments').reduce(function(flattened, fulfillments) { return flattened.concat(fulfillments); }).mapBy('issue');
   }),
 
+  isAddressless: Ember.computed.empty('address'),
+
   rev: DS.attr('string')
 });
