@@ -108,42 +108,6 @@ describe "Acceptance: Manage subscriptions", ->
 
           done()
 
-    rates =
-      Canada: 30
-      USA: 35
-      International: 40
-      Institution: 45
-
-    for own classification, rate of rates
-      do (classification, rate) ->
-        describe "creating a new subscription for #{classification}", ->
-          beforeEach (done) ->
-            click 'button:contains("Edit")'
-            click "label:contains('#{classification}')"
-            click 'button:contains("Done")'
-
-            waitForModels ['entity']
-
-            click 'input[name=3]'
-            click 'button.js-subscribe'
-
-            waitForModels ['subscription', 'entity']
-
-            andThen ->
-              done()
-
-          it "results in a subscription transaction for $#{rate}", (done) ->
-            viewTransactions()
-
-            andThen ->
-              # withinElement 'tr:contains("Cara")', ->
-              #   expectElement 'td', {contains: "$#{rate}"}
-              #   expectElement 'td', {contains: 'Subscription'}
-              expectElement 'tr:contains("Cara") td', {contains: "$#{rate}"}
-              expectElement 'tr:contains("Cara") td', {contains: 'Subscription'}
-
-              done()
-
     describe 'when the subscriber is an institution', ->
       beforeEach (done) ->
         click 'button:contains("Edit")'
@@ -168,7 +132,6 @@ describe "Acceptance: Manage subscriptions", ->
             done()
 
         costsByIssueCount =
-          3: 100
           6: 200
 
         for issueCount, cost of costsByIssueCount
