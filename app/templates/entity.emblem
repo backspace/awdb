@@ -38,5 +38,4 @@ else
 
   button click='edit' Edit
   br
-  button click='addSubscription 3' Add 3-issue subscription
-  button click='addSubscription 6' Add 6-issue subscription
+  entity-subscription-form entity=model subscription=newSubscription save="subscribe"

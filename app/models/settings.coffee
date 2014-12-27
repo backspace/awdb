@@ -16,6 +16,10 @@ Settings = DS.Model.extend
   subscriptionInternational6: DS.attr 'number', {defaultValue: 70}
   subscriptionInstitution6: DS.attr 'number', {defaultValue: 80}
 
+  costForSubscription: (count, classification) ->
+    return undefined unless count? && classification?
+    @get("subscription#{classification.capitalize()}#{count}")
+
   rev: DS.attr 'string'
 
 `export default Settings`

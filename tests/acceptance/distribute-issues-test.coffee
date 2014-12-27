@@ -16,7 +16,7 @@ describe "Acceptance: Distribute issues", ->
         asyncRecords = Ember.RSVP.hash
           alice: store.createRecord('entity', {name: 'Alice', address: 'Alice address'}).save()
           bob: store.createRecord('entity', {name: 'Bob', address: 'Bob address'}).save()
-          cara: store.createRecord('entity', {name: 'Cara'}).save()
+          cara: store.createRecord('entity', {name: 'Cara', classification: 'international'}).save()
 
           bookstore: store.createRecord('entity', {name: 'Bookstore', address: 'Bookstore address', isRetailer: true}).save()
           dépanneur: store.createRecord('entity', {name: 'Dépanneur', address: 'Dépanneur address', isRetailer: true}).save()
@@ -270,7 +270,9 @@ describe "Acceptance: Distribute issues", ->
   describe 'when there is another subscriber', (done) ->
     beforeEach (done) ->
       viewEntity 'Cara'
-      click 'button:contains("3-issue")'
+
+      click 'input[name=3]'
+      click 'button.js-subscribe'
 
       waitForModels ['subscription', 'entity']
 

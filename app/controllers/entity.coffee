@@ -7,6 +7,9 @@ EntityController = Ember.ObjectController.extend
     @get('model.isNew') || @get('isEditing')
   ).property('model.isNew', 'isEditing')
 
+  newSubscription: Ember.computed 'model.isNew', ->
+    @store.createRecord 'subscription'
+
   actions:
     doneEditing: ->
       model = @get('model')
@@ -20,10 +23,10 @@ EntityController = Ember.ObjectController.extend
     edit: ->
       @set 'isEditing', true
 
-    addSubscription: (count) ->
-      @store.createRecord('subscription', {entity: @get('model'), count: count}).save().then (subscription) =>
-        entity = @get('model')
-        entity.get('subscriptions').addObject(subscription)
-        entity.save()
+    subscribe: ->
+      subscription = @get('newSubscription')
+      subscription.set 'entity', @get('model')
+      subscription.save().then =>
+        @get('model').save()
 
 `export default EntityController`

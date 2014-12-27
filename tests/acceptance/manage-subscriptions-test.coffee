@@ -87,6 +87,27 @@ describe "Acceptance: Manage subscriptions", ->
       andThen ->
         done()
 
+    describe 'when they subscribe with custom subscription cost', ->
+      beforeEach (done) ->
+        click 'input[name=3]'
+        fillIn 'input[name=cost]', '400'
+
+        click 'button.js-subscribe'
+
+        waitForModels ['subscription', 'entity']
+
+        andThen ->
+          done()
+
+      it 'results in a subscription transaction for the custom cost', (done) ->
+        viewTransactions()
+
+        andThen ->
+          expectElement 'tr:contains("Cara") td', {contains: "$400"}
+          expectElement 'tr:contains("Cara") td', {contains: 'Subscription'}
+
+          done()
+
     rates =
       Canada: 30
       USA: 35
@@ -103,7 +124,8 @@ describe "Acceptance: Manage subscriptions", ->
 
             waitForModels ['entity']
 
-            click 'button:contains("Add 3-issue subscription")'
+            click 'input[name=3]'
+            click 'button.js-subscribe'
 
             waitForModels ['subscription', 'entity']
 
@@ -155,7 +177,8 @@ describe "Acceptance: Manage subscriptions", ->
               beforeEach (done) ->
                 viewEntity 'Cara'
 
-                click "button:contains('Add #{issueCount}-issue subscription')"
+                click "input[name=#{issueCount}]"
+                click "button.js-subscribe"
 
                 waitForModels ['subscription', 'entity']
 

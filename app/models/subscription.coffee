@@ -27,17 +27,7 @@ Subscription = DS.Model.extend
 
   createTransaction: Ember.on 'didCreate', ->
     unless @get 'isRetail'
-      # FIXME should be injected
-      settings = @container.lookup 'settings:main'
-
-      classification = @get('entity.classification')
-      # TODO prevent subscription without setting classification?
-      classification ?= 'institution'
-
-      # FIXME assumes only 3 or 6 issues
-      cost = settings.get "subscription#{classification.capitalize()}#{@get 'count'}"
-
-      transaction = @store.createRecord 'transaction', {amount: cost, entity: @get('entity'), subscription: @}
+      transaction = @store.createRecord 'transaction', {amount: @get('cost'), entity: @get('entity'), subscription: @}
       transaction.save()
 
   end: ->
