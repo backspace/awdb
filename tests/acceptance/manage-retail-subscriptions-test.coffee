@@ -40,7 +40,7 @@ describe 'Acceptance: Manage retail subscriptions', ->
 
       fillIn 'input[name=cost]', cost
       fillIn 'input[name=copies]', copies
-      click 'button:contains("Create subscription")'
+      click 'button.js-subscribe'
 
       waitForModels ['entity', 'subscription', 'transaction']
 
@@ -62,7 +62,7 @@ describe 'Acceptance: Manage retail subscriptions', ->
       viewRetailer 'Chapters'
 
       andThen ->
-        expectNoElement 'button:contains("Create subscription")'
+        expectNoElement 'button.js-subscribe'
 
         done()
 
@@ -97,7 +97,7 @@ describe 'Acceptance: Manage retail subscriptions', ->
         viewRetailer 'Chapters'
 
         andThen ->
-          expectElement 'button:contains("Create subscription")'
+          expectElement 'button.js-subscribe'
           done()
 
       it 'has an inactive subscription listed', (done) ->

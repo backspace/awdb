@@ -1,7 +1,16 @@
-label
-  | Cost per issue
-  =input type='number' name="cost" value=subscription.cost
-label
-  | Copies per delivery
-  =input type='number' name="copies" value=subscription.copies
-button click='save' disabled=isIncomplete Create subscription
+fieldset
+  legend Create a subscription
+  .row
+    label.small-5.columns
+      | Cost per issue
+      =input type='number' name="cost" value=subscription.cost
+    label.small-5.columns
+      | Copies per delivery
+      =input type='number' name="copies" value=subscription.copies
+    label.small-2.columns
+      | &nbsp;
+      button.postfix.js-subscribe click='save' disabled=isIncomplete class=isIncomplete:secondary
+        if isIncomplete
+          fa-icon 'ellipsis-h'
+        else
+          fa-icon 'thumbs-up'
