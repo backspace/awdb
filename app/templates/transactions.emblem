@@ -6,5 +6,5 @@ table
       th Event
       th Amount
   tbody
-    each transaction in model
+    each transaction in arrangedContent
       transaction-list-item transaction=transaction
