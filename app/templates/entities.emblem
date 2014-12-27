@@ -1,23 +1,22 @@
 .list-and-details
   section.list
     h2 Entities
-    // TODO componentise to avoid having to know about fa-ul?
-    ul.fa-ul.side-nav
-      each entity in persistedEntities
-        =entity-list-item entity=entity
     button click='createEntity' New entity
 
-    br
-
-    h3 Current subscribers:
-    ul.fa-ul.js-subscribers
+    // TODO componentise to avoid having to know about fa-ul?
+    ul.fa-ul.side-nav.js-subscribers
+      li.heading Subscribers
       each entity in subscribers
         =entity-list-item entity=entity
 
-    h3 Former subscribers:
-
-    ul.fa-ul.js-former-subscribers
+    ul.fa-ul.side-nav.js-former-subscribers
+      li.heading Former subscribers
       each entity in formerSubscribers
+        =entity-list-item entity=entity
+
+    ul.fa-ul.side-nav.js-never-subscribers
+      li.heading Never subscribed
+      each entity in neverSubscribers
         =entity-list-item entity=entity
   section.details
     outlet

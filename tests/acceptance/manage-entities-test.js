@@ -14,7 +14,7 @@ describe('Acceptance: Manage entities', function() {
         Ember.RSVP.Promise.all([
           store.createRecord('entity', {name: "Alice", address: '123 Main St.'}).save(),
           store.createRecord('entity', {name: "Bob"}).save(),
-          store.createRecord('entity', {name: "Zzzana's World of Pleasure", classification: 'institution'})
+          store.createRecord('entity', {name: "Zzzana's World of Pleasure", classification: 'institution'}).save()
         ]).then(function() {
           done();
         });
@@ -35,7 +35,7 @@ describe('Acceptance: Manage entities', function() {
       expectElement('li', {contains: 'Bob'});
       expectElement('li', {contains: "Zzzana's World of Pleasure"});
 
-      expectElement('li', 3);
+      expectElement('li:not(.heading)', 3);
 
       done();
     });
