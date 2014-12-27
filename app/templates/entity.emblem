@@ -16,7 +16,7 @@ if editing
     label
       =radio-button value='institution' groupValue=classification
       | Institution
-    button click='doneEditing' Done
+    button.js-save click='doneEditing' Done
 else
   h3=name
 
@@ -36,6 +36,6 @@ else
     else
       p None
 
-  button click='edit' Edit
+  button.js-edit click='edit' Edit
   br
   entity-subscription-form entity=model subscription=newSubscription save="subscribe"

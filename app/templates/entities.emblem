@@ -1,7 +1,7 @@
 .list-and-details
   section.list
     h2 Entities
-    button click='createEntity' New entity
+    button.js-create click='createEntity' New entity
 
     // TODO componentise to avoid having to know about fa-ul?
     ul.fa-ul.side-nav.js-subscribers
