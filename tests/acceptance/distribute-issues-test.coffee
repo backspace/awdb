@@ -113,56 +113,6 @@ describe "Acceptance: Distribute issues", ->
 
         done()
 
-    describe 'having an additional recipient with no address', ->
-      beforeEach (done) ->
-        fillIn 'input[type="search"]', 'Addressless'
-        click 'li:contains("Addressless") .fa-plus'
-
-        andThen ->
-          done()
-
-      it 'the new recipient is listed', (done) ->
-        andThen ->
-          expectElement '.js-extras li', {contains: 'Addressless'}
-
-          done()
-
-      it 'will not distribute because the recipient has no address', (done) ->
-        andThen ->
-          expectElement 'button.js-distribute[disabled]'
-
-          done()
-
-    describe 'having an additional recipient who has an address', ->
-      beforeEach (done) ->
-        fillIn 'input[type="search"]', 'ext'
-        click 'li:contains("Extra") .fa-plus'
-
-        andThen ->
-          done()
-
-      describe 'when it is distributed', ->
-        beforeEach (done) ->
-          click 'button:contains("Distribute")'
-
-          waitForModels ['issue', 'subscription', 'fulfillment', 'distribution']
-
-          andThen ->
-            done()
-
-        it 'shows the new recipient in the completed distribution', (done) ->
-          andThen ->
-            expectElement 'a', {contains: 'Extra'}
-
-            done()
-
-        it 'shows that the new recipient received the issue', (done) ->
-          viewEntity 'Extra'
-
-          andThen ->
-            expectElement 'li', {contains: 'Bananas are better'}
-
-            done()
 
     describe 'that has been distributed', ->
       beforeEach (done) ->
@@ -328,6 +278,65 @@ describe "Acceptance: Distribute issues", ->
           expectNoElement 'a', {contains: 'Cara'}
 
           done()
+
+  describe 'building a distribution for the existing issue', ->
+    beforeEach (done) ->
+      viewIssue 'Apples'
+      click 'a:contains("Distribute")'
+
+      andThen ->
+        done()
+
+    describe 'with additional recipient with no address', ->
+      beforeEach (done) ->
+        fillIn 'input[type="search"]', 'Addressless'
+        click 'li:contains("Addressless") .fa-plus'
+
+        andThen ->
+          done()
+
+      it 'the new recipient is listed', (done) ->
+        andThen ->
+          expectElement '.js-extras li', {contains: 'Addressless'}
+
+          done()
+
+      it 'will not distribute because the recipient has no address', (done) ->
+        andThen ->
+          expectElement 'button.js-distribute[disabled]'
+
+          done()
+
+    describe 'with an additional recipient who has an address', ->
+      beforeEach (done) ->
+        fillIn 'input[type="search"]', 'ext'
+        click 'li:contains("Extra") .fa-plus'
+
+        andThen ->
+          done()
+
+      describe 'when it is distributed', ->
+        beforeEach (done) ->
+          click 'button:contains("Distribute")'
+
+          waitForModels ['issue', 'subscription', 'fulfillment', 'distribution']
+
+          andThen ->
+            done()
+
+        it 'shows the new recipient in the completed distribution', (done) ->
+          andThen ->
+            expectElement 'a', {contains: 'Extra'}
+
+            done()
+
+        it 'shows that the new recipient received the issue', (done) ->
+          viewEntity 'Extra'
+
+          andThen ->
+            expectElement 'li', {contains: 'Apples are amazing'}
+
+            done()
 
   describe 'when the default feature compensation is changed', (done) ->
     beforeEach (done) ->
