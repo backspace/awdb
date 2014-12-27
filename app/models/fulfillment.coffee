@@ -15,6 +15,8 @@ Fulfillment = DS.Model.extend
   count: DS.attr 'number', {defaultValue: 1}
 
   addressPopulator: Ember.observer 'entity.id', ->
+    return unless @get('isNew')
+
     newEntityID = @get 'entity.id'
 
     if @oldEntityID != newEntityID
