@@ -158,6 +158,12 @@ describe.skip 'Archive sample data', ->
     createIssue
       title: 'Durians'
 
+    createIssue
+      title: 'Elderberries'
+      features: [
+        {title: 'Work in progress', contributors: ['Write']}
+      ]
+
 
     distributeIssue = (attributes) ->
       viewIssue attributes.title
