@@ -1,1 +1,13 @@
-outlet
+if displayWelcome
+  h1 Hello!
+  p Would you like to load some sample data?
+  button.alert click="rejectSample"
+    fa-icon 'thumbs-down'
+  | &nbsp;
+  button click="acceptSample"
+    if replacing
+      fa-icon 'circle-o-notch' spin=true size="lg"
+    else
+      fa-icon 'thumbs-up'
+else
+  outlet
