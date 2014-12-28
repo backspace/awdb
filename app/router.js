@@ -24,7 +24,9 @@ Router.map(function() {
     this.resource('retailer', {path: ':retailer_id'});
   });
 
-  this.resource('transactions');
+  this.resource('transactions', function() {
+    this.resource('transaction', { path: ':transaction_id'});
+  });
 
   this.route('settings');
 });

@@ -76,12 +76,4 @@ FeatureListItem = Ember.Component.extend
       feature = @get('feature')
       feature.removeContribution(contribution)
 
-  titleAndContributors: Ember.computed 'feature.title', 'feature.contributors.@each.name', ->
-    string = @get('feature.title')
-
-    if Ember.isPresent(@get('feature.contributors'))
-      string = "#{string}: #{@get('feature.contributors').mapBy('name').join(', ')}"
-
-    string
-
 `export default FeatureListItem`

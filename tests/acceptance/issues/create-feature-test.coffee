@@ -39,7 +39,9 @@ describe "Acceptance: Create issue feature", ->
     viewIssue 'Full of features'
 
     andThen ->
-      expectElement 'li', {contains: 'Like this one: Alice, Bob'}
+      expectElement 'li', {contains: 'Like this one'}
+      expectElement 'li:contains(Like)', {contains: 'Alice'}
+      expectElement 'li:contains(Like)', {contains: 'Bob'}
 
       done()
 
@@ -57,7 +59,7 @@ describe "Acceptance: Create issue feature", ->
     viewIssue 'Full of features'
 
     andThen ->
-      expectElement 'li', {contains: 'Welcome: Francine'}
+      expectElement 'li:contains(Welcome)', {contains: 'Francine'}
 
     viewEntities()
 

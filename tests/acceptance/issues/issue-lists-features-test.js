@@ -52,7 +52,9 @@ describe('Acceptance: Issue lists features', function() {
     viewIssue('All about apples');
 
     andThen(function() {
-      expectElement('li', {contains: 'Apples are tasty: Alice, Bob'});
+      expectElement('li', {contains: 'Apples are tasty'});
+      expectElement('li:contains(Apples)', {contains: 'Alice'});
+      expectElement('li:contains(Apples)', {contains: 'Bob'});
 
       done();
     });

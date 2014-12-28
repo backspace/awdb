@@ -18,8 +18,11 @@ if isEditing
   entity-search entities=entities addEntity="addContributor" createEntity="addNewContributor" placeholder="Contributor name" supportCreation=true
 else
   span.js-target click=edit
-    =titleAndContributors
-    unless contribution.isUncompensated
-      // FIXME link to particular transaction
-      link-to 'transactions'
-        fa-icon 'dollar'
+    | #{feature.title}: 
+    each contribution in feature.contributions
+      =contribution.entity.name
+      unless contribution.isUncompensated
+        | &nbsp;
+        link-to 'transaction' contribution.transaction.id
+          fa-icon 'dollar'
+      | &nbsp;
