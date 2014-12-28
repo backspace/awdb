@@ -54,7 +54,7 @@ FeatureListItem = Ember.Component.extend
         feature: @get('feature')
 
     cancel: ->
-      @get('feature').rollback()
+      @get('feature').reload()
       @set 'isEditing', false
     edit: ->
       @set 'isEditing', true
