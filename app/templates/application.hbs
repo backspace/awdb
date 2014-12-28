@@ -1,23 +1,23 @@
 <div class="everything">
   <aside>
     <nav>
-      {{#link-to 'entities' classNames='item'}}
+      {{#link-to 'entities' id='js-entities' classNames='item'}}
         {{fa-icon 'users'}}
         <label>Entities</label>
       {{/link-to}}
-      {{#link-to 'retailers' classNames='item'}}
+      {{#link-to 'retailers' id='js-retailers' classNames='item'}}
         {{fa-icon 'shopping-cart'}}
         <label>Retailers</label>
       {{/link-to}}
-      {{#link-to 'issues' classNames='item'}}
+      {{#link-to 'issues' id='js-issues' classNames='item'}}
         {{fa-icon 'book'}}
         <label>Issues</label>
       {{/link-to}}
-      {{#link-to 'transactions' classNames='item'}}
+      {{#link-to 'transactions' id='js-transactions' classNames='item'}}
         {{fa-icon 'dollar'}}
         <label>Transactions</label>
       {{/link-to}}
-      {{#link-to 'settings' classNames='item'}}
+      {{#link-to 'settings' id='js-settings' classNames='item'}}
         {{fa-icon 'gear'}}
         <label>Settings</label>
       {{/link-to}}
@@ -25,5 +25,8 @@
   </aside>
   <main>
     {{outlet}}
+    {{#if offerTour}}
+      {{guided-tour}}
+    {{/if}}
   </main>
 </div>

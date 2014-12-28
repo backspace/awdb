@@ -1,0 +1,7 @@
+p want a tour?
+button click="startTour" Yes
+
+ol.joyride-list data-joyride=true
+  each stop in stopsArray
+    li data-joyride-key="{{unbound stop.key}}" data-options="{{unbound stop.options}}" data-text="&rarr;" data-prev-text="&larr;"
+      p=stop.text
