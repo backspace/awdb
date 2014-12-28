@@ -5,11 +5,11 @@
 
 application = null
 
-describe.skip 'Archive test data', ->
+describe.skip 'Archive sample data', ->
   beforeEach (done) ->
     application = startApp()
 
-    PouchTestHelper.buildStore(application, 'http://127.0.0.1:5984/awdb-archive').then ->
+    PouchTestHelper.buildStore(application, 'http://127.0.0.1:5984/awdb-sample').then ->
       Ember.run ->
         done()
 
