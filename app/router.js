@@ -10,6 +10,7 @@ Router.map(function() {
     this.route('new');
     this.resource('issue', { path: ':issue_id' }, function() {
       this.route('distribute');
+      this.route('distribution', { path: 'distributions/:distribution_id' });
     });
   });
 
@@ -22,8 +23,6 @@ Router.map(function() {
     this.route('new');
     this.resource('retailer', {path: ':retailer_id'});
   });
-
-  this.route('distribution', { path: 'distributions/:distribution_id' });
 
   this.resource('transactions');
 

@@ -21,4 +21,4 @@ unless isNew
   h4 Distributions:
   ul.distributions
     each distribution in distributions
-      li: link-to 'distribution' distribution: distribution.createdAt
+      li: link-to 'issue.distribution' distribution: distribution.createdAt

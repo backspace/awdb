@@ -10,6 +10,6 @@ DistributeRoute = Ember.Route.extend
 
   actions:
     showDistribution: (distribution) ->
-      @transitionTo 'distribution', distribution
+      @transitionTo 'issue.distribution', distribution
 
 `export default DistributeRoute`
