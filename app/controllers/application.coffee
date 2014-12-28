@@ -1,6 +1,6 @@
 `import Ember from 'ember'`
 
 ApplicationController = Ember.Controller.extend
-  offerTour: true
+  offerTour: false
 
 `export default ApplicationController`
