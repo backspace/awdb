@@ -36,7 +36,7 @@ IndexController = Ember.ArrayController.extend
             @set 'hasVisited', true
             @set 'isReplacing', false
             document.location.reload()
-          ).on('error', (info) =>
+          ).on('error', (info) ->
             alert "Error: #{JSON.stringify(info)}"
           )
 
