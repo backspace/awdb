@@ -27,8 +27,13 @@ describe "Acceptance: Distribute issues", ->
 
           apples: store.createRecord('issue', {title: 'Apples are amazing'}).save()
 
+          feature: store.createRecord('feature', {title: 'Crunchy is better'}).save()
+
         asyncRecords.then((records) ->
           entities = records
+
+          # FIXME hackery nightmare
+          records.apples.get('features').addObject(records.feature)
 
           # TODO is there a better way to add to an RSVP.hash? HIDEOUS
           subscriptions = Ember.RSVP.hash
@@ -36,15 +41,24 @@ describe "Acceptance: Distribute issues", ->
             bob: store.createRecord('subscription', {entity: records.bob, count: 3}).save()
             bookstore: store.createRecord('subscription', {entity: records.bookstore, copies: 30, cost: 10}).save()
 
+            saveIssue: records.apples.save()
+            contribution: store.createRecord('contribution', {feature: records.feature}).save()
+
             records: records
 
           subscriptions
         ).then((subscriptions) ->
           records = subscriptions.records
 
+          subscriptions.contribution.set 'entity', records.artist
+          records.feature.set 'issue', records.apples
+
           fulfillments = Ember.RSVP.hash
             fulfillment: store.createRecord('fulfillment', {issue: records.apples, subscription: subscriptions.alice}).save()
             bookstoreFulfillment: store.createRecord('fulfillment', {issue: records.apples, subscription: subscriptions.bookstore}).save()
+
+            saveContribution: subscriptions.contribution.save()
+            saveFeature: records.feature.save()
 
             subscriptions: subscriptions
 
