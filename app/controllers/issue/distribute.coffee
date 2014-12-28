@@ -1,16 +1,16 @@
 `import Ember from 'ember'`
 
 IssueDistributeController = Ember.ObjectController.extend
-  needs: 'issue'
 
   isDistributing: false
 
-  # FIXME this is empty when the distribute page is directly accessed
-  entities: Ember.computed.alias 'controllers.issue.entities'
+  distribution: Ember.computed.alias 'model.distribution'
+
+  entities: Ember.computed.alias 'model.entities'
   subscribers: Ember.computed.filterBy('entities', 'isSubscribed')
 
-  hasNoFulfillments: Ember.computed.empty 'model.proposedFulfillments'
-  fulfillmentAddresses: Ember.computed.mapBy 'model.proposedFulfillments', 'entity.address'
+  hasNoFulfillments: Ember.computed.empty 'distribution.proposedFulfillments'
+  fulfillmentAddresses: Ember.computed.mapBy 'distribution.proposedFulfillments', 'entity.address'
   allFulfillmentsHaveAddresses: Ember.computed 'fulfillmentAddresses.@each', ->
     Ember.isEmpty(@get('fulfillmentAddresses').filter (address) ->
       Ember.isNone(address)
@@ -19,10 +19,19 @@ IssueDistributeController = Ember.ObjectController.extend
 
   isIncomplete: Ember.computed.any 'hasNoFulfillments', 'hasMissingAddresses'
 
+  waitsForEntitiesToTriggerSuggestions: Ember.observer 'entities.isLoaded', ->
+    if @get 'entities.isLoaded'
+      @addSuggestedFulfillmentsToDistribution @get('model.distribution')
+
   addSuggestedFulfillmentsToDistribution: (distribution) ->
     return unless distribution?
 
     issue = distribution.get 'issue'
+
+    # TODO why does this happen? the store loading the issue elsewhere?
+    unless issue
+      issue = @get 'model.issue'
+      distribution.set 'issue', issue
 
     # FIXME hideous hack to store fulfillments elsewhere because of broken parent-saving with unsaved children
     distribution.set 'proposedFulfillments', []
@@ -46,7 +55,7 @@ IssueDistributeController = Ember.ObjectController.extend
 
   actions:
     distribute: ->
-      distribution = @get 'model'
+      distribution = @get 'distribution'
       issue = distribution.get('issue')
 
       @set 'isDistributing', true
@@ -74,9 +83,9 @@ IssueDistributeController = Ember.ObjectController.extend
           @send 'showDistribution', distribution
 
     deleteFulfillment: (fulfillment) ->
-      @get('model.proposedFulfillments').removeObject(fulfillment)
+      @get('distribution.proposedFulfillments').removeObject(fulfillment)
 
     addEntity: (entity) ->
-      @get('model.proposedFulfillments').addObject(@store.createRecord('fulfillment', {entity: entity, issue: @get('model.issue')}))
+      @get('distribution.proposedFulfillments').addObject(@store.createRecord('fulfillment', {entity: entity, issue: @get('distribution.issue')}))
 
 `export default IssueDistributeController`

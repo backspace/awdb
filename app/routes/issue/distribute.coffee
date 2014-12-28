@@ -1,12 +1,15 @@
 `import Ember from 'ember'`
 
 DistributeRoute = Ember.Route.extend
-  model: ->
-    @store.createRecord 'distribution', {issue: @modelFor('issue')}
+  model: (params) ->
+    # FIXME hack to ensure entities are loaded even upon refresh
 
-  setupController: (controller, model) ->
-    controller.addSuggestedFulfillmentsToDistribution(model)
-    controller.set 'model', model
+    distribution = @store.createRecord 'distribution', {issue: @modelFor('issue')}
+
+    Ember.RSVP.hash
+      issue: @store.find 'issue', @paramsFor('issue').issue_id
+      distribution: distribution
+      entities: @store.find 'entity'
 
   actions:
     showDistribution: (distribution) ->

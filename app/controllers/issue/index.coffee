@@ -1,6 +1,10 @@
 `import Ember from 'ember'`
 
 IssueIndexController = Ember.ObjectController.extend
+  needs: ['issues']
+
+  entities: Ember.computed.alias 'controllers.issues.entities'
+
   isEditing: false
 
   handleNewRecord: Ember.observer 'model.isNew', ->

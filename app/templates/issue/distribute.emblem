@@ -1,26 +1,26 @@
-button.js-distribute click='distribute' disabled=isIncomplete class=isIncomplete:secondary Distribute to #{proposedFulfillments.length} recipients
+button.js-distribute click='distribute' disabled=isIncomplete class=isIncomplete:secondary Distribute to #{distribution.proposedFulfillments.length} recipients
 
 // TODO this is almost exactly repeated in issue/distribution
 
 div.js-recipients
   div.js-subscriptions
     | Subscribers
-    =fulfillment-list fulfillments=proposedSubscriptionFulfillments deleteFulfillment="deleteFulfillment"
+    =fulfillment-list fulfillments=distribution.proposedSubscriptionFulfillments deleteFulfillment="deleteFulfillment"
   div.js-retail-subscriptions
     | Retailers
-    =fulfillment-list fulfillments=proposedRetailSubscriptionFulfillments deleteFulfillment="deleteFulfillment"
+    =fulfillment-list fulfillments=distribution.proposedRetailSubscriptionFulfillments deleteFulfillment="deleteFulfillment"
   div.js-contributions
     | Contributors
-    =fulfillment-list fulfillments=proposedContributionFulfillments deleteFulfillment="deleteFulfillment"
+    =fulfillment-list fulfillments=distribution.proposedContributionFulfillments deleteFulfillment="deleteFulfillment"
   div.js-extras
     | Extras
-    =fulfillment-list fulfillments=proposedExtraFulfillments deleteFulfillment="deleteFulfillment"
+    =fulfillment-list fulfillments=distribution.proposedExtraFulfillments deleteFulfillment="deleteFulfillment"
 
 =entity-search entities=entities addEntity="addEntity" placeholder="Add an extra recipient"
 
 h3 Contributor compensation
 ul.compensations
-  each feature in issue.features
+  each feature in distribution.issue.features
     each contribution in feature.uncompensatedContributions
       li
         | #{feature.title}: #{contribution.entity.name}
