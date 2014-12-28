@@ -29,7 +29,7 @@ IndexController = Ember.ArrayController.extend
       # TODO extract to config
       replacementName = "http://awdb.iriscouch.com/awdb-sample"
 
-      pouch.destroy().then =>
+      pouch.destroy().then ->
         new PouchDB(databaseName).then (newPouch) =>
           pouch = newPouch
           pouch.replicate.from(replacementName).on('complete', =>

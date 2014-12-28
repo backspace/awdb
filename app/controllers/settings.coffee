@@ -52,7 +52,7 @@ SettingsController = Ember.ObjectController.extend
               console.log "??"
               @set 'isReplacing', false
               document.location.reload()
-            ).on('error', (info) =>
+            ).on('error', (info) ->
               alert "Error: #{JSON.stringify(info)}"
             )
       else
