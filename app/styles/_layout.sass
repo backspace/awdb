@@ -4,16 +4,23 @@ $list-background: #eee
 body, body > .ember-view, .everything
   height: 100%
 
+// TODO preprocess prefixes
+
 body > .ember-view
+  display: -webkit-flex
   display: flex
   flex-direction: column
 
 .everything
+  display: -webkit-flex
   display: flex
+  -webkit-flex: 1
   flex: 1
 
 aside
+  display: -webkit-flex
   display: flex
+  -webkit-flex: 0 0 5rem
   flex: 0 0 5rem
   height: 100%
 
@@ -28,14 +35,17 @@ nav
     display: none
 
 main
+  -webkit-flex: 1
   flex: 1
   height: 100%
 
 .list-and-details
+  display: -webkit-flex
   display: flex
   height: 100%
 
   .list
+    -webkit-flex: 0 0 15rem
     flex: 0 0 15rem
     height: 100%
     overflow-y: scroll
@@ -43,6 +53,7 @@ main
     background-color: $list-background
 
   .details
+    -webkit-flex: 1
     flex: 1
     height: 100%
     overflow-y: scroll
