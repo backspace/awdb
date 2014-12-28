@@ -49,7 +49,6 @@ SettingsController = Ember.ObjectController.extend
           new PouchDB(databaseName).then (newPouch) =>
             pouch = newPouch
             pouch.replicate.from(replacementName).on('complete', =>
-              console.log "??"
               @set 'isReplacing', false
               document.location.reload()
             ).on('error', (info) ->
