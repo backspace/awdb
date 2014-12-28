@@ -31,6 +31,7 @@ Fulfillment = DS.Model.extend
   rev: DS.attr 'string'
 
   countAndCostPopulator: Ember.observer 'subscription.copies', 'subscription.cost', ->
+    return unless @get('isNew')
     if @get 'isRetail'
       @set('count', @get('subscription.copies'))
       @set('cost', @get('subscription.cost'))
