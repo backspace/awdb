@@ -1,8 +1,9 @@
 each fulfillment in fulfillments
   with fulfillment.entity as entity
-    entity-list-item entity=entity inlineIcon=true warning=entity.isAddressless warningText='has no address'
+    entity-list-item entity=entity inlineIcon=true warning=entity.isAddressless warningText='has no address' nameOverride=fulfillment.name
       if fulfillment.isRetail
         | × #{fulfillment.count} @ $#{fulfillment.cost}/each
-      span.deleter.js-delete click="deleteFulfillment fulfillment" ×
+      if deleteFulfillment
+        span.deleter.js-delete click="deleteFulfillment fulfillment" ×
 else
   | None

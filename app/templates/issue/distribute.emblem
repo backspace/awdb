@@ -1,5 +1,7 @@
 button.js-distribute click='distribute' disabled=isIncomplete class=isIncomplete:secondary Distribute to #{proposedFulfillments.length} recipients
 
+// TODO this is almost exactly repeated in issue/distribution
+
 div.js-recipients
   div.js-subscriptions
     | Subscribers

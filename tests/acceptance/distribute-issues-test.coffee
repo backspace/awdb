@@ -177,11 +177,10 @@ describe "Acceptance: Distribute issues", ->
 
           done()
 
-      it 'retains the names and addresses in the distribution even if they have since changed', (done) ->
+      it 'retains the name in the distribution even if it has since changed', (done) ->
         viewEntity 'Alice'
         click 'button:contains("Edit")'
         fillIn('input[name=name]', 'Newname')
-        fillIn('textarea[name="address"]', 'New address for Alice')
         click('button:contains("Done")')
 
         waitForModels ['entity']
@@ -191,8 +190,6 @@ describe "Acceptance: Distribute issues", ->
 
         andThen ->
           expectElement 'a', {contains: 'Alice'}
-          expectElement 'p', {contains: 'Alice address'}
-          expectElement 'p', {contains: 'Bob address'}
 
           done()
 

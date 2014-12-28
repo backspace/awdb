@@ -1,8 +1,17 @@
 h2 Distribution of issue {{issue.title}}
-ul
-  each fulfillment in fulfillments
-    with fulfillment.entity as entity
-      entity-list-item entity=entity nameOverride=fulfillment.name
-        p=fulfillment.address
+
+div.js-recipients
+  div.js-subscriptions
+    | Subscribers
+    =fulfillment-list fulfillments=subscriptionFulfillments
+  div.js-retail-subscriptions
+    | Retailers
+    =fulfillment-list fulfillments=retailSubscriptionFulfillments
+  div.js-contributions
+    | Contributors
+    =fulfillment-list fulfillments=contributionFulfillments
+  div.js-extras
+    | Extras
+    =fulfillment-list fulfillments=extraFulfillments
 h3 Mailing labels
 mailing-labels addressables=fulfillments
