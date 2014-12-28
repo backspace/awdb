@@ -29,8 +29,8 @@ IndexController = Ember.ArrayController.extend
       # TODO extract to config
       replacementName = "http://awdb.iriscouch.com/awdb-sample"
 
-      pouch.destroy().then ->
-        new PouchDB(databaseName).then (newPouch) =>
+      pouch.destroy().then(=>
+        new PouchDB(databaseName).then((newPouch) =>
           pouch = newPouch
           pouch.replicate.from(replacementName).on('complete', =>
             @set 'hasVisited', true
@@ -39,5 +39,11 @@ IndexController = Ember.ArrayController.extend
           ).on('error', (info) ->
             alert "Error: #{JSON.stringify(info)}"
           )
+        , (error) ->
+          alert "Error creating new database: #{JSON.stringify(info)}"
+        )
+      , (error) ->
+        alert "Error deleting current database: #{JSON.stringify(info)}"
+      )
 
 `export default IndexController`
