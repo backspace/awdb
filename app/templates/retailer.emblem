@@ -6,7 +6,7 @@ if isEditing
     | Address
     =textarea name='address' value=address
 
-  button click='doneEditing' Done
+  button.js-save click='doneEditing' Done
 else
   h3=model.name
 

@@ -1,7 +1,7 @@
 .list-and-details
   section.list
     h2 Retailers
-    button click='createRetailer' New retailer
+    button.js-create click='createRetailer' New retailer
 
     ul.fa-ul.side-nav.js-active-retailers
       li.heading Active retailers

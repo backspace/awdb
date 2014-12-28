@@ -114,6 +114,48 @@ describe.skip 'Archive sample data', ->
       count: 6
 
 
+    createRetailer = (attributes) ->
+      viewRetailers()
+      click '.js-create'
+      fillIn 'input[name=name]', attributes.name
+      fillIn 'textarea[name=address]', attributes.address
+
+      click '.js-save'
+
+      waitForAllModels()
+
+    createRetailer
+      name: 'The Paddlewheel'
+      address: '101 Colony St.'
+
+    createRetailer
+      name: 'Mondragón'
+      address: '91 Albert St.'
+
+    createRetailer
+      name: 'The Big Box store'
+      address: 'Saint James'
+
+
+    createRetailSubscription = (attributes) ->
+      viewRetailer attributes.name
+      fillIn 'input[name=cost]', attributes.cost
+      fillIn 'input[name=copies]', attributes.copies
+      click '.js-subscribe'
+
+      waitForAllModels()
+
+    createRetailSubscription
+      name: 'The Paddlewheel'
+      cost: 20
+      copies: 10
+
+    createRetailSubscription
+      name: 'Mondragón'
+      cost: 10
+      copies: 30
+
+
     createIssue = (attributes) ->
       viewIssues()
       click '.js-create'
@@ -181,6 +223,13 @@ describe.skip 'Archive sample data', ->
     distributeIssue
       title: 'Apples'
       giftees: ["Giftee"]
+
+    # Cancel a retail subscription
+
+    viewRetailer 'Mondragón'
+    click '.js-unsubscribe'
+
+    waitForAllModels()
 
     distributeIssue
       title: 'Bananas'
