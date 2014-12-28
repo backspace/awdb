@@ -164,6 +164,7 @@ describe "Acceptance: Distribute issues", ->
 
     it 'uses the default $100 feature compensation', (done) ->
       andThen ->
+        expectElement 'li:contains("Crunchy is better: Artist") input[type=number]'
         expect(find('input[type="number"]').val()).to.equal('100')
 
         done()
