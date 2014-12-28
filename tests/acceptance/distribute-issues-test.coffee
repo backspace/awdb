@@ -327,6 +327,13 @@ describe "Acceptance: Distribute issues", ->
 
           done()
 
+      it 'but links to the compensation transaction', (done) ->
+        viewIssue 'Apples'
+
+        andThen ->
+          expectElement 'li:contains("Crunchy") a[href*=transactions]'
+          done()
+
   describe 'when the default feature compensation is changed', (done) ->
     beforeEach (done) ->
       visit '/'
