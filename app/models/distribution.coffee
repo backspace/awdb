@@ -25,6 +25,8 @@ Distribution = DS.Model.extend
       feature.get('contributions').forEach (contribution) =>
         transaction = @store.createRecord 'transaction', {amount: -contribution.get('compensation'), entity: contribution.get('entity'), contribution: contribution}
 
-        transaction.save()
+        transaction.save().then ->
+          contribution.set 'transaction', transaction
+          contribution.save()
 
 `export default Distribution`

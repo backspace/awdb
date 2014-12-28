@@ -7,6 +7,7 @@ var Feature = DS.Model.extend({
 
   contributors: Ember.computed.mapBy('contributions', 'entity'),
   contributions: DS.hasMany('contribution'),
+  uncompensatedContributions: Ember.computed.filterBy('contributions', 'isUncompensated'),
 
   appendNewContributor: function(id) {
     if (Ember.isPresent(id)) {

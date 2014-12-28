@@ -317,6 +317,16 @@ describe "Acceptance: Distribute issues", ->
 
           done()
 
+      it 'does not compensate nor fulfill contributors for a second distribution', (done) ->
+        viewIssue 'Apples'
+        click '.js-build-distribution'
+
+        andThen ->
+          expectNoElement '.js-contributions li', {contains: 'Artist'}
+          expectNoElement 'input[type=number]'
+
+          done()
+
   describe 'when the default feature compensation is changed', (done) ->
     beforeEach (done) ->
       visit '/'

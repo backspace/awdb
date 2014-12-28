@@ -39,7 +39,7 @@ IssueDistributeController = Ember.ObjectController.extend
 
     issue.get('features').forEach (feature) =>
       # FIXME a contributor will receive one issue for each feature
-      feature.get('contributions').forEach (contribution) =>
+      feature.get('uncompensatedContributions').forEach (contribution) =>
         fulfillment = @store.createRecord 'fulfillment', {entity: contribution.get('entity'), contribution: contribution, issue: issue}
 
         distribution.get('proposedFulfillments').pushObject fulfillment

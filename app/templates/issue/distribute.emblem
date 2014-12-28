@@ -21,7 +21,7 @@ div.js-recipients
 h3 Contributor compensation
 ul.compensations
   each feature in issue.features
-    each contribution in feature.contributions
+    each contribution in feature.uncompensatedContributions
       li
         | #{feature.title}: #{contribution.entity.name}
         =input type='number' value=contribution.compensation
