@@ -239,7 +239,7 @@ describe.skip 'Archive sample data', ->
     viewEntity 'Caterpillar'
     click '.js-edit'
     fillIn 'input[name=name]', 'Butterfly'
-    fillIn 'textarea[name=address]', 'I was in the air'
+    fillIn 'textarea[name=address]', 'I’ll be in the air'
     click '.js-save'
 
     waitForModels ['entity']
