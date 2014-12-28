@@ -149,7 +149,7 @@ describe.skip 'Archive sample data', ->
     createIssue
       title: 'Bananas'
       features: [
-        {title: 'A piece', contributors: ['Bananas']}
+        {title: 'A piece', contributors: ['Abstract painter']}
       ]
 
     createIssue
