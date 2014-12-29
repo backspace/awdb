@@ -111,7 +111,7 @@ describe "Acceptance: Manage subscriptions", ->
     describe 'when the subscriber is an institution', ->
       beforeEach (done) ->
         click 'button:contains("Edit")'
-        click 'label:contains("Institution")'
+        click 'label:contains("Institution") input'
         click 'button:contains("Done")'
 
         waitForModels ['entity']
