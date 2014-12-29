@@ -19,7 +19,8 @@
     "es6-shim": "~0.20.3",
     "foundation": "~5.4.7",
     "font-awesome": "~4.2.0",
-    "ember-cli-moment-shim": "~0.0.2"
+    "ember-cli-moment-shim": "~0.0.2",
+    "bourbon": "3.2.1"
   },
   "resolutions": {
     "jquery": "~1.11.1"
