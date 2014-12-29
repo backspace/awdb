@@ -17,6 +17,8 @@ GuidedTour = Ember.Component.extend
     navSettings:
       selector: '.fa-gear'
       text: "You can adjust settings here."
+    done:
+      text: "Done!"
 
   stopsArray: Ember.computed 'stops', ->
     stops = @get('stops')
@@ -39,8 +41,9 @@ GuidedTour = Ember.Component.extend
   attachIDs: Ember.on 'didInsertElement', ->
     stops = @get 'stopsArray'
     stops.forEach (stop) =>
-      $(stop.selector).addClass "joyride-#{stop.key}"
-      @$("li[data-joyride-key=#{stop.key}]").attr 'data-class', "joyride-#{stop.key}"
+      if stop.selector
+        $(stop.selector).addClass "joyride-#{stop.key}"
+        @$("li[data-joyride-key=#{stop.key}]").attr 'data-class', "joyride-#{stop.key}"
 
   actions:
     startTour: ->
