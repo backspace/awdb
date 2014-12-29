@@ -28,6 +28,8 @@ app.import('bower_components/pouchdb/dist/pouchdb.js');
 app.import('bower_components/relational-pouch/dist/pouchdb.relational-pouch.js');
 app.import('bower_components/ember-pouch/dist/globals/main.js');
 
-app.import('vendor/jspdf.min.js');
+// TODO import properly
+app.import('vendor/pdfkit.js');
+app.import('vendor/blob-stream.js');
 
 module.exports = app.toTree();
