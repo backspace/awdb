@@ -26,6 +26,11 @@ GuidedTour = Ember.Component.extend
     talkAboutButterfly:
       selector: 'li:contains(Butterfly)'
       text: "This is Butterfly"
+    talkAboutBananas:
+      selector: 'a:contains(Bananas)'
+      text: "This is Bananas"
+      before: '/issues'
+      revert: '/entities'
 
   stopsArray: Ember.computed 'stops', ->
     stops = @get('stops')
@@ -44,6 +49,15 @@ GuidedTour = Ember.Component.extend
       stop.set 'options', 'next_button: false' if lastKey == key
 
       stop
+
+  waitForStopSelector: (stop, callback) ->
+    if stop.selector
+      $(stop.selector).waitUntilExists =>
+        @mapStopSelector(stop)
+        callback()
+    else
+      @mapStopSelector(stop)
+      callback()
 
   mapStopSelector: (stop) ->
     if stop?.selector
@@ -83,18 +97,45 @@ GuidedTour = Ember.Component.extend
           stop = stops[stopNumber]
           nextStop = stops[stopNumber + if goingForward then 1 else -1]
 
-
           if !goingForward && stop.revert?
             joyride.settings.paused = true
             router.transitionTo(stop.revert).then ->
-              joyride.show(null, true)
+              component.waitForStopSelector nextStop, ->
+                joyride.show(null, true)
 
           if nextStop
-            component.mapStopSelector(nextStop)
-
             if goingForward && nextStop.before?
               joyride.settings.paused = true
               router.transitionTo(nextStop.before).then ->
-                joyride.show()
+                if nextStop.selector?
+                  $(nextStop.selector).waitUntilExists ->
+                    component.mapStopSelector(nextStop)
+                    joyride.show()
+                else
+                  joyride.show()
+            else
+              component.mapStopSelector(nextStop)
+
+# Taken from http://snipplr.com/view.php?codeview&id=73324
+`
+$.fn.waitUntilExists    = function (handler, shouldRunHandlerOnce, isChild) {
+    var found       = 'found';
+    var $this       = $(this.selector);
+    var $elements   = $this.not(function () { return $(this).data(found); }).each(handler).data(found, true);
+
+    if (!isChild)
+    {
+        (window.waitUntilExists_Intervals = window.waitUntilExists_Intervals || {})[this.selector] =
+            window.setInterval(function () { $this.waitUntilExists(handler, shouldRunHandlerOnce, true); }, 500)
+        ;
+    }
+    else if (shouldRunHandlerOnce && $elements.length)
+    {
+        window.clearInterval(window.waitUntilExists_Intervals[this.selector]);
+    }
+
+    return $this;
+}
+`
 
 `export default GuidedTour`
