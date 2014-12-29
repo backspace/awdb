@@ -1,7 +1,7 @@
 if editing
   p
     label Name
-    =input type='text' name='name' value=name
+    =input type='text' name='name' value=name autofocus=true
     label Address
     =textarea name='address' value=address
     label
