@@ -4,7 +4,7 @@
 
     ul.side-nav
       each issue in persistedIssues
-        li: link-to 'issue' issue: issue.title
+        issue-list-item issue=issue
     button.js-create click='createIssue' New issue
   section.details
     outlet
