@@ -21,8 +21,10 @@ GuidedTour = Ember.Component.extend
       text: "Let’s look at the subscribers page."
     visitEntities:
       text: "Subscribers are grouped by whether they have an active subscription, were formerly subscribed, or have never subscribed."
-      before: ->
-        $('.fa-users').trigger 'click'
+      before: (router) ->
+        router.transitionTo '/entities'
+      revert: (router) ->
+        router.transitionTo '/'
     talkAboutButterfly:
       selector: 'li:contains(Butterfly)'
       text: "This is Butterfly"
@@ -56,6 +58,20 @@ GuidedTour = Ember.Component.extend
 
       stops = @get 'stopsArray'
       component = @
+      router = component.container.lookup('router:main')
+
+      goingForward = true
+      joyride = Foundation.libs.joyride
+
+      go_prev = joyride.go_prev
+      joyride.go_prev = ->
+        goingForward = false
+        go_prev.apply(joyride)
+
+      go_next = joyride.go_next
+      joyride.go_next = ->
+        goingForward = true
+        go_next.apply(joyride)
 
       $(document).foundation 'joyride', 'start',
         pre_ride_callback: ->
@@ -64,12 +80,18 @@ GuidedTour = Ember.Component.extend
             component.mapStopSelector(stops[0])
             firstTime = false
             $(document).foundation('joyride', 'hide').foundation('joyride', 'start')
+
         post_step_callback: (stopNumber) ->
           stop = stops[stopNumber]
-          nextStop = stops[stopNumber + 1]
+          nextStop = stops[stopNumber + if goingForward then 1 else -1]
+
+          if !goingForward
+            stop.revert?(router)
 
           if nextStop
             component.mapStopSelector(nextStop)
-            nextStop.before?(component)
+
+            if goingForward
+              nextStop.before?(router)
 
 `export default GuidedTour`
