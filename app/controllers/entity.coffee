@@ -3,6 +3,13 @@
 EntityController = Ember.ObjectController.extend
   isEditing: false
 
+  resetEditingOnModelChange: Ember.observer 'model.id', ->
+    newID = @get 'model.id'
+
+    if newID != @oldID
+      @set 'isEditing', false
+      @oldID = newID
+
   editing: (->
     @get('model.isNew') || @get('isEditing')
   ).property('model.isNew', 'isEditing')

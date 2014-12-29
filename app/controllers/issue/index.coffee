@@ -7,6 +7,14 @@ IssueIndexController = Ember.ObjectController.extend
 
   isEditing: false
 
+  # TODO extract mixin
+  resetEditingOnModelChange: Ember.observer 'model.id', ->
+    newID = @get 'model.id'
+
+    if newID != @oldID
+      @set 'isEditing', false
+      @oldID = newID
+
   handleNewRecord: Ember.observer 'model.isNew', ->
     if @get('model.isNew')
       @set 'wasNew', true

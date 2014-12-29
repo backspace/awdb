@@ -3,6 +3,13 @@
 RetailerController = Ember.ObjectController.extend
   requestedEditing: false
 
+  resetEditingOnModelChange: Ember.observer 'model.id', ->
+    newID = @get 'model.id'
+
+    if newID != @oldID
+      @set 'requestedEditing', false
+      @oldID = newID
+
   isEditing: Ember.computed.any 'model.isNew', 'requestedEditing'
 
   newSubscription: Ember.computed 'model.isRetailer', 'model.isNew', ->
