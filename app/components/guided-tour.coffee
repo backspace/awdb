@@ -21,10 +21,8 @@ GuidedTour = Ember.Component.extend
       text: "Let’s look at the subscribers page."
     visitEntities:
       text: "Subscribers are grouped by whether they have an active subscription, were formerly subscribed, or have never subscribed."
-      before: (router) ->
-        router.transitionTo '/entities'
-      revert: (router) ->
-        router.transitionTo '/'
+      before: '/entities'
+      revert: '/'
     talkAboutButterfly:
       selector: 'li:contains(Butterfly)'
       text: "This is Butterfly"
@@ -85,13 +83,18 @@ GuidedTour = Ember.Component.extend
           stop = stops[stopNumber]
           nextStop = stops[stopNumber + if goingForward then 1 else -1]
 
-          if !goingForward
-            stop.revert?(router)
+
+          if !goingForward && stop.revert?
+            joyride.settings.paused = true
+            router.transitionTo(stop.revert).then ->
+              joyride.show(null, true)
 
           if nextStop
             component.mapStopSelector(nextStop)
 
-            if goingForward
-              nextStop.before?(router)
+            if goingForward && nextStop.before?
+              joyride.settings.paused = true
+              router.transitionTo(nextStop.before).then ->
+                joyride.show()
 
 `export default GuidedTour`
