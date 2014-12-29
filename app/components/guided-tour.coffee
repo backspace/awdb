@@ -22,7 +22,6 @@ GuidedTour = Ember.Component.extend
     visitEntities:
       text: "Subscribers are grouped by whether they have an active subscription, were formerly subscribed, or have never subscribed."
       before: '/entities'
-      revert: '/'
     talkAboutButterfly:
       selector: 'li:contains(Butterfly)'
       text: "This is Butterfly"
@@ -30,7 +29,6 @@ GuidedTour = Ember.Component.extend
       selector: 'a:contains(Bananas)'
       text: "This is Bananas"
       before: '/issues'
-      revert: '/entities'
 
   stopsArray: Ember.computed 'stops', ->
     stops = @get('stops')
@@ -45,7 +43,7 @@ GuidedTour = Ember.Component.extend
 
       stop.set 'key', key
 
-      stop.set 'options', 'prev_button: false' if firstKey == key
+      stop.set 'options', 'prev_button: false'
       stop.set 'options', 'next_button: false' if lastKey == key
 
       stop
@@ -78,7 +76,6 @@ GuidedTour = Ember.Component.extend
       go_prev = joyride.go_prev
       joyride.go_prev = ->
         goingForward = false
-        go_prev.apply(joyride)
 
       go_next = joyride.go_next
       joyride.go_next = ->
@@ -96,12 +93,6 @@ GuidedTour = Ember.Component.extend
         post_step_callback: (stopNumber) ->
           stop = stops[stopNumber]
           nextStop = stops[stopNumber + if goingForward then 1 else -1]
-
-          if !goingForward && stop.revert?
-            joyride.settings.paused = true
-            router.transitionTo(stop.revert).then ->
-              component.waitForStopSelector nextStop, ->
-                joyride.show(null, true)
 
           if nextStop
             if goingForward && nextStop.before?
