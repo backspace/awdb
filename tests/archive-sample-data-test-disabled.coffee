@@ -5,7 +5,7 @@
 
 application = null
 
-describe.skip 'Archive sample data', ->
+describe 'Archive sample data', ->
   beforeEach (done) ->
     application = startApp()
 
