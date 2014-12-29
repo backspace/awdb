@@ -1,5 +1,8 @@
 `import Ember from 'ember'`
 
+`import PDFDocument from 'npm:pdfkit'`
+`import blobStream from 'npm:blob-stream'`
+
 MailingLabelsComponent = Ember.Component.extend
   insertPDF: Ember.on 'didInsertElement', ->
     # TODO does this help?
