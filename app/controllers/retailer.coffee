@@ -1,14 +1,12 @@
 `import Ember from 'ember'`
+`import SetPropertyOnModelChange from '../mixins/set-property-on-model-change'`
 
-RetailerController = Ember.ObjectController.extend
+RetailerController = Ember.ObjectController.extend SetPropertyOnModelChange,
   requestedEditing: false
 
-  resetEditingOnModelChange: Ember.observer 'model.id', ->
-    newID = @get 'model.id'
-
-    if newID != @oldID
-      @set 'requestedEditing', false
-      @oldID = newID
+  setPropertyOnModelChange:
+    property: 'requestedEditing'
+    value: false
 
   isEditing: Ember.computed.any 'model.isNew', 'requestedEditing'
 
