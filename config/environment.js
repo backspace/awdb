@@ -19,7 +19,8 @@ module.exports = function(environment) {
     },
 
     APP: {
-      databaseName: 'awdb-' + environment
+      databaseName: 'awdb-' + environment,
+      sampleDatabase: 'http://awdb.iriscouch.com/awdb-sample'
       // Here you can pass flags/options to your application instance
       // when it is created
     }

@@ -1,4 +1,5 @@
 `import Ember from 'ember'`
+`import config from '../config/environment'`
 
 IndexController = Ember.ArrayController.extend
   displayWelcome: Ember.computed 'hasVisited', ->
@@ -26,8 +27,7 @@ IndexController = Ember.ArrayController.extend
       pouch = @container.lookup 'pouch:main'
       databaseName = pouch._db_name
 
-      # TODO extract to config
-      replacementName = "http://awdb.iriscouch.com/awdb-sample"
+      replacementName = config.APP.sampleDatabase
 
       pouch.destroy().then(=>
         new PouchDB(databaseName).then((newPouch) =>
