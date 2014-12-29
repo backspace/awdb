@@ -4,7 +4,7 @@ if isEditing
     =input type='text' name='name' value=name autofocus=true
   label
     | Address
-    =textarea name='address' value=address
+    =textarea name='address' value=address rows=4
 
   button.js-save click='doneEditing' Done
 else
