@@ -18,7 +18,14 @@ GuidedTour = Ember.Component.extend
       selector: '.fa-gear'
       text: "You can adjust settings here."
     done:
-      text: "Done!"
+      text: "Let’s look at the subscribers page."
+    visitEntities:
+      text: "Subscribers are grouped by whether they have an active subscription, were formerly subscribed, or have never subscribed."
+      before: ->
+        $('.fa-users').trigger 'click'
+    talkAboutButterfly:
+      selector: 'li:contains(Butterfly)'
+      text: "This is Butterfly"
 
   stopsArray: Ember.computed 'stops', ->
     stops = @get('stops')
@@ -38,22 +45,31 @@ GuidedTour = Ember.Component.extend
 
       stop
 
-  attachIDs: Ember.on 'didInsertElement', ->
-    stops = @get 'stopsArray'
-    stops.forEach (stop) =>
-      if stop.selector
-        $(stop.selector).addClass "joyride-#{stop.key}"
-        @$("li[data-joyride-key=#{stop.key}]").attr 'data-class', "joyride-#{stop.key}"
+  mapStopSelector: (stop) ->
+    if stop?.selector
+      $(stop.selector).addClass "joyride-#{stop.key}"
+      @$("li[data-joyride-key=#{stop.key}]").attr 'data-class', "joyride-#{stop.key}"
 
   actions:
     startTour: ->
       firstTime = true
 
+      stops = @get 'stopsArray'
+      component = @
+
       $(document).foundation 'joyride', 'start',
         pre_ride_callback: ->
           # TODO this is an unfortunate hack to compensate for the modal background disappearing upon first display
           if firstTime
+            component.mapStopSelector(stops[0])
             firstTime = false
             $(document).foundation('joyride', 'hide').foundation('joyride', 'start')
+        post_step_callback: (stopNumber) ->
+          stop = stops[stopNumber]
+          nextStop = stops[stopNumber + 1]
+
+          if nextStop
+            component.mapStopSelector(nextStop)
+            nextStop.before?(component)
 
 `export default GuidedTour`
