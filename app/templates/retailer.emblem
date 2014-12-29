@@ -23,7 +23,7 @@ unless isNew
   h3 Inactive subscriptions:
   ul.js-inactive-subscriptions
     each subscription in model.inactiveSubscriptions
-      li From #{subscription.createdAt} to #{subscription.endedAt}
+      li From #{moment subscription.createdAt} to #{moment subscription.endedAt}
     else
       | None!
 

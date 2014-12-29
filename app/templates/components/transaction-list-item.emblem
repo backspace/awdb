@@ -1,4 +1,4 @@
-td=transaction.createdAt
+td=moment transaction.createdAt
 td=transaction.entity.name
 td=eventType
 td=formattedAmount
