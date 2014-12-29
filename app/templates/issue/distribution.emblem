@@ -1,17 +1,6 @@
 h2 Distribution of issue {{issue.title}}
 
-div.js-recipients
-  div.js-subscriptions
-    | Subscribers
-    =fulfillment-list fulfillments=subscriptionFulfillments
-  div.js-retail-subscriptions
-    | Retailers
-    =fulfillment-list fulfillments=retailSubscriptionFulfillments
-  div.js-contributions
-    | Contributors
-    =fulfillment-list fulfillments=contributionFulfillments
-  div.js-extras
-    | Extras
-    =fulfillment-list fulfillments=extraFulfillments
+distribution-fulfillments fulfillments=fulfillments
+
 h3 Mailing labels
 mailing-labels addressables=fulfillments

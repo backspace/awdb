@@ -7,6 +7,9 @@ App = null
 entities = null
 
 describe "Acceptance: Distribute issues", ->
+  # TODO speed this up
+  @timeout 3000
+
   # Copied from manage-subscriptions-test; DRY up somehow?
   beforeEach (done) ->
     App = startApp()

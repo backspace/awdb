@@ -1,20 +1,6 @@
 button.js-distribute click='distribute' disabled=isIncomplete class=isIncomplete:secondary Distribute to #{distribution.proposedFulfillments.length} recipient#{plural-suffix distribution.proposedFulfillments.length}
 
-// TODO this is almost exactly repeated in issue/distribution
-
-div.js-recipients
-  div.js-subscriptions
-    | Subscribers
-    =fulfillment-list fulfillments=distribution.proposedSubscriptionFulfillments deleteFulfillment="deleteFulfillment"
-  div.js-retail-subscriptions
-    | Retailers
-    =fulfillment-list fulfillments=distribution.proposedRetailSubscriptionFulfillments deleteFulfillment="deleteFulfillment"
-  div.js-contributions
-    | Contributors
-    =fulfillment-list fulfillments=distribution.proposedContributionFulfillments deleteFulfillment="deleteFulfillment"
-  div.js-extras
-    | Extras
-    =fulfillment-list fulfillments=distribution.proposedExtraFulfillments deleteFulfillment="deleteFulfillment"
+distribution-fulfillments fulfillments=distribution.proposedFulfillments deleteFulfillment="deleteFulfillment"
 
 =entity-search entities=entities addEntity="addEntity" placeholder="Add an extra recipient"
 
