@@ -1,6 +1,7 @@
 .list-and-details
   section.list
-    h2 Issues
+    header
+      h2 Issues
 
     ul.side-nav
       each issue in persistedIssues

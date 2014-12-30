@@ -1,5 +1,6 @@
 .full-details
-  h2 Transactions
+  header
+    h2 Transactions
   table
     thead
       tr

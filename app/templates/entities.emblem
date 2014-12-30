@@ -1,6 +1,7 @@
 .list-and-details
   section.list
-    h2 Entities
+    header
+      h2 Entities
     button.js-create click='createEntity' New entity
 
     // TODO componentise to avoid having to know about fa-ul?

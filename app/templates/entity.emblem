@@ -1,3 +1,6 @@
+header
+  h3=name
+
 if editing
   p
     label Name
@@ -18,8 +21,6 @@ if editing
       | Institution
     button.js-save click='doneEditing' Done
 else
-  h3=name
-
   p.address=address
 
   if isSubscribed

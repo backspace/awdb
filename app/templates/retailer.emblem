@@ -1,3 +1,6 @@
+header
+  h3=name
+
 if isEditing
   label
     | Name
@@ -8,8 +11,6 @@ if isEditing
 
   button.js-save click='doneEditing' Done
 else
-  h3=model.name
-
   p.address=model.address
 
   button click='edit' Edit

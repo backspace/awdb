@@ -1,5 +1,6 @@
 .full-details
-  h2 Settings
+  header
+    h2 Settings
   if isReplicating
     fa-icon 'circle-o-notch' spin=true size="lg"
   else
