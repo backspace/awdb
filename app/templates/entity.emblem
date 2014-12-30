@@ -20,7 +20,7 @@ if editing
 else
   h3=name
 
-  p=address
+  p.address=address
 
   if isSubscribed
     p Issues remaining: #{fulfillmentsRemaining}

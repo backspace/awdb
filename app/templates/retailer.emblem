@@ -10,7 +10,7 @@ if isEditing
 else
   h3=model.name
 
-  p=model.address
+  p.address=model.address
 
   button click='edit' Edit
 
