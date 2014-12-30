@@ -1,10 +1,11 @@
-table
-  thead
-    tr
-      th Date
-      th Entity
-      th Event
-      th Amount
-  tbody
-    each transaction in arrangedContent
-      transaction-list-item transaction=transaction
+.full-details
+  table
+    thead
+      tr
+        th Date
+        th Entity
+        th Event
+        th Amount
+    tbody
+      each transaction in arrangedContent
+        transaction-list-item transaction=transaction

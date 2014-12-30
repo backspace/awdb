@@ -1,43 +1,44 @@
-if isReplicating
-  fa-icon 'circle-o-notch' spin=true size="lg"
-else
-  h2 Back up database
-  =input type='text' value=url
-  button click='replicate' Replicate
+.full-details
+  if isReplicating
+    fa-icon 'circle-o-notch' spin=true size="lg"
+  else
+    h2 Back up database
+    =input type='text' value=url
+    button click='replicate' Replicate
 
-if isReplacing
-  fa-icon 'circle-o-notch' spin=true size="lg"
-else
-  h2 Replace this database
-  =input type='text' name='replacement' value=replacementUrl
-  button.replace click='replace' Replace
+  if isReplacing
+    fa-icon 'circle-o-notch' spin=true size="lg"
+  else
+    h2 Replace this database
+    =input type='text' name='replacement' value=replacementUrl
+    button.replace click='replace' Replace
 
-.row
-  .small-12.medium-8.columns
-    h2 Subscription costs
+  .row
+    .small-12.medium-8.columns
+      h2 Subscription costs
 
-    table
-      thead
-        tr
-          th
-          th 3 issues
-          th 6 issues
-      tbody
-        tr
-          th Canada
-          td=input type='number' value=subscriptionCanada3 name='subscriptionCanada3'
-          td=input type='number' value=subscriptionCanada6 name='subscriptionCanada6'
-        tr
-          th USA
-          td=input type='number' value=subscriptionUsa3 name='subscriptionUsa3'
-          td=input type='number' value=subscriptionUsa6 name='subscriptionUsa6'
-        tr
-          th International
-          td=input type='number' value=subscriptionInternational3 name='subscriptionInternational3'
-          td=input type='number' value=subscriptionInternational6 name='subscriptionInternational6'
-        tr
-          th Institution
-          td=input type='number' value=subscriptionInstitution3 name='subscriptionInstitution3'
+      table
+        thead
+          tr
+            th
+            th 3 issues
+            th 6 issues
+        tbody
+          tr
+            th Canada
+            td=input type='number' value=subscriptionCanada3 name='subscriptionCanada3'
+            td=input type='number' value=subscriptionCanada6 name='subscriptionCanada6'
+          tr
+            th USA
+            td=input type='number' value=subscriptionUsa3 name='subscriptionUsa3'
+            td=input type='number' value=subscriptionUsa6 name='subscriptionUsa6'
+          tr
+            th International
+            td=input type='number' value=subscriptionInternational3 name='subscriptionInternational3'
+            td=input type='number' value=subscriptionInternational6 name='subscriptionInternational6'
+          tr
+            th Institution
+            td=input type='number' value=subscriptionInstitution3 name='subscriptionInstitution3'
           td=input type='number' value=subscriptionInstitution6 name='subscriptionInstitution6'
   .small-12.medium-4.columns
     h2 Feature compensation
