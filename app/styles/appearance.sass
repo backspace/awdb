@@ -5,6 +5,9 @@ $colour-brand-trace: scale-color($colour-brand, $lightness: 90%)
 
 $section-padding: $icon-bar-item-padding
 
+// TODO define as height of one icon bar item?
+$top-margin: 64px
+
 table
   border: 0
 
@@ -16,6 +19,9 @@ table
 
 .address
   white-space: pre
+
+aside nav a:first-child
+  margin-top: $top-margin
 
 aside nav
   background: white
@@ -40,9 +46,6 @@ aside nav
 
     &:hover i, &.active i
       color: $colour-brand-active
-
-  a.blank
-    opacity: 0
 
 .list-and-details
   .list, .details
