@@ -1,14 +1,80 @@
+$colour-brand: $primary-color
+$colour-brand-inactive: $colour-brand
+$colour-brand-active: scale-color($colour-brand, $lightness: 30%)
+$colour-brand-trace: scale-color($colour-brand, $lightness: 90%)
+
+$section-padding: $icon-bar-item-padding
+
+aside nav
+  background: white
+
+  a
+    position: relative
+
+    &:hover, &.active
+      background: white
+
+    &:after
+      position: absolute
+      top: 0
+      right: 0
+      height: 100%
+
+      border-right: 1px solid $colour-brand-trace
+
+      content: ""
+    i
+      color: $colour-brand-inactive
+
+    &:hover i, &.active i
+      color: $colour-brand-active
+
+  a.blank
+    opacity: 0
+
+.list-and-details
+  .list, .details
+    position: relative
+
+    padding: 0 $section-padding
+
+  .list:after
+    position: absolute
+    top: 64px
+    bottom: 64px
+    right: 0
+
+    border-right: 1px solid $colour-brand-trace
+
+    content: ""
+
+
 ul.side-nav
-  li.active
-    background-color: #ccc
+  li a:not(.button)
+    color: $colour-brand-inactive
+
+    &:hover, &.active
+      background: inherit
+      color: $colour-brand-active
 
   &.fa-ul
     li
       padding-left: 1em
+      &.heading
+        padding-left: 0
+
+        color: $colour-brand-inactive
+
     .fa-li
       top: 0.75em
       left: 0.5em
       width: 0.5em
+
+      color: $colour-brand-inactive
+
+    li.active, li:hover
+      .fa-li
+        color: $colour-brand-active
 
 label.inline-radio
   display: inline
