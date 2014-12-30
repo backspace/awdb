@@ -1,21 +1,22 @@
 .full-details
+  h2 Settings
   if isReplicating
     fa-icon 'circle-o-notch' spin=true size="lg"
   else
-    h2 Back up database
+    h3 Back up database
     =input type='text' value=url
     button click='replicate' Replicate
 
   if isReplacing
     fa-icon 'circle-o-notch' spin=true size="lg"
   else
-    h2 Replace this database
+    h3 Replace this database
     =input type='text' name='replacement' value=replacementUrl
     button.replace click='replace' Replace
 
   .row
     .small-12.medium-8.columns
-      h2 Subscription costs
+      h3 Subscription costs
 
       table
         thead
@@ -41,7 +42,7 @@
             td=input type='number' value=subscriptionInstitution3 name='subscriptionInstitution3'
           td=input type='number' value=subscriptionInstitution6 name='subscriptionInstitution6'
   .small-12.medium-4.columns
-    h2 Feature compensation
+    h3 Feature compensation
     =input type='number' value=featureCompensation name='featureCompensation'
 .row
   .small-centered.small-3.columns
