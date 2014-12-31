@@ -7,6 +7,8 @@ liquid-with model as issue
       | Number
       =input type='number' name='number' value=issue.number
     button.js-save click='doneEditing' Done
+    | &nbsp;
+    button.js-cancel click='revertEditing' Revert
   else
     button click='edit' Edit
     br

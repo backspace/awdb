@@ -35,6 +35,18 @@ IssueIndexController = Ember.ObjectController.extend SetPropertyOnModelChange,
       @get('model').save().then =>
         @set 'isEditing', false
 
+    revertEditing: ->
+      model = @get('model')
+
+      if model.get('isNew')
+        model.deleteRecord()
+
+        @transitionToRoute 'issues'
+      else
+        model.rollback()
+
+      @set 'isEditing', false
+
     saveFeature: (context) ->
       promise = context.promise
       feature = context.feature
