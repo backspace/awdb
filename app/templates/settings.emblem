@@ -1,19 +1,10 @@
 .full-details
   header
     h2 Settings
-  if isReplicating
-    fa-icon 'circle-o-notch' spin=true size="lg"
-  else
-    h3 Back up database
-    =input type='text' value=url
-    button click='replicate' Replicate
 
-  if isReplacing
-    fa-icon 'circle-o-notch' spin=true size="lg"
-  else
-    h3 Replace this database
-    =input type='text' name='replacement' value=replacementUrl
-    button.replace click='replace' Replace
+  single-field-form header="Back up database" value=url action='replicate' label="Replicate" processing=isReplicating
+
+  single-field-form header="Replace this database" value=replacementUrl action='replace' label="Replace" processing=isReplacing
 
   .row
     .small-12.medium-8.columns

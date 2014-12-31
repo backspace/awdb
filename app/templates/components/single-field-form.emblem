@@ -1,0 +1,6 @@
+if processing
+  fa-icon 'circle-o-notch' spin=true size="lg"
+else
+  h3=header
+  =input type='text' value=value
+  button click='click' #{label}
