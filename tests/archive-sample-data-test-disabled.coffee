@@ -21,7 +21,7 @@ describe 'Archive sample data', ->
       click '.js-create'
       fillIn 'input[name=name]', attributes.name
       fillIn 'textarea[name=address]', attributes.address
-      click "label:contains('#{attributes.classification}')"
+      click "label:contains('#{attributes.classification}') input"
 
       click '.js-save'
 
