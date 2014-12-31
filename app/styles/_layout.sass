@@ -1,5 +1,8 @@
 $list-background: #eee
 
+$aside-width: 4rem
+$list-width: $aside-width*4
+
 body, .everything
   height: 100%
 
@@ -13,7 +16,7 @@ body
 
 aside
   @include display(flex)
-  @include flex(0 0 4rem)
+  @include flex(0 0 $aside-width)
 
   height: 100%
 
@@ -36,9 +39,13 @@ main
   height: 100%
 
   .list
-    @include flex(0 0 16rem)
+    @include flex(0 0 $list-width)
     height: 100%
     overflow-y: scroll
+
+    // TODO layout vs appearance? hmm
+    &:after
+      left: $list-width
 
   .details
     @include flex(1)
