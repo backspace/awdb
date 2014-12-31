@@ -1,6 +1,7 @@
-header
-  h3=title
+liquid-with model as issue
+  header
+    h3=issue.title
 
-h4 Issue #{number}
+  h4 Issue #{issue.number}
 
 outlet

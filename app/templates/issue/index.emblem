@@ -1,24 +1,25 @@
-if isEditing
-  label
-    | Title
-    =input type='text' name='title' value=title autofocus=true
-  label
-    | Number
-    =input type='number' name='number' value=number
-  button.js-save click='doneEditing' Done
-else
-  button click='edit' Edit
-  br
-  =link-to 'issue.distribute' class="js-build-distribution" | Distribute
+liquid-with model as issue
+  if isEditing
+    label
+      | Title
+      =input type='text' name='title' value=issue.title autofocus=true
+    label
+      | Number
+      =input type='number' name='number' value=issue.number
+    button.js-save click='doneEditing' Done
+  else
+    button click='edit' Edit
+    br
+    =link-to 'issue.distribute' class="js-build-distribution" | Distribute
 
-unless isNew
-  h4 Features:
-  ul
-    each feature in features
-      =feature-list-item feature=feature entities=entities save="saveFeature" createEntity="createEntity"
-    =feature-list-item feature=newFeature save="saveFeature" entities=entities createEntity="createEntity"
+  unless isNew
+    h4 Features:
+    ul
+      each feature in issue.features
+        =feature-list-item feature=feature entities=entities save="saveFeature" createEntity="createEntity"
+      =feature-list-item feature=newFeature save="saveFeature" entities=entities createEntity="createEntity"
 
-  h4 Distributions:
-  ul.distributions
-    each distribution in distributions
-      li: link-to 'issue.distribution' distribution: moment distribution.createdAt
+    h4 Distributions:
+    ul.distributions
+      each distribution in issue.distributions
+        li: link-to 'issue.distribution' distribution: moment distribution.createdAt
