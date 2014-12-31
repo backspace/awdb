@@ -9,7 +9,6 @@
       li.heading Active retailers
       each retailer in activeRetailers
         =entity-list-item entity=retailer
-          | #{retailer.activeSubscription.copies} copies @ $#{retailer.activeSubscription.cost}/each
 
     ul.fa-ul.side-nav.js-inactive-retailers
       li.heading Inactive retailers

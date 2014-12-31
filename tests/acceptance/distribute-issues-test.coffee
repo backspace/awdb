@@ -159,7 +159,6 @@ describe "Acceptance: Distribute issues", ->
         expectElement '.js-subscriptions li', {contains: 'Bob'}
 
         expectElement '.js-retail-subscriptions li', {contains: 'Bookstore'}
-        expectElement '.js-retail-subscriptions li:contains("Bookstore")', {contains: '30 @ $10/each'}
 
         expectElement '.js-contributions li', {contains: 'Artist'}
 
