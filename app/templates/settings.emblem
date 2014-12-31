@@ -41,7 +41,7 @@
           tr
             th Institution
             td=input type='number' value=subscriptionInstitution3 name='subscriptionInstitution3'
-          td=input type='number' value=subscriptionInstitution6 name='subscriptionInstitution6'
+            td=input type='number' value=subscriptionInstitution6 name='subscriptionInstitution6'
   .small-12.medium-4.columns
     h3 Feature compensation
     =input type='number' value=featureCompensation name='featureCompensation'
