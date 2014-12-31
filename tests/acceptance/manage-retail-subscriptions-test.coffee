@@ -53,8 +53,6 @@ describe 'Acceptance: Manage retail subscriptions', ->
       andThen ->
         expectElement '.js-active-retailers li:not(.heading)'
         expectElement '.js-active-retailers li', {contains: 'Chapters'}
-        expectElement '.js-active-retailers li:contains("Chapters")', {contains: cost}
-        expectElement '.js-active-retailers li:contains("Chapters")', {contains: copies}
 
         done()
 
