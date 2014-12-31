@@ -20,6 +20,8 @@ if editing
       =radio-button value='institution' groupValue=classification
       | Institution
     button.js-save click='doneEditing' Done
+    | &nbsp;
+    button.js-cancel click='revertEditing' Revert
 else
   p.address=address
 

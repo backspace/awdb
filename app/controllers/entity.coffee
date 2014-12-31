@@ -25,6 +25,16 @@ EntityController = Ember.ObjectController.extend SetPropertyOnModelChange,
         model.save().then =>
           @set 'isEditing', false
 
+    revertEditing: ->
+      model = @get('model')
+
+      if model.get 'isNew'
+        model.deleteRecord()
+      else
+        model.rollback()
+
+      @set 'isEditing', false
+
     edit: ->
       @set 'isEditing', true
 
