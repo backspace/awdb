@@ -8,7 +8,7 @@ entities = null
 
 describe "Acceptance: Distribute issues", ->
   # TODO speed this up
-  @timeout 3000
+  @timeout 5000
 
   # Copied from manage-subscriptions-test; DRY up somehow?
   beforeEach (done) ->
