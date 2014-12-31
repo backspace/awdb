@@ -2,7 +2,8 @@
   section.list
     header
       h2 Entities
-    button.js-create click='createEntity' New entity
+      .secret-button.add.js-create click='createEntity'
+        fa-icon 'plus'
 
     // TODO componentise to avoid having to know about fa-ul?
     ul.fa-ul.side-nav.js-subscribers

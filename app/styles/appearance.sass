@@ -33,6 +33,24 @@ header
 
     margin: 0.5rem 0
 
+  .secret-button
+    position: relative
+    // TODO how to align to header text?
+    top: 33%
+    width: 3rem
+    float: right
+    color: $colour-brand-trace
+    text-align: right
+
+    &.add:hover
+      i:before
+        // TODO figure out how to know this or how icon-changing hover should work in general
+        content: "\f055"
+
+  &:hover
+    .secret-button
+      color: $colour-brand
+
 aside nav
   background: white
 

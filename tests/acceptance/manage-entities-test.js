@@ -76,7 +76,7 @@ describe('Acceptance: Manage entities', function() {
   it("lets the user create an entity", function(done) {
     viewEntities();
 
-    click('button:contains("New")');
+    click('.js-create');
     fillIn('input[name="name"]', 'Corrie');
     click('button:contains("Done")');
 

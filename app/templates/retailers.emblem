@@ -2,7 +2,8 @@
   section.list
     header
       h2 Retailers
-    button.js-create click='createRetailer' New retailer
+      .secret-button.add.js-create click='createRetailer'
+        fa-icon 'plus'
 
     ul.fa-ul.side-nav.js-active-retailers
       li.heading Active retailers

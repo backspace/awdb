@@ -2,10 +2,11 @@
   section.list
     header
       h2 Issues
+      .secret-button.add.js-create click='createIssue'
+        fa-icon 'plus'
 
     ul.side-nav
       each issue in persistedIssues
         issue-list-item issue=issue
-    button.js-create click='createIssue' New issue
   section.details
     outlet

@@ -21,7 +21,7 @@ describe('Acceptance: Create issue', function() {
   it('lets the user create a new issue', function(done) {
     viewIssues();
 
-    click('button:contains("New issue")');
+    click('.js-create');
 
     andThen(function() {
       expect(find('input[type="number"]').val()).to.equal('1');
@@ -43,7 +43,7 @@ describe('Acceptance: Create issue', function() {
 
     beforeEach(function(done) {
       viewIssues();
-      click('button:contains("New issue")');
+      click('.js-create');
       fillIn('input[name=number]', existingIssueNumber);
       click('button:contains("Done")');
 
@@ -54,7 +54,7 @@ describe('Acceptance: Create issue', function() {
 
     it('auto-fills the next issue number', function(done) {
       viewIssues();
-      click('button:contains("New issue")');
+      click('.js-create');
 
       andThen(function() {
         expect(find('input[type=number]').val()).to.equal(existingIssueNumber + 1 + '');

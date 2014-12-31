@@ -351,7 +351,7 @@ describe "Acceptance: Distribute issues", ->
 
     it 'uses the new feature compensation in a distribution', (done) ->
       viewIssues()
-      click 'button:contains("New issue")'
+      click '.js-create'
       fillIn 'input[name="title"]', 'Cantaloupe is capricious'
       click 'button:contains("Done")'
 

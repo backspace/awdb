@@ -43,7 +43,7 @@ describe "Acceptance: Manage retailers", ->
   it 'supports creating a retailer', (done) ->
     viewRetailers()
 
-    click 'button:contains("New")'
+    click '.js-create'
     fillIn 'input[name="name"]', 'Controversial'
     click 'button:contains("Done")'
 
