@@ -1,12 +1,16 @@
 `import Ember from 'ember'`
 `import SetPropertyOnModelChange from '../mixins/set-property-on-model-change'`
 
+`import Entity from '../models/entity'`
+
 EntityController = Ember.ObjectController.extend SetPropertyOnModelChange,
   isEditing: false
 
   setPropertyOnModelChange:
     property: 'isEditing'
     value: false
+
+  classificationKeyToLabel: (Ember.Object.create({key: key, label: value}) for key, value of Entity.classifications)
 
   editing: (->
     @get('model.isNew') || @get('isEditing')

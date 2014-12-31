@@ -7,18 +7,12 @@ if editing
     =input type='text' name='name' value=name autofocus=true
     label Address
     =textarea name='address' value=address rows=4
-    label
-      =radio-button value='canada' groupValue=classification
-      | Canada
-    label
-      =radio-button value='usa' groupValue=classification
-      | USA
-    label
-      =radio-button value='international' groupValue=classification
-      | International
-    label
-      =radio-button value='institution' groupValue=classification
-      | Institution
+
+    each keyToLabel in classificationKeyToLabel
+      label
+        =radio-button value=keyToLabel.key groupValue=classification
+        | #{keyToLabel.label}
+
     button.js-save click='doneEditing' Done
     | &nbsp;
     button.js-cancel click='revertEditing' Revert

@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import DS from 'ember-data';
 
-export default DS.Model.extend({
+var Entity = DS.Model.extend({
   name: DS.attr('string'),
   address: DS.attr('string'),
   classification: DS.attr('string'),
@@ -36,3 +36,14 @@ export default DS.Model.extend({
 
   rev: DS.attr('string')
 });
+
+Entity.reopenClass({
+  classifications: {
+    'canada': 'Canada',
+    'usa': 'USA',
+    'international': 'International',
+    'institution': 'Institution'
+  }
+});
+
+export default Entity;
