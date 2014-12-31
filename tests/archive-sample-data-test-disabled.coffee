@@ -27,6 +27,8 @@ describe 'Archive sample data', ->
 
       waitForAllModels()
 
+      andThen -> console.log "Created entity #{attributes.name}"
+
     createEntity
       name: 'Writer'
       address: "91 Albert St.\nWinnipeg, MB  R0E 0H0\nCanada"
@@ -96,6 +98,8 @@ describe 'Archive sample data', ->
 
       waitForAllModels()
 
+      andThen -> "Subscribed #{attributes.name}"
+
     createEntitySubscription
       name: 'Subscriber'
       count: 6
@@ -133,6 +137,8 @@ describe 'Archive sample data', ->
 
       waitForAllModels()
 
+      andThen -> console.log "Created retailer #{attributes.name}"
+
     createRetailer
       name: 'The Paddlewheel'
       address: '101 Colony St.'
@@ -153,6 +159,8 @@ describe 'Archive sample data', ->
       click '.js-subscribe'
 
       waitForAllModels()
+
+      andThen -> console.log "Subscribed #{attributes.name}"
 
     createRetailSubscription
       name: 'The Paddlewheel'
@@ -189,6 +197,8 @@ describe 'Archive sample data', ->
           waitForModels ['feature']
 
       waitForAllModels()
+
+      andThen -> "Created issue #{attributes.title}"
 
     createIssue
       title: 'Apples'
@@ -228,6 +238,8 @@ describe 'Archive sample data', ->
       click '.js-distribute'
 
       waitForAllModels()
+
+      andThen -> "Distributed issue #{attributes.title}"
 
     distributeIssue
       title: 'Apples'
