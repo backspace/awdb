@@ -1,7 +1,7 @@
 .list-and-details
   section.list
     header
-      h2 Entities
+      h2 Subscribers
       .secret-button.add.js-create click='createEntity'
         fa-icon 'plus'
 
