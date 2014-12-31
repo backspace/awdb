@@ -2,9 +2,9 @@
   header
     h2 Settings
 
-  single-field-form header="Back up database" value=url action='replicate' label="Replicate" processing=isReplicating
+  single-field-form header="Back up database" value=url action='replicate' icon='save' processing=isReplicating
 
-  single-field-form header="Replace this database" value=replacementUrl action='replace' label="Replace" processing=isReplacing
+  single-field-form header="Replace this database" value=replacementUrl action='replace' icon='exclamation-triangle' processing=isReplacing
 
   .row
     .small-12.medium-8.columns

@@ -1,6 +1,11 @@
-if processing
-  fa-icon 'circle-o-notch' spin=true size="lg"
-else
-  h3=header
-  =input type='text' value=value
-  button click='click' #{label}
+.row.collapse
+  .small-4.columns
+    span.prefix=header
+  .small-6.columns
+    =input type='text' value=value
+  .small-2.columns
+    button.postfix click='click'
+      if processing
+        fa-icon 'circle-o-notch' spin=true size="lg"
+      else
+        fa-icon icon
