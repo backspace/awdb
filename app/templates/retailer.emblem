@@ -1,5 +1,9 @@
 header
-  h3=name
+  h3
+    if isNew
+      | New retailer
+    else
+      =name
 
 if isEditing
   label

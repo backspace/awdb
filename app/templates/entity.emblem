@@ -1,5 +1,9 @@
 header
-  h3=name
+  h3
+    if isNew
+      | New subscriber
+    else
+      =name
 
 if editing
   p
