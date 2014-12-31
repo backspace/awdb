@@ -22,4 +22,6 @@ liquid-with model as issue
     h4 Distributions:
     ul.distributions
       each distribution in issue.distributions
-        li: link-to 'issue.distribution' distribution: moment distribution.createdAt
+        // TODO is this better a computed filterBy?
+        unless distribution.isNew
+          li: link-to 'issue.distribution' distribution: moment distribution.createdAt
