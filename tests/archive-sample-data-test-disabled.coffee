@@ -82,6 +82,11 @@ describe 'Archive sample data', ->
       address: '42 Emerson Ave.\nWinnipeg, MB  R2F 9P9\nCanada'
       classification: 'Canada'
 
+    createEntity
+      name: 'Revenant'
+      address: 'The International Network'
+      classification: 'International'
+
 
     createEntitySubscription = (attributes) ->
       viewEntity attributes.name
@@ -112,6 +117,10 @@ describe 'Archive sample data', ->
     createEntitySubscription
       name: 'Caterpillar'
       count: 6
+
+    createEntitySubscription
+      name: 'Revenant'
+      count: 3
 
 
     createRetailer = (attributes) ->
@@ -249,6 +258,12 @@ describe 'Archive sample data', ->
 
     distributeIssue
       title: 'Durians'
+
+    # Re-subscribe a former subscriber
+
+    createEntitySubscription
+      name: 'Revenant'
+      count: 3
 
     andThen ->
       done()
