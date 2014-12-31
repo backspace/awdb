@@ -8,6 +8,9 @@ Distribution = DS.Model.extend
 
   rev: DS.attr 'string'
 
+  countByFulfillment: Ember.computed.mapBy 'fulfillments', 'count'
+  count: Ember.computed.sum 'countByFulfillment'
+
   createContributionTransactions: Ember.on 'didCreate', ->
     @get('issue.features').forEach (feature) =>
       feature.get('contributions').forEach (contribution) =>
