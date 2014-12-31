@@ -23,6 +23,17 @@ RetailerController = Ember.ObjectController.extend SetPropertyOnModelChange,
         model.save().then =>
           @set 'requestedEditing', false
 
+    revertEditing: ->
+      model = @get 'model'
+
+      if model.get 'isNew'
+        model.deleteRecord()
+        @transitionToRoute 'retailers'
+      else
+        model.rollback()
+
+      @set 'requestedEditing', false
+
     edit: ->
       @set 'requestedEditing', true
 
