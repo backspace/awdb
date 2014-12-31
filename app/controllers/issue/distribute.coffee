@@ -7,7 +7,7 @@ IssueDistributeController = Ember.ObjectController.extend
   distribution: Ember.computed.alias 'model.distribution'
 
   entities: Ember.computed.alias 'model.entities'
-  subscribers: Ember.computed.filterBy('entities', 'isSubscribed')
+  subscribers: Ember.computed.filterBy('model.entities', 'isSubscribed')
 
   hasNoFulfillments: Ember.computed.empty 'distribution.proposedFulfillments'
   fulfillmentAddresses: Ember.computed.mapBy 'distribution.proposedFulfillments', 'entity.address'
@@ -36,7 +36,8 @@ IssueDistributeController = Ember.ObjectController.extend
     # FIXME hideous hack to store fulfillments elsewhere because of broken parent-saving with unsaved children
     distribution.set 'proposedFulfillments', []
 
-    suggestedSubscribers = @get('subscribers').filter (subscriber) ->
+    # FIXME having to refilter entities.isSubscribed here rather than rely on computed subscribers, why?
+    suggestedSubscribers = @get('model.entities').filterBy('isSubscribed').filter (subscriber) ->
       !subscriber.get('issuesReceived').contains(issue)
 
     suggestedSubscribers.mapBy('activeSubscription').forEach (subscription) =>
