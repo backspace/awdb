@@ -43,8 +43,7 @@ EntityController = Ember.ObjectController.extend SetPropertyOnModelChange,
     edit: ->
       @set 'isEditing', true
 
-    subscribe: ->
-      subscription = @get('newSubscription')
+    subscribe: (subscription) ->
       subscription.set 'entity', @get('model')
       subscription.save().then =>
         @get('model').save()

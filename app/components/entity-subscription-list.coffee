@@ -20,8 +20,8 @@ EntitySubscriptionList = Ember.Component.extend SetPropertyOnModelChange,
     requestSubscriptionForm: ->
       @set 'requestedSubscriptionForm', true
 
-    save: ->
-      @sendAction 'save'
+    save: (subscription) ->
+      @sendAction 'save', subscription
       @set 'requestedSubscriptionForm', false
 
 `export default EntitySubscriptionList`

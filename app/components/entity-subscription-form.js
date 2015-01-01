@@ -36,7 +36,7 @@ export default Ember.Component.extend({
     save() {
       // TODO find a better way to stop changing subscription after save fired
       this.set('saving', true);
-      this.sendAction('save');
+      this.sendAction('save', this.get('subscription'));
     }
   }
 });
