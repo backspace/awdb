@@ -32,10 +32,6 @@ else
 
 
   p Issues received:
-  ul
-    each fulfillment in fulfillments
-      li: link-to 'issue' fulfillment.issue: fulfillment.issue.title
-    else
-      p None
+  entity-fulfillment-list fulfillments=fulfillments
 
   entity-subscription-form entity=model subscription=newSubscription save="subscribe"

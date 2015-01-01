@@ -1,0 +1,5 @@
+ul
+  each fulfillment in fulfillments
+    li: link-to 'issue' fulfillment.issue: fulfillment.issue.title
+  else
+    p None
