@@ -1,30 +1,33 @@
-.row.subscription
-  if showSubscriptionForm
-    entity-subscription-form entity=entity subscription=subscription save="save"
-  else
-    button.tiny.js-create-subscription click="requestSubscriptionForm"
-      | #{fa-icon 'plus'} Add subscription
+if showSubscriptionForm
+  .row.subscription
+    .small-3.columns
+      entity-subscription-form entity=entity subscription=subscription save="save"
+    .small-9.columns
+      entity-fulfillment-list fulfillments=subscription.currentAndFutureFulfillments
+else
+  button.tiny.js-create-subscription click="requestSubscriptionForm"
+    | #{fa-icon 'plus'} Add subscription
 each subscription in subscriptions
   .row.subscription
-    .small-2.columns
+    .small-3.columns
       .row
         .date=moment subscription.createdAt 'MMM D ’YY'
       .row
         .count #{subscription.count} issues
         .cost $#{subscription.cost}
-    .small-10.columns
+    .small-9.columns
       entity-fulfillment-list fulfillments=subscription.currentAndFutureFulfillments
 if entity.extraFulfillments
     .row.subscription
-      .small-2.columns
+      .small-3.columns
         .row
           | Extra issues
-      .small-10.columns
+      .small-9.columns
         entity-fulfillment-list fulfillments=entity.extraFulfillments
 if entity.contributionFulfillments
     .row.subscription
-      .small-2.columns
+      .small-3.columns
         .row
           | Contribution issues
-      .small-10.columns
+      .small-9.columns
         entity-fulfillment-list fulfillments=entity.contributionFulfillments
