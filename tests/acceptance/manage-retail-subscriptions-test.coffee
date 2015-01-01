@@ -60,11 +60,8 @@ describe 'Acceptance: Manage retail subscriptions', ->
       viewRetailer 'Chapters'
 
       andThen ->
-        expectElement 'input[disabled][name=cost]'
-        expectElement 'input[disabled][name=copies]'
-
-        expect(find('input[name=cost]').val()).to.equal(cost)
-        expect(find('input[name=copies]').val()).to.equal(copies)
+        expectElement '.cost', {contains: cost}
+        expectElement '.copies', {contains: copies}
 
         done()
 
@@ -114,5 +111,5 @@ describe 'Acceptance: Manage retail subscriptions', ->
         viewRetailer 'Chapters'
 
         andThen ->
-          expectElement '.js-inactive-subscriptions li'
+          expectElement '.subscription.is-exhausted'
           done()

@@ -1,0 +1,21 @@
+.row.subscription.new
+  unless retailer.isSubscribed
+    .small-3.columns
+      retail-subscription-form retailer=retailer subscription=newSubscription save="save"
+each subscription in subscriptions
+  .row.subscription class=subscription.isExhausted
+    .small-3.columns
+      .row
+        if subscription.isExhausted
+          .span From #{moment subscription.createdAt 'MMM D ’YY'} to #{moment subscription.endedAt 'MMM D ’YY'}
+        else
+          .span From #{moment subscription.createdAt 'MMM D ’YY'} to present
+      .row
+        .copies #{subscription.copies} copies
+        .cost $#{subscription.cost} each
+      unless subscription.isExhausted
+        .row
+          button.tiny.alert.js-unsubscribe click='end'
+            | End #{fa-icon 'ban'}
+    .small-9.columns
+      entity-fulfillment-list fulfillments=subscription.fulfillments

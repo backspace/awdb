@@ -21,18 +21,5 @@ else
 
   button click='edit' Edit
 
-unless isNew
-  if isNotSubscribed
-    retail-subscription-form retailer=model subscription=newSubscription save="subscribe"
-  else
-    retail-subscription-form subscription=model.activeSubscription end="endSubscription"
-
-  h3 Inactive subscriptions:
-  ul.js-inactive-subscriptions
-    each subscription in model.inactiveSubscriptions
-      li From #{moment subscription.createdAt} to #{moment subscription.endedAt}
-    else
-      | None!
-
-  p Issues received:
-  entity-fulfillment-list fulfillments=fulfillments
+  h4 Subscriptions
+  retailer-subscription-list retailer=model newSubscription=newSubscription save="subscribe" end="endSubscription"

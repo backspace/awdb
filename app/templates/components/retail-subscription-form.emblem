@@ -1,24 +1,18 @@
-fieldset
-  legend
+.row
+  | New subscription
+.row.collapse
+  .cost.small-12.columns
+    =input type='number' name="cost" value=subscription.cost disabled=isPersisted placeholder="Cost per issue"
+  .copies.small-12.columns
+    =input type='number' name="copies" value=subscription.copies disabled=isPersisted placeholder="Copies per delivery"
+.row
+  .small-6.columns
     if isPersisted
-      | Current subscription
+      button.alert.postfix.js-unsubscribe click='end'
+        fa-icon 'ban'
     else
-      | Create a subscription
-  .row
-    label.small-5.columns
-      | Cost per issue
-      =input type='number' name="cost" value=subscription.cost disabled=isPersisted
-    label.small-5.columns
-      | Copies per delivery
-      =input type='number' name="copies" value=subscription.copies disabled=isPersisted
-    label.small-2.columns
-      | &nbsp;
-      if isPersisted
-        button.alert.postfix.js-unsubscribe click='end'
-          fa-icon 'ban'
-      else
-        button.postfix.js-subscribe click='save' disabled=isIncomplete class=isIncomplete:secondary
-          if isIncomplete
-            fa-icon 'ellipsis-h'
-          else
-            fa-icon 'thumbs-up'
+      button.postfix.js-subscribe click='save' disabled=isIncomplete class=isIncomplete:secondary
+        if isIncomplete
+          fa-icon 'ellipsis-h'
+        else
+          fa-icon 'thumbs-up'
