@@ -1,0 +1,24 @@
+each subscription in subscriptions
+  .row.subscription
+    .small-2.columns
+      .row
+        .date=moment subscription.createdAt 'MMM D ’YY'
+      .row
+        .count #{subscription.count} issues
+        .cost $#{subscription.cost}
+    .small-10.columns
+      entity-fulfillment-list fulfillments=subscription.currentAndFutureFulfillments
+if entity.extraFulfillments
+    .row.subscription
+      .small-2.columns
+        .row
+          | Extra issues
+      .small-10.columns
+        entity-fulfillment-list fulfillments=entity.extraFulfillments
+if entity.contributionFulfillments
+    .row.subscription
+      .small-2.columns
+        .row
+          | Contribution issues
+      .small-10.columns
+        entity-fulfillment-list fulfillments=entity.contributionFulfillments

@@ -24,14 +24,7 @@ else
   p.address=address
   button.js-edit click='edit' Edit
 
-  if isSubscribed
-    p Issues remaining: #{fulfillmentsRemaining}
-
-  else
-    p Not subscribed!
-
-
-  p Issues received:
-  entity-fulfillment-list fulfillments=fulfillments
+  h4 Subscriptions
+  entity-subscription-list entity=model subscription=newSubscription subscribe="subscribe"
 
   entity-subscription-form entity=model subscription=newSubscription save="subscribe"

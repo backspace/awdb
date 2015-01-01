@@ -64,19 +64,19 @@ describe "Acceptance: Manage subscriptions", ->
     viewEntity 'Alice'
 
     andThen ->
-      expectElement 'p', {contains: 'Issues remaining: 1'}
+      expectElement '.future', 1
       expectElement 'li', {contains: 'Apples are amazing'}
 
     viewEntity 'Bob'
 
     andThen ->
-      expectElement 'p', {contains: 'Issues remaining: 3'}
+      expectElement '.future', 3
       expectNoElement 'li', {contains: 'Apples are amazing'}
 
     viewEntity 'Cara'
 
     andThen ->
-      expectElement 'p', {contains: 'Not subscribed!'}
+      expectNoElement '.future'
 
       done()
 
@@ -153,7 +153,7 @@ describe "Acceptance: Manage subscriptions", ->
                 viewEntity 'Cara'
 
                 andThen ->
-                  expectElement 'p', {contains: "Issues remaining: #{issueCount}"}
+                  expectElement '.future', parseInt(issueCount)
 
                   done()
 

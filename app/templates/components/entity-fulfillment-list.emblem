@@ -1,9 +1,12 @@
 ul.issue-list.small-block-grid-3.large-block-grid-6
   each fulfillment in fulfillments
-    li class=fulfillment.isMultiple
+    if fulfillment.issue
       with fulfillment.issue as issue
-        link-to 'issue' issue
-          .title=issue.title
-          .number=issue.number
+        li class=fulfillment.isMultiple
+          link-to 'issue' issue
+            .title=issue.title
+            .number=issue.number
+    else
+      li.future
   else
     p None

@@ -34,6 +34,9 @@ var Entity = DS.Model.extend({
 
   isAddressless: Ember.computed.empty('address'),
 
+  extraFulfillments: Ember.computed.filterBy('fulfillments', 'isExtra'),
+  contributionFulfillments: Ember.computed.filterBy('fulfillments', 'isForContribution'),
+
   rev: DS.attr('string')
 });
 

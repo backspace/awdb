@@ -262,7 +262,7 @@ describe "Acceptance: Distribute issues", ->
         viewEntity 'Bob'
 
         andThen ->
-          expectElement 'p', {contains: 'Issues remaining: 2'}
+          expectElement '.future', 2
           expectElement 'li', {contains: 'Apples are amazing'}
 
         viewRetailer 'Bookstore'
