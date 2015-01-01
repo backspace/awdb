@@ -76,7 +76,7 @@ describe "Acceptance: Manage subscriptions", ->
     viewEntity 'Cara'
 
     andThen ->
-      expectNoElement '.future'
+      expectNoElement '.subscription:not(.new) .future'
 
       done()
 
