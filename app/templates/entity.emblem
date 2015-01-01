@@ -26,5 +26,3 @@ else
 
   h4 Subscriptions
   entity-subscription-list entity=model subscription=newSubscription subscribe="subscribe"
-
-  entity-subscription-form entity=model subscription=newSubscription save="subscribe"

@@ -1,3 +1,9 @@
+.row.subscription
+  if showSubscriptionForm
+    entity-subscription-form entity=entity subscription=subscription save="save"
+  else
+    button.tiny.js-create-subscription click="requestSubscriptionForm"
+      | #{fa-icon 'plus'} Add subscription
 each subscription in subscriptions
   .row.subscription
     .small-2.columns
