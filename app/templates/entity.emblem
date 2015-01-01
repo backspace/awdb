@@ -22,6 +22,7 @@ if editing
     button.js-cancel click='revertEditing' Revert
 else
   p.address=address
+  button.js-edit click='edit' Edit
 
   if isSubscribed
     p Issues remaining: #{fulfillmentsRemaining}
@@ -37,6 +38,4 @@ else
     else
       p None
 
-  button.js-edit click='edit' Edit
-  br
   entity-subscription-form entity=model subscription=newSubscription save="subscribe"
