@@ -6,6 +6,8 @@ ul.issue-list.small-block-grid-3.large-block-grid-6
           link-to 'issue' issue
             .title=issue.title
             .number=issue.number
+            if fulfillment.isMultiple
+              .count × #{fulfillment.count}
     else
       li.future
   else
