@@ -2,16 +2,20 @@
   header
     h2 Settings
 
-  single-field-form header="Back up database" value=url action='replicate' icon='save' processing=isReplicating
-
-  single-field-form header="Replace database" value=replacementUrl action='replace' icon='exclamation-triangle' processing=isReplacing
+  .row
+    .small-12.large-6.columns
+      single-field-form header="Back up database" value=url action='replicate' icon='save' processing=isReplicating
+    .small-12.large-6.columns
+      single-field-form header="Replace database" value=replacementUrl action='replace' icon='exclamation-triangle' processing=isReplacing
 
   .row
     .small-12.medium-8.columns
-      h3 Subscription costs
-
       table
         thead
+          tr
+            th
+            th colspan=2
+              h3 Subscription costs
           tr
             th
             th 3 issues
@@ -33,10 +37,10 @@
             th Institution
             td=input type='number' value=subscriptionInstitution3 name='subscriptionInstitution3'
             td=input type='number' value=subscriptionInstitution6 name='subscriptionInstitution6'
-  .small-12.medium-4.columns
-    h3 Feature compensation
-    =input type='number' value=featureCompensation name='featureCompensation'
-.row
-  .small-centered.small-3.columns
-    if isDirty
-      =async-button action="save" default="Save" pending="Saving…"
+    .small-12.medium-4.columns
+      h3 Feature compensation
+      =input type='number' value=featureCompensation name='featureCompensation'
+  .row
+    .small-centered.small-3.columns
+      if isDirty
+        =async-button action="save" default="Save" pending="Saving…"
