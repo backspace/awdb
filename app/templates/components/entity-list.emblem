@@ -1,0 +1,4 @@
+ul.fa-ul.side-nav class=list-class
+  li.heading=heading
+  each entity in entities
+    =entity-list-item entity=entity

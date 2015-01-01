@@ -5,14 +5,8 @@
       .secret-button.add.js-create click='createRetailer'
         fa-icon 'plus'
 
-    ul.fa-ul.side-nav.js-active-retailers
-      li.heading Active retailers
-      each retailer in activeRetailers
-        =entity-list-item entity=retailer
+    entity-list entities=activeRetailers heading="Active retailers" list-class="js-active-retailers"
+    entity-list entities=inactiveRetailers heading="Inactive retailers" list-class="js-inactive-retailers"
 
-    ul.fa-ul.side-nav.js-inactive-retailers
-      li.heading Inactive retailers
-      each retailer in inactiveRetailers
-        =entity-list-item entity=retailer
   section.details
     outlet

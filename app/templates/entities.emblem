@@ -5,20 +5,9 @@
       .secret-button.add.js-create click='createEntity'
         fa-icon 'plus'
 
-    // TODO componentise to avoid having to know about fa-ul?
-    ul.fa-ul.side-nav.js-subscribers
-      li.heading Subscribers
-      each entity in subscribers
-        =entity-list-item entity=entity
+    entity-list entities=subscribers heading="Subscribers" list-class="js-subscribers"
+    entity-list entities=formerSubscribers heading="Former subscribers" list-class="js-former-subscribers"
+    entity-list entities=neverSubscribers heading="Never subscribed"
 
-    ul.fa-ul.side-nav.js-former-subscribers
-      li.heading Former subscribers
-      each entity in formerSubscribers
-        =entity-list-item entity=entity
-
-    ul.fa-ul.side-nav.js-never-subscribers
-      li.heading Never subscribed
-      each entity in neverSubscribers
-        =entity-list-item entity=entity
   section.details
     outlet
