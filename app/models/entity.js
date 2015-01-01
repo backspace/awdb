@@ -29,7 +29,7 @@ var Entity = DS.Model.extend({
 
   issuesReceived: Ember.computed('subscriptions', function() {
     var subscriptions = this.get('subscriptions');
-    return subscriptions.mapBy('fulfillments').reduce(function(flattened, fulfillments) { return flattened.concat(fulfillments); }).mapBy('issue');
+    return subscriptions.mapBy('fulfillments').reduce(function(flattened, fulfillments) { return flattened.concat(fulfillments.mapBy('issue')); }, []);
   }),
 
   isAddressless: Ember.computed.empty('address'),
