@@ -1,6 +1,6 @@
 ul.issue-list.small-block-grid-3.large-block-grid-6
   each fulfillment in fulfillments
-    li
+    li class=fulfillment.isMultiple
       with fulfillment.issue as issue
         link-to 'issue' issue
           .title=issue.title

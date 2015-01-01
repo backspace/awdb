@@ -15,6 +15,8 @@ Fulfillment = DS.Model.extend
 
   count: DS.attr 'number', {defaultValue: 1}
 
+  isMultiple: Ember.computed.gt 'count', 1
+
   # TODO must be a better way to copy name and address
   nameAndAddressPopulator: Ember.observer 'entity.id', ->
     return unless @get('isNew')

@@ -23,3 +23,17 @@ $issue-height: $issue-width*8.5/7
     .number
       position: absolute
       bottom: 0.5rem
+
+    &.is-multiple
+      &:before
+        content: " "
+
+        display: block
+        position: absolute
+        width: $issue-width
+        height: $issue-height
+
+        border: 1px solid $colour-brand-trace
+
+        left: 2px
+        top: -4px
