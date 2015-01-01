@@ -34,6 +34,7 @@ EntityController = Ember.ObjectController.extend SetPropertyOnModelChange,
 
       if model.get 'isNew'
         model.deleteRecord()
+        @transitionToRoute 'entities'
       else
         model.rollback()
 
