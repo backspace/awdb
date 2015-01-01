@@ -1,0 +1,26 @@
+aside nav a:first-child
+  margin-top: $top-margin
+
+aside nav
+  background: white
+
+  a
+    position: relative
+
+    &:hover, &.active
+      background: white
+
+    &:after
+      position: absolute
+      top: 0
+      right: 0
+      height: 100%
+
+      border-right: 1px solid $colour-brand-trace
+
+      content: ""
+    i
+      color: $colour-brand-inactive
+
+    &:hover i, &.active i
+      color: $colour-brand-active

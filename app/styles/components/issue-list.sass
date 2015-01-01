@@ -1,0 +1,25 @@
+$issue-width: 100px
+$issue-height: $issue-width*8.5/7
+
+.issue-list
+  @include block-grid($per-row: 6, $spacing: $issue-width/5)
+
+  li
+    position: relative
+
+    width: $issue-width
+    height: $issue-height
+
+    border: 1px solid $colour-brand
+    padding: 0.5rem
+    margin: 0.5rem 0.5rem 0 0
+
+    a
+      display: block
+
+      width: 100%
+      height: 100%
+
+    .number
+      position: absolute
+      bottom: 0.5rem
