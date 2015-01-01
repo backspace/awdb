@@ -1,7 +1,7 @@
 if displayWelcome
   h1 Hello!
   p Would you like to load some sample data?
-  button.alert click="rejectSample"
+  button.secondary click="rejectSample"
     fa-icon 'thumbs-down'
   | &nbsp;
   button click="acceptSample"
