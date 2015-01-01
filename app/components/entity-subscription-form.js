@@ -17,7 +17,7 @@ export default Ember.Component.extend({
     if (Ember.isNone(subscription.get('count'))) {
       subscription.set('count', '3');
     }
-  }.on('init', 'subscription'),
+  }.observes('subscription', 'entity.id'),
 
   setCost: function() {
     if (this.get('saving')) { return; }
@@ -30,7 +30,11 @@ export default Ember.Component.extend({
     var entity = this.get('entity');
 
     subscription.set('cost', settings.costForSubscription(subscription.get('count'), entity.get('classification')));
-  }.observes('subscription.count', 'entity.classification', 'settings'),
+  }.observes('subscription.count', 'entity.classification', 'settings', 'entity.id'),
+
+  onInit: function() {
+    this.setDefaultCount();
+  }.on('init'),
 
   actions: {
     save() {

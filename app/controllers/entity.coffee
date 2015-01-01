@@ -16,7 +16,7 @@ EntityController = Ember.ObjectController.extend SetPropertyOnModelChange,
     @get('model.isNew') || @get('isEditing')
   ).property('model.isNew', 'isEditing')
 
-  newSubscription: Ember.computed 'model.isNew', ->
+  newSubscription: Ember.computed 'model.isNew', 'model.id', ->
     @store.createRecord 'subscription'
 
   actions:

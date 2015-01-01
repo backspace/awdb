@@ -25,4 +25,4 @@ else
   button.js-edit click='edit' Edit
 
   h4 Subscriptions
-  entity-subscription-list entity=model subscription=newSubscription subscribe="subscribe"
+  entity-subscription-list entity=model subscription=newSubscription save="subscribe"
