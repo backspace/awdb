@@ -99,7 +99,7 @@ if application.populateSampleDatabase
 
         waitForAllModels()
 
-        andThen -> "Subscribed #{attributes.name}"
+        andThen -> console.log "Subscribed #{attributes.name}"
 
       createEntitySubscription
         name: 'Subscriber'
@@ -199,7 +199,7 @@ if application.populateSampleDatabase
 
         waitForAllModels()
 
-        andThen -> "Created issue #{attributes.title}"
+        andThen -> console.log "Created issue #{attributes.title}"
 
       createIssue
         title: 'Apples'
@@ -240,7 +240,7 @@ if application.populateSampleDatabase
 
         waitForAllModels()
 
-        andThen -> "Distributed issue #{attributes.title}"
+        andThen -> console.log "Distributed issue #{attributes.title}"
 
       distributeIssue
         title: 'Apples'
