@@ -14,13 +14,13 @@ Subscription = DS.Model.extend
 
   fulfillments: DS.hasMany 'fulfillment'
 
-  currentAndFutureFulfillments: Ember.computed 'fulfillments', ->
+  currentAndFutureFulfillments: Ember.computed 'remaining', ->
     all = [].addObjects @get('fulfillments')
     all.addObject(Ember.Object.create()) for num in [0...@get('remaining')]
 
     all
 
-  remaining: Ember.computed 'fulfillments', ->
+  remaining: Ember.computed 'count', 'fulfillments', ->
     @get('count') - @get('fulfillments.length')
 
   isExhausted: Ember.computed 'remaining', 'isRetail', 'endedAt', ->
