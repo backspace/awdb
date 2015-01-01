@@ -21,6 +21,7 @@ aside nav
       content: ""
     i
       color: $colour-brand-inactive
+      @include single-transition(color, $speed: 150ms)
 
     &:hover i, &.active i
       color: $colour-brand-active
