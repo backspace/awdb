@@ -42,6 +42,8 @@ header
     color: $colour-brand-trace
     text-align: right
 
+    @include single-transition(color)
+
     &.add:hover
       i:before
         // TODO figure out how to know this or how icon-changing hover should work in general
