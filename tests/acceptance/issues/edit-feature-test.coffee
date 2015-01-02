@@ -34,7 +34,7 @@ describe "Acceptance: Edit issue feature", ->
     beforeEach (done) ->
       viewIssue 'Featureful'
 
-      click 'li:contains("Oops") .js-target'
+      click 'li:contains("Oops") .js-edit-feature'
       fillIn 'li.js-persisted input[name="title"]', 'Corrected'
 
       click 'li.js-persisted i.fa-check'
@@ -53,7 +53,7 @@ describe "Acceptance: Edit issue feature", ->
   describe 'when a contributor is added', ->
     beforeEach (done) ->
       viewIssue 'Featureful'
-      click 'li:contains("Oops") .js-target'
+      click 'li:contains("Oops") .js-edit-feature'
 
       fillIn 'input[type="search"]', 'alice'
       click 'li:contains("Alice") .fa-plus'
@@ -69,13 +69,13 @@ describe "Acceptance: Edit issue feature", ->
       viewIssue 'Featureful'
 
       andThen ->
-        expectElement 'li', {contains: 'Oops: Alice'}
+        expectElement 'li:contains(Oops)', {contains: 'Alice'}
 
         done()
 
     describe 'and then removed', ->
       beforeEach (done) ->
-        click 'li:contains("Oops") .js-target'
+        click 'li:contains("Oops") .js-edit-feature'
         click 'li:contains("Alice") .fa-trash'
 
         click 'li.js-persisted i.fa-check'

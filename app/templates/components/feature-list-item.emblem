@@ -17,8 +17,12 @@ if isEditing
 
   entity-search entities=entities addEntity="addContributor" createEntity="addNewContributor" placeholder="Contributor name" supportCreation=true
 else
-  span.js-target click=edit
-    | #{feature.title}: 
+  span.js-target
+    | #{feature.title}
+    span.js-edit-feature click='edit'
+      | &nbsp;
+      fa-icon 'pencil'
+      | &nbsp;
     each contribution in feature.contributions
       =contribution.entity.name
       unless contribution.isUncompensated
