@@ -1,5 +1,5 @@
 $issue-width: 100px
-$issue-height: $issue-width*8.5/7
+$issue-height: ceil($issue-width*8.5/7)
 
 .issue-list
   @include block-grid($per-row: 6, $spacing: $issue-width/5)
