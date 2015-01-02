@@ -238,6 +238,9 @@ describe "Acceptance: Distribute issues", ->
           expectElement 'a', {contains: 'Alice'}
           expectElement 'a', {contains: 'Bookstore'}
 
+          expectElement 'li:contains(Bookstore)', {contains: '30'}
+          expectElement 'li:contains(Bookstore)', {contains: '10'}
+
           done()
 
       it 'shows that the non-subscribers did not receive the issue', (done) ->

@@ -14,6 +14,7 @@ Fulfillment = DS.Model.extend
   address: DS.attr 'string'
 
   count: DS.attr 'number', {defaultValue: 1}
+  cost: DS.attr 'number'
 
   isMultiple: Ember.computed.gt 'count', 1
 
