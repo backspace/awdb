@@ -10,6 +10,6 @@ ul.issue-list.small-block-grid-3.large-block-grid-6
               if fulfillment.isMultiple
                 .count × #{fulfillment.count}
       else
-        li.future
+        li.future &nbsp;
   else
     p None
