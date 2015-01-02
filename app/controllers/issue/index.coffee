@@ -7,6 +7,7 @@ IssueIndexController = Ember.ObjectController.extend SetPropertyOnModelChange,
   entities: Ember.computed.alias 'controllers.issues.entities'
 
   isEditing: false
+  isSaving: false
 
   setPropertyOnModelChange:
     property: 'isEditing'
@@ -32,7 +33,9 @@ IssueIndexController = Ember.ObjectController.extend SetPropertyOnModelChange,
       @set 'isEditing', true
 
     doneEditing: ->
+      @set 'isSaving', true
       @get('model').save().then =>
+        @set 'isSaving', false
         @set 'isEditing', false
 
     revertEditing: ->

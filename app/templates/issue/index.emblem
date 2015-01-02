@@ -6,7 +6,11 @@ liquid-with model as issue
     label
       | Number
       =input type='number' name='number' value=issue.number
-    button.js-save click='doneEditing' Done
+    button.js-save click='doneEditing'
+      if isSaving
+        fa-icon 'circle-o-notch' spin=true
+      else
+        | Done
     | &nbsp;
     button.js-cancel click='revertEditing' Revert
   else
