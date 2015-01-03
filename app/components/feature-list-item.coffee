@@ -18,7 +18,7 @@ FeatureListItem = Ember.Component.extend
       "Feature title"
 
   setIsEditing: (->
-    @set 'isEditing', @get('isNew') if @get('isEditable')
+    @set 'isEditing', @get('isNew') if @get('isEditable') && !@get('disableInitialEdit')
   ).on 'init'
 
   resetIsEditing: (->
@@ -46,7 +46,8 @@ FeatureListItem = Ember.Component.extend
       defer = Ember.RSVP.defer()
       defer.promise.then(=>
         # TODO the isDestroyed/isDestroying checks are only for testing, seems weird
-        @set 'isEditing', false unless @get('isDestroyed') || @get('isDestroying') || @get('isNew')
+        @set 'isEditing', false unless @get('isDestroyed') || @get('isDestroying')
+        @set 'isEditing', true if @get('alwaysEditing')
       , ->
         alert "An error saving the feature!"
       )

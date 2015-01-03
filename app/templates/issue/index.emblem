@@ -10,7 +10,9 @@ liquid-with model as issue
     ul
       each feature in issue.features
         =feature-list-item feature=feature entities=entities save="saveFeature" createEntity="createEntity"
-      =feature-list-item feature=newFeature save="saveFeature" entities=entities createEntity="createEntity"
+      each feature in newFeaturesToSave
+        =feature-list-item feature=feature entities=entities save="saveFeature" createEntity="createEntity" disableInitialEdit=true
+      =feature-list-item feature=newFeature save="saveFeature" entities=entities createEntity="createEntity" alwaysEditing=true
     button.js-save click='doneEditing'
       if isSaving
         fa-icon 'circle-o-notch' spin=true

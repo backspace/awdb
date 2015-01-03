@@ -28,6 +28,8 @@ IssueIndexController = Ember.ObjectController.extend SetPropertyOnModelChange,
 
     newFeature
 
+  newFeaturesToSave: Ember.computed.filterBy 'featuresToSave', 'isNew'
+
   actions:
     edit: ->
       @set 'isEditing', true
@@ -87,12 +89,12 @@ IssueIndexController = Ember.ObjectController.extend SetPropertyOnModelChange,
       promise = context.promise
       feature = context.feature
 
+      featuresToSave = @get 'featuresToSave'
+
       # TODO ?! during new feature compensation distribution test, was getting a new feature with no attributes
-      if Ember.isEmpty(Ember.keys(feature.changedAttributes())) && feature.get('contributions.length') == 0
+      if (Ember.isEmpty(Ember.keys(feature.changedAttributes())) && feature.get('contributions.length') == 0) || featuresToSave?.contains(feature)
         promise.resolve()
         return
-
-      featuresToSave = @get 'featuresToSave'
 
       unless featuresToSave?
         featuresToSave = []
