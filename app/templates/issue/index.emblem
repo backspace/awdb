@@ -26,7 +26,8 @@ liquid-with model as issue
       each feature in issue.features
         =feature-list-item feature=feature
 
-    button.js-edit click='edit' Edit
+    button.js-edit click='edit'
+      | #{fa-icon 'pencil'} Edit
     br
     button.small.secondary.js-build-distribution click="buildDistribution"
       | #{fa-icon 'envelope'} Prepare distribution

@@ -19,7 +19,8 @@ if isEditing
 else
   p.address=model.address
 
-  button click='edit' Edit
+  button click='edit'
+    | #{fa-icon 'pencil'} Edit
 
   h4 Subscriptions
   retailer-subscription-list retailer=model newSubscription=newSubscription save="subscribe" end="endSubscription"

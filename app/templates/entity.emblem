@@ -22,7 +22,8 @@ if editing
     button.js-cancel click='revertEditing' Revert
 else
   p.address=address
-  button.js-edit click='edit' Edit
+  button.js-edit click='edit'
+    | #{fa-icon 'pencil'} Edit
 
   h4 Subscriptions
   entity-subscription-list entity=model subscription=newSubscription save="subscribe"
