@@ -20,12 +20,14 @@ else
   span.js-target
     | #{feature.title}
     if isEditable
-      button.tiny.secondary.js-edit-feature click='edit'
+      button.tiny.secondary.edit-button.js-edit-feature click='edit'
         | #{fa-icon 'pencil'} Edit
-    each contribution in feature.contributions
-      =contribution.entity.name
-      unless contribution.isUncompensated
-        | &nbsp;
-        link-to 'transaction' contribution.transaction.id
-          fa-icon 'dollar'
-      | &nbsp;
+    .contributions
+      each contribution in feature.contributions
+        ul.contribution.fa-ul
+          entity-list-item entity=contribution.entity
+            unless contribution.isUncompensated
+              | &nbsp;
+              link-to 'transaction' contribution.transaction.id class="transaction"
+                | transaction
+            | &nbsp;

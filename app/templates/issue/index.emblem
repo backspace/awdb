@@ -10,7 +10,7 @@ liquid-with model as issue
       | Number
       =input type='number' name='number' value=issue.number
     h4 Features
-    ul
+    ul.features
       each feature in issue.features
         =feature-list-item feature=feature entities=entities save="saveFeature" createEntity="createEntity"
       each feature in newFeaturesToSave
@@ -25,7 +25,7 @@ liquid-with model as issue
     button.js-cancel click='revertEditing' Revert
   else
     h4 Features
-    ul
+    ul.features
       each feature in issue.features
         =feature-list-item feature=feature
 

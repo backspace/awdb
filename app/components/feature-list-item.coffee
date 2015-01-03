@@ -3,6 +3,7 @@
 FeatureListItem = Ember.Component.extend
   tagName: 'li'
   classNameBindings: ['isNew:js-new:js-persisted']
+  classNames: ['feature']
 
   # FIXME seems pretty messy
 
