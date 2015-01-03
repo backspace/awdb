@@ -108,7 +108,7 @@ describe "Acceptance: Distribute issues", ->
     describe 'and the new subscriber is deleted from the distribution', (done) ->
       beforeEach (done) ->
         viewIssue 'Apples'
-        click 'a:contains("Distribute")'
+        click '.js-build-distribution'
 
         click '.js-subscriptions li:contains("Cara") .js-delete'
 
@@ -132,7 +132,7 @@ describe "Acceptance: Distribute issues", ->
   describe 'building a distribution for the existing issue', ->
     beforeEach (done) ->
       viewIssue 'Apples'
-      click 'a:contains("Distribute")'
+      click '.js-build-distribution'
 
       andThen ->
         done()
@@ -373,7 +373,7 @@ describe "Acceptance: Distribute issues", ->
       waitForModels ['feature', 'issue']
 
       viewIssue 'Cantaloupe'
-      click 'a:contains("Distribute")'
+      click '.js-build-distribution'
 
       andThen ->
         expect(find('input[type="number"]').val()).to.equal('50')

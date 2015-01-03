@@ -146,5 +146,8 @@ IssueIndexController = Ember.ObjectController.extend SetPropertyOnModelChange,
       entity.save().then ->
         promise.resolve(entity)
 
+    buildDistribution: ->
+      @transitionToRoute 'issue.distribute', @get('model')
+
 
 `export default IssueIndexController`

@@ -28,7 +28,8 @@ liquid-with model as issue
       each feature in issue.features
         =feature-list-item feature=feature
 
-    =link-to 'issue.distribute' class="js-build-distribution" | Distribute
+    button.small.secondary.js-build-distribution click="buildDistribution"
+      | #{fa-icon 'envelope'} Prepare distribution
 
   unless isNew
 
