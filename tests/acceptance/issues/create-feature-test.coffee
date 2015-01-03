@@ -26,7 +26,9 @@ describe "Acceptance: Create issue feature", ->
   it 'shows the new feature', (done) ->
     viewIssue 'Full of features'
 
-    fillIn 'input[name="title"]', 'Like this one'
+    click '.js-edit'
+
+    fillIn '.js-new input[name="title"]', 'Like this one'
 
     fillIn 'input[type="search"]', 'alice'
     click 'li:contains("Alice") .fa-plus'
@@ -35,6 +37,10 @@ describe "Acceptance: Create issue feature", ->
     click 'li:contains("Bob") .fa-plus'
 
     click 'i.fa-check'
+
+    click '.js-save'
+
+    waitForModels ['issue', 'feature', 'contribution']
 
     viewIssue 'Full of features'
 
@@ -48,13 +54,17 @@ describe "Acceptance: Create issue feature", ->
   it 'supports creating a new entity via a contribution', (done) ->
     viewIssue 'Full of features'
 
-    fillIn 'input[name=title]', 'Welcome'
+    click '.js-edit'
+
+    fillIn '.js-new input[name=title]', 'Welcome'
     fillIn 'input[type=search]', 'Francine'
     click 'li:contains("Francine") .fa-plus'
 
     click 'i.fa-check'
 
-    waitForModels ['feature', 'entity']
+    click '.js-save'
+
+    waitForModels ['feature', 'entity', 'contribution']
 
     viewIssue 'Full of features'
 

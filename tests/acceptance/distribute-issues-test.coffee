@@ -359,14 +359,19 @@ describe "Acceptance: Distribute issues", ->
 
       waitForModels ['issue']
 
-      fillIn 'input[name="title"]', 'Sometimes so good'
+      click '.js-edit'
+
+      fillIn '.js-new input[name="title"]', 'Sometimes so good'
 
       fillIn 'input[type="search"]', 'artist'
       click 'li:contains("Artist") .fa-plus'
 
-      click 'i.fa-check'
+      click 'i.fa-check:first'
+
+      click '.js-save'
 
       waitForModels ['feature', 'issue']
+
       viewIssue 'Cantaloupe'
       click 'a:contains("Distribute")'
 

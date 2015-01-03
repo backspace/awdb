@@ -34,10 +34,14 @@ describe "Acceptance: Edit issue feature", ->
     beforeEach (done) ->
       viewIssue 'Featureful'
 
+      click '.js-edit'
+
       click 'li:contains("Oops") .js-edit-feature'
       fillIn 'li.js-persisted input[name="title"]', 'Corrected'
 
       click 'li.js-persisted i.fa-check'
+
+      click '.js-save'
 
       waitForModels ['issue', 'feature']
 
@@ -53,12 +57,17 @@ describe "Acceptance: Edit issue feature", ->
   describe 'when a contributor is added', ->
     beforeEach (done) ->
       viewIssue 'Featureful'
+
+      click '.js-edit'
+
       click 'li:contains("Oops") .js-edit-feature'
 
       fillIn 'input[type="search"]', 'alice'
       click 'li:contains("Alice") .fa-plus'
 
       click 'li.js-persisted i.fa-check'
+
+      click '.js-save'
 
       waitForModels ['issue', 'feature']
 

@@ -35,8 +35,34 @@ IssueIndexController = Ember.ObjectController.extend SetPropertyOnModelChange,
     doneEditing: ->
       @set 'isSaving', true
       @get('model').save().then =>
-        @set 'isSaving', false
-        @set 'isEditing', false
+        featuresToSave = @get 'featuresToSave'
+
+        lastDefer = Ember.RSVP.defer()
+        lastPromise = lastDefer.promise
+
+        firstDefer = lastDefer
+
+        featuresToSave?.forEach (feature) =>
+          context =
+            promise: lastDefer
+            feature: feature
+
+          nextDefer = Ember.RSVP.defer()
+
+          lastPromise.then =>
+            @send 'actuallySaveFeature', context
+          .then ->
+            nextDefer.resolve()
+
+          lastDefer = nextDefer
+          lastPromise = lastDefer.promise
+
+        lastPromise.then =>
+          @set 'featuresToSave', []
+          @set 'isSaving', false
+          @set 'isEditing', false
+
+        firstDefer.resolve()
 
     revertEditing: ->
       model = @get('model')
@@ -48,9 +74,38 @@ IssueIndexController = Ember.ObjectController.extend SetPropertyOnModelChange,
       else
         model.rollback()
 
+        featuresToSave = @get 'featuresToSave'
+
+        featuresToSave?.forEach (feature) ->
+          feature.rollback()
+
+        @set 'featuresToSave', []
+
       @set 'isEditing', false
 
     saveFeature: (context) ->
+      promise = context.promise
+      feature = context.feature
+
+      # TODO ?! during new feature compensation distribution test, was getting a new feature with no attributes
+      if Ember.isEmpty(Ember.keys(feature.changedAttributes())) && feature.get('contributions.length') == 0
+        promise.resolve()
+        return
+
+      featuresToSave = @get 'featuresToSave'
+
+      unless featuresToSave?
+        featuresToSave = []
+        @set 'featuresToSave', featuresToSave
+
+      featuresToSave.pushObject feature
+
+      if feature.get('isNew')
+        @set 'newFeature', @store.createRecord 'feature'
+
+      promise.resolve()
+
+    actuallySaveFeature: (context) ->
       promise = context.promise
       feature = context.feature
 
@@ -67,8 +122,7 @@ IssueIndexController = Ember.ObjectController.extend SetPropertyOnModelChange,
           contribution.set 'feature', undefined
 
         feature.set 'issue', issue
-        feature.save().then =>
-          @set 'newFeature', @store.createRecord 'feature'
+        feature.save().then ->
           issue.get('features').pushObject feature
 
           issue.save().then ->
