@@ -1,5 +1,8 @@
 liquid-with model as issue
   if isEditing
+    if isNew
+      header
+        h3 New issue
     label
       | Title
       =input type='text' name='title' value=issue.title autofocus=true
