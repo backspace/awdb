@@ -1,1 +1,2 @@
+=fa-icon 'book' listItem=true
 link-to 'issue' issue boundActive=active: issue.title

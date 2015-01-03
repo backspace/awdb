@@ -5,7 +5,7 @@
       .secret-button.add.js-create click='createIssue'
         fa-icon 'plus'
 
-    ul.side-nav
+    ul.side-nav.fa-ul
       each issue in persistedIssues
         issue-list-item issue=issue
   section.details
