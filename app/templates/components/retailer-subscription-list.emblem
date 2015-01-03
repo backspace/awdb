@@ -16,6 +16,6 @@ each subscription in subscriptions
       unless subscription.isExhausted
         .row
           button.tiny.alert.js-unsubscribe click='end'
-            | End #{fa-icon 'ban'}
+            | #{fa-icon 'ban'} End subscription
     .small-9.columns
       entity-fulfillment-list fulfillments=subscription.fulfillments
