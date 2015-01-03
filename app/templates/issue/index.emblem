@@ -6,6 +6,11 @@ liquid-with model as issue
     label
       | Number
       =input type='number' name='number' value=issue.number
+    h4 Features:
+    ul
+      each feature in issue.features
+        =feature-list-item feature=feature entities=entities save="saveFeature" createEntity="createEntity"
+      =feature-list-item feature=newFeature save="saveFeature" entities=entities createEntity="createEntity"
     button.js-save click='doneEditing'
       if isSaving
         fa-icon 'circle-o-notch' spin=true
@@ -15,15 +20,15 @@ liquid-with model as issue
     button.js-cancel click='revertEditing' Revert
   else
     button.js-edit click='edit' Edit
-    br
+
+    h4 Features
+    ul
+      each feature in issue.features
+        =feature-list-item feature=feature
+
     =link-to 'issue.distribute' class="js-build-distribution" | Distribute
 
   unless isNew
-    h4 Features:
-    ul
-      each feature in issue.features
-        =feature-list-item feature=feature entities=entities save="saveFeature" createEntity="createEntity"
-      =feature-list-item feature=newFeature save="saveFeature" entities=entities createEntity="createEntity"
 
     h4 Distributions:
     ul.distributions

@@ -9,6 +9,8 @@ FeatureListItem = Ember.Component.extend
   isNew: Ember.computed.alias('feature.isNew')
   isEditing: false
 
+  isEditable: Ember.computed.alias 'save'
+
   placeholder: Ember.computed 'isNew', ->
     if @get 'isNew'
       "New feature title"
@@ -16,7 +18,7 @@ FeatureListItem = Ember.Component.extend
       "Feature title"
 
   setIsEditing: (->
-    @set 'isEditing', @get('isNew')
+    @set 'isEditing', @get('isNew') if @get('isEditable')
   ).on 'init'
 
   resetIsEditing: (->

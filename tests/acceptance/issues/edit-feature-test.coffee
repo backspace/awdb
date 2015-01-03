@@ -84,10 +84,14 @@ describe "Acceptance: Edit issue feature", ->
 
     describe 'and then removed', ->
       beforeEach (done) ->
+        click '.js-edit'
+
         click 'li:contains("Oops") .js-edit-feature'
         click 'li:contains("Alice") .fa-trash'
 
         click 'li.js-persisted i.fa-check'
+
+        click '.js-save'
 
         waitForModels ['issue', 'feature']
 

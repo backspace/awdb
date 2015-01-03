@@ -19,10 +19,11 @@ if isEditing
 else
   span.js-target
     | #{feature.title}
-    span.js-edit-feature click='edit'
-      | &nbsp;
-      fa-icon 'pencil'
-      | &nbsp;
+    if isEditable
+      span.js-edit-feature click='edit'
+        | &nbsp;
+        fa-icon 'pencil'
+        | &nbsp;
     each contribution in feature.contributions
       =contribution.entity.name
       unless contribution.isUncompensated
