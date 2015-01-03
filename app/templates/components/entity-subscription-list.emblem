@@ -5,7 +5,7 @@ if showSubscriptionForm
     .small-9.columns
       entity-fulfillment-list fulfillments=subscription.currentAndFutureFulfillments
 else
-  button.tiny.js-create-subscription click="requestSubscriptionForm"
+  button.secondary.tiny.js-create-subscription click="requestSubscriptionForm"
     | #{fa-icon 'plus'} Add subscription
 each subscription in subscriptions
   .row.subscription

@@ -11,8 +11,8 @@
   .cost.small-5.columns
     =input type="number" name="cost" value=subscription.cost placeholder="Cost" size='5'
 .row
-  button.postfix.js-subscribe click='save' disabled=isIncomplete class=isIncomplete:secondary
+  button.secondary.tiny.js-subscribe click='save' disabled=isIncomplete class=isIncomplete
     if isIncomplete
       fa-icon 'ellipsis-h'
     else
-      fa-icon 'thumbs-up'
+      | #{fa-icon 'thumbs-up'} Add subscription

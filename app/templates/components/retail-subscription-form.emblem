@@ -6,13 +6,13 @@
   .copies.small-12.columns
     =input type='number' name="copies" value=subscription.copies disabled=isPersisted placeholder="Copies per delivery"
 .row
-  .small-6.columns
+  .small-9.columns
     if isPersisted
-      button.alert.postfix.js-unsubscribe click='end'
-        fa-icon 'ban'
+      button.alert.tiny.js-unsubscribe click='end'
+        | #{fa-icon 'ban'} End subscription
     else
-      button.postfix.js-subscribe click='save' disabled=isIncomplete class=isIncomplete:secondary
+      button.secondary.tiny.js-subscribe click='save' disabled=isIncomplete class=isIncomplete
         if isIncomplete
           fa-icon 'ellipsis-h'
         else
-          fa-icon 'thumbs-up'
+          | #{fa-icon 'thumbs-up'} Add subscription
