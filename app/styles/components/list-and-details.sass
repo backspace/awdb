@@ -44,3 +44,15 @@ ul.side-nav
   a, i
     -webkit-background-clip: text
     -webkit-text-fill-color: transparent
+
+#easter-egg
+  width: 30px
+  height: 30px
+  position: fixed
+  left: 0
+  bottom: 0
+
+  @include single-transition(background-color)
+
+  &:hover
+    background-color: #ccc
