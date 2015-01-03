@@ -32,18 +32,18 @@ liquid-with model as issue
     button.js-edit click='edit'
       | #{fa-icon 'pencil'} Edit
 
-  unless isNew
+    unless isNew
 
-    h4 Distributions
-    ul.distributions
-      each distribution in issue.distributions
-        // TODO is this better a computed filterBy?
-        unless distribution.isNew
-          li
-            link-to 'issue.distribution' distribution
-              =moment distribution.createdAt 'MMM D ’YY'
-            | &nbsp; {{fa-icon 'envelope'}} {{distribution.fulfillments.length}} {{fa-icon 'book'}} {{distribution.count}}
-      else
-        | No distributions yet.
-    button.small.secondary.js-build-distribution click="buildDistribution"
-      | #{fa-icon 'envelope'} Prepare distribution
+      h4 Distributions
+      ul.distributions
+        each distribution in issue.distributions
+          // TODO is this better a computed filterBy?
+          unless distribution.isNew
+            li
+              link-to 'issue.distribution' distribution
+                =moment distribution.createdAt 'MMM D ’YY'
+              | &nbsp; {{fa-icon 'envelope'}} {{distribution.fulfillments.length}} {{fa-icon 'book'}} {{distribution.count}}
+        else
+          | No distributions yet.
+      button.small.secondary.js-build-distribution click="buildDistribution"
+        | #{fa-icon 'envelope'} Prepare distribution
