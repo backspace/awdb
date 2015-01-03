@@ -186,16 +186,20 @@ if application.populateSampleDatabase
         viewIssue attributes.title
 
         if attributes.features
+          click '.js-edit'
+
           attributes.features.forEach (feature) ->
             fillIn 'input[name=title]:last', feature.title
 
             feature.contributors.forEach (contributor) ->
               fillIn 'input[type=search]', contributor
-              click "li:contains(#{contributor}) .fa-plus"
+              click "li:contains(#{contributor}):first .fa-plus:first"
 
-            click '.js-save'
+            click '.js-save-feature'
 
-            waitForModels ['feature']
+          click '.js-save'
+
+          waitForModels ['feature', 'issue']
 
         waitForAllModels()
 
