@@ -9,7 +9,7 @@ liquid-with model as issue
     label
       | Number
       =input type='number' name='number' value=issue.number
-    h4 Features:
+    h4 Features
     ul
       each feature in issue.features
         =feature-list-item feature=feature entities=entities save="saveFeature" createEntity="createEntity"
@@ -37,7 +37,7 @@ liquid-with model as issue
 
   unless isNew
 
-    h4 Distributions:
+    h4 Distributions
     ul.distributions
       each distribution in issue.distributions
         // TODO is this better a computed filterBy?
