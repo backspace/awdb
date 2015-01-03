@@ -9,7 +9,7 @@
       =radio-button name='6' value='6' id='count6' groupValue=subscription.count
       | &nbsp; 6
   .cost.small-5.columns
-    =input type="number" name="cost" value=subscription.cost placeholder="Cost" size='5'
+    =input type="number" name="cost" value=subscription.cost min=0 placeholder="Cost" size='5'
 .row
   button.secondary.tiny.js-subscribe click='save' disabled=isIncomplete class=isIncomplete
     if isIncomplete

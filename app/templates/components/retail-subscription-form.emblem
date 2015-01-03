@@ -2,9 +2,9 @@
   | New subscription
 .row.collapse
   .cost.small-12.columns
-    =input type='number' name="cost" value=subscription.cost disabled=isPersisted placeholder="Cost per issue"
+    =input type='number' name="cost" value=subscription.cost min=0 disabled=isPersisted placeholder="Cost per issue"
   .copies.small-12.columns
-    =input type='number' name="copies" value=subscription.copies disabled=isPersisted placeholder="Copies per delivery"
+    =input type='number' name="copies" value=subscription.copies min=0 disabled=isPersisted placeholder="Copies per delivery"
 .row
   .small-9.columns
     if isPersisted
