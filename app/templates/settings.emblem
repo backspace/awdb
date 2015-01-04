@@ -14,7 +14,7 @@
         thead
           tr
             th
-            th colspan=2
+            th colspan='2'
               h3 Subscription costs
           tr
             th
