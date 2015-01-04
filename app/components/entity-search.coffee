@@ -17,10 +17,15 @@ EntitySearch = Ember.Component.extend
     Ember.Object.create
       name: @get 'search'
 
+  clearSearch: ->
+    @set 'search', ''
+
   actions:
     addEntity: (entity) ->
       @sendAction 'addEntity', entity
+      @clearSearch()
     createEntity: (promiseAndAttributes) ->
       @sendAction 'createEntity', promiseAndAttributes
+      @clearSearch()
 
 `export default EntitySearch`
