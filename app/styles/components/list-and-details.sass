@@ -14,6 +14,17 @@
     content: ""
 
 ul.side-nav
+  padding: 0
+  margin-bottom: $block-height
+
+  li
+    height: $block-height
+    margin: 0
+
+    &.heading
+      // TODO copied from .side-nav li a:not(.button)
+      padding: 0.4375rem 0
+
   li a:not(.button)
     color: $colour-brand-inactive
 
