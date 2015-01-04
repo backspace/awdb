@@ -12,7 +12,7 @@ if isEditing
   ul.fa-ul
     each contribution in feature.contributions
       entity-list-item entity=contribution.entity
-        button.alert.tiny click="removeContribution contribution"
+        button.alert.tiny.js-remove-contribution click="removeContribution contribution"
           | #{fa-icon 'trash'} Remove as contributor
 
   entity-search entities=entities addEntity="addContributor" createEntity="addNewContributor" placeholder="Contributor name" supportCreation=true

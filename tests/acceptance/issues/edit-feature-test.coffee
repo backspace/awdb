@@ -63,13 +63,13 @@ describe "Acceptance: Edit issue feature", ->
       click 'li:contains("Oops") .js-edit-feature'
 
       fillIn 'input[type="search"]', 'alice'
-      click 'li:contains("Alice") .fa-plus'
+      click 'li:contains("Alice") .js-add-contributor'
 
       click 'li.js-persisted i.fa-check'
 
       click '.js-save'
 
-      waitForModels ['issue', 'feature']
+      waitForModels ['issue', 'feature', 'contribution']
 
       andThen ->
         done()
@@ -87,7 +87,7 @@ describe "Acceptance: Edit issue feature", ->
         click '.js-edit'
 
         click 'li:contains("Oops") .js-edit-feature'
-        click 'li:contains("Alice") .fa-trash'
+        click 'li:contains("Alice") .js-remove-contribution'
 
         click 'li.js-persisted i.fa-check'
 

@@ -51,14 +51,54 @@ describe "Acceptance: Create issue feature", ->
 
       done()
 
+  it 'supports creating two features at once', (done) ->
+    viewIssue 'Full of features'
+
+    click '.js-edit'
+
+    fillIn '.js-new input[name=title]:last', 'One feature'
+
+    fillIn 'input[type=search]', 'alice'
+    click 'li:contains(Alice) .fa-plus'
+
+    click 'i.fa-check:last'
+
+    fillIn '.js-new input[name=title]:last', 'Two features'
+
+    fillIn 'input[type=search]', 'bob'
+    click 'li:contains(Bob) .fa-plus'
+
+    click 'i.fa-check:last'
+
+    click '.js-save'
+
+    waitForModels ['issue', 'feature', 'contribution']
+
+    viewIssue 'Full of features'
+
+    andThen ->
+      expectElement 'li', {contains: 'One'}
+      expectElement 'li:contains(One)', {contains: 'Alice'}
+
+      expectElement 'li', {contains: 'Two'}
+      expectElement 'li:contains(Two)', {contains: 'Bob'}
+
+      done()
+
   it 'supports creating a new entity via a contribution', (done) ->
+    # TODO why is this so slow?
+    @timeout 5000
+
     viewIssue 'Full of features'
 
     click '.js-edit'
 
     fillIn '.js-new input[name=title]', 'Welcome'
     fillIn 'input[type=search]', 'Francine'
-    click 'li:contains("Francine") .fa-plus'
+
+    click 'li:contains("Francine") .js-create-contributor'
+
+    waitForModels ['entity']
 
     click 'i.fa-check'
 

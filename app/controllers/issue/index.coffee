@@ -39,32 +39,31 @@ IssueIndexController = Ember.ObjectController.extend SetPropertyOnModelChange,
       @get('model').save().then =>
         featuresToSave = @get 'featuresToSave'
 
-        lastDefer = Ember.RSVP.defer()
-        lastPromise = lastDefer.promise
-
-        firstDefer = lastDefer
-
-        featuresToSave?.forEach (feature) =>
-          context =
-            promise: lastDefer
-            feature: feature
-
-          nextDefer = Ember.RSVP.defer()
-
-          lastPromise.then =>
-            @send 'actuallySaveFeature', context
-          .then ->
-            nextDefer.resolve()
-
-          lastDefer = nextDefer
-          lastPromise = lastDefer.promise
-
-        lastPromise.then =>
+        finish = =>
           @set 'featuresToSave', []
           @set 'isSaving', false
           @set 'isEditing', false
 
-        firstDefer.resolve()
+        finish() unless featuresToSave?
+
+        saveNextFeature = =>
+          feature = featuresToSave?.shiftObject()
+
+          if feature?
+            defer = Ember.RSVP.defer()
+            context =
+              promise: defer
+              feature: feature
+
+            defer.promise.then ->
+              saveNextFeature()
+
+            @send 'actuallySaveFeature', context
+          else
+            finish()
+
+        saveNextFeature()
+
 
     revertEditing: ->
       model = @get('model')
