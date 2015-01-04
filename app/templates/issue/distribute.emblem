@@ -1,4 +1,5 @@
-button.js-distribute click='distribute' disabled=isIncomplete class=isIncomplete:secondary Distribute to #{distribution.proposedFulfillments.length} recipient#{plural-suffix distribution.proposedFulfillments.length}
+button.js-distribute click='distribute' disabled=isIncomplete class=isIncomplete:secondary
+  | #{fa-icon 'envelope'} Distribute to #{distribution.proposedFulfillments.length} recipient#{plural-suffix distribution.proposedFulfillments.length}
 
 distribution-fulfillments fulfillments=distribution.proposedFulfillments deleteFulfillment="deleteFulfillment"
 
