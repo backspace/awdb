@@ -20,39 +20,29 @@ describe "Acceptance: Manage subscriptions", ->
           apples: store.createRecord('issue', {title: 'Apples are amazing'}).save()
 
         asyncRecords.then((records) ->
-          # TODO is there a better way to add to an RSVP.hash? HIDEOUS
-          subscriptions = Ember.RSVP.hash
-            alice: store.createRecord('subscription', {entity: records.alice, count: 2}).save()
-            bob: store.createRecord('subscription', {entity: records.bob, count: 3}).save()
-            donna: store.createRecord('subscription', {entity: records.donna, count: 1}).save()
-            records: records
+          records.aliceSub = store.createRecord('subscription', {entity: records.alice, count: 2}).save()
+          records.bobSub = store.createRecord('subscription', {entity: records.bob, count: 3}).save()
+          records.donnaSub = store.createRecord('subscription', {entity: records.donna, count: 1}).save()
 
-          subscriptions
-        ).then((subscriptions) ->
-          records = subscriptions.records
+          Ember.RSVP.hash(records)
+        ).then((records) ->
+          records.fulfillment = store.createRecord('fulfillment', {issue: records.apples, entity: records.alice, subscription: records.aliceSub}).save()
+          records.final_fulfillment = store.createRecord('fulfillment', {issue: records.apples, entity: records.donna, subscription: records.donnaSub}).save()
 
-          fulfillments = Ember.RSVP.hash
-            fulfillment: store.createRecord('fulfillment', {issue: records.apples, entity: records.alice, subscription: subscriptions.alice}).save()
-            final_fulfillment: store.createRecord('fulfillment', {issue: records.apples, entity: records.donna, subscription: subscriptions.donna}).save()
-            subscriptions: subscriptions
-
-          fulfillments
-        ).then((fulfillments) ->
-          records = fulfillments.subscriptions.records
-          subscriptions = fulfillments.subscriptions
-
+          Ember.RSVP.hash(records)
+        ).then((records) ->
           # FIXME hack to prevent stored entity IDs from being cleared
-          subscriptions.alice.set 'entity', records.alice
-          subscriptions.bob.set 'entity', records.bob
-          subscriptions.donna.set 'entity', records.donna
+          records.aliceSub.set 'entity', records.alice
+          records.bobSub.set 'entity', records.bob
+          records.donnaSub.set 'entity', records.donna
 
           Ember.RSVP.all([
             records.alice.save(),
             records.bob.save()
             records.donna.save()
-            subscriptions.alice.save(),
-            subscriptions.bob.save()
-            subscriptions.donna.save()
+            records.aliceSub.save(),
+            records.bobSub.save()
+            records.donnaSub.save()
           ]).then ->
             done()
         )
