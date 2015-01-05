@@ -36,13 +36,11 @@ liquid-with model as issue
 
       h4 Distributions
       ul.distributions
-        each distribution in issue.distributions
-          // TODO is this better a computed filterBy?
-          unless distribution.isNew
-            li
-              link-to 'issue.distribution' distribution
-                =moment distribution.createdAt 'MMM D ’YY'
-              | &nbsp; {{fa-icon 'envelope'}} {{distribution.fulfillments.length}} {{fa-icon 'book'}} {{distribution.count}}
+        each distribution in issue.persistedDistributions
+          li
+            link-to 'issue.distribution' distribution
+              =moment distribution.createdAt 'MMM D ’YY'
+            | &nbsp; {{fa-icon 'envelope'}} {{distribution.fulfillments.length}} {{fa-icon 'book'}} {{distribution.count}}
         else
           | No distributions yet.
       button.small.secondary.js-build-distribution click="buildDistribution"

@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import DS from 'ember-data';
 
 var Issue = DS.Model.extend({
@@ -5,6 +6,8 @@ var Issue = DS.Model.extend({
   number: DS.attr('number'),
   features: DS.hasMany('feature'),
   distributions: DS.hasMany('distributions'),
+
+  persistedDistributions: Ember.computed.filterBy('distributions', 'isNew', false),
 
   rev: DS.attr("string")
 });
