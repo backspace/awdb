@@ -3,12 +3,13 @@
 StockChart = Ember.Component.extend
   classNames: ['stock-chart']
 
-  axis:
+  axis: Ember.computed 'max', ->
     rotated: true
     x:
       show: false
     y:
       show: false
+      max: @get('max')
 
   legend:
     show: false

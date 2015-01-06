@@ -9,6 +9,6 @@
       each issue in persistedIssues
         issue-list-item issue=issue
           // TODO connect to CSS variables
-          stock-chart issue=issue width=60 height=16
+          stock-chart issue=issue width=60 height=16 max=issueMaxCopies
   section.details
     outlet

@@ -6,4 +6,7 @@ IssuesController = Ember.ArrayController.extend
 
   persistedIssues: Ember.computed.filterBy 'arrangedContent', 'isNew', false
 
+  issueCopies: Ember.computed.mapBy 'model', 'printingsCopies'
+  issueMaxCopies: Ember.computed.max 'issueCopies'
+
 `export default IssuesController`
