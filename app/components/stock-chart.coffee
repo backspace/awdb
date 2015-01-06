@@ -11,6 +11,10 @@ StockChart = Ember.Component.extend
       show: false
       max: @get('max')
 
+  grid:
+    focus:
+      show: false
+
   legend:
     show: false
 
