@@ -9,8 +9,8 @@ NewPrintingController = Ember.Controller.extend
 
     revertEditing: ->
       issue = @get('printing.issue')
-      @get('printing').deleteRecord().then =>
-        @transitionToRoute 'issue.index', issue
+      @get('printing').deleteRecord()
+      @transitionToRoute 'issue.index', issue
 
     setPrinter: (printer) ->
       @set('printing.entity', printer)
