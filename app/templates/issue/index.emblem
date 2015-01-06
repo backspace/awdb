@@ -43,8 +43,6 @@ liquid-with model as issue
 
       p.stock In stock: #{issue.inStock} #{plural-suffix issue.inStock phrase="[copy|copies]"}
 
-      stock-chart issue=issue
-
       button.small.secondary.js-build-printing click="buildPrinting"
         | #{fa-icon 'print'} Record printing
 
