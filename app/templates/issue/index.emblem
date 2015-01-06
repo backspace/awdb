@@ -37,7 +37,7 @@ liquid-with model as issue
       h4 Printings
       ul.printings
         each printing in issue.printings
-          li #{printing.count}
+          li #{printing.entity.name}: #{printing.count}
         else
           | No printings yet.
 

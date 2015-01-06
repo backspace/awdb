@@ -1,6 +1,12 @@
 label
   | Number of copies
   =input type='number' name='count' value=printing.count autofocus=true
+if printing.entity
+  h5 Printer
+  entity-list-item entity=printing.entity
+else
+  entity-search entities=entities addEntity="setPrinter" placeholder="Printer name" addLabel="Set as printer"
+
 button.js-save click='doneEditing' Done
 | &nbsp;
 button.js-cancel click='revertEditing' Revert

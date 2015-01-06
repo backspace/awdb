@@ -1,8 +1,6 @@
 `import Ember from 'ember'`
 
 NewPrintingController = Ember.Controller.extend
-  printing: Ember.computed.alias 'model'
-
   actions:
     doneEditing: ->
       @get('printing').save().then =>
@@ -13,5 +11,8 @@ NewPrintingController = Ember.Controller.extend
       issue = @get('printing.issue')
       @get('printing').deleteRecord().then =>
         @transitionToRoute 'issue.index', issue
+
+    setPrinter: (printer) ->
+      @set('printing.entity', printer)
 
 `export default NewPrintingController`

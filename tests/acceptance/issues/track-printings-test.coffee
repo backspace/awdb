@@ -14,6 +14,7 @@ describe "Acceptance: Track printings", ->
         Ember.run ->
           Ember.RSVP.hash(
             issue: store.createRecord('issue', {title: 'Printworthy'}).save()
+            printer: store.createRecord('entity', {name: 'Printer'}).save()
           ).then (records) ->
             done()
 
@@ -27,6 +28,9 @@ describe "Acceptance: Track printings", ->
       click '.js-build-printing'
 
       fillIn 'input[name=count]', 30
+      fillIn 'input[type=search]', 'Print'
+
+      click 'li:contains(Printer) .js-add-entity'
 
       click '.js-save'
 
@@ -40,5 +44,6 @@ describe "Acceptance: Track printings", ->
 
       andThen ->
         expectElement '.printings li', {contains: '30'}
+        expectElement '.printings li', {contains: 'Printer'}
 
         done()
