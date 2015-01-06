@@ -28,4 +28,9 @@ app.import('bower_components/pouchdb/dist/pouchdb.js');
 app.import('bower_components/relational-pouch/dist/pouchdb.relational-pouch.js');
 app.import('bower_components/ember-pouch/dist/globals/main.js');
 
+app.import('bower_components/d3/d3.min.js');
+app.import('bower_components/c3/c3.css');
+app.import('bower_components/c3/c3.min.js');
+app.import('bower_components/ember-c3/build/lib.js');
+
 module.exports = app.toTree();

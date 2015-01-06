@@ -20,6 +20,7 @@
     "foundation": "~5.4.7",
     "font-awesome": "~4.2.0",
     "ember-cli-moment-shim": "~0.0.2",
-    "bourbon": "3.2.1"
+    "bourbon": "3.2.1",
+    "ember-c3": "~0.1.3"
   }
 }
