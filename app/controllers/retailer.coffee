@@ -11,7 +11,9 @@ RetailerController = Ember.ObjectController.extend SetPropertyOnModelChange,
   isEditing: Ember.computed.any 'model.isNew', 'requestedEditing'
 
   newSubscription: Ember.computed 'model.isRetailer', 'model.isNew', ->
-    @store.createRecord 'subscription', {count: 999}
+    # TODO what is this 999
+    # TODO should the default retail cost be set in the model?
+    @store.createRecord 'subscription', {count: 999, cost: @settings.get('retailIssueCost')}
 
   actions:
     doneEditing: ->

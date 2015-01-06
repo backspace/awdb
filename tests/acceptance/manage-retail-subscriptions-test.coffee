@@ -31,6 +31,13 @@ describe 'Acceptance: Manage retail subscriptions', ->
 
       done()
 
+  it 'uses the default retail issue cost', (done) ->
+    viewRetailer 'Chapters'
+
+    andThen ->
+      expect(find('input[name=cost]').val()).to.equal('8')
+      done()
+
   describe 'when a retailer subscribes', ->
     cost = '50'
     copies = '100'

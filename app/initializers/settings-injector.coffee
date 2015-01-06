@@ -16,6 +16,7 @@ initializer =
 
       application.register 'settings:main', settings, {instantiate: false}
       application.inject 'model', 'settings', 'settings:main'
+      application.inject 'controller', 'settings', 'settings:main'
 
       application.advanceReadiness()
 

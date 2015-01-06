@@ -40,6 +40,9 @@
     .small-12.medium-4.columns
       h3 Feature compensation
       =input type='number' value=featureCompensation name='featureCompensation'
+
+      h3 Retail issue cost
+      =input type='number' value=retailIssueCost name='retailIssueCost'
   .row
     .small-centered.small-3.columns
       if isDirty
