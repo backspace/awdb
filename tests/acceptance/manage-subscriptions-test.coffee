@@ -51,6 +51,7 @@ describe "Acceptance: Manage subscriptions", ->
     endAcceptanceTest(done)
 
   it 'shows issues remaining', (done) ->
+    @timeout 3000
     viewEntity 'Alice'
 
     andThen ->
