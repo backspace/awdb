@@ -63,7 +63,7 @@ describe "Acceptance: Edit issue feature", ->
       click 'li:contains("Oops") .js-edit-feature'
 
       fillIn 'input[type="search"]', 'alice'
-      click 'li:contains("Alice") .js-add-contributor'
+      click 'li:contains("Alice") .js-add-entity'
 
       click 'li.js-persisted i.fa-check'
 

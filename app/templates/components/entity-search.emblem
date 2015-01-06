@@ -3,7 +3,7 @@
 ul.results.fa-ul
   each entity in searchResults
     =entity-list-item entity=entity
-      button.tiny.secondary.js-add-contributor click="addEntity entity"
+      button.tiny.secondary.js-add-entity click="addEntity entity"
         | #{fa-icon 'plus'} #{addLabel}
   else
     if search
