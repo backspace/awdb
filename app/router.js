@@ -11,6 +11,10 @@ Router.map(function() {
     this.resource('issue', { path: ':issue_id' }, function() {
       this.route('distribute');
       this.route('distribution', { path: 'distributions/:distribution_id' });
+
+      this.route('printings', { path: 'printings' }, function() {
+        this.route('new');
+      });
     });
   });
 

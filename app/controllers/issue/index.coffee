@@ -148,5 +148,7 @@ IssueIndexController = Ember.ObjectController.extend SetPropertyOnModelChange,
     buildDistribution: ->
       @transitionToRoute 'issue.distribute', @get('model')
 
+    buildPrinting: ->
+      @transitionToRoute 'issue.printings.new', @get('model')
 
 `export default IssueIndexController`

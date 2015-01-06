@@ -6,6 +6,7 @@ var Issue = DS.Model.extend({
   number: DS.attr('number'),
   features: DS.hasMany('feature'),
   distributions: DS.hasMany('distributions'),
+  printings: DS.hasMany('printing'),
 
   persistedDistributions: Ember.computed.filterBy('distributions', 'isNew', false),
 

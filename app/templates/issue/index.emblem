@@ -34,6 +34,16 @@ liquid-with model as issue
 
     unless isNew
 
+      h4 Printings
+      ul.printings
+        each printing in issue.printings
+          li #{printing.count}
+        else
+          | No printings yet.
+
+      button.small.secondary.js-build-printing click="buildPrinting"
+        | #{fa-icon 'print'} Record printing
+
       h4 Mailouts
       ul.distributions
         each distribution in issue.persistedDistributions

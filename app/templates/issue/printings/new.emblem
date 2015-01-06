@@ -1,0 +1,6 @@
+label
+  | Number of copies
+  =input type='number' name='count' value=printing.count autofocus=true
+button.js-save click='doneEditing' Done
+| &nbsp;
+button.js-cancel click='revertEditing' Revert
