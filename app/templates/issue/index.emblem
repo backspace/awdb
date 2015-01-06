@@ -37,7 +37,7 @@ liquid-with model as issue
       h4 Printings
       ul.printings
         each printing in issue.printings
-          li #{moment printing.createdAt 'MMM D ’YY'} #{printing.entity.name}: #{printing.count} #{plural-suffix printing.count phrase="[copy|copies]"}
+          li #{moment printing.createdAt 'MMM D ’YY'} #{fa-icon 'print'} #{printing.entity.name} #{fa-icon 'book'} #{printing.count}
         else
           | No printings yet.
 
