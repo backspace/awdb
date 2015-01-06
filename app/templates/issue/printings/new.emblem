@@ -2,6 +2,9 @@ h4 New printing
 label
   | Number of copies
   =input type='number' name='count' value=printing.count autofocus=true
+label
+  | Cost
+  =input type='number' name='cost' value=printing.cost
 if printing.entity
   h5 Printer
   entity-list-item entity=printing.entity
