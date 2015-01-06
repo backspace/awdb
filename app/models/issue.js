@@ -10,7 +10,8 @@ var Issue = DS.Model.extend({
 
   persistedMailouts: Ember.computed.filterBy('mailouts', 'isNew', false),
 
-  printingsCopyCount: Ember.computed.mapBy('printings', 'count'),
+  persistedPrintings: Ember.computed.filterBy('printings', 'isNew', false),
+  printingsCopyCount: Ember.computed.mapBy('persistedPrintings', 'count'),
   printingsCopies: Ember.computed.sum('printingsCopyCount'),
 
   mailoutsCopyCount: Ember.computed.mapBy('mailouts', 'count'),
