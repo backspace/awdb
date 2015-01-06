@@ -1,5 +1,5 @@
 button.js-distribute click='distribute' disabled=isIncomplete class=isIncomplete:secondary
-  | #{fa-icon 'envelope'} Distribute to #{distribution.proposedFulfillments.length} recipient#{plural-suffix distribution.proposedFulfillments.length}
+  | #{fa-icon 'envelope'} Save mailout to #{distribution.proposedFulfillments.length} recipient#{plural-suffix distribution.proposedFulfillments.length}
 
 distribution-fulfillments fulfillments=distribution.proposedFulfillments deleteFulfillment="deleteFulfillment"
 

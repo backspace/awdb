@@ -34,7 +34,7 @@ liquid-with model as issue
 
     unless isNew
 
-      h4 Distributions
+      h4 Mailouts
       ul.distributions
         each distribution in issue.persistedDistributions
           li
@@ -42,6 +42,6 @@ liquid-with model as issue
               =moment distribution.createdAt 'MMM D ’YY'
             | &nbsp; {{fa-icon 'envelope'}} {{distribution.fulfillments.length}} {{fa-icon 'book'}} {{distribution.count}}
         else
-          | No distributions yet.
+          | No mailouts yet.
       button.small.secondary.js-build-distribution click="buildDistribution"
-        | #{fa-icon 'envelope'} Prepare distribution
+        | #{fa-icon 'envelope'} Prepare mailout

@@ -99,7 +99,7 @@ describe "Acceptance: Distribute issues", ->
 
         click '.js-subscriptions li:contains("Cara") .js-delete'
 
-        click 'button:contains("Distribute")'
+        click '.js-distribute'
 
         waitForModels ['distribution', 'fulfillment', 'issue', 'subscription']
 
@@ -188,7 +188,7 @@ describe "Acceptance: Distribute issues", ->
 
       describe 'when it is distributed', ->
         beforeEach (done) ->
-          click 'button:contains("Distribute")'
+          click '.js-distribute'
 
           waitForModels ['issue', 'subscription', 'fulfillment', 'distribution']
 
@@ -212,7 +212,7 @@ describe "Acceptance: Distribute issues", ->
     describe 'when it is distributed', ->
       beforeEach (done) ->
         fillIn 'input[type="number"]', '200'
-        click 'button:contains("Distribute")'
+        click '.js-distribute'
 
         waitForModels ['issue', 'subscription', 'fulfillment', 'distribution']
 
@@ -221,7 +221,7 @@ describe "Acceptance: Distribute issues", ->
 
       it 'shows the completed distribution', (done) ->
         andThen ->
-          expectElement 'h2', {contains: "Distribution of issue Apples are amazing"}
+          expectElement 'h2', {contains: "Mailout of issue Apples are amazing"}
           expectElement 'a', {contains: 'Alice'}
           expectElement 'a', {contains: 'Bookstore'}
 

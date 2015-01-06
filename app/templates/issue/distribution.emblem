@@ -1,4 +1,4 @@
-h2 Distribution of issue {{issue.title}}
+h2 Mailout of issue {{issue.title}}
 
 distribution-fulfillments fulfillments=fulfillments
 
