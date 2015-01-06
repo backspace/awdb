@@ -90,6 +90,16 @@ if application.populateSampleDatabase
         address: 'The International Network'
         classification: 'International'
 
+      createEntity
+        name: 'Bad printer'
+        address: 'Mediocrity Ave.'
+        classification: 'Canada'
+
+      createEntity
+        name: 'Great printer'
+        address: 'Excellence Ave.'
+        classification: 'Canada'
+
 
       createEntitySubscription = (attributes) ->
         viewEntity attributes.name
@@ -229,6 +239,59 @@ if application.populateSampleDatabase
         features: [
           {title: 'Work in progress', contributors: ['Write']}
         ]
+
+
+      createPrinting = (attributes) ->
+        viewIssue attributes.title
+
+        click '.js-build-printing'
+
+        fillIn 'input[name=count]', attributes.count
+        fillIn 'input[name=cost]', attributes.cost
+        fillIn 'input[type=search]', attributes.printer
+        click '.js-add-entity'
+
+        click '.js-save'
+
+        waitForAllModels()
+
+        andThen -> console.log "Created printing for issue #{attributes.title}"
+
+      createPrinting
+        title: 'Apples'
+        count: 50
+        cost: 500
+        printer: 'Bad printer'
+
+      createPrinting
+        title: 'Apples'
+        count: 20
+        cost: 250
+        printer: 'Bad printer'
+
+      createPrinting
+        title: 'Bananas'
+        count: 40
+        cost: 300
+        printer: 'Bad printer'
+
+      createPrinting
+        title: 'Coconuts'
+        count: 50
+        cost: 550
+        printer: 'Great printer'
+
+      createPrinting
+        title: 'Durians'
+        count: 60
+        cost: 550
+        printer: 'Great printer'
+
+      createPrinting
+        title: 'Elderberries'
+        count: 70
+        cost: 600
+        printer: 'Great printer'
 
 
       mailIssue = (attributes) ->
