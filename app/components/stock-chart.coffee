@@ -14,6 +14,10 @@ StockChart = Ember.Component.extend
   legend:
     show: false
 
+  tooltip: Ember.computed 'issue.inStock', ->
+    contents: =>
+      return "#{@get('issue.inStock')} in stock"
+
   data: Ember.computed 'issue.inStock', ->
     {
       columns: [
