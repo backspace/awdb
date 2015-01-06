@@ -8,7 +8,7 @@ Fulfillment = DS.Model.extend
 
   entity: DS.belongsTo 'entity', {async: true}
 
-  distribution: DS.belongsTo 'distribution'
+  mailout: DS.belongsTo 'mailout'
 
   name: DS.attr 'string'
   address: DS.attr 'string'

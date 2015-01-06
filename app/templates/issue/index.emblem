@@ -45,13 +45,13 @@ liquid-with model as issue
         | #{fa-icon 'print'} Record printing
 
       h4 Mailouts
-      ul.distributions
-        each distribution in issue.persistedDistributions
+      ul.mailouts
+        each mailout in issue.persistedMailouts
           li
-            link-to 'issue.distribution' distribution
-              =moment distribution.createdAt 'MMM D ’YY'
-            | &nbsp; {{fa-icon 'envelope'}} {{distribution.fulfillments.length}} {{fa-icon 'book'}} {{distribution.count}}
+            link-to 'issue.mailouts.mailout' mailout
+              =moment mailout.createdAt 'MMM D ’YY'
+            | &nbsp; {{fa-icon 'envelope'}} {{mailout.fulfillments.length}} {{fa-icon 'book'}} {{mailout.count}}
         else
           | No mailouts yet.
-      button.small.secondary.js-build-distribution click="buildDistribution"
+      button.small.secondary.js-build-mailout click="buildMailout"
         | #{fa-icon 'envelope'} Prepare mailout

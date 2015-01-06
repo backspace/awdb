@@ -1,6 +1,6 @@
 `import Ember from 'ember'`
 
-DistributionFulfillments = Ember.Component.extend
+MailoutFulfillments = Ember.Component.extend
   subscription: Ember.computed.filterBy 'fulfillments', 'isForSubscription'
   retailSubscription: Ember.computed.filterBy 'fulfillments', 'isForRetailSubscription'
   contribution: Ember.computed.filterBy 'fulfillments', 'isForContribution'
@@ -10,4 +10,4 @@ DistributionFulfillments = Ember.Component.extend
     deleteFulfillment: (fulfillment) ->
       @sendAction 'deleteFulfillment', fulfillment
 
-`export default DistributionFulfillments`
+`export default MailoutFulfillments`

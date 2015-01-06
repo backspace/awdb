@@ -1,12 +1,12 @@
 `import Ember from 'ember'`
-`import startApp from '../helpers/start-app'`
+`import startApp from '../../helpers/start-app'`
 
-`import PouchTestHelper from '../helpers/pouch-test-helper'`
+`import PouchTestHelper from '../../helpers/pouch-test-helper'`
 
 App = null
 entities = null
 
-describe "Acceptance: Distribute issues", ->
+describe "Acceptance: Track issue mailouts", ->
   # TODO speed this up
   @timeout 5000
 
@@ -92,23 +92,23 @@ describe "Acceptance: Distribute issues", ->
       andThen ->
         done()
 
-    describe 'and the new subscriber is deleted from the distribution', (done) ->
+    describe 'and the new subscriber is deleted from the mailout', (done) ->
       beforeEach (done) ->
         viewIssue 'Apples'
-        click '.js-build-distribution'
+        click '.js-build-mailout'
 
         click '.js-subscriptions li:contains("Cara") .js-delete'
 
-        click '.js-distribute'
+        click '.js-save-mailout'
 
-        waitForModels ['distribution', 'fulfillment', 'issue', 'subscription']
+        waitForModels ['mailout', 'fulfillment', 'issue', 'subscription']
 
         andThen ->
           done()
 
-      it 'does not distribute to the new subscriber', (done) ->
+      it 'does not mail to the new subscriber', (done) ->
         viewIssue 'Apples'
-        click '.distributions li a'
+        click '.mailouts li a'
 
         andThen ->
           expectElement 'a', {contains: 'Bob'}
@@ -116,10 +116,10 @@ describe "Acceptance: Distribute issues", ->
 
           done()
 
-  describe 'building a distribution for the existing issue', ->
+  describe 'building a mailout for the existing issue', ->
     beforeEach (done) ->
       viewIssue 'Apples'
-      click '.js-build-distribution'
+      click '.js-build-mailout'
 
       andThen ->
         done()
@@ -132,15 +132,15 @@ describe "Acceptance: Distribute issues", ->
 
         done()
 
-    it 'will not distribute when there are no recipients', (done) ->
+    it 'will not mail when there are no recipients', (done) ->
       click '.js-delete'
 
       andThen ->
-        expectElement '.js-distribute[disabled]'
+        expectElement '.js-save-mailout[disabled]'
 
         done()
 
-    it 'the proposed distribution lists active subscribers and contributors as recipients', (done) ->
+    it 'the proposed mailout lists active subscribers and contributors as recipients', (done) ->
       andThen ->
         expectElement '.js-subscriptions li', {contains: 'Alice'}
         expectElement '.js-subscriptions li', {contains: 'Bob'}
@@ -172,9 +172,9 @@ describe "Acceptance: Distribute issues", ->
 
           done()
 
-      it 'will not distribute because the recipient has no address', (done) ->
+      it 'will not mail because the recipient has no address', (done) ->
         andThen ->
-          expectElement 'button.js-distribute[disabled]'
+          expectElement 'button.js-save-mailout[disabled]'
 
           done()
 
@@ -186,16 +186,16 @@ describe "Acceptance: Distribute issues", ->
         andThen ->
           done()
 
-      describe 'when it is distributed', ->
+      describe 'when it is saved', ->
         beforeEach (done) ->
-          click '.js-distribute'
+          click '.js-save-mailout'
 
-          waitForModels ['issue', 'subscription', 'fulfillment', 'distribution']
+          waitForModels ['issue', 'subscription', 'fulfillment', 'mailout']
 
           andThen ->
             done()
 
-        it 'shows the new recipient in the completed distribution', (done) ->
+        it 'shows the new recipient in the completed mailout', (done) ->
           andThen ->
             expectElement 'a', {contains: 'Extra'}
 
@@ -209,17 +209,17 @@ describe "Acceptance: Distribute issues", ->
 
             done()
 
-    describe 'when it is distributed', ->
+    describe 'when it is mailed', ->
       beforeEach (done) ->
         fillIn 'input[type="number"]', '200'
-        click '.js-distribute'
+        click '.js-save-mailout'
 
-        waitForModels ['issue', 'subscription', 'fulfillment', 'distribution']
+        waitForModels ['issue', 'subscription', 'fulfillment', 'mailout']
 
         andThen ->
           done()
 
-      it 'shows the completed distribution', (done) ->
+      it 'shows the completed mailout', (done) ->
         andThen ->
           expectElement 'h2', {contains: "Mailout of issue Apples are amazing"}
           expectElement 'a', {contains: 'Alice'}
@@ -267,7 +267,7 @@ describe "Acceptance: Distribute issues", ->
 
           done()
 
-      it 'retains the name in the distribution even if it has since changed', (done) ->
+      it 'retains the name in the mailout even if it has since changed', (done) ->
         viewEntity 'Alice'
         click 'button:contains("Edit")'
         fillIn('input[name=name]', 'Newname')
@@ -276,7 +276,7 @@ describe "Acceptance: Distribute issues", ->
         waitForModels ['entity']
 
         viewIssue 'Apples'
-        click '.distributions li a'
+        click '.mailouts li a'
 
         andThen ->
           expectElement 'a', {contains: 'Alice'}
@@ -309,9 +309,9 @@ describe "Acceptance: Distribute issues", ->
 
           done()
 
-      it 'does not compensate nor fulfill contributors for a second distribution', (done) ->
+      it 'does not compensate nor fulfill contributors for a second mailout', (done) ->
         viewIssue 'Apples'
-        click '.js-build-distribution'
+        click '.js-build-mailout'
 
         andThen ->
           expectNoElement '.js-contributions li', {contains: 'Artist'}
@@ -338,7 +338,7 @@ describe "Acceptance: Distribute issues", ->
       andThen ->
         done()
 
-    it 'uses the new feature compensation in a distribution', (done) ->
+    it 'uses the new feature compensation in a mailout', (done) ->
       viewIssues()
       click '.js-create'
       fillIn 'input[name="title"]', 'Cantaloupe is capricious'
@@ -360,7 +360,7 @@ describe "Acceptance: Distribute issues", ->
       waitForModels ['feature', 'issue']
 
       viewIssue 'Cantaloupe'
-      click '.js-build-distribution'
+      click '.js-build-mailout'
 
       andThen ->
         expect(find('input[type="number"]').val()).to.equal('50')

@@ -1,6 +1,6 @@
 h2 Mailout of issue {{issue.title}}
 
-distribution-fulfillments fulfillments=fulfillments
+mailout-fulfillments fulfillments=fulfillments
 
 h3 Mailing labels
 mailing-labels addressables=fulfillments

@@ -231,22 +231,22 @@ if application.populateSampleDatabase
         ]
 
 
-      distributeIssue = (attributes) ->
+      mailIssue = (attributes) ->
         viewIssue attributes.title
-        click '.js-build-distribution'
+        click '.js-build-mailout'
 
         if attributes.giftees
           attributes.giftees.forEach (giftee) ->
             fillIn 'input[type=search]', giftee
             click "li:contains(#{giftee}) .fa-plus"
 
-        click '.js-distribute'
+        click '.js-save-mailout'
 
         waitForAllModels()
 
-        andThen -> console.log "Distributed issue #{attributes.title}"
+        andThen -> console.log "Mailed issue #{attributes.title}"
 
-      distributeIssue
+      mailIssue
         title: 'Apples'
         giftees: ["Giftee"]
 
@@ -257,7 +257,7 @@ if application.populateSampleDatabase
 
       waitForAllModels()
 
-      distributeIssue
+      mailIssue
         title: 'Bananas'
 
       # Change a name and address
@@ -270,10 +270,10 @@ if application.populateSampleDatabase
 
       waitForModels ['entity']
 
-      distributeIssue
+      mailIssue
         title: 'Coconuts'
 
-      distributeIssue
+      mailIssue
         title: 'Durians'
 
       # Re-subscribe a former subscriber

@@ -5,10 +5,10 @@ var Issue = DS.Model.extend({
   title: DS.attr("string"),
   number: DS.attr('number'),
   features: DS.hasMany('feature'),
-  distributions: DS.hasMany('distributions'),
+  mailouts: DS.hasMany('mailouts'),
   printings: DS.hasMany('printing'),
 
-  persistedDistributions: Ember.computed.filterBy('distributions', 'isNew', false),
+  persistedMailouts: Ember.computed.filterBy('mailouts', 'isNew', false),
 
   rev: DS.attr("string")
 });

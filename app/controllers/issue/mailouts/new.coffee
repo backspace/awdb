@@ -1,16 +1,16 @@
 `import Ember from 'ember'`
 
-IssueDistributeController = Ember.ObjectController.extend
+NewMailoutController = Ember.ObjectController.extend
 
-  isDistributing: false
+  isSaving: false
 
-  distribution: Ember.computed.alias 'model.distribution'
+  mailout: Ember.computed.alias 'model.mailout'
 
   entities: Ember.computed.alias 'model.entities'
   subscribers: Ember.computed.filterBy('model.entities', 'isSubscribed')
 
-  hasNoFulfillments: Ember.computed.empty 'distribution.proposedFulfillments'
-  fulfillmentAddresses: Ember.computed.mapBy 'distribution.proposedFulfillments', 'entity.address'
+  hasNoFulfillments: Ember.computed.empty 'mailout.proposedFulfillments'
+  fulfillmentAddresses: Ember.computed.mapBy 'mailout.proposedFulfillments', 'entity.address'
   allFulfillmentsHaveAddresses: Ember.computed 'fulfillmentAddresses.@each', ->
     Ember.isEmpty(@get('fulfillmentAddresses').filter (address) ->
       Ember.isNone(address)
@@ -21,20 +21,20 @@ IssueDistributeController = Ember.ObjectController.extend
 
   waitsForEntitiesToTriggerSuggestions: Ember.observer 'entities.isLoaded', ->
     if @get 'entities.isLoaded'
-      @addSuggestedFulfillmentsToDistribution @get('model.distribution')
+      @addSuggestedFulfillmentsToMailout @get('model.mailout')
 
-  addSuggestedFulfillmentsToDistribution: (distribution) ->
-    return unless distribution?
+  addSuggestedFulfillmentsToMailout: (mailout) ->
+    return unless mailout?
 
-    issue = distribution.get 'issue'
+    issue = mailout.get 'issue'
 
     # TODO why does this happen? the store loading the issue elsewhere?
     unless issue
       issue = @get 'model.issue'
-      distribution.set 'issue', issue
+      mailout.set 'issue', issue
 
     # FIXME hideous hack to store fulfillments elsewhere because of broken parent-saving with unsaved children
-    distribution.set 'proposedFulfillments', []
+    mailout.set 'proposedFulfillments', []
 
     # FIXME having to refilter entities.isSubscribed here rather than rely on computed subscribers, why?
     suggestedSubscribers = @get('model.entities').filterBy('isSubscribed').filter (subscriber) ->
@@ -45,29 +45,29 @@ IssueDistributeController = Ember.ObjectController.extend
 
       fulfillment = @store.createRecord 'fulfillment', {entity: entity, issue: issue, subscription: subscription}
 
-      distribution.get('proposedFulfillments').pushObject fulfillment
+      mailout.get('proposedFulfillments').pushObject fulfillment
 
     issue.get('features').forEach (feature) =>
       # FIXME a contributor will receive one issue for each feature
       feature.get('uncompensatedContributions').forEach (contribution) =>
         fulfillment = @store.createRecord 'fulfillment', {entity: contribution.get('entity'), contribution: contribution, issue: issue}
 
-        distribution.get('proposedFulfillments').pushObject fulfillment
+        mailout.get('proposedFulfillments').pushObject fulfillment
 
   actions:
-    distribute: ->
-      distribution = @get 'distribution'
-      issue = distribution.get('issue')
+    save: ->
+      mailout = @get 'mailout'
+      issue = mailout.get('issue')
 
-      @set 'isDistributing', true
+      @set 'isSaving', true
 
-      distribution.save().then =>
-        Ember.RSVP.all(distribution.get('proposedFulfillments').map((fulfillment) ->
-          fulfillment.set 'distribution', distribution
+      mailout.save().then =>
+        Ember.RSVP.all(mailout.get('proposedFulfillments').map((fulfillment) ->
+          fulfillment.set 'mailout', mailout
           fulfillment.save()
         )).then((fulfillments) ->
           fulfillments.map((fulfillment) ->
-            distribution.get('fulfillments').pushObject fulfillment
+            mailout.get('fulfillments').pushObject fulfillment
             subscription = fulfillment.get('subscription')
             subscription.save() if subscription?
 
@@ -75,18 +75,18 @@ IssueDistributeController = Ember.ObjectController.extend
               entity.save()
           )
         ).then( ->
-          issue.get('distributions').pushObject distribution
+          issue.get('mailouts').pushObject mailout
           issue.save()
         ).then( ->
-          distribution.save()
+          mailout.save()
         ).then =>
-          @set 'isDistributing', false
-          @send 'showDistribution', distribution
+          @set 'isSaving', false
+          @send 'showMailout', mailout
 
     deleteFulfillment: (fulfillment) ->
-      @get('distribution.proposedFulfillments').removeObject(fulfillment)
+      @get('mailout.proposedFulfillments').removeObject(fulfillment)
 
     addEntity: (entity) ->
-      @get('distribution.proposedFulfillments').addObject(@store.createRecord('fulfillment', {entity: entity, issue: @get('distribution.issue')}))
+      @get('mailout.proposedFulfillments').addObject(@store.createRecord('fulfillment', {entity: entity, issue: @get('mailout.issue')}))
 
-`export default IssueDistributeController`
+`export default NewMailoutController`

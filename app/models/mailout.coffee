@@ -1,6 +1,6 @@
 `import DS from 'ember-data'`
 
-Distribution = DS.Model.extend
+Mailout = DS.Model.extend
   issue: DS.belongsTo 'issue'
   fulfillments: DS.hasMany 'fulfillment'
 
@@ -20,4 +20,4 @@ Distribution = DS.Model.extend
           contribution.set 'transaction', transaction
           contribution.save()
 
-`export default Distribution`
+`export default Mailout`

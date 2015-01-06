@@ -9,8 +9,10 @@ Router.map(function() {
   this.resource('issues', function() {
     this.route('new');
     this.resource('issue', { path: ':issue_id' }, function() {
-      this.route('distribute');
-      this.route('distribution', { path: 'distributions/:distribution_id' });
+      this.route('mailouts', { path: 'mailouts' }, function() {
+        this.route('new');
+        this.route('mailout', { path: ':mailout_id' });
+      });
 
       this.route('printings', { path: 'printings' }, function() {
         this.route('new');

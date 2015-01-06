@@ -90,7 +90,7 @@ IssueIndexController = Ember.ObjectController.extend SetPropertyOnModelChange,
 
       featuresToSave = @get 'featuresToSave'
 
-      # TODO ?! during new feature compensation distribution test, was getting a new feature with no attributes
+      # TODO ?! during new feature compensation mailout test, was getting a new feature with no attributes
       if (Ember.isEmpty(Ember.keys(feature.changedAttributes())) && feature.get('contributions.length') == 0) || featuresToSave?.contains(feature)
         promise.resolve()
         return
@@ -145,8 +145,8 @@ IssueIndexController = Ember.ObjectController.extend SetPropertyOnModelChange,
       entity.save().then ->
         promise.resolve(entity)
 
-    buildDistribution: ->
-      @transitionToRoute 'issue.distribute', @get('model')
+    buildMailout: ->
+      @transitionToRoute 'issue.mailouts.new', @get('model')
 
     buildPrinting: ->
       @transitionToRoute 'issue.printings.new', @get('model')
