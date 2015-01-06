@@ -6,6 +6,8 @@ Printing = DS.Model.extend
 
   entity: DS.belongsTo 'entity'
 
+  createdAt: DS.attr 'date', {defaultValue: -> new Date()}
+
   rev: DS.attr 'string'
 
 `export default Printing`
