@@ -8,5 +8,7 @@
     ul.side-nav.fa-ul
       each issue in persistedIssues
         issue-list-item issue=issue
+          // TODO connect to CSS variables
+          stock-chart issue=issue width=60 height=16
   section.details
     outlet

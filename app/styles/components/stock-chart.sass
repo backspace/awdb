@@ -6,6 +6,8 @@ $mailed-colour: $colour-brand-trace
 .stock-chart
   .c3-target-stock path[style]
     fill: $stock-colour !important
+    stroke: $stock-colour !important
+    stroke-width: 1px
   .c3-target-mailed path[style]
     fill: $mailed-colour !important
     stroke: $stock-colour !important
@@ -18,3 +20,8 @@ $mailed-colour: $colour-brand-trace
       background-color: $stock-colour !important
     .c3-tooltip-name-mailed span[style]
       background-color: $mailed-colour !important
+
+.list .stock-chart
+  position: absolute
+  top: 8px
+  right: 0

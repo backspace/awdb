@@ -24,4 +24,13 @@ StockChart = Ember.Component.extend
       order: null
     }
 
+  size: Ember.computed 'width', 'height', ->
+    if @get('width') && @get('height')
+      {
+        width: @get('width')
+        height: @get('height')
+      }
+    else
+      {}
+
 `export default StockChart`
