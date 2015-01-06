@@ -4,7 +4,7 @@ ul.results.fa-ul
   each entity in searchResults
     =entity-list-item entity=entity
       button.tiny.secondary.js-add-contributor click="addEntity entity"
-        | #{fa-icon 'plus'} Add as contributor
+        | #{fa-icon 'plus'} #{addLabel}
   else
     if search
       if supportCreation

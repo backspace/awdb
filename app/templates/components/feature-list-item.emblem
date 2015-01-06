@@ -15,7 +15,7 @@ if isEditing
         button.alert.tiny.js-remove-contribution click="removeContribution contribution"
           | #{fa-icon 'trash'} Remove as contributor
 
-  entity-search entities=entities addEntity="addContributor" createEntity="addNewContributor" placeholder="Contributor name" supportCreation=true
+  entity-search entities=entities addEntity="addContributor" createEntity="addNewContributor" placeholder="Contributor name" supportCreation=true addLabel="Add as contributor"
 else
   span.js-target
     | #{feature.title}

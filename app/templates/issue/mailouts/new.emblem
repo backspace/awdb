@@ -3,7 +3,7 @@ button.js-save-mailout click='save' disabled=isIncomplete class=isIncomplete:sec
 
 mailout-fulfillments fulfillments=mailout.proposedFulfillments deleteFulfillment="deleteFulfillment"
 
-=entity-search entities=entities addEntity="addEntity" placeholder="Add an extra recipient"
+=entity-search entities=entities addEntity="addEntity" placeholder="Add an extra recipient" addLabel="Add as an extra recipient"
 
 h3 Contributor compensation
 ul.compensations
