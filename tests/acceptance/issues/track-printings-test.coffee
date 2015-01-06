@@ -43,7 +43,7 @@ describe "Acceptance: Track printings", ->
       viewIssue "Printworthy"
 
       andThen ->
-        expectElement '.printings li', {contains: '30'}
+        expectElement '.printings li', {contains: '30 copies'}
         expectElement '.printings li', {contains: 'Printer'}
 
         done()
