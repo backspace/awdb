@@ -14,7 +14,7 @@ describe "Acceptance: Track printings", ->
         Ember.run ->
           Ember.RSVP.hash(
             issue: store.createRecord('issue', {title: 'Printworthy'}).save()
-            printer: store.createRecord('entity', {name: 'Printer'}).save()
+            printer: store.createRecord('entity', {name: 'Printer', address: 'Printertopia'}).save()
           ).then (records) ->
             done()
 
@@ -47,3 +47,30 @@ describe "Acceptance: Track printings", ->
         expectElement '.printings li', {contains: 'Printer'}
 
         done()
+
+    it "the stock is increased", (done) ->
+      viewIssue "Printworthy"
+
+      andThen ->
+        expectElement '.stock', {contains: '30 copies'}
+        done()
+
+    describe "and a copy is mailed", ->
+      beforeEach (done) ->
+        click '.js-build-mailout'
+        fillIn 'input[type=search]', 'Print'
+        click 'li:contains(Printer) .js-add-entity'
+
+        click '.js-save-mailout'
+
+        waitForModels ['issue', 'mailout']
+
+        andThen ->
+          done()
+
+      it "decreases the stock", (done) ->
+        viewIssue "Printworthy"
+
+        andThen ->
+          expectElement '.stock', {contains: '29 copies'}
+          done()

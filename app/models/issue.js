@@ -10,6 +10,16 @@ var Issue = DS.Model.extend({
 
   persistedMailouts: Ember.computed.filterBy('mailouts', 'isNew', false),
 
+  printingsCopyCount: Ember.computed.mapBy('printings', 'count'),
+  printingsCopies: Ember.computed.sum('printingsCopyCount'),
+
+  mailoutsCopyCount: Ember.computed.mapBy('mailouts', 'count'),
+  mailoutsCopies: Ember.computed.sum('mailoutsCopyCount'),
+
+  inStock: Ember.computed('printingsCopies', 'mailoutsCopies', function() {
+    return this.get('printingsCopies') - this.get('mailoutsCopies');
+  }),
+
   rev: DS.attr("string")
 });
 

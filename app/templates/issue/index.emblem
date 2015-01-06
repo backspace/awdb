@@ -41,6 +41,8 @@ liquid-with model as issue
         else
           | No printings yet.
 
+      p.stock In stock: #{issue.inStock} #{plural-suffix issue.inStock phrase="[copy|copies]"}
+
       button.small.secondary.js-build-printing click="buildPrinting"
         | #{fa-icon 'print'} Record printing
 
