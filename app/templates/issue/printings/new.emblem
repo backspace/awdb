@@ -1,3 +1,4 @@
+h4 New printing
 label
   | Number of copies
   =input type='number' name='count' value=printing.count autofocus=true
