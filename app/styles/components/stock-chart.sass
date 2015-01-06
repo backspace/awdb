@@ -1,0 +1,20 @@
+$border-colour: $colour-brand
+
+$stock-colour: $colour-brand
+$mailed-colour: $colour-brand-trace
+
+.stock-chart
+  .c3-target-stock path[style]
+    fill: $stock-colour !important
+  .c3-target-mailed path[style]
+    fill: $mailed-colour !important
+    stroke: $stock-colour !important
+    stroke-width: 1px
+
+  .c3-tooltip-container
+    span
+      border: 1px solid $border-colour
+    .c3-tooltip-name-stock span[style]
+      background-color: $stock-colour !important
+    .c3-tooltip-name-mailed span[style]
+      background-color: $mailed-colour !important
