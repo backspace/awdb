@@ -263,7 +263,7 @@ describe "Acceptance: Track issue mailouts", ->
         viewEntity 'Artist'
 
         andThen ->
-          expectElement 'li', {contains: 'Apples are amazing'}
+          expectElement 'li.is-multiple', {contains: 'Apples are amazing'}
 
           done()
 

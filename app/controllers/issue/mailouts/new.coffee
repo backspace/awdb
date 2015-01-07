@@ -50,7 +50,7 @@ NewMailoutController = Ember.ObjectController.extend
     issue.get('features').forEach (feature) =>
       # FIXME a contributor will receive one issue for each feature
       feature.get('uncompensatedContributions').forEach (contribution) =>
-        fulfillment = @store.createRecord 'fulfillment', {entity: contribution.get('entity'), contribution: contribution, issue: issue}
+        fulfillment = @store.createRecord 'fulfillment', {entity: contribution.get('entity'), contribution: contribution, issue: issue, count: @settings.get('featureComplimentaryIssues')}
 
         mailout.get('proposedFulfillments').pushObject fulfillment
 

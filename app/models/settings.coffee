@@ -5,6 +5,7 @@ Ember.Inflector.inflector.uncountable 'settings'
 
 Settings = DS.Model.extend
   featureCompensation: DS.attr 'number', {defaultValue: 100}
+  featureComplimentaryIssues: DS.attr 'number', {defaultValue: 2}
 
   subscriptionCanada3: DS.attr 'number', {defaultValue: 30}
   subscriptionUsa3: DS.attr 'number', {defaultValue: 35}
