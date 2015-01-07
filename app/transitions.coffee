@@ -1,3 +1,4 @@
+`import Entity from './models/entity'`
 `import Issue from './models/issue'`
 
 transitions = ->
@@ -8,6 +9,11 @@ transitions = ->
 
   @transition(
     @betweenModels({instanceOf: Issue}),
+    @use('shortFade')
+  )
+
+  @transition(
+    @betweenModels({instanceOf: Entity}),
     @use('shortFade')
   )
 

@@ -1,29 +1,30 @@
-header
-  h3
-    if isNew
-      | New subscriber
-    else
-      =name
+liquid-with model as entity
+  header
+    h3
+      if isNew
+        | New subscriber
+      else
+        =entity.name
 
-if editing
-  p
-    label Name
-    =input type='text' name='name' value=name autofocus=true
-    label Address
-    =textarea name='address' value=address rows=4
+  if editing
+    p
+      label Name
+      =input type='text' name='name' value=entity.name autofocus=true
+      label Address
+      =textarea name='address' value=entity.address rows=4
 
-    each keyToLabel in classificationKeyToLabel
-      label
-        =radio-button value=keyToLabel.key groupValue=classification
-        | #{keyToLabel.label}
+      each keyToLabel in classificationKeyToLabel
+        label
+          =radio-button value=keyToLabel.key groupValue=classification
+          | #{keyToLabel.label}
 
-    button.js-save click='doneEditing' Done
-    | &nbsp;
-    button.js-cancel click='revertEditing' Revert
-else
-  p.address=address
-  button.js-edit click='edit'
-    | #{fa-icon 'pencil'} Edit
+      button.js-save click='doneEditing' Done
+      | &nbsp;
+      button.js-cancel click='revertEditing' Revert
+  else
+    p.address=entity.address
+    button.js-edit click='edit'
+      | #{fa-icon 'pencil'} Edit
 
-  h4 Subscriptions
-  entity-subscription-list entity=model subscription=newSubscription save="subscribe"
+    h4 Subscriptions
+    entity-subscription-list entity=entity subscription=newSubscription save="subscribe"

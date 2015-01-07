@@ -1,26 +1,27 @@
-header
-  h3
-    if isNew
-      | New retailer
-    else
-      =name
+liquid-with model as retailer
+  header
+    h3
+      if isNew
+        | New retailer
+      else
+        =retailer.name
 
-if isEditing
-  label
-    | Name
-    =input type='text' name='name' value=name autofocus=true
-  label
-    | Address
-    =textarea name='address' value=address rows=4
+  if isEditing
+    label
+      | Name
+      =input type='text' name='name' value=retailer.name autofocus=true
+    label
+      | Address
+      =textarea name='address' value=retailer.address rows=4
 
-  button.js-save click='doneEditing' Done
-  | &nbsp;
-  button.js-cancel click='revertEditing' Revert
-else
-  p.address=model.address
+    button.js-save click='doneEditing' Done
+    | &nbsp;
+    button.js-cancel click='revertEditing' Revert
+  else
+    p.address=retailer.address
 
-  button click='edit'
-    | #{fa-icon 'pencil'} Edit
+    button click='edit'
+      | #{fa-icon 'pencil'} Edit
 
-  h4 Subscriptions
-  retailer-subscription-list retailer=model newSubscription=newSubscription save="subscribe" end="endSubscription"
+    h4 Subscriptions
+    retailer-subscription-list retailer=retailer newSubscription=newSubscription save="subscribe" end="endSubscription"
