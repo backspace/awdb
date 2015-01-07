@@ -17,6 +17,8 @@ if application.populateSampleDatabase
     it 'constructs archival data', (done) ->
       @timeout 0
 
+      # Define helper methods
+
       createEntity = (attributes) ->
         viewEntities()
         click '.js-create'
@@ -30,82 +32,6 @@ if application.populateSampleDatabase
 
         andThen -> console.log "Created entity #{attributes.name}"
 
-      createEntity
-        name: 'Writer'
-        address: "91 Albert St.\nWinnipeg, MB  R0E 0H0\nCanada"
-        classification: 'Canada'
-
-      createEntity
-        name: 'Abstract painter'
-        address: 'Syntagma Square\nAthens\nGreece'
-        classification: 'International'
-
-      createEntity
-        name: 'Scylla'
-        address: "Firuzağa\nIstanbul\nTurkey"
-        classification: 'International'
-
-      createEntity
-        name: 'Charybdis'
-        address: "Tarlabaşı\nIstanbul\nTurkey"
-        classification: 'International'
-
-      createEntity
-        name: 'Subscriber'
-        address: "123 Christopher St.\nNew York, NY  21212\nUSA"
-        classification: 'USA'
-
-      createEntity
-        name: 'Former subscriber'
-        address: "Talbot & Watt\nWinnipeg"
-        classification: 'Canada'
-
-      createEntity
-        name: 'Special subscriber'
-        address: "Villa Maria"
-        classification: 'Canada'
-
-      createEntity
-        name: 'Hater'
-        address: "100 Ingrate Ave.\nLockport, MB  R3K 1P4\nCanada"
-        classification: 'Canada'
-
-      createEntity
-        name: 'The Institute'
-        address: "The Hague"
-        classification: 'Institution'
-
-      createEntity
-        name: 'Caterpillar'
-        address: "A branch"
-        classification: 'International'
-
-      createEntity
-        name: 'Giftee'
-        address: '42 Emerson Ave.\nWinnipeg, MB  R2F 9P9\nCanada'
-        classification: 'Canada'
-
-      createEntity
-        name: 'Revenant'
-        address: 'The International Network'
-        classification: 'International'
-
-      createEntity
-        name: 'Latecomer'
-        address: '100 Bandwagon Way'
-        classification: 'Canada'
-
-      createEntity
-        name: 'Bad printer'
-        address: 'Mediocrity Ave.'
-        classification: 'Canada'
-
-      createEntity
-        name: 'Great printer'
-        address: 'Excellence Ave.'
-        classification: 'Canada'
-
-
       createEntitySubscription = (attributes) ->
         viewEntity attributes.name
         click "input[name=#{attributes.count}]"
@@ -115,33 +41,6 @@ if application.populateSampleDatabase
         waitForAllModels()
 
         andThen -> console.log "Subscribed #{attributes.name}"
-
-      createEntitySubscription
-        name: 'Subscriber'
-        count: 6
-
-      createEntitySubscription
-        name: 'Former subscriber'
-        count: 3
-
-      createEntitySubscription
-        name: 'Special subscriber'
-        count: 3
-        cost: 10
-
-      createEntitySubscription
-        name: 'The Institute'
-        count: 6
-        cost: 10000
-
-      createEntitySubscription
-        name: 'Caterpillar'
-        count: 6
-
-      createEntitySubscription
-        name: 'Revenant'
-        count: 3
-
 
       createRetailer = (attributes) ->
         viewRetailers()
@@ -155,23 +54,6 @@ if application.populateSampleDatabase
 
         andThen -> console.log "Created retailer #{attributes.name}"
 
-      createRetailer
-        name: 'The Paddlewheel'
-        address: '101 Colony St.'
-
-      createRetailer
-        name: 'Mondragón'
-        address: '91 Albert St.'
-
-      createRetailer
-        name: 'The Big Box store'
-        address: 'Saint James'
-
-      createRetailer
-        name: 'Popup'
-        address: 'The Exchange'
-
-
       createRetailSubscription = (attributes) ->
         viewRetailer attributes.name
         fillIn 'input[name=cost]', attributes.cost
@@ -181,17 +63,6 @@ if application.populateSampleDatabase
         waitForAllModels()
 
         andThen -> console.log "Subscribed #{attributes.name}"
-
-      createRetailSubscription
-        name: 'The Paddlewheel'
-        cost: 20
-        copies: 10
-
-      createRetailSubscription
-        name: 'Mondragón'
-        cost: 10
-        copies: 30
-
 
       createIssue = (attributes) ->
         viewIssues()
@@ -224,32 +95,6 @@ if application.populateSampleDatabase
 
         andThen -> console.log "Created issue #{attributes.title}"
 
-      createIssue
-        title: 'Apples'
-        features: [
-          {title: 'They are great', contributors: ['Writer']},
-          {title: 'Not so great', contributors: ['Scylla', 'Charybdis']}
-        ]
-
-      createIssue
-        title: 'Bananas'
-        features: [
-          {title: 'A piece', contributors: ['Abstract painter']}
-        ]
-
-      createIssue
-        title: 'Coconuts'
-
-      createIssue
-        title: 'Durians'
-
-      createIssue
-        title: 'Elderberries'
-        features: [
-          {title: 'Work in progress', contributors: ['Write']}
-        ]
-
-
       createPrinting = (attributes) ->
         viewIssue attributes.title
 
@@ -265,43 +110,6 @@ if application.populateSampleDatabase
         waitForAllModels()
 
         andThen -> console.log "Created printing for issue #{attributes.title}"
-
-      createPrinting
-        title: 'Apples'
-        count: 50
-        cost: 500
-        printer: 'Bad printer'
-
-      createPrinting
-        title: 'Apples'
-        count: 10
-        cost: 250
-        printer: 'Bad printer'
-
-      createPrinting
-        title: 'Bananas'
-        count: 40
-        cost: 300
-        printer: 'Bad printer'
-
-      createPrinting
-        title: 'Coconuts'
-        count: 50
-        cost: 550
-        printer: 'Great printer'
-
-      createPrinting
-        title: 'Durians'
-        count: 55
-        cost: 550
-        printer: 'Great printer'
-
-      createPrinting
-        title: 'Elderberries'
-        count: 70
-        cost: 600
-        printer: 'Great printer'
-
 
       mailIssue = (attributes) ->
         viewIssue attributes.title
@@ -325,9 +133,138 @@ if application.populateSampleDatabase
 
         andThen -> console.log "Mailed issue #{attributes.title}"
 
+      # First issue
+
+      createEntity
+        name: 'Writer'
+        address: "91 Albert St.\nWinnipeg, MB  R0E 0H0\nCanada"
+        classification: 'Canada'
+
+      createEntity
+        name: 'Scylla'
+        address: "Firuzağa\nIstanbul\nTurkey"
+        classification: 'International'
+
+      createEntity
+        name: 'Charybdis'
+        address: "Tarlabaşı\nIstanbul\nTurkey"
+        classification: 'International'
+
+      createIssue
+        title: 'Apples'
+        features: [
+          {title: 'They are great', contributors: ['Writer']},
+          {title: 'Not so great', contributors: ['Scylla', 'Charybdis']}
+        ]
+
+      createEntity
+        name: 'Subscriber'
+        address: "123 Christopher St.\nNew York, NY  21212\nUSA"
+        classification: 'USA'
+
+      createEntity
+        name: 'Former subscriber'
+        address: "Talbot & Watt\nWinnipeg"
+        classification: 'Canada'
+
+      createEntity
+        name: 'Special subscriber'
+        address: "Villa Maria"
+        classification: 'Canada'
+
+      createEntity
+        name: 'The Institute'
+        address: "The Hague"
+        classification: 'Institution'
+
+      createEntity
+        name: 'Caterpillar'
+        address: "A branch"
+        classification: 'International'
+
+      createEntity
+        name: 'Giftee'
+        address: '42 Emerson Ave.\nWinnipeg, MB  R2F 9P9\nCanada'
+        classification: 'Canada'
+
+      createEntity
+        name: 'Revenant'
+        address: 'The International Network'
+        classification: 'International'
+
+      createEntity
+        name: 'Hater'
+        address: "100 Ingrate Ave.\nLockport, MB  R3K 1P4\nCanada"
+        classification: 'Canada'
+
+      createEntity
+        name: 'Bad printer'
+        address: 'Mediocrity Ave.'
+        classification: 'Canada'
+
+      createEntitySubscription
+        name: 'Subscriber'
+        count: 6
+
+      createEntitySubscription
+        name: 'Former subscriber'
+        count: 3
+
+      createEntitySubscription
+        name: 'Special subscriber'
+        count: 3
+        cost: 10
+
+      createEntitySubscription
+        name: 'The Institute'
+        count: 6
+        cost: 10000
+
+      createEntitySubscription
+        name: 'Caterpillar'
+        count: 6
+
+      createEntitySubscription
+        name: 'Revenant'
+        count: 3
+
+      createRetailer
+        name: 'The Paddlewheel'
+        address: '101 Colony St.'
+
+      createRetailer
+        name: 'Mondragón'
+        address: '91 Albert St.'
+
+      createRetailer
+        name: 'The Big Box store'
+        address: 'Saint James'
+
+      createRetailSubscription
+        name: 'The Paddlewheel'
+        cost: 20
+        copies: 10
+
+      createRetailSubscription
+        name: 'Mondragón'
+        cost: 10
+        copies: 30
+
+      createPrinting
+        title: 'Apples'
+        count: 50
+        cost: 500
+        printer: 'Bad printer'
+
       mailIssue
         title: 'Apples'
         giftees: ["Giftee"]
+
+      createPrinting
+        title: 'Apples'
+        count: 10
+        cost: 250
+        printer: 'Bad printer'
 
       # Cancel a retail subscription
 
@@ -335,6 +272,26 @@ if application.populateSampleDatabase
       click '.js-unsubscribe'
 
       waitForAllModels()
+
+
+      # Second issue
+
+      createEntity
+        name: 'Abstract painter'
+        address: 'Syntagma Square\nAthens\nGreece'
+        classification: 'International'
+
+      createIssue
+        title: 'Bananas'
+        features: [
+          {title: 'A piece', contributors: ['Abstract painter']}
+        ]
+
+      createPrinting
+        title: 'Bananas'
+        count: 40
+        cost: 300
+        printer: 'Bad printer'
 
       mailIssue
         title: 'Bananas'
@@ -349,10 +306,33 @@ if application.populateSampleDatabase
 
       waitForModels ['entity']
 
+
+      # Third issue
+
+      createEntity
+        name: 'Great printer'
+        address: 'Excellence Ave.'
+        classification: 'Canada'
+
+      createIssue
+        title: 'Coconuts'
+
+      createPrinting
+        title: 'Coconuts'
+        count: 50
+        cost: 550
+        printer: 'Great printer'
+
       mailIssue
         title: 'Coconuts'
 
+
       # Mail back issues
+
+      createEntity
+        name: 'Latecomer'
+        address: '100 Bandwagon Way'
+        classification: 'Canada'
 
       mailIssue
         title: 'Apples'
@@ -369,6 +349,10 @@ if application.populateSampleDatabase
         extras:
           Latecomer: null
 
+      createRetailer
+        name: 'Popup'
+        address: 'The Exchange'
+
       # Add subscriptions
 
       createEntitySubscription
@@ -380,8 +364,35 @@ if application.populateSampleDatabase
         cost: 10
         copies: 40
 
+
+      # Fourth issue
+
+      createIssue
+        title: 'Durians'
+
+      createPrinting
+        title: 'Durians'
+        count: 55
+        cost: 550
+        printer: 'Great printer'
+
       mailIssue
         title: 'Durians'
+
+
+      # Fifth issue
+
+      createIssue
+        title: 'Elderberries'
+        features: [
+          {title: 'Work in progress', contributors: ['Writer']}
+        ]
+
+      createPrinting
+        title: 'Elderberries'
+        count: 70
+        cost: 600
+        printer: 'Great printer'
 
       # Re-subscribe a former subscriber
 
