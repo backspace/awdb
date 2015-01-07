@@ -317,7 +317,7 @@ describe "Acceptance: Track issue mailouts", ->
           # withinElement 'tr:contains("Artist")', ->
           #   expectElement 'td', {contains: '-$200'}
           #   expectElement 'td', {contains: 'Contribution'}
-          expectElement 'tr:contains("Artist") td', {contains: '-$200'}
+          expectElement 'tr:contains("Artist") td.debit + td.added', {contains: '$200'}
           expectElement 'tr:contains("Artist") td', {contains: 'Contribution'}
 
           done()

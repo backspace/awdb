@@ -6,10 +6,12 @@ TransactionListItem = Ember.Component.extend
   formattedAmount: Ember.computed 'transaction.amount', ->
     amount = @get 'transaction.amount'
 
-    if amount < 0
+    if @get 'isNegative'
       "-$#{Math.abs amount}"
     else
       "$#{amount}"
+
+  isNegative: Ember.computed.lt 'transaction.amount', 0
 
   eventType: Ember.computed 'transaction.event', ->
     event = @get 'transaction.event'

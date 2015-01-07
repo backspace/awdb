@@ -1,4 +1,4 @@
 td=moment transaction.createdAt
 td=transaction.entity.name
 td=eventType
-td=formattedAmount
+td class=isNegative:debit:credit=formattedAmount

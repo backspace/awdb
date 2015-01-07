@@ -1,4 +1,4 @@
-table
+table.transactions
   thead
     tr
       th Date

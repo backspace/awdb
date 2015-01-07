@@ -62,7 +62,7 @@ describe "Acceptance: Track printings", ->
       viewTransactions()
 
       andThen ->
-        expectElement 'tr:contains(Printer) td', {contains: "-$300"}
+        expectElement 'tr:contains(Printer) td.debit + .added', {contains: "$300"}
 
         done()
 
