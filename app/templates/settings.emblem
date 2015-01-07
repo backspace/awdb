@@ -43,6 +43,9 @@
 
       h3 Retail issue cost
       =input type='number' value=retailIssueCost name='retailIssueCost'
+
+      h3 Back issue cost
+      =input type='number' value=backIssueCost name='backIssueCost'
   .row
     .small-centered.small-3.columns
       if isDirty

@@ -208,6 +208,33 @@ describe "Acceptance: Track issue mailouts", ->
 
             done()
 
+        it 'shows a transaction for the default back issue cost', (done) ->
+          viewTransactions()
+
+          andThen ->
+            expectElement 'tr:contains(Extra) td', {contains: '$10'}
+            expectElement 'tr:contains(Extra) td', {contains: 'Fulfillment'}
+
+            done()
+
+      describe 'and an overridden back issue cost', ->
+        beforeEach (done) ->
+          fillIn 'li:contains(Extra) input[type=number]', '100'
+
+          click '.js-save-mailout'
+
+          waitForModels ['issue', 'subscription', 'fulfillment', 'mailout']
+
+          andThen ->
+            done()
+
+        it 'results in a transaction for the custom amount', (done) ->
+          viewTransactions()
+
+          andThen ->
+            expectElement 'tr:contains(Extra) td', {contains: '$100'}
+            done()
+
     describe 'when it is mailed', ->
       beforeEach (done) ->
         fillIn 'input[type="number"]', '200'

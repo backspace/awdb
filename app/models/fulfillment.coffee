@@ -33,11 +33,16 @@ Fulfillment = DS.Model.extend
 
   rev: DS.attr 'string'
 
-  countAndCostPopulator: Ember.observer 'subscription.copies', 'subscription.cost', ->
+  countAndCostPopulator: Ember.observer 'subscription.copies', 'subscription.cost', 'entity', ->
     return unless @get('isNew')
     if @get 'isRetail'
       @set('count', @get('subscription.copies'))
       @set('cost', @get('subscription.cost'))
+
+    if @get 'isExtra'
+      # FIXME should be injected but missing in PhantomJS
+      settings = @container.lookup 'settings:main'
+      @set('cost', settings.get('backIssueCost'))
 
   isRetail: Ember.computed.alias 'entity.isRetailer'
   isNotRetail: Ember.computed.not 'isRetail'
@@ -57,5 +62,8 @@ Fulfillment = DS.Model.extend
     if @get 'isRetail'
       transaction = @store.createRecord 'transaction', {amount: @get('cost')*@get('count'), entity: @get('entity'), fulfillment: @}
       transaction.save()
+
+    if @get 'isExtra'
+      transaction = @store.createRecord 'transaction', {amount: @get('cost'), entity: @get('entity'), fulfillment: @}
 
 `export default Fulfillment`

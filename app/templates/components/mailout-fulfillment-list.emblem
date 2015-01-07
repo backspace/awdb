@@ -11,6 +11,10 @@ each fulfillment in fulfillments
           | $
           =input type='number' value=fulfillment.contribution.compensation
       if deleteFulfillment
+        if fulfillment.isExtra
+          label
+            | $
+            =input type='number' value=fulfillment.cost
         span.deleter.js-delete click="deleteFulfillment fulfillment" ×
 else
   | None

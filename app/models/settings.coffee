@@ -18,6 +18,7 @@ Settings = DS.Model.extend
   subscriptionInstitution6: DS.attr 'number', {defaultValue: 80}
 
   retailIssueCost: DS.attr 'number', {defaultValue: 8}
+  backIssueCost: DS.attr 'number', {defaultValue: 10}
 
   costForSubscription: (count, classification) ->
     return undefined unless count? && classification?
