@@ -312,6 +312,13 @@ if application.populateSampleDatabase
             fillIn 'input[type=search]', giftee
             click "li:contains(#{giftee}) .fa-plus"
 
+        if attributes.extras
+          for name, cost of attributes.extras
+            fillIn 'input[type=search]', name
+            click "li:contains(#{name}) .fa-plus"
+
+            fillIn "li:contains(#{name}) input[type=number]", cost if cost?
+
         click '.js-save-mailout'
 
         waitForAllModels()
@@ -344,6 +351,23 @@ if application.populateSampleDatabase
 
       mailIssue
         title: 'Coconuts'
+
+      # Mail back issues
+
+      mailIssue
+        title: 'Apples'
+        extras:
+          Latecomer: 25
+
+      mailIssue
+        title: 'Bananas'
+        extras:
+          Latecomer: null
+
+      mailIssue
+        title: 'Coconuts'
+        extras:
+          Latecomer: null
 
       # Add subscriptions
 
