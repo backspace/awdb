@@ -1,3 +1,4 @@
-=fa-icon 'book' listItem=true
-link-to 'issue' issue boundActive=active: issue.title
+link-to 'issue' issue boundActive=active
+  fa-icon 'book' listItem=true
+  =issue.title
 yield
