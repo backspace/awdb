@@ -6,6 +6,10 @@ each fulfillment in fulfillments
       else
         if fulfillment.isMultiple
           | × #{fulfillment.count}
+      if fulfillment.contribution.isUncompensated
+        label
+          | $
+          =input type='number' value=fulfillment.contribution.compensation
       if deleteFulfillment
         span.deleter.js-delete click="deleteFulfillment fulfillment" ×
 else
