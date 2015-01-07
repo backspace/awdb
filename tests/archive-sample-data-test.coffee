@@ -91,6 +91,11 @@ if application.populateSampleDatabase
         classification: 'International'
 
       createEntity
+        name: 'Latecomer'
+        address: '100 Bandwagon Way'
+        classification: 'Canada'
+
+      createEntity
         name: 'Bad printer'
         address: 'Mediocrity Ave.'
         classification: 'Canada'
@@ -161,6 +166,10 @@ if application.populateSampleDatabase
       createRetailer
         name: 'The Big Box store'
         address: 'Saint James'
+
+      createRetailer
+        name: 'Popup'
+        address: 'The Exchange'
 
 
       createRetailSubscription = (attributes) ->
@@ -265,7 +274,7 @@ if application.populateSampleDatabase
 
       createPrinting
         title: 'Apples'
-        count: 20
+        count: 10
         cost: 250
         printer: 'Bad printer'
 
@@ -283,7 +292,7 @@ if application.populateSampleDatabase
 
       createPrinting
         title: 'Durians'
-        count: 60
+        count: 55
         cost: 550
         printer: 'Great printer'
 
@@ -335,6 +344,17 @@ if application.populateSampleDatabase
 
       mailIssue
         title: 'Coconuts'
+
+      # Add subscriptions
+
+      createEntitySubscription
+        name: 'Latecomer'
+        count: 6
+
+      createRetailSubscription
+        name: 'Popup'
+        cost: 10
+        copies: 40
 
       mailIssue
         title: 'Durians'
