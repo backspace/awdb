@@ -23,6 +23,8 @@ describe "Acceptance: Track printings", ->
 
   describe "when a printing is entered", ->
     beforeEach (done) ->
+      @timeout 3000
+
       viewIssue 'Printworthy'
 
       click '.js-build-printing'
@@ -62,6 +64,15 @@ describe "Acceptance: Track printings", ->
       andThen ->
         expectElement 'tr:contains(Printer) td', {contains: "-$300"}
 
+        done()
+
+    it "the same printer is suggested for the next printing", (done) ->
+      viewIssue 'Printworthy'
+
+      click '.js-build-printing'
+
+      andThen ->
+        expectElement 'li', {contains: 'Printer'}
         done()
 
     describe "and a copy is mailed", ->
