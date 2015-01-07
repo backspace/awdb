@@ -3,7 +3,7 @@ ul.issue-list.small-block-grid-3.large-block-grid-6
     each fulfillment in ff
       if fulfillment.issue
         with fulfillment.issue as issue
-          li class=fulfillment.isMultiple
+          li class=fulfillment.isMultiple data-count=fulfillment.count
             link-to 'issue' issue
               .title=issue.title
               .number=issue.number
