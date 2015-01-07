@@ -2,11 +2,11 @@
   | New subscription
 .row.collapse
   .count.small-7.columns
-    label.inline-radio for='count3'
-      =radio-button name='3' value='3' id='count3' groupValue=subscription.count
+    label.inline-radio
+      =radio-button name='3' value='3' groupValue=subscription.count
       | &nbsp; 3
-    label.inline-radio for='count6'
-      =radio-button name='6' value='6' id='count6' groupValue=subscription.count
+    label.inline-radio
+      =radio-button name='6' value='6' groupValue=subscription.count
       | &nbsp; 6
   .cost.small-5.columns
     =input type="number" name="cost" value=subscription.cost min=0 placeholder="Cost" size='5'
