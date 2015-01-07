@@ -39,7 +39,7 @@ describe "Acceptance: Edit issue feature", ->
       click 'li:contains("Oops") .js-edit-feature'
       fillIn 'li.js-persisted input[name="title"]', 'Corrected'
 
-      click 'li.js-persisted i.fa-check'
+      click 'li.js-persisted .js-save-feature'
 
       click '.js-save'
 
@@ -65,7 +65,7 @@ describe "Acceptance: Edit issue feature", ->
       fillIn 'input[type="search"]', 'alice'
       click 'li:contains("Alice") .js-add-entity'
 
-      click 'li.js-persisted i.fa-check'
+      click 'li.js-persisted .js-save-feature'
 
       click '.js-save'
 
@@ -89,7 +89,7 @@ describe "Acceptance: Edit issue feature", ->
         click 'li:contains("Oops") .js-edit-feature'
         click 'li:contains("Alice") .js-remove-contribution'
 
-        click 'li.js-persisted i.fa-check'
+        click 'li.js-persisted .js-save-feature'
 
         click '.js-save'
 

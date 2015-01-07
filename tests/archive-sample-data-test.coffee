@@ -83,7 +83,7 @@ if application.populateSampleDatabase
 
             feature.contributors.forEach (contributor) ->
               fillIn 'input[type=search]', contributor
-              click "li:contains(#{contributor}):first .fa-plus:first"
+              click "li:contains(#{contributor}):first .js-add-entity"
 
             click '.js-save-feature'
 
@@ -118,12 +118,12 @@ if application.populateSampleDatabase
         if attributes.giftees
           attributes.giftees.forEach (giftee) ->
             fillIn 'input[type=search]', giftee
-            click "li:contains(#{giftee}) .fa-plus"
+            click "li:contains(#{giftee}) .js-add-entity"
 
         if attributes.extras
           for name, cost of attributes.extras
             fillIn 'input[type=search]', name
-            click "li:contains(#{name}) .fa-plus"
+            click "li:contains(#{name}) .js-add-entity"
 
             fillIn "li:contains(#{name}) input[type=number]", cost if cost?
 

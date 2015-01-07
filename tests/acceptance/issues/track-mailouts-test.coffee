@@ -160,7 +160,7 @@ describe "Acceptance: Track issue mailouts", ->
     describe 'with additional recipient with no address', ->
       beforeEach (done) ->
         fillIn 'input[type="search"]', 'Addressless'
-        click 'li:contains("Addressless") .fa-plus'
+        click 'li:contains("Addressless") .js-add-entity'
 
         andThen ->
           done()
@@ -180,7 +180,7 @@ describe "Acceptance: Track issue mailouts", ->
     describe 'with an additional recipient who has an address', ->
       beforeEach (done) ->
         fillIn 'input[type="search"]', 'ext'
-        click 'li:contains("Extra") .fa-plus'
+        click 'li:contains("Extra") .js-add-entity'
 
         andThen ->
           done()
@@ -377,9 +377,9 @@ describe "Acceptance: Track issue mailouts", ->
       fillIn '.js-new input[name="title"]', 'Sometimes so good'
 
       fillIn 'input[type="search"]', 'artist'
-      click 'li:contains("Artist") .fa-plus'
+      click 'li:contains("Artist") .js-add-entity'
 
-      click 'i.fa-check:first'
+      click '.js-save-feature'
 
       click '.js-save'
 

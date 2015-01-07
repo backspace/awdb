@@ -32,12 +32,12 @@ describe "Acceptance: Create issue feature", ->
     fillIn '.js-new input[name="title"]', 'Like this one'
 
     fillIn 'input[type="search"]', 'alice'
-    click 'li:contains("Alice") .fa-plus'
+    click 'li:contains("Alice") .js-add-entity'
 
     fillIn 'input[type="search"]', 'ob'
-    click 'li:contains("Bob") .fa-plus'
+    click 'li:contains("Bob") .js-add-entity'
 
-    click 'i.fa-check'
+    click '.js-save-feature'
 
     click '.js-save'
 
@@ -60,16 +60,16 @@ describe "Acceptance: Create issue feature", ->
     fillIn '.js-new input[name=title]:last', 'One feature'
 
     fillIn 'input[type=search]', 'alice'
-    click 'li:contains(Alice) .fa-plus'
+    click 'li:contains(Alice) .js-add-entity'
 
-    click 'i.fa-check:last'
+    click '.js-save-feature:last'
 
     fillIn '.js-new input[name=title]:last', 'Two features'
 
     fillIn 'input[type=search]', 'bob'
-    click 'li:contains(Bob) .fa-plus'
+    click 'li:contains(Bob) .js-add-entity'
 
-    click 'i.fa-check:last'
+    click '.js-save-feature:last'
 
     click '.js-save'
 
@@ -101,7 +101,7 @@ describe "Acceptance: Create issue feature", ->
 
     waitForModels ['entity']
 
-    click 'i.fa-check'
+    click '.js-save-feature:last'
 
     click '.js-save'
 
