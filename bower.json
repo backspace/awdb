@@ -21,6 +21,7 @@
     "font-awesome": "~4.2.0",
     "ember-cli-moment-shim": "~0.0.2",
     "bourbon": "3.2.1",
-    "ember-c3": "backspace/ember-c3#permit-handlebars-2.0.0"
+    "ember-c3": "backspace/ember-c3#permit-handlebars-2.0.0",
+    "align-column": "https://github.com/ndp/align-column/archive/1.0.0.zip"
   }
 }

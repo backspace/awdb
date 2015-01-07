@@ -33,4 +33,6 @@ app.import('bower_components/c3/c3.css');
 app.import('bower_components/c3/c3.min.js');
 app.import('bower_components/ember-c3/build/lib.js');
 
+app.import('bower_components/align-column/jquery.align-column.js');
+
 module.exports = app.toTree();
