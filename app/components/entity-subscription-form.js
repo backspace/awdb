@@ -1,6 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  classNames: ['entity-subscription-form'],
+
   isComplete: Ember.computed.and('subscription.cost', 'subscription.count'),
   isIncomplete: Ember.computed.not('isComplete'),
 
