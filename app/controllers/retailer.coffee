@@ -51,4 +51,8 @@ RetailerController = Ember.ObjectController.extend SetPropertyOnModelChange,
 
       subscription.end()
 
+    buildReturn: ->
+      @transitionToRoute 'retailer.returns.new', @get('model')
+      undefined
+
 `export default RetailerController`

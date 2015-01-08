@@ -29,3 +29,15 @@ liquid-with model as retailer
 
     h4 Subscriptions
     retailer-subscription-list retailer=retailer newSubscription=newSubscription save="subscribe" end="endSubscription"
+
+    h4 Returns
+    ul.returns
+      each return in retailer.returns
+        li #{return.count} #{fa-icon 'book'}
+      else
+        | No returns yet.
+
+    button.small.secondary.js-build-return click="buildReturn"
+      | #{fa-icon 'recycle'} Process return
+
+outlet

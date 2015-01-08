@@ -14,6 +14,8 @@ var Entity = DS.Model.extend({
 
   fulfillments: DS.hasMany('fulfillment', {async: true}),
 
+  returns: DS.hasMany('return'),
+
   activeSubscriptions: Ember.computed.filterBy('subscriptions', 'isExhausted', false),
   inactiveSubscriptions: Ember.computed.filterBy('subscriptions', 'isExhausted'),
 
