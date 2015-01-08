@@ -1,4 +1,4 @@
-# awdb
+# awdb [![Build Status](https://travis-ci.org/backspace/awdb.svg?branch=master)](https://travis-ci.org/backspace/awdb)
 
 This is a database, stored in-browser, to support the distribution of a magazine. Still very preliminary.
 
