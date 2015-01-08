@@ -4,6 +4,7 @@ import DS from 'ember-data';
 var Entity = DS.Model.extend({
   name: DS.attr('string'),
   address: DS.attr('string'),
+  email: DS.attr('string'),
   classification: DS.attr('string'),
 
   isRetailer: DS.attr('boolean', {defaultValue: false}),

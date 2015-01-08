@@ -13,12 +13,16 @@ liquid-with model as retailer
     label
       | Address
       =textarea name='address' value=retailer.address rows=4
+    label
+      | Email address
+      =input type='text' name='email' value=retailer.email
 
     button.js-save click='doneEditing' Done
     | &nbsp;
     button.js-cancel click='revertEditing' Revert
   else
     p.address=retailer.address
+    p.email=retailer.email
 
     button click='edit'
       | #{fa-icon 'pencil'} Edit
