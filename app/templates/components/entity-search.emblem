@@ -9,7 +9,7 @@ ul.results.fa-ul
     if search
       if supportCreation
         =entity-list-item entity=newEntity
-          button.tiny.js-create-contributor click="createEntity newEntity"
-            | #{fa-icon 'plus'} Create and add as contributor
+          button.tiny.js-create-entity click="createEntity newEntity"
+            | #{fa-icon 'plus'} #{createLabel}
       else
         | No results!

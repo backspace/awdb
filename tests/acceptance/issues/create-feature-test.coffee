@@ -97,7 +97,7 @@ describe "Acceptance: Create issue feature", ->
     fillIn '.js-new input[name=title]', 'Welcome'
     fillIn 'input[type=search]', 'Francine'
 
-    click 'li:contains("Francine") .js-create-contributor'
+    click 'li:contains("Francine") .js-create-entity'
 
     waitForModels ['entity']
 
