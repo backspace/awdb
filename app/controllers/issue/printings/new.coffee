@@ -15,6 +15,12 @@ NewPrintingController = Ember.Controller.extend
     setPrinter: (printer) ->
       @set('printing.entity', printer)
 
+    setNewPrinter: (pseudoEntity) ->
+      entity = @store.createRecord 'entity', JSON.parse(JSON.stringify(pseudoEntity))
+
+      entity.save().then =>
+        @set 'printing.entity', entity
+
     deletePrinter: ->
       @set('printing.entity', undefined)
 

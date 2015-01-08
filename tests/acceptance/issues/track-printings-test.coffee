@@ -104,3 +104,21 @@ describe "Acceptance: Track printings", ->
         andThen ->
           expectElement '.stock', {contains: '29 copies'}
           done()
+
+  it 'supports creating a new entity through a printing', (done) ->
+    @timeout 3000
+
+    viewIssue 'Printworthy'
+    click '.js-build-printing'
+
+    fillIn 'input[type=search]', 'Amazing new printer'
+    click '.js-create-entity'
+
+    click '.js-save'
+
+    waitForModels ['issue', 'printing']
+
+    andThen ->
+      expectElement '.printings li', {contains: 'Amazing new printer'}
+
+      done()

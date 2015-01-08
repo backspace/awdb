@@ -10,7 +10,7 @@ if printing.entity
   entity-list-item entity=printing.entity
     button.secondary.tiny.js-delete-printer click='deletePrinter' #{fa-icon 'trash'} Choose another printer
 else
-  entity-search entities=entities addEntity="setPrinter" placeholder="Printer name" addLabel="Set as printer"
+  entity-search entities=entities addEntity="setPrinter" placeholder="Printer name" addLabel="Set as printer" createEntity="setNewPrinter" supportCreation=true createLabel="Create and set as printer"
 
 button.js-save click='doneEditing' Done
 | &nbsp;
