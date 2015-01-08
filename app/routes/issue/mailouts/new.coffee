@@ -14,5 +14,6 @@ NewMailoutRoute = Ember.Route.extend
   actions:
     showMailout: (mailout) ->
       @transitionTo 'issue.mailouts.mailout', mailout
+      undefined
 
 `export default NewMailoutRoute`
