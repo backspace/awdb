@@ -58,5 +58,15 @@ describe("Acceptance: Process returns", function() {
         done();
       });
     });
+
+    it("increases the stock of the issue", (done) => {
+      // FIXME note that a return can be saved even when no issues have been sent
+      viewIssue("Premier");
+
+      andThen(() => {
+        expectElement('.stock', {contains: '30 copies'});
+        done();
+      });
+    });
   });
 });

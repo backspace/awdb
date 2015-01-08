@@ -5,7 +5,9 @@ export default Ember.Controller.extend({
     doneEditing() {
       this.get('model').save().then(() => {
         this.get('model.entity').save().then(() => {
-          this.transitionToRoute('retailer', this.get('model.entity'));
+          this.get('model.issue').save().then(() => {
+            this.transitionToRoute('retailer', this.get('model.entity'));
+          });
         });
       });
     },

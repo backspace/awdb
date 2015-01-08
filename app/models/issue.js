@@ -7,6 +7,7 @@ var Issue = DS.Model.extend({
   features: DS.hasMany('feature'),
   mailouts: DS.hasMany('mailouts'),
   printings: DS.hasMany('printing'),
+  returns: DS.hasMany('return'),
 
   persistedMailouts: Ember.computed.filterBy('mailouts', 'isNew', false),
 
@@ -17,8 +18,11 @@ var Issue = DS.Model.extend({
   mailoutsCopyCount: Ember.computed.mapBy('mailouts', 'count'),
   mailoutsCopies: Ember.computed.sum('mailoutsCopyCount'),
 
-  inStock: Ember.computed('printingsCopies', 'mailoutsCopies', function() {
-    return this.get('printingsCopies') - this.get('mailoutsCopies');
+  returnsCopyCount: Ember.computed.mapBy('returns', 'count'),
+  returnsCopies: Ember.computed.sum('returnsCopyCount'),
+
+  inStock: Ember.computed('printingsCopies', 'mailoutsCopies', 'returnsCopies', function() {
+    return this.get('printingsCopies') - this.get('mailoutsCopies') + this.get('returnsCopies');
   }),
 
   rev: DS.attr("string")
