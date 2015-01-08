@@ -29,7 +29,7 @@ liquid-with model as retailer
     h4 Returns
     ul.returns
       each return in retailer.returns
-        li #{return.count} #{fa-icon 'book'}
+        li #{return.issue.title}: #{return.count} #{fa-icon 'book'}
       else
         | No returns yet.
 

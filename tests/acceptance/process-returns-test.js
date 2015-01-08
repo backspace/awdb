@@ -13,7 +13,8 @@ describe("Acceptance: Process returns", function() {
       PouchTestHelper.buildStore(application, this.currentTest.title).then((store) => {
         Ember.run(() => {
           Ember.RSVP.hash({
-            retailer: store.createRecord('entity', {name: 'Returner', isRetailer: true}).save()
+            retailer: store.createRecord('entity', {name: 'Returner', isRetailer: true}).save(),
+            issue: store.createRecord('issue', {title: 'Premier'}).save()
           }).then(() => {
             done();
           });
@@ -35,6 +36,11 @@ describe("Acceptance: Process returns", function() {
 
       fillIn("input[name=count]", 30);
 
+      andThen(() => {
+        var issueID = find('select option:contains(Premier)').attr('value');
+        fillIn("select", issueID);
+      });
+
       click(".js-save");
 
       waitForModels(["entity", "return"]);
@@ -48,7 +54,7 @@ describe("Acceptance: Process returns", function() {
       viewRetailer("Returner");
 
       andThen(() => {
-        expectElement(".returns li", {contains: "30"});
+        expectElement(".returns li:contains(Premier)", {contains: "30"});
         done();
       });
     });
