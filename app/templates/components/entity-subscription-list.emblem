@@ -1,5 +1,5 @@
 if showSubscriptionForm
-  .row.subscription.new
+  .panel.row.subscription.new
     .small-3.columns
       entity-subscription-form entity=entity subscription=subscription save="save"
     .small-9.columns
