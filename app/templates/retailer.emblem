@@ -1,43 +1,5 @@
 liquid-with model as retailer
   header
-    h3
-      if isNew
-        | New retailer
-      else
-        =retailer.name
-
-  if isEditing
-    label
-      | Name
-      =input type='text' name='name' value=retailer.name autofocus=true
-    label
-      | Address
-      =textarea name='address' value=retailer.address rows=4
-    label
-      | Email address
-      =input type='text' name='email' value=retailer.email
-
-    button.js-save click='doneEditing' Done
-    | &nbsp;
-    button.js-cancel click='revertEditing' Revert
-  else
-    p.address=retailer.address
-    p.email=retailer.email
-
-    button click='edit'
-      | #{fa-icon 'pencil'} Edit
-
-    h4 Subscriptions
-    retailer-subscription-list retailer=retailer newSubscription=newSubscription save="subscribe" end="endSubscription"
-
-    h4 Returns
-    ul.returns
-      each return in retailer.returns
-        li #{return.count} #{fa-icon 'book'}
-      else
-        | No returns yet.
-
-    button.small.secondary.js-build-return click="buildReturn"
-      | #{fa-icon 'recycle'} Process return
+    h3=retailer.name
 
 outlet

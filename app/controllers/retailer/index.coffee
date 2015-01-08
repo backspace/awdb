@@ -1,5 +1,5 @@
 `import Ember from 'ember'`
-`import SetPropertyOnModelChange from '../mixins/set-property-on-model-change'`
+`import SetPropertyOnModelChange from '../../mixins/set-property-on-model-change'`
 
 RetailerController = Ember.ObjectController.extend SetPropertyOnModelChange,
   requestedEditing: false
