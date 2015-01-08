@@ -15,4 +15,7 @@ NewPrintingController = Ember.Controller.extend
     setPrinter: (printer) ->
       @set('printing.entity', printer)
 
+    deletePrinter: ->
+      @set('printing.entity', undefined)
+
 `export default NewPrintingController`

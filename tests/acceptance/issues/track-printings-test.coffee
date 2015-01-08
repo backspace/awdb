@@ -66,14 +66,24 @@ describe "Acceptance: Track printings", ->
 
         done()
 
-    it "the same printer is suggested for the next printing", (done) ->
-      viewIssue 'Printworthy'
+    describe "when creating another printing", ->
+      beforeEach (done) ->
+        viewIssue 'Printworthy'
+        click '.js-build-printing'
 
-      click '.js-build-printing'
+        andThen -> done()
 
-      andThen ->
-        expectElement 'li', {contains: 'Printer'}
-        done()
+      it "the same printer is suggested", (done) ->
+        andThen ->
+          expectElement 'li', {contains: 'Printer'}
+          done()
+
+      it "but it can be deleted", (done) ->
+        click '.js-delete-printer'
+
+        andThen ->
+          expectElement 'input[type=search]'
+          done()
 
     describe "and a copy is mailed", ->
       beforeEach (done) ->

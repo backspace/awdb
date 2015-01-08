@@ -8,6 +8,7 @@ label
 if printing.entity
   h5 Printer
   entity-list-item entity=printing.entity
+    button.secondary.tiny.js-delete-printer click='deletePrinter' #{fa-icon 'trash'} Choose another printer
 else
   entity-search entities=entities addEntity="setPrinter" placeholder="Printer name" addLabel="Set as printer"
 
