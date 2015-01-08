@@ -1,6 +1,7 @@
 `import Ember from 'ember'`
+`import MovingHighlight from '../mixins/apply-moving-highlight'`
 
-EntityListItem = Ember.Component.extend
+EntityListItem = Ember.Component.extend MovingHighlight,
   tagName: 'li'
 
   classNameBindings: ['active', 'warning']
