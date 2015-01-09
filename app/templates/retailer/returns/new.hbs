@@ -1,5 +1,5 @@
 <h4>New return</h4>
-<label>Number of copies {{input type='number' name='count' value=model.count autofocus=true}}</label>
+<label>Number of copies returned {{input type='number' name='returned' value=model.returned autofocus=true}}</label>
 <label>Issue {{view "select" name='issue' content=issues optionValuePath='content.id' optionLabelPath='content.title' prompt="Issue title" selection=model.issue}}</label>
 
 <button {{action "doneEditing"}} class="js-save">Done</button>

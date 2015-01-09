@@ -34,7 +34,7 @@ describe("Acceptance: Process returns", function() {
 
       click(".js-build-return");
 
-      fillIn("input[name=count]", 30);
+      fillIn("input[name=returned]", 30);
 
       andThen(() => {
         var issueID = find('select option:contains(Premier)').attr('value');

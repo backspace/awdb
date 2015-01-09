@@ -25,7 +25,7 @@ var Issue = DS.Model.extend({
     return this.get('mailoutsRetailCopies') - this.get('returnsCopies');
   }),
 
-  returnsCopyCount: Ember.computed.mapBy('returns', 'count'),
+  returnsCopyCount: Ember.computed.mapBy('returns', 'returned'),
   returnsCopies: Ember.computed.sum('returnsCopyCount'),
 
   inStock: Ember.computed('printingsCopies', 'mailoutsCopies', 'returnsCopies', function() {
