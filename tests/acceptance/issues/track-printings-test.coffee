@@ -118,6 +118,8 @@ describe "Acceptance: Track printings", ->
     fillIn 'input[type=search]', 'Amazing new printer'
     click '.js-create-entity'
 
+    waitForModels ['entity']
+
     click '.js-save'
 
     waitForModels ['issue', 'printing']
