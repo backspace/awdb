@@ -1,6 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  classNames: ['issues-remaining-chart'],
+
   remainingCounts: function() {
     var remainingCounts = this.get('subscribers').mapBy('fulfillmentsRemaining').reduce(function(counts, remaining) {
       if (!counts[remaining]) {
