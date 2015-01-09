@@ -20,16 +20,20 @@ StockChart = Ember.Component.extend
 
   tooltip: Ember.computed 'issue.inStock', ->
     contents: =>
-      return "#{@get('issue.inStock')} in stock"
+      return "#{@get('issue.inStock')} stock, #{@get('issue.mailoutsUnreturnedRetailCopies')} at retailers"
 
   data: Ember.computed 'issue.inStock', ->
+    retailMailed = @get('issue.mailoutsUnreturnedRetailCopies')
+    entityMailed = @get('issue.mailoutsCopies') - retailMailed
+
     {
       columns: [
         ['stock', @get('issue.inStock')]
-        ['mailed', @get('issue.mailoutsCopies')]
+        ['retail-mailed', retailMailed]
+        ['entity-mailed', entityMailed]
       ]
       type: 'bar'
-      groups: [['mailed', 'stock']]
+      groups: [['entity-mailed', 'retail-mailed', 'stock']]
       order: null
     }
 

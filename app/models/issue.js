@@ -18,6 +18,13 @@ var Issue = DS.Model.extend({
   mailoutsCopyCount: Ember.computed.mapBy('mailouts', 'count'),
   mailoutsCopies: Ember.computed.sum('mailoutsCopyCount'),
 
+  mailoutsRetailCopyCount: Ember.computed.mapBy('mailouts', 'retailCount'),
+  mailoutsRetailCopies: Ember.computed.sum('mailoutsRetailCopyCount'),
+
+  mailoutsUnreturnedRetailCopies: Ember.computed('mailoutsRetailCopies', 'returnsCopies', function() {
+    return this.get('mailoutsRetailCopies') - this.get('returnsCopies');
+  }),
+
   returnsCopyCount: Ember.computed.mapBy('returns', 'count'),
   returnsCopies: Ember.computed.sum('returnsCopyCount'),
 

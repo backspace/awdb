@@ -11,6 +11,10 @@ Mailout = DS.Model.extend
   countByFulfillment: Ember.computed.mapBy 'fulfillments', 'count'
   count: Ember.computed.sum 'countByFulfillment'
 
+  retailFulfillments: Ember.computed.filterBy 'fulfillments', 'isRetail'
+  retailCountByFulfillment: Ember.computed.mapBy 'retailFulfillments', 'count'
+  retailCount: Ember.computed.sum 'retailCountByFulfillment'
+
   createContributionTransactions: Ember.on 'didCreate', ->
     @get('issue.features').forEach (feature) =>
       feature.get('contributions').forEach (contribution) =>
