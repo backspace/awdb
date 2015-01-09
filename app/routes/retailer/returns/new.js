@@ -14,6 +14,6 @@ export default Ember.Route.extend({
     ret.set('entity', this.modelFor('retailer'));
 
     controller.set('model', ret);
-    controller.set('issues', model.issues);
+    controller.set('issues', model.issues.sortBy('number'));
   }
 });
