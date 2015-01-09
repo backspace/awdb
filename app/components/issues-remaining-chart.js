@@ -20,7 +20,7 @@ export default Ember.Component.extend({
   maxIssuesRemaining: function() {
     var remainingCounts = this.get('remainingCounts');
 
-    var sortedKeys = Object.keys(remainingCounts).sort(function(a, b) { return parseInt(a) - parseInt(b); })
+    var sortedKeys = Object.keys(remainingCounts).sort(function(a, b) { return parseInt(a) - parseInt(b); });
     var maxIssuesRemaining = sortedKeys[sortedKeys.length - 1];
 
     return maxIssuesRemaining;
@@ -73,7 +73,7 @@ export default Ember.Component.extend({
           values: ticks
         }
       }
-    }
+    };
   }.property('maxIssuesRemaining'),
 
   legend: {
