@@ -81,7 +81,8 @@ NewMailoutController = Ember.ObjectController.extend
           mailout.save()
         ).then =>
           @set 'isSaving', false
-          @send 'showMailout', mailout
+          # This used to be in the route but periodic unhandled action errors happened
+          @transitionToRoute 'issue.mailouts.mailout', mailout
 
     deleteFulfillment: (fulfillment) ->
       @get('mailout.proposedFulfillments').removeObject(fulfillment)
