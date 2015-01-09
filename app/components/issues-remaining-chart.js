@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  data: function() {
+  remainingCounts: function() {
     var remainingCounts = this.get('subscribers').mapBy('fulfillmentsRemaining').reduce(function(counts, remaining) {
       if (!counts[remaining]) {
         counts[remaining] = 0;
@@ -12,14 +12,34 @@ export default Ember.Component.extend({
       return counts;
     }, {});
 
+    return remainingCounts;
+  }.property('subscribers.@each.fulfillmentsRemaining'),
+
+  maxIssuesRemaining: function() {
+    var remainingCounts = this.get('remainingCounts');
+
     var sortedKeys = Object.keys(remainingCounts).sort(function(a, b) { return parseInt(a) - parseInt(b); })
     var maxIssuesRemaining = sortedKeys[sortedKeys.length - 1];
 
-    var column = ['data1'];
+    return maxIssuesRemaining;
+  }.property('remainingCounts'),
+
+  columnData: function() {
+    var remainingCounts = this.get('remainingCounts');
+    var maxIssuesRemaining = this.get('maxIssuesRemaining');
+
+    var column = [];
 
     for (var i = 0; i <= maxIssuesRemaining; i++) {
       column.push(remainingCounts[i] || 0);
     }
+
+    return column;
+  }.property('remainingCounts'),
+
+  data: function() {
+    var column = this.get('columnData');
+    column.unshift('data1');
 
     return {
       columns: [column],
@@ -27,14 +47,29 @@ export default Ember.Component.extend({
     };
   }.property('subscribers.@each.fulfillmentsRemaining'),
 
-  axis: {
-    rotated: true,
-    x: {
-      // FIXME why is this not working?
-      label: 'Issues remaining'
-    },
-    y: {
-      label: 'Number of subscribers'
+  maxNumberOfSubscribers: Ember.computed.max('columnData'),
+
+  axis: function() {
+    var maxSubscriberCount = this.get('maxNumberOfSubscribers');
+
+    var ticks = [];
+
+    for (var i = 0; i <= maxSubscriberCount; i++) {
+      ticks.push(i);
     }
-  }
+
+    return {
+      rotated: true,
+      x: {
+        // FIXME why is this not working?
+        label: 'Issues remaining'
+      },
+      y: {
+        label: 'Number of subscribers',
+        tick: {
+          values: ticks
+        }
+      }
+    }
+  }.property('maxIssuesRemaining')
 });
