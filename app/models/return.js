@@ -6,6 +6,8 @@ export default DS.Model.extend({
   returned: DS.attr('number'),
   sold: DS.attr('number'),
 
+  createdAt: DS.attr('date', {defaultValue: function() { return new Date(); }}),
+
   rev: DS.attr('string'),
 
   createTransaction: function() {
