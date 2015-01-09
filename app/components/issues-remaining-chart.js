@@ -71,5 +71,13 @@ export default Ember.Component.extend({
         }
       }
     }
-  }.property('maxIssuesRemaining')
+  }.property('maxIssuesRemaining'),
+
+  legend: {
+    show: false
+  },
+
+  tooltip: {
+    show: false
+  }
 });
