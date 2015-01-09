@@ -28,6 +28,13 @@ export default Ember.Component.extend({
   }.property('subscribers.@each.fulfillmentsRemaining'),
 
   axis: {
-    rotated: true
+    rotated: true,
+    x: {
+      // FIXME why is this not working?
+      label: 'Issues remaining'
+    },
+    y: {
+      label: 'Number of subscribers'
+    }
   }
 });
