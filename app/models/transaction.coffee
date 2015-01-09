@@ -10,8 +10,9 @@ Transaction = DS.Model.extend
   contribution: DS.belongsTo 'contribution'
   subscription: DS.belongsTo 'subscription'
   printing: DS.belongsTo 'printing'
+  return: DS.belongsTo 'return'
 
-  event: Ember.computed.any 'fulfillment', 'contribution', 'subscription', 'printing'
+  event: Ember.computed.any 'fulfillment', 'contribution', 'subscription', 'printing', 'return'
 
   createdAt: DS.attr 'date', {defaultValue: -> new Date()}
 

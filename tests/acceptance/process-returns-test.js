@@ -70,5 +70,14 @@ describe("Acceptance: Process returns", function() {
         done();
       });
     });
+
+    it("generates a debit transaction for the returned copies", (done) => {
+      viewTransactions();
+
+      andThen(() => {
+        expectElement("tr:contains(Returner) td.debit + .added", {contains: "$240"});
+        done();
+      });
+    });
   });
 });

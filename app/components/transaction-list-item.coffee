@@ -27,5 +27,7 @@ TransactionListItem = Ember.Component.extend
         "Subscription"
       else if constructor.contains "printing"
         "Printing"
+      else if constructor.contains "return"
+        "Return"
 
 `export default TransactionListItem`
