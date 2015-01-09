@@ -8,11 +8,13 @@ export default Ember.Mixin.create({
     var originalBG = this.$().css("background");
     var color = "#9999ff";
 
+    var offset = this.$().offset();
+
     this.$()
     .mousemove(function(e) {
 
-        var x = e.offsetX;
-        var y = e.offsetY;
+        var x = e.pageX - offset.left;
+        var y = e.pageY - offset.top;
         var xy = x + " " + y;
 
         var bgWebKit = "-webkit-gradient(radial, " + xy + ", 0, " + xy + ", 100, from(rgba(255,255,255,0.6)), to(rgba(255,255,255,0.0))), " + color;
