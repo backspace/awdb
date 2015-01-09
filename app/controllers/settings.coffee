@@ -1,4 +1,5 @@
 `import Ember from 'ember'`
+`import config from '../config/environment'`
 
 SettingsController = Ember.ObjectController.extend
   isReplicating: false
@@ -22,6 +23,10 @@ SettingsController = Ember.ObjectController.extend
 
     cookie.getCookie 'replacement-url'
   )
+
+  setDefaultReplacementUrl: Ember.on 'init', ->
+    unless @get('replacementUrl')
+      @set 'replacementUrl', config.APP.sampleDatabase
 
   actions:
     replicate: ->
