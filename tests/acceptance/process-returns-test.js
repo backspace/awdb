@@ -35,6 +35,7 @@ describe("Acceptance: Process returns", function() {
       click(".js-build-return");
 
       fillIn("input[name=returned]", 30);
+      fillIn("input[name=sold]", 40);
 
       andThen(() => {
         var issueID = find('select option:contains(Premier)').attr('value');
@@ -55,6 +56,7 @@ describe("Acceptance: Process returns", function() {
 
       andThen(() => {
         expectElement(".returns li:contains(Premier)", {contains: "30"});
+        expectElement(".returns li:contains(Premier)", {contains: "40"});
         done();
       });
     });
