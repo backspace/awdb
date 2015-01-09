@@ -1,8 +1,13 @@
-$border-colour: $colour-brand
+$hover-border-colour: $colour-brand
 
-$stock-colour: $colour-brand
-$entity-mailed-colour: $colour-brand-trace
-$retail-mailed-colour: mix($stock-colour, $entity-mailed-colour)
+$hover-stock-colour: $colour-brand
+$hover-entity-mailed-colour: $colour-brand-trace
+$hover-retail-mailed-colour: mix($hover-stock-colour, $hover-entity-mailed-colour)
+
+$border-colour: desaturate($hover-border-colour, 100%)
+$stock-colour: desaturate($hover-stock-colour, 100%)
+$entity-mailed-colour: desaturate($hover-entity-mailed-colour, 100%)
+$retail-mailed-colour: desaturate($hover-retail-mailed-colour, 100%)
 
 .stock-chart
   .c3-target-stock path[style]
@@ -25,6 +30,17 @@ $retail-mailed-colour: mix($stock-colour, $entity-mailed-colour)
     top: -1.5rem !important
     right: 0 !important
     left: 0 !important
+
+.list li:hover .stock-chart
+  .c3-target-stock path[style]
+    fill: $hover-stock-colour !important
+    stroke: $hover-border-colour !important
+  .c3-target-entity-mailed path[style]
+    fill: $hover-entity-mailed-colour !important
+    stroke: $hover-border-colour !important
+  .c3-target-retail-mailed path[style]
+    fill: $hover-retail-mailed-colour !important
+    stroke: $hover-border-colour !important
 
 .list .stock-chart
   position: absolute
