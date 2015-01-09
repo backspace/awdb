@@ -1,7 +1,10 @@
 `import Ember from 'ember'`
 
 EntitiesIndexController = Ember.Controller.extend
-  subscribers: Ember.computed.filterBy 'model', 'isSubscribed'
+  needs: ['entities']
+
+  subscribers: Ember.computed.alias 'controllers.entities.subscribers'
+
   data: Ember.computed 'subscribers', ->
     classificationCounts = @get('subscribers').reduce (classificationCounts, subscriber) ->
       classification = subscriber.get('classification')
