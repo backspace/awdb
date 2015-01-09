@@ -64,7 +64,8 @@ export default Ember.Component.extend({
       rotated: true,
       x: {
         // FIXME why is this not working?
-        label: 'Issues remaining'
+        label: 'Issues remaining',
+        type: 'category'
       },
       y: {
         label: 'Number of subscribers',
@@ -81,5 +82,12 @@ export default Ember.Component.extend({
 
   tooltip: {
     show: false
+  },
+
+  bar: {
+    width: {
+      // TODO why not 1?
+      ratio: 0.95
+    }
   }
 });
