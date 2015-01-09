@@ -23,7 +23,8 @@ describe "Acceptance: Track printings", ->
 
   describe "when a printing is entered", ->
     beforeEach (done) ->
-      @timeout 3000
+      # TODO why so long for PhantomJS?
+      @timeout 6000
 
       viewIssue 'Printworthy'
 
