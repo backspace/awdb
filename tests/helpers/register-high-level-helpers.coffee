@@ -29,4 +29,11 @@ register = ->
     visit '/'
     click 'a:contains("Transactions")'
 
+  Ember.Test.registerAsyncHelper 'expectTransaction', (app, attributes) ->
+    expectElement "tr:contains(#{attributes.entity})", {contains: attributes.event} if attributes.event?
+
+    debitOrCredit = if attributes.amount < 0 then 'debit' else 'credit'
+
+    expectElement "tr:contains(#{attributes.entity}) td.#{debitOrCredit} + .added", {contains: "$#{Math.abs(attributes.amount)}"}
+
 `export default register`

@@ -75,7 +75,12 @@ describe("Acceptance: Process returns", function() {
       viewTransactions();
 
       andThen(() => {
-        expectElement("tr:contains(Returner) td.debit + .added", {contains: "$240"});
+        expectTransaction({
+          entity: 'Returner',
+          event: 'Return',
+          amount: -240
+        });
+
         done();
       });
     });

@@ -212,8 +212,10 @@ describe "Acceptance: Track issue mailouts", ->
           viewTransactions()
 
           andThen ->
-            expectElement 'tr:contains(Extra) td', {contains: '$10'}
-            expectElement 'tr:contains(Extra) td', {contains: 'Fulfillment'}
+            expectTransaction
+              entity: 'Extra'
+              event: 'Fulfillment'
+              amount: 10
 
             done()
 
@@ -232,7 +234,11 @@ describe "Acceptance: Track issue mailouts", ->
           viewTransactions()
 
           andThen ->
-            expectElement 'tr:contains(Extra) td', {contains: '$100'}
+            expectTransaction
+              entity: 'Extra'
+              event: 'Fulfillment'
+              amount: 100
+
             done()
 
     describe 'when it is mailed', ->
@@ -313,12 +319,10 @@ describe "Acceptance: Track issue mailouts", ->
         viewTransactions()
 
         andThen ->
-          # TODO fix withinElement, doesn’t reset scope
-          # withinElement 'tr:contains("Artist")', ->
-          #   expectElement 'td', {contains: '-$200'}
-          #   expectElement 'td', {contains: 'Contribution'}
-          expectElement 'tr:contains("Artist") td.debit + td.added', {contains: '$200'}
-          expectElement 'tr:contains("Artist") td', {contains: 'Contribution'}
+          expectTransaction
+            entity: 'Artist'
+            event: 'Contribution'
+            amount: -200
 
           done()
 
@@ -327,11 +331,10 @@ describe "Acceptance: Track issue mailouts", ->
         viewTransactions()
 
         andThen ->
-          # withinElement 'tr:contains("Bookstore")', ->
-          #   expectElement 'td', {contains: '$300'}
-          #   expectElement 'td', {contains: 'Fulfillment'}
-          expectElement 'tr:contains("Bookstore") td', {contains: '$300'}
-          expectElement 'tr:contains("Bookstore") td', {contains: 'Fulfillment'}
+          expectTransaction
+            entity: 'Bookstore'
+            event: 'Fulfillment'
+            amount: 300
 
           done()
 

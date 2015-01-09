@@ -94,8 +94,10 @@ describe "Acceptance: Manage subscriptions", ->
         viewTransactions()
 
         andThen ->
-          expectElement 'tr:contains("Cara") td', {contains: "$400"}
-          expectElement 'tr:contains("Cara") td', {contains: 'Subscription'}
+          expectTransaction
+            entity: 'Cara'
+            event: 'Subscription'
+            amount: 400
 
           done()
 
@@ -152,7 +154,10 @@ describe "Acceptance: Manage subscriptions", ->
                 viewTransactions()
 
                 andThen ->
-                  expectElement 'tr:contains("Cara") td', {contains: "$#{cost}"}
+                  expectTransaction
+                    entity: 'Cara'
+                    event: 'Subscription'
+                    amount: cost
 
                   done()
 
