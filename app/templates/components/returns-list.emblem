@@ -1,5 +1,5 @@
 ul.returns
   each return in returns
-    li #{return.issue.title}: #{return.returned} #{fa-icon 'recycle'} #{return.sold} #{fa-icon 'thumbs-up'}
+    li #{return.issue.title} — Copies returned: #{return.returned}, copies sold: #{return.sold}
   else
     | No returns yet.
