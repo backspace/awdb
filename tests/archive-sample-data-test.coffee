@@ -428,12 +428,6 @@ if application.populateSampleDatabase
         returned: 5
         sold: 5
 
-      createReturn
-        retailer: 'Popup'
-        issue: 'Durians'
-        returned: 4
-        sold: 36
-
 
       # Fifth issue
 
