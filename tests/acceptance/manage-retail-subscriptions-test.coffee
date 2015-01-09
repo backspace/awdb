@@ -39,13 +39,11 @@ describe 'Acceptance: Manage retail subscriptions', ->
       done()
 
   describe 'when a retailer subscribes', ->
-    cost = '50'
     copies = '100'
 
     beforeEach (done) ->
       viewRetailer 'Chapters'
 
-      fillIn 'input[name=cost]', cost
       fillIn 'input[name=copies]', copies
       click 'button.js-subscribe'
 
@@ -67,7 +65,7 @@ describe 'Acceptance: Manage retail subscriptions', ->
       viewRetailer 'Chapters'
 
       andThen ->
-        expectElement '.cost', {contains: cost}
+        expectElement '.cost', {contains: '8'}
         expectElement '.copies', {contains: copies}
 
         done()

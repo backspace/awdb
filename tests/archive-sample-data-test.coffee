@@ -56,7 +56,6 @@ if application.populateSampleDatabase
 
       createRetailSubscription = (attributes) ->
         viewRetailer attributes.name
-        fillIn 'input[name=cost]', attributes.cost
         fillIn 'input[name=copies]', attributes.copies
         click '.js-subscribe'
 
@@ -242,12 +241,10 @@ if application.populateSampleDatabase
 
       createRetailSubscription
         name: 'The Paddlewheel'
-        cost: 20
         copies: 10
 
       createRetailSubscription
         name: 'Mondragón'
-        cost: 10
         copies: 30
 
       createPrinting
@@ -361,7 +358,6 @@ if application.populateSampleDatabase
 
       createRetailSubscription
         name: 'Popup'
-        cost: 10
         copies: 40
 
 
