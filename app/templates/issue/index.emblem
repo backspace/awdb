@@ -59,4 +59,4 @@ liquid-with model as issue
         | #{fa-icon 'envelope'} Prepare mailout
 
       h4 Returns
-      returns-list returns=issue.returns
+      returns-list returns=issue.returns retailers=true
