@@ -101,6 +101,11 @@ if application.populateSampleDatabase
 
         fillIn 'input[name=count]', attributes.count
         fillIn 'input[name=cost]', attributes.cost
+
+        andThen ->
+          if find('.js-delete-printer').is('*')
+            click '.js-delete-printer'
+
         fillIn 'input[type=search]', attributes.printer
         click '.js-add-entity'
 
