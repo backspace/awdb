@@ -15,14 +15,14 @@ export default Ember.Component.extend({
     var sortedKeys = Object.keys(remainingCounts).sort(function(a, b) { return parseInt(a) - parseInt(b); })
     var maxIssuesRemaining = sortedKeys[sortedKeys.length - 1];
 
-    var columns = [];
+    var column = ['data1'];
 
-    for (var i = maxIssuesRemaining; i > 0; i--) {
-      columns.push([i, remainingCounts[i] || 0]);
+    for (var i = 0; i <= maxIssuesRemaining; i++) {
+      column.push(remainingCounts[i] || 0);
     }
 
     return {
-      columns: columns,
+      columns: [column],
       type: 'bar'
     };
   }.property('subscribers.@each.fulfillmentsRemaining'),
