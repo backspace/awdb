@@ -24,7 +24,7 @@ describe "Acceptance: Create issue feature", ->
     endAcceptanceTest(done)
 
   it 'shows the new feature', (done) ->
-    @timeout 3000
+    @timeout 4000
     viewIssue 'Full of features'
 
     click '.js-edit'
