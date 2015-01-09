@@ -115,6 +115,24 @@ if application.populateSampleDatabase
 
         andThen -> console.log "Created printing for issue #{attributes.title}"
 
+      createReturn = (attributes) ->
+        viewRetailer attributes.retailer
+
+        click '.js-build-return'
+
+        fillIn 'input[name=returned]', attributes.returned
+        fillIn 'input[name=sold]', attributes.sold
+
+        andThen ->
+          issueID = find("select option:contains(#{attributes.issue})").attr('value')
+          fillIn "select", issueID
+
+        click '.js-save'
+
+        waitForAllModels()
+
+        andThen -> console.log "Created return of issue #{attributes.issue} for retailer #{attributes.retailer}"
+
       mailIssue = (attributes) ->
         viewIssue attributes.title
         click '.js-build-mailout'
@@ -268,6 +286,18 @@ if application.populateSampleDatabase
         cost: 250
         printer: 'Bad printer'
 
+      createReturn
+        retailer: 'The Paddlewheel'
+        issue: 'Apples'
+        returned: 2
+        sold: 8
+
+      createReturn
+        retailer: 'Mondragón'
+        issue: 'Apples'
+        returned: 1
+        sold: 29
+
       # Cancel a retail subscription
 
       viewRetailer 'Mondragón'
@@ -298,6 +328,12 @@ if application.populateSampleDatabase
       mailIssue
         title: 'Bananas'
 
+      createReturn
+        retailer: 'The Paddlewheel'
+        issue: 'Bananas'
+        returned: 4
+        sold: 6
+
       # Change a name and address
 
       viewEntity 'Caterpillar'
@@ -327,6 +363,12 @@ if application.populateSampleDatabase
 
       mailIssue
         title: 'Coconuts'
+
+      createReturn
+        retailer: 'The Paddlewheel'
+        issue: 'Coconuts'
+        returned: 2
+        sold: 8
 
 
       # Mail back issues
@@ -379,6 +421,18 @@ if application.populateSampleDatabase
 
       mailIssue
         title: 'Durians'
+
+      createReturn
+        retailer: 'The Paddlewheel'
+        issue: 'Durians'
+        returned: 5
+        sold: 5
+
+      createReturn
+        retailer: 'Popup'
+        issue: 'Durians'
+        returned: 4
+        sold: 36
 
 
       # Fifth issue

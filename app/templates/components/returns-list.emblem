@@ -1,0 +1,5 @@
+ul.returns
+  each return in returns
+    li #{return.issue.title}: #{return.returned} #{fa-icon 'recycle'} #{return.sold} #{fa-icon 'thumbs-up'}
+  else
+    | No returns yet.

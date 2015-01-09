@@ -57,3 +57,6 @@ liquid-with model as issue
           | No mailouts yet.
       button.small.secondary.js-build-mailout click="buildMailout"
         | #{fa-icon 'envelope'} Prepare mailout
+
+      h4 Returns
+      returns-list returns=issue.returns
