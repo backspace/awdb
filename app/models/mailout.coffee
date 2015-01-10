@@ -17,7 +17,7 @@ Mailout = DS.Model.extend
 
   createContributionTransactions: Ember.on 'didCreate', ->
     @get('issue.features').forEach (feature) =>
-      feature.get('contributions').forEach (contribution) =>
+      feature.get('contributions').filterBy('isUncompensated').forEach (contribution) =>
         transaction = @store.createRecord 'transaction', {amount: -contribution.get('compensation'), entity: contribution.get('entity'), contribution: contribution}
 
         transaction.save().then ->

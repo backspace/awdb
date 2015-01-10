@@ -338,15 +338,35 @@ describe "Acceptance: Track issue mailouts", ->
 
           done()
 
-      it 'does not compensate nor fulfill contributors for a second mailout', (done) ->
-        viewIssue 'Apples'
-        click '.js-build-mailout'
+      describe 'for a second mailout', (done) ->
+        beforeEach (done) ->
+          viewIssue 'Apples'
+          click '.js-build-mailout'
 
-        andThen ->
-          expectNoElement '.js-contributions li', {contains: 'Artist'}
-          expectNoElement 'input[type=number]'
+          andThen -> done()
 
-          done()
+        it 'does not fulfill contributors', (done) ->
+          andThen ->
+            expectNoElement '.js-contributions li', {contains: 'Artist'}
+            expectNoElement 'input[type=number]'
+
+            done()
+
+        it 'nor compensate them', (done) ->
+          # Must add recipient so the mailout saves
+          fillIn 'input[type="search"]', 'ext'
+          click 'li:contains("Extra") .js-add-entity'
+
+          click '.js-save-mailout'
+
+          waitForModels ['issue', 'subscription', 'fulfillment', 'mailout']
+
+          viewTransactions()
+
+          andThen ->
+            expectElement 'tr:contains(Artist)'
+
+            done()
 
       it 'but links to the compensation transaction', (done) ->
         viewIssue 'Apples'
