@@ -20,6 +20,8 @@ Settings = DS.Model.extend
   retailIssueCost: DS.attr 'number', {defaultValue: 8}
   backIssueCost: DS.attr 'number', {defaultValue: 10}
 
+  returnAddress: DS.attr 'string'
+
   costForSubscription: (count, classification) ->
     return undefined unless count? && classification?
     @get("subscription#{classification.capitalize()}#{count}")

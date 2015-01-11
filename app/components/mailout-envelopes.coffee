@@ -35,8 +35,12 @@ MailingLabelsComponent = Ember.Component.extend
     addressables = @get('addressables')
     lastAddressable = addressables.get('lastObject')
 
+    returnAddress = @get('returnAddress')
+
     addressables.forEach (addressable) ->
       doc.font(font).text("#{addressable.get('name')}\n#{addressable.get('address')}", 350, 250)
+        .text(returnAddress, 50, 50)
+
       doc.addPage() unless addressable == lastAddressable
 
     doc.end()
