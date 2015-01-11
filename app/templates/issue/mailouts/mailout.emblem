@@ -2,5 +2,5 @@ h2 Mailout of issue {{issue.title}}
 
 mailout-fulfillments fulfillments=fulfillments
 
-h3 Mailing labels
-mailing-labels addressables=fulfillments
+h3 Envelopes
+mailout-envelopes addressables=fulfillments

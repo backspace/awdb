@@ -24,16 +24,20 @@ MailingLabelsComponent = Ember.Component.extend
 
   insertPDF: ->
     @$().html "<iframe></iframe>"
-    @$('iframe').width(350).height(453)
+    @$('iframe').width(453).height(350)
 
     font = @get 'font'
 
     doc = new PDFDocument
+      layout: 'landscape'
     stream = doc.pipe(blobStream())
 
-    @get('addressables').forEach (addressable, index) ->
-      doc.font(font).text("#{addressable.get('name')}\n#{addressable.get('address')}")
-      doc.text("\n")
+    addressables = @get('addressables')
+    lastAddressable = addressables.get('lastObject')
+
+    addressables.forEach (addressable) ->
+      doc.font(font).text("#{addressable.get('name')}\n#{addressable.get('address')}", 350, 250)
+      doc.addPage() unless addressable == lastAddressable
 
     doc.end()
 
