@@ -321,8 +321,8 @@ if application.populateSampleDatabase
 
       createPrinting
         title: 'Bananas'
-        count: 40
-        cost: 300
+        count: 20
+        cost: 200
         printer: 'Bad printer'
 
       mailIssue
@@ -357,8 +357,8 @@ if application.populateSampleDatabase
 
       createPrinting
         title: 'Coconuts'
-        count: 50
-        cost: 550
+        count: 30
+        cost: 350
         printer: 'Great printer'
 
       mailIssue
@@ -416,7 +416,7 @@ if application.populateSampleDatabase
       createPrinting
         title: 'Durians'
         count: 55
-        cost: 550
+        cost: 600
         printer: 'Great printer'
 
       mailIssue
@@ -439,8 +439,8 @@ if application.populateSampleDatabase
 
       createPrinting
         title: 'Elderberries'
-        count: 70
-        cost: 600
+        count: 60
+        cost: 650
         printer: 'Great printer'
 
       # Re-subscribe a former subscriber
