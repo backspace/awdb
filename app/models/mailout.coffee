@@ -1,4 +1,5 @@
 `import DS from 'ember-data'`
+`import sumBy from 'ember-cpm/macros/sum-by'`
 
 Mailout = DS.Model.extend
   issue: DS.belongsTo 'issue'
@@ -8,12 +9,10 @@ Mailout = DS.Model.extend
 
   rev: DS.attr 'string'
 
-  countByFulfillment: Ember.computed.mapBy 'fulfillments', 'count'
-  count: Ember.computed.sum 'countByFulfillment'
+  count: sumBy 'fulfillments', 'count'
 
   retailFulfillments: Ember.computed.filterBy 'fulfillments', 'isRetail'
-  retailCountByFulfillment: Ember.computed.mapBy 'retailFulfillments', 'count'
-  retailCount: Ember.computed.sum 'retailCountByFulfillment'
+  retailCount: sumBy 'retailFulfillments', 'count'
 
   createContributionTransactions: Ember.on 'didCreate', ->
     @get('issue.features').forEach (feature) =>

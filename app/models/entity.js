@@ -1,6 +1,8 @@
 import Ember from 'ember';
 import DS from 'ember-data';
 
+import sumBy from 'ember-cpm/macros/sum-by';
+
 var Entity = DS.Model.extend({
   name: DS.attr('string'),
   address: DS.attr('string'),
@@ -27,8 +29,7 @@ var Entity = DS.Model.extend({
   isFormerSubscriber: Ember.computed.and('hasSubscribed', 'isNotSubscribed'),
   isNeverSubscriber: Ember.computed.empty('subscriptions'),
 
-  subscriptionFulfillmentsRemaining: Ember.computed.mapBy('subscriptions', 'remaining'),
-  fulfillmentsRemaining: Ember.computed.sum('subscriptionFulfillmentsRemaining'),
+  fulfillmentsRemaining: sumBy('subscriptions', 'remaining'),
 
   issuesReceived: Ember.computed('subscriptions', function() {
     var subscriptions = this.get('subscriptions');

@@ -1,6 +1,8 @@
 import Ember from 'ember';
 import DS from 'ember-data';
 
+import sumBy from 'ember-cpm/macros/sum-by';
+
 var Issue = DS.Model.extend({
   title: DS.attr("string"),
   number: DS.attr('number'),
@@ -13,26 +15,16 @@ var Issue = DS.Model.extend({
 
   persistedPrintings: Ember.computed.filterBy('printings', 'isNew', false),
 
-  // TODO Ember CPM to reduce these?
-
-  printingsCopyCount: Ember.computed.mapBy('persistedPrintings', 'count'),
-  printingsCopies: Ember.computed.sum('printingsCopyCount'),
-
-  mailoutsCopyCount: Ember.computed.mapBy('mailouts', 'count'),
-  mailoutsCopies: Ember.computed.sum('mailoutsCopyCount'),
-
-  mailoutsRetailCopyCount: Ember.computed.mapBy('mailouts', 'retailCount'),
-  mailoutsRetailCopies: Ember.computed.sum('mailoutsRetailCopyCount'),
+  printingsCopies: sumBy('persistedPrintings', 'count'),
+  mailoutsCopies: sumBy('mailouts', 'count'),
+  mailoutsRetailCopies: sumBy('mailouts', 'retailCount'),
 
   mailoutsUnknownRetailCopies: Ember.computed('mailoutsRetailCopies', 'returnsCopies', function() {
     return this.get('mailoutsRetailCopies') - this.get('returnsReturnedCopies') - this.get('returnsSoldCopies');
   }),
 
-  returnsReturnedCopyCount: Ember.computed.mapBy('returns', 'returned'),
-  returnsReturnedCopies: Ember.computed.sum('returnsReturnedCopyCount'),
-
-  returnsSoldCopyCount: Ember.computed.mapBy('returns', 'sold'),
-  returnsSoldCopies: Ember.computed.sum('returnsSoldCopyCount'),
+  returnsReturnedCopies: sumBy('returns', 'returned'),
+  returnsSoldCopies: sumBy('returns', 'sold'),
 
   inStock: Ember.computed('printingsCopies', 'mailoutsCopies', 'returnsCopies', function() {
     return this.get('printingsCopies') - this.get('mailoutsCopies') + this.get('returnsReturnedCopies');
