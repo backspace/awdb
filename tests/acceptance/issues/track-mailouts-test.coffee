@@ -177,10 +177,12 @@ describe "Acceptance: Track issue mailouts", ->
 
           done()
 
-    describe 'with an additional recipient who has an address', ->
+    describe 'with an additional recipient who has an address and gets two copies', ->
       beforeEach (done) ->
         fillIn 'input[type="search"]', 'ext'
         click 'li:contains("Extra") .js-add-entity'
+
+        fillIn '.js-count', '2'
 
         andThen ->
           done()
@@ -204,7 +206,7 @@ describe "Acceptance: Track issue mailouts", ->
           viewEntity 'Extra'
 
           andThen ->
-            expectElement 'li', {contains: 'Apples are amazing'}
+            expectElement 'li[data-count=2]', {contains: 'Apples are amazing'}
 
             done()
 
@@ -215,7 +217,7 @@ describe "Acceptance: Track issue mailouts", ->
             expectTransaction
               entity: 'Extra'
               event: 'Fulfillment'
-              amount: 10
+              amount: 20
 
             done()
 

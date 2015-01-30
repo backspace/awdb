@@ -44,6 +44,11 @@ Fulfillment = DS.Model.extend
       settings = @container.lookup 'settings:main'
       @set('cost', settings.get('backIssueCost'))
 
+  countUpdater: Ember.observer 'count', ->
+    if @get 'isExtra'
+      settings = @container.lookup 'settings:main'
+      @set('cost', settings.get('backIssueCost')*@get('count'))
+
   isRetail: Ember.computed.alias 'entity.isRetailer'
   isNotRetail: Ember.computed.not 'isRetail'
 

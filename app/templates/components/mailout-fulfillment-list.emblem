@@ -15,6 +15,9 @@ each fulfillment in fulfillments
           label
             | $
             =input type='number' value=fulfillment.cost
+          label
+            | ×
+            =input type='number' value=fulfillment.count class='js-count'
         span.deleter.js-delete click="deleteFulfillment fulfillment" ×
 else
   | None
