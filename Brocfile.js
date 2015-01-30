@@ -3,7 +3,7 @@
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 var app = new EmberApp({
-  'foundation-sass': {
+  'ember-cli-foundation-sass': {
     'foundationJs': ['joyride']
   }
 });
